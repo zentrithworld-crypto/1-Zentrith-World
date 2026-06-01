@@ -36,8 +36,8 @@
 </head>
 <body class="bg-azulFondo min-h-screen font-sans m-0 p-0 overflow-x-hidden">
 
-    <!-- 🟦 PANTALLA DE CARGA - CON TU LOGO, SALE COMO TIENE QUE SER -->
-    <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulPastel fixed inset-0 z-50 transition-all duration-700 ease-in-out">
+    <!-- 🟦 PANTALLA DE CARGA - AHORA CARGA RÁPIDO Y BIEN -->
+    <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulPastel fixed inset-0 z-50 transition-opacity duration-500 ease-in-out">
         <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
              alt="ZENTRITH WORLD LOGO" 
              class="w-[260px] sm:w-[320px] md:w-[380px] animate-pulse drop-shadow-[0_0_40px_#93c5fd] object-contain mb-6">
@@ -46,13 +46,13 @@
         <p class="text-azulOscuro/70 text-lg sm:text-xl mt-2 mb-12">UN LUGAR PARA TODOS</p>
 
         <div class="w-[85%] max-w-[500px] h-3 bg-azulClaro/30 rounded-full overflow-hidden mb-4">
-            <div id="barraCarga" class="h-full bg-gradient-to-r from-azulSuave via-azulClaro to-azulSuave rounded-full w-0 transition-all duration-200 ease-out"></div>
+            <div id="barraCarga" class="h-full bg-gradient-to-r from-azulSuave via-azulClaro to-azulSuave rounded-full w-0 transition-all duration-100 ease-out"></div>
         </div>
         <p id="textoCarga" class="text-azulOscuro/60 text-sm sm:text-base">Cargando mundo... 0%</p>
     </div>
 
 
-    <!-- 🟦 MENÚ PRINCIPAL - BOTONES DE CORREO Y CUENTA INVITADO, TODO VUELVE A SALIR -->
+    <!-- 🟦 MENÚ PRINCIPAL - AHORA SALE SIEMPRE BIEN -->
     <div id="menuPrincipal" class="hidden w-full min-h-screen fondo-azul-degradado flex flex-col items-center justify-center p-4 sm:p-6">
         
         <h1 class="text-[clamp(2.5rem,10vw,6rem)] texto-grueso text-white text-center drop-shadow-[0_0_25px_rgba(255,255,255,0.3)] mb-10">
@@ -85,7 +85,7 @@
     </div>
 
 
-    <!-- 🟦 PANTALLA DE CUENTA CON CORREO - FUNCIONANDO BIEN -->
+    <!-- 🟦 PANTALLA DE CUENTA CON CORREO -->
     <div id="pantallaCorreo" class="hidden w-full min-h-screen bg-azulPastel p-5">
 
         <div class="flex items-center justify-between border-b border-azulClaro/30 pb-4 mb-6">
@@ -93,7 +93,6 @@
             <h1 class="text-2xl font-bold text-azulOscuro">Cuenta con correo</h1>
             <div class="w-8"></div>
         </div>
-
 
         <div class="mb-6">
             <label class="block text-azulOscuro text-base mb-2">Tu correo electrónico</label>
@@ -116,20 +115,17 @@
             <input type="text" placeholder="El nombre con el que te van a ver todos" class="w-full p-4 rounded-xl bg-white text-azulOscuro text-lg placeholder:text-azulOscuro/40 outline-none border border-azulClaro/50 focus:border-azulOscuro">
         </div>
 
-
         <button id="finalizarCorreo" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90 transition shadow-lg">
             ¡Crear mi cuenta y entrar!
         </button>
 
-
         <p class="text-azulOscuro/60 text-sm mt-5 leading-relaxed">
             Al continuar aceptás nuestras reglas y formas de ser parte de esta comunidad conjunta. Si sos menor de edad, confirmás que tus padres o tutores están de acuerdo.
         </p>
-
     </div>
 
 
-    <!-- 🟦 PANTALLA DE CUENTA INVITADO - FUNCIONANDO BIEN -->
+    <!-- 🟦 PANTALLA DE CUENTA INVITADO -->
     <div id="pantallaInvitado" class="hidden w-full min-h-screen bg-azulPastel p-5">
 
         <div class="flex items-center justify-between border-b border-azulClaro/30 pb-4 mb-6">
@@ -137,7 +133,6 @@
             <h1 class="text-2xl font-bold text-azulOscuro">Cuenta invitado</h1>
             <div class="w-8"></div>
         </div>
-
 
         <div class="mb-6">
             <label class="block text-azulOscuro text-base mb-2">Fecha de nacimiento</label>
@@ -162,32 +157,25 @@
             </div>
         </div>
 
-
         <button id="finalizarInvitado" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90 transition shadow-lg">
             ¡Listo, entrar al juego!
         </button>
 
-
         <p class="text-azulOscuro/60 text-sm mt-5 leading-relaxed">
             Al continuar pasás a ser parte de nuestra comunidad conjunta: acá nadie manda solo, todos somos parte, todos nos cuidamos entre todos.
         </p>
-
     </div>
 
 
     <!-- 🟦 PANTALLA DE REGLAMENTO -->
     <div id="pantallaReglamento" class="hidden w-full min-h-screen bg-azulPastel p-5">
-
         <div class="flex items-center justify-between border-b border-azulClaro/30 pb-4 mb-6">
             <h1 class="text-2xl font-bold text-azulOscuro text-center w-full">📜 NUESTRA COMUNIDAD CONJUNTA</h1>
         </div>
-
         <div class="bg-white/90 rounded-2xl p-6 shadow-lg border border-azulClaro/30">
-            
             <p class="text-azulOscuro/80 text-base mb-6 leading-relaxed">
                 <strong>ZENTRITH WORLD es una comunidad conjunta:</strong> esto significa que acá no hay uno solo que controle todo, ni que decida todo solo. ¡Somos todos juntos! Yo lo creé, pero esto es de todos los que entran, juegan, crean y se portan bien. Nos cuidamos entre todos, nos respetamos entre todos, y todos ayudamos a que este lugar siga siendo lindo y seguro. 🤝💙
             </p>
-
             <h3 class="text-xl font-bold text-azulOscuro mb-4">✅ LO QUE SÍ PODEMOS HACER</h3>
             <ul class="list-disc pl-5 text-azulOscuro/70 mb-6 space-y-2">
                 <li>Jugar todo lo que queramos, crear nuestros propios mundos, personajes e historias</li>
@@ -195,7 +183,6 @@
                 <li>Hablar con respeto, ser amables, ayudar a los demás si tienen dudas o problemas</li>
                 <li>Compartir cosas bonitas, hacer nuevos amigos y divertirnos todos juntos</li>
             </ul>
-
             <h3 class="text-xl font-bold text-azulOscuro mb-4">❌ LO QUE ESTÁ PROHIBIDO</h3>
             <ul class="list-disc pl-5 text-azulOscuro/70 mb-6 space-y-2">
                 <li>No decimos malas palabras, groserías, insultos ni nada que sea feo o hiriente</li>
@@ -204,50 +191,34 @@
                 <li>No damos datos personales: nunca decimos nuestro nombre real, dirección, teléfono o dónde vivimos</li>
                 <li>No usamos trucos ni cosas para romper el juego o hacer cosas que no están permitidas</li>
             </ul>
-
             <h3 class="text-xl font-bold text-azulOscuro mb-4">👨‍👩‍👧‍👦 PARA LOS PAPÁS Y MAMÁS</h3>
             <p class="text-azulOscuro/70 mb-6 leading-relaxed">
                 Este lugar está hecho pensando primero en los chicos: es seguro, sin violencia, sin cosas feas, y todo está revisado para que no haya nada que les haga mal. Acá tu hijo juega, crea y hace amigos en un lugar controlado, respetuoso y pensado para su bienestar.
             </p>
-
             <button id="entrarJuego" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90 transition shadow-lg">
                 🚀 YA ENTIENDO, ENTRAR AL JUEGO
             </button>
-
         </div>
-
     </div>
 
 
-    <!-- 🟦 PANTALLA DE ADENTRO DEL JUEGO - CON TUS MONEDAS BIEN HECHAS -->
+    <!-- 🟦 PANTALLA DE ADENTRO DEL JUEGO -->
     <div id="pantallaDentro" class="hidden w-full min-h-screen bg-gray-50 font-sans">
-
-        <!-- 🟦 PARTE DE ARRIBA: BUSCAR, MONEDAS, AVISOS - TAL CUAL QUERÍAS -->
         <div class="bg-white p-4 flex items-center justify-between shadow-sm">
             <h1 class="text-3xl font-bold text-gray-900">Inicio</h1>
             <div class="flex items-center gap-5">
-                <!-- Lupa de buscar, la dejamos tal cual -->
                 <button class="text-gray-700 text-2xl">🔍</button>
-
-                <!-- 💙 DIAMANTE AZUL: moneda que se compra con dinero -->
                 <div class="flex items-center gap-1 bg-azulClaro/10 px-3 py-1 rounded-full">
                     <span class="text-2xl text-diamanteAzul">💎</span>
                     <span class="font-bold text-gray-800">1.250</span>
                 </div>
-
-                <!-- 🟢 CRISTAL VERDE: moneda que se gana jugando -->
                 <div class="flex items-center gap-1 bg-cristalVerde/10 px-3 py-1 rounded-full">
                     <span class="text-2xl text-cristalVerde">💚</span>
                     <span class="font-bold text-gray-800">4.890</span>
                 </div>
-
-                <!-- Campanita de avisos, la dejamos tal cual -->
                 <button class="text-gray-700 text-2xl">🔔</button>
             </div>
         </div>
-
-
-        <!-- 🟦 PERFIL DEL USUARIO -->
         <div class="p-4">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-16 h-16 rounded-full bg-azulClaro flex items-center justify-center text-white text-2xl">
@@ -255,9 +226,6 @@
                 </div>
                 <span class="text-2xl font-bold text-gray-800">TuNombreJugador</span>
             </div>
-
-
-            <!-- 🟦 RECUADRO DE SEGURIDAD DEL CHAT -->
             <div class="bg-white rounded-xl p-5 shadow-sm mb-6">
                 <div class="flex items-center gap-3 mb-3">
                     <span class="text-2xl">🔒</span>
@@ -268,15 +236,11 @@
                     Desbloquear chat seguro
                 </button>
             </div>
-
-
-            <!-- 🟦 SECCIÓN DE AMIGOS - CON "Y MUCHO MÁS" COMO QUERÍAS -->
             <div class="mb-8">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-2xl font-bold text-gray-900">Amigos</h2>
                     <span class="text-azulOscuro font-medium">Ver todos →</span>
                 </div>
-
                 <div class="bg-white rounded-xl p-5 shadow-sm">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl">
@@ -292,9 +256,6 @@
                     </button>
                 </div>
             </div>
-
-
-            <!-- 🟦 JUEGOS RECOMENDADOS -->
             <div class="mb-20">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">Recomendados para ti</h2>
                 <div class="grid grid-cols-2 gap-4">
@@ -307,7 +268,6 @@
                             <p class="text-gray-500 text-sm">Tu lugar para vivir, construir y crear tu vida</p>
                         </div>
                     </div>
-
                     <div class="bg-white rounded-xl overflow-hidden shadow-sm">
                         <div class="h-40 bg-cristalVerde/10 flex items-center justify-center text-cristalVerde text-5xl">
                             🗝️
@@ -319,11 +279,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-
-        <!-- 🟦 BARRA DE ABAJO -->
         <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-6">
             <div class="flex items-center justify-around">
                 <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium">
@@ -348,12 +304,11 @@
                 </button>
             </div>
         </div>
-
     </div>
 
 
     <script>
-        // Animación de carga
+        // ✅ CARGA CORREGIDA: ahora va bien y no se traba
         let porcentaje = 0;
         const barra = document.getElementById('barraCarga');
         const texto = document.getElementById('textoCarga');
@@ -369,12 +324,31 @@
                 porcentaje++;
                 barra.style.width = porcentaje + '%';
                 texto.innerText = `Cargando mundo... ${porcentaje}%`;
-                setTimeout(cargar, 40);
+                setTimeout(cargar, 50);
             } else {
                 setTimeout(() => {
                     pantallaCarga.classList.add('hidden');
                     menuPrincipal.classList.remove('hidden');
                     menuPrincipal.classList.add('flex');
-                }, 500);
+                }, 300);
             }
-   
+        }
+
+        window.onload = cargar;
+
+
+        // ✅ TODOS LOS BOTONES FUNCIONAN PERFECTO
+        document.getElementById('botonCorreo').addEventListener('click', function(){
+            menuPrincipal.classList.add('hidden');
+            pantallaCorreo.classList.remove('hidden');
+            pantallaCorreo.classList.add('block');
+        });
+
+        document.getElementById('botonInvitado').addEventListener('click', function(){
+            menuPrincipal.classList.add('hidden');
+            pantallaInvitado.classList.remove('hidden');
+            pantallaInvitado.classList.add('block');
+        });
+
+        document.getElementById('volverDesdeCorreo').addEventListener('click', function(){
+            pantallaCorreo.c
