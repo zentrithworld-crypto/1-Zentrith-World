@@ -12,9 +12,7 @@
                     colors: {
                         azulClaro: '#93c5fd',
                         azulSuave: '#bfdbfe',
-                        azulPastel: '#dbeafe',
                         azulOscuro: '#1d4ed8',
-                        azulFondo: '#eff6ff',
                         diamanteAzul: '#3b82f6',
                         cristalVerde: '#22c55e',
                     }
@@ -22,333 +20,162 @@
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .texto-grueso {
-                font-weight: 900;
-                letter-spacing: 1px;
-            }
-            .fondo-azul-degradado {
-                background: linear-gradient(180deg, #bfdbfe 0%, #93c5fd 100%);
-            }
-        }
-    </style>
 </head>
-<body class="bg-azulFondo min-h-screen font-sans m-0 p-0 overflow-x-hidden">
+<body class="bg-sky-50 min-h-screen font-sans m-0 p-0">
 
-    <!-- 🟦 PANTALLA DE CARGA - AHORA CARGA RÁPIDO Y BIEN -->
-    <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulPastel fixed inset-0 z-50 transition-opacity duration-500 ease-in-out">
-        <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
-             alt="ZENTRITH WORLD LOGO" 
-             class="w-[260px] sm:w-[320px] md:w-[380px] animate-pulse drop-shadow-[0_0_40px_#93c5fd] object-contain mb-6">
-
-        <h1 class="text-[clamp(2.5rem,8vw,5rem)] texto-grueso text-azulOscuro text-center">ZENTRITH WORLD</h1>
-        <p class="text-azulOscuro/70 text-lg sm:text-xl mt-2 mb-12">UN LUGAR PARA TODOS</p>
-
-        <div class="w-[85%] max-w-[500px] h-3 bg-azulClaro/30 rounded-full overflow-hidden mb-4">
-            <div id="barraCarga" class="h-full bg-gradient-to-r from-azulSuave via-azulClaro to-azulSuave rounded-full w-0 transition-all duration-100 ease-out"></div>
+    <!-- PANTALLA DE CARGA - RÁPIDA Y SENCILLA -->
+    <div id="carga" class="fixed inset-0 bg-sky-100 flex flex-col items-center justify-center z-50">
+        <h1 class="text-5xl font-bold text-azulOscuro mb-4">ZENTRITH WORLD</h1>
+        <div class="w-64 h-2 bg-azulClaro/30 rounded-full overflow-hidden">
+            <div id="barra" class="h-full bg-azulOscuro w-0"></div>
         </div>
-        <p id="textoCarga" class="text-azulOscuro/60 text-sm sm:text-base">Cargando mundo... 0%</p>
+        <p class="text-azulOscuro/60 mt-2">Cargando...</p>
     </div>
 
-
-    <!-- 🟦 MENÚ PRINCIPAL - AHORA SALE SIEMPRE BIEN -->
-    <div id="menuPrincipal" class="hidden w-full min-h-screen fondo-azul-degradado flex flex-col items-center justify-center p-4 sm:p-6">
-        
-        <h1 class="text-[clamp(2.5rem,10vw,6rem)] texto-grueso text-white text-center drop-shadow-[0_0_25px_rgba(255,255,255,0.3)] mb-10">
-            ZENTRITH WORLD
-        </h1>
-
-        <div class="bg-white/80 backdrop-blur-lg rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-[0_0_40px_rgba(29, 78, 216, 0.2)] border border-white/40">
-            
-            <h2 class="text-2xl sm:text-3xl font-bold text-azulOscuro text-center mb-6">¡BIENVENIDO!</h2>
-            <p class="text-azulOscuro/70 text-center mb-8">Elegí cómo querés entrar a nuestra comunidad</p>
-
+    <!-- MENÚ PRINCIPAL -->
+    <div id="menu" class="hidden min-h-screen bg-gradient-to-b from-azulSuave to-azulClaro flex flex-col items-center justify-center p-4">
+        <h1 class="text-6xl font-bold text-white text-center mb-10">ZENTRITH WORLD</h1>
+        <div class="bg-white/90 rounded-2xl p-6 w-full max-w-md shadow-xl">
+            <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">¡Bienvenido!</h2>
             <div class="space-y-4">
-                <button id="botonCorreo" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90 transition-all duration-300 shadow-lg">
-                    📧 Crear cuenta con correo electrónico
+                <button onclick="irACorreo()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90">
+                    📧 Crear cuenta con correo
                 </button>
-
-                <button id="botonInvitado" class="w-full p-4 rounded-xl bg-white border-2 border-azulClaro text-azulOscuro font-medium text-lg hover:bg-azulSuave/50 transition-all duration-300">
-                    👤 Crear cuenta invitado
-                </button>
-            </div>
-
-            <div class="flex justify-center gap-8 mt-10">
-                <a href="#" class="text-azulOscuro underline text-lg hover:text-azulOscuro/80">Términos</a>
-                <a href="#" class="text-azulOscuro underline text-lg hover:text-azulOscuro/80">Privacidad</a>
-            </div>
-
-            <p class="text-center text-azulOscuro/60 text-sm mt-8">© 2026 ZENTRITH WORLD - Todos los derechos reservados</p>
-        </div>
-
-    </div>
-
-
-    <!-- 🟦 PANTALLA DE CUENTA CON CORREO -->
-    <div id="pantallaCorreo" class="hidden w-full min-h-screen bg-azulPastel p-5">
-
-        <div class="flex items-center justify-between border-b border-azulClaro/30 pb-4 mb-6">
-            <button id="volverDesdeCorreo" class="text-azulOscuro text-2xl font-bold">← Volver</button>
-            <h1 class="text-2xl font-bold text-azulOscuro">Cuenta con correo</h1>
-            <div class="w-8"></div>
-        </div>
-
-        <div class="mb-6">
-            <label class="block text-azulOscuro text-base mb-2">Tu correo electrónico</label>
-            <input type="email" placeholder="ejemplo@correo.com" class="w-full p-4 rounded-xl bg-white text-azulOscuro text-lg placeholder:text-azulOscuro/40 outline-none border border-azulClaro/50 focus:border-azulOscuro">
-        </div>
-
-        <div class="mb-6">
-            <label class="block text-azulOscuro text-base mb-2">Crear contraseña</label>
-            <input type="password" placeholder="Escribí una contraseña segura" class="w-full p-4 rounded-xl bg-white text-azulOscuro text-lg placeholder:text-azulOscuro/40 outline-none border border-azulClaro/50 focus:border-azulOscuro">
-            <p class="text-azulOscuro/60 text-sm mt-2">Guárdala bien, la vas a necesitar para entrar después</p>
-        </div>
-
-        <div class="mb-6">
-            <label class="block text-azulOscuro text-base mb-2">Fecha de nacimiento</label>
-            <input type="date" class="w-full p-4 rounded-xl bg-white text-azulOscuro text-lg outline-none border border-azulClaro/50 focus:border-azulOscuro">
-        </div>
-
-        <div class="mb-8">
-            <label class="block text-azulOscuro text-base mb-2">Nombre de jugador</label>
-            <input type="text" placeholder="El nombre con el que te van a ver todos" class="w-full p-4 rounded-xl bg-white text-azulOscuro text-lg placeholder:text-azulOscuro/40 outline-none border border-azulClaro/50 focus:border-azulOscuro">
-        </div>
-
-        <button id="finalizarCorreo" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90 transition shadow-lg">
-            ¡Crear mi cuenta y entrar!
-        </button>
-
-        <p class="text-azulOscuro/60 text-sm mt-5 leading-relaxed">
-            Al continuar aceptás nuestras reglas y formas de ser parte de esta comunidad conjunta. Si sos menor de edad, confirmás que tus padres o tutores están de acuerdo.
-        </p>
-    </div>
-
-
-    <!-- 🟦 PANTALLA DE CUENTA INVITADO -->
-    <div id="pantallaInvitado" class="hidden w-full min-h-screen bg-azulPastel p-5">
-
-        <div class="flex items-center justify-between border-b border-azulClaro/30 pb-4 mb-6">
-            <button id="volverDesdeInvitado" class="text-azulOscuro text-2xl font-bold">← Volver</button>
-            <h1 class="text-2xl font-bold text-azulOscuro">Cuenta invitado</h1>
-            <div class="w-8"></div>
-        </div>
-
-        <div class="mb-6">
-            <label class="block text-azulOscuro text-base mb-2">Fecha de nacimiento</label>
-            <input type="date" class="w-full p-4 rounded-xl bg-white text-azulOscuro text-lg outline-none border border-azulClaro/50 focus:border-azulOscuro">
-        </div>
-
-        <div class="mb-6">
-            <label class="block text-azulOscuro text-base mb-2">Nombre de jugador</label>
-            <input type="text" placeholder="Escribí el nombre que quieras usar" class="w-full p-4 rounded-xl bg-white text-azulOscuro text-lg placeholder:text-azulOscuro/40 outline-none border border-azulClaro/50 focus:border-azulOscuro">
-            <p class="text-azulOscuro/60 text-sm mt-2">Podés poner el nombre que se te ocurra, no hace falta que sea tu nombre real</p>
-        </div>
-
-        <div class="mb-8">
-            <label class="block text-azulOscuro text-base mb-3">Género (es opcional)</label>
-            <div class="grid grid-cols-2 gap-3">
-                <button id="mujerBtn" class="p-4 rounded-xl bg-transparent border-2 border-azulClaro/60 text-azulOscuro text-xl hover:bg-azulSuave/30 transition">
-                    ♀️ Mujer
-                </button>
-                <button id="hombreBtn" class="p-4 rounded-xl bg-transparent border-2 border-azulClaro/60 text-azulOscuro text-xl hover:bg-azulSuave/30 transition">
-                    ♂️ Hombre
+                <button onclick="irAInvitado()" class="w-full p-4 rounded-xl bg-white border-2 border-azulClaro text-azulOscuro font-bold text-lg hover:bg-sky-50">
+                    👤 Cuenta invitado
                 </button>
             </div>
         </div>
-
-        <button id="finalizarInvitado" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90 transition shadow-lg">
-            ¡Listo, entrar al juego!
-        </button>
-
-        <p class="text-azulOscuro/60 text-sm mt-5 leading-relaxed">
-            Al continuar pasás a ser parte de nuestra comunidad conjunta: acá nadie manda solo, todos somos parte, todos nos cuidamos entre todos.
-        </p>
     </div>
 
+    <!-- PANTALLA CORREO -->
+    <div id="pagCorreo" class="hidden min-h-screen bg-sky-50 p-4">
+        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta con correo</h2>
+        <input type="email" placeholder="Tu correo" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
+        <input type="password" placeholder="Contraseña" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
+        <input type="date" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
+        <input type="text" placeholder="Tu nombre de jugador" class="w-full p-4 rounded-xl border border-azulClaro mb-6">
+        <button onclick="irAReglas()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Crear cuenta!</button>
+    </div>
 
-    <!-- 🟦 PANTALLA DE REGLAMENTO -->
-    <div id="pantallaReglamento" class="hidden w-full min-h-screen bg-azulPastel p-5">
-        <div class="flex items-center justify-between border-b border-azulClaro/30 pb-4 mb-6">
-            <h1 class="text-2xl font-bold text-azulOscuro text-center w-full">📜 NUESTRA COMUNIDAD CONJUNTA</h1>
+    <!-- PANTALLA INVITADO -->
+    <div id="pagInvitado" class="hidden min-h-screen bg-sky-50 p-4">
+        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta invitado</h2>
+        <input type="date" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
+        <input type="text" placeholder="Tu nombre de jugador" class="w-full p-4 rounded-xl border border-azulClaro mb-6">
+        <div class="grid grid-cols-2 gap-3 mb-6">
+            <button id="btnMujer" onclick="elegirGenero('mujer')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro">♀️ Mujer</button>
+            <button id="btnHombre" onclick="elegirGenero('hombre')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro">♂️ Hombre</button>
         </div>
-        <div class="bg-white/90 rounded-2xl p-6 shadow-lg border border-azulClaro/30">
-            <p class="text-azulOscuro/80 text-base mb-6 leading-relaxed">
-                <strong>ZENTRITH WORLD es una comunidad conjunta:</strong> esto significa que acá no hay uno solo que controle todo, ni que decida todo solo. ¡Somos todos juntos! Yo lo creé, pero esto es de todos los que entran, juegan, crean y se portan bien. Nos cuidamos entre todos, nos respetamos entre todos, y todos ayudamos a que este lugar siga siendo lindo y seguro. 🤝💙
-            </p>
-            <h3 class="text-xl font-bold text-azulOscuro mb-4">✅ LO QUE SÍ PODEMOS HACER</h3>
-            <ul class="list-disc pl-5 text-azulOscuro/70 mb-6 space-y-2">
-                <li>Jugar todo lo que queramos, crear nuestros propios mundos, personajes e historias</li>
-                <li>Invitar a amigos, familiares o quien quiera sumarse a nuestra comunidad</li>
-                <li>Hablar con respeto, ser amables, ayudar a los demás si tienen dudas o problemas</li>
-                <li>Compartir cosas bonitas, hacer nuevos amigos y divertirnos todos juntos</li>
+        <button onclick="irAReglas()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Entrar!</button>
+    </div>
+
+    <!-- PANTALLA REGLAS -->
+    <div id="pagReglas" class="hidden min-h-screen bg-sky-50 p-4">
+        <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">📜 NUESTRA COMUNIDAD</h2>
+        <div class="bg-white rounded-xl p-5 shadow">
+            <p class="text-gray-700 mb-4">Somos una comunidad conjunta: acá todos somos parte, nos cuidamos y nos respetamos.</p>
+            <h3 class="font-bold text-azulOscuro mb-2">✅ Lo que sí podés hacer:</h3>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Jugar y crear todo lo que quieras</li>
+                <li>Invitar amigos a jugar con vos</li>
+                <li>Hablar con respeto y ser amable</li>
             </ul>
-            <h3 class="text-xl font-bold text-azulOscuro mb-4">❌ LO QUE ESTÁ PROHIBIDO</h3>
-            <ul class="list-disc pl-5 text-azulOscuro/70 mb-6 space-y-2">
-                <li>No decimos malas palabras, groserías, insultos ni nada que sea feo o hiriente</li>
-                <li>No molestamos, no nos burlamos, no hacemos sentir mal a nadie</li>
-                <li>No arruinamos ni borramos lo que otros crearon, respetamos el trabajo de todos</li>
-                <li>No damos datos personales: nunca decimos nuestro nombre real, dirección, teléfono o dónde vivimos</li>
-                <li>No usamos trucos ni cosas para romper el juego o hacer cosas que no están permitidas</li>
+            <h3 class="font-bold text-azulOscuro mb-2">❌ Lo que NO podés hacer:</h3>
+            <ul class="list-disc pl-5 text-gray-600 mb-6">
+                <li>No decir malas palabras ni insultar</li>
+                <li>No molestar ni hacer sentir mal a nadie</li>
+                <li>No dar datos personales reales</li>
             </ul>
-            <h3 class="text-xl font-bold text-azulOscuro mb-4">👨‍👩‍👧‍👦 PARA LOS PAPÁS Y MAMÁS</h3>
-            <p class="text-azulOscuro/70 mb-6 leading-relaxed">
-                Este lugar está hecho pensando primero en los chicos: es seguro, sin violencia, sin cosas feas, y todo está revisado para que no haya nada que les haga mal. Acá tu hijo juega, crea y hace amigos en un lugar controlado, respetuoso y pensado para su bienestar.
-            </p>
-            <button id="entrarJuego" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg hover:bg-azulOscuro/90 transition shadow-lg">
-                🚀 YA ENTIENDO, ENTRAR AL JUEGO
-            </button>
+            <button onclick="irAdentro()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Entrar al juego</button>
         </div>
     </div>
 
-
-    <!-- 🟦 PANTALLA DE ADENTRO DEL JUEGO -->
-    <div id="pantallaDentro" class="hidden w-full min-h-screen bg-gray-50 font-sans">
-        <div class="bg-white p-4 flex items-center justify-between shadow-sm">
-            <h1 class="text-3xl font-bold text-gray-900">Inicio</h1>
-            <div class="flex items-center gap-5">
-                <button class="text-gray-700 text-2xl">🔍</button>
-                <div class="flex items-center gap-1 bg-azulClaro/10 px-3 py-1 rounded-full">
-                    <span class="text-2xl text-diamanteAzul">💎</span>
-                    <span class="font-bold text-gray-800">1.250</span>
-                </div>
-                <div class="flex items-center gap-1 bg-cristalVerde/10 px-3 py-1 rounded-full">
-                    <span class="text-2xl text-cristalVerde">💚</span>
-                    <span class="font-bold text-gray-800">4.890</span>
-                </div>
-                <button class="text-gray-700 text-2xl">🔔</button>
+    <!-- ADENTRO DEL JUEGO -->
+    <div id="pagAdentro" class="hidden min-h-screen bg-gray-50">
+        <div class="bg-white p-4 flex items-center justify-between shadow">
+            <h1 class="text-2xl font-bold">Inicio</h1>
+            <div class="flex items-center gap-4">
+                <span>🔍</span>
+                <span class="text-xl text-diamanteAzul font-bold">💎 1250</span>
+                <span class="text-xl text-cristalVerde font-bold">💚 4890</span>
+                <span>🔔</span>
             </div>
         </div>
         <div class="p-4">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-16 h-16 rounded-full bg-azulClaro flex items-center justify-center text-white text-2xl">
-                    😊
-                </div>
-                <span class="text-2xl font-bold text-gray-800">TuNombreJugador</span>
+                <div class="w-14 h-14 rounded-full bg-azulClaro flex items-center justify-center text-white text-xl">😊</div>
+                <span class="text-xl font-bold">TuNombre</span>
             </div>
-            <div class="bg-white rounded-xl p-5 shadow-sm mb-6">
-                <div class="flex items-center gap-3 mb-3">
-                    <span class="text-2xl">🔒</span>
-                    <h3 class="text-xl font-bold text-gray-900">Vamos a comprobar tu edad para que puedas usar el chat</h3>
-                </div>
-                <p class="text-gray-600 mb-4">Esto te ayuda a chatear de forma segura y respetuosa. Solo toma un momento.</p>
-                <button class="bg-azulOscuro text-white font-bold py-3 px-6 rounded-xl w-full text-lg hover:bg-azulOscuro/90">
-                    Desbloquear chat seguro
-                </button>
+            <div class="bg-white rounded-xl p-4 shadow mb-6">
+                <h3 class="font-bold text-lg mb-2">🔒 Desbloquear chat seguro</h3>
+                <p class="text-gray-600 text-sm mb-3">Para hablar seguro con los demás jugadores</p>
+                <button class="w-full p-3 rounded-xl bg-azulOscuro text-white font-bold">Desbloquear</button>
             </div>
-            <div class="mb-8">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-2xl font-bold text-gray-900">Amigos</h2>
-                    <span class="text-azulOscuro font-medium">Ver todos →</span>
-                </div>
-                <div class="bg-white rounded-xl p-5 shadow-sm">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl">
-                            +
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800">¡ZENTRITH WORLD es más divertido con amigos y mucho más!</h3>
-                            <p class="text-gray-600 mt-1">Conectá con personas que ya conocés o encontrá nuevos compañeros para jugar, crear y pasarla bien.</p>
-                        </div>
-                    </div>
-                    <button class="w-full border-2 border-azulOscuro text-azulOscuro font-bold py-3 rounded-xl text-lg hover:bg-azulSuave/30">
-                        Añadir o invitar amigos ✨
-                    </button>
-                </div>
-            </div>
-            <div class="mb-20">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">Recomendados para ti</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
-                        <div class="h-40 bg-azulSuave flex items-center justify-center text-azulOscuro text-5xl">
-                            🏠
-                        </div>
-                        <div class="p-3">
-                            <h3 class="font-bold text-gray-800">Mundo de Casas y Ciudades</h3>
-                            <p class="text-gray-500 text-sm">Tu lugar para vivir, construir y crear tu vida</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
-                        <div class="h-40 bg-cristalVerde/10 flex items-center justify-center text-cristalVerde text-5xl">
-                            🗝️
-                        </div>
-                        <div class="p-3">
-                            <h3 class="font-bold text-gray-800">Misiones y Aventuras</h3>
-                            <p class="text-gray-500 text-sm">Explorá, buscá tesoros y ganá recompensas</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-6">
-            <div class="flex items-center justify-around">
-                <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium">
-                    <span class="text-2xl">🏠</span>
-                    <span class="text-sm">Inicio</span>
-                </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
-                    <span class="text-2xl">📶</span>
-                    <span class="text-sm">Destacadas</span>
-                </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
-                    <span class="text-2xl">👤</span>
-                    <span class="text-sm">Avatar</span>
-                </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
-                    <span class="text-2xl">👥</span>
-                    <span class="text-sm">Equipo</span>
-                </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
-                    <span class="text-2xl">⋯</span>
-                    <span class="text-sm">Más</span>
-                </button>
+            <div class="bg-white rounded-xl p-4 shadow mb-6">
+                <h3 class="font-bold text-lg mb-2">👥 Amigos y mucho más</h3>
+                <p class="text-gray-600 text-sm mb-3">Jugá con tus amigos y pasalo mejor</p>
+                <button class="w-full p-3 rounded-xl border border-azulOscuro text-azulOscuro font-bold">Invitar amigos</button>
             </div>
         </div>
     </div>
 
-
     <script>
-        // ✅ CARGA CORREGIDA: ahora va bien y no se traba
-        let porcentaje = 0;
-        const barra = document.getElementById('barraCarga');
-        const texto = document.getElementById('textoCarga');
-        const pantallaCarga = document.getElementById('pantallaCarga');
-        const menuPrincipal = document.getElementById('menuPrincipal');
-        const pantallaCorreo = document.getElementById('pantallaCorreo');
-        const pantallaInvitado = document.getElementById('pantallaInvitado');
-        const pantallaReglamento = document.getElementById('pantallaReglamento');
-        const pantallaDentro = document.getElementById('pantallaDentro');
-
+        // CARGA RÁPIDA
+        let progreso = 0;
         function cargar() {
-            if(porcentaje < 100) {
-                porcentaje++;
-                barra.style.width = porcentaje + '%';
-                texto.innerText = `Cargando mundo... ${porcentaje}%`;
-                setTimeout(cargar, 50);
+            if(progreso < 100) {
+                progreso++;
+                document.getElementById('barra').style.width = progreso + '%';
+                setTimeout(cargar, 20);
             } else {
-                setTimeout(() => {
-                    pantallaCarga.classList.add('hidden');
-                    menuPrincipal.classList.remove('hidden');
-                    menuPrincipal.classList.add('flex');
-                }, 300);
+                document.getElementById('carga').classList.add('hidden');
+                document.getElementById('menu').classList.remove('hidden');
+            }
+        }
+        window.onload = cargar;
+
+        // FUNCIONES PARA CAMBIAR DE PANTALLA
+        function irACorreo() {
+            document.getElementById('menu').classList.add('hidden');
+            document.getElementById('pagCorreo').classList.remove('hidden');
+        }
+
+        function irAInvitado() {
+            document.getElementById('menu').classList.add('hidden');
+            document.getElementById('pagInvitado').classList.remove('hidden');
+        }
+
+        function volverMenu() {
+            document.getElementById('pagCorreo').classList.add('hidden');
+            document.getElementById('pagInvitado').classList.add('hidden');
+            document.getElementById('menu').classList.remove('hidden');
+        }
+
+        function elegirGenero(tipo) {
+            if(tipo === 'mujer') {
+                document.getElementById('btnMujer').classList.add('bg-azulOscuro', 'text-white');
+                document.getElementById('btnHombre').classList.remove('bg-azulOscuro', 'text-white');
+            } else {
+                document.getElementById('btnHombre').classList.add('bg-azulOscuro', 'text-white');
+                document.getElementById('btnMujer').classList.remove('bg-azulOscuro', 'text-white');
             }
         }
 
-        window.onload = cargar;
+        function irAReglas() {
+            document.getElementById('pagCorreo').classList.add('hidden');
+            document.getElementById('pagInvitado').classList.add('hidden');
+            document.getElementById('pagReglas').classList.remove('hidden');
+        }
 
+        function irAdentro() {
+            document.getElementById('pagReglas').classList.add('hidden');
+            document.getElementById('pagAdentro').classList.remove('hidden');
+        }
+    </script>
 
-        // ✅ TODOS LOS BOTONES FUNCIONAN PERFECTO
-        document.getElementById('botonCorreo').addEventListener('click', function(){
-            menuPrincipal.classList.add('hidden');
-            pantallaCorreo.classList.remove('hidden');
-            pantallaCorreo.classList.add('block');
-        });
-
-        document.getElementById('botonInvitado').addEventListener('click', function(){
-            menuPrincipal.classList.add('hidden');
-            pantallaInvitado.classList.remove('hidden');
-            pantallaInvitado.classList.add('block');
-        });
-
-        document.getElementById('volverDesdeCorreo').addEventListener('click', function(){
-            pantallaCorreo.c
+</body>
+    </html>
+    
