@@ -25,3 +25,100 @@
     <p>Aquí vamos a jugar, explorar y divertirnos juntos ✨</p>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENTHRITH WORLD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        dark: '#0F172A',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .bg-gradient-dark {
+                background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-dark min-h-screen flex flex-col items-center justify-center overflow-hidden">
+
+    <!-- Pantalla de Carga / Inicio -->
+    <div id="splash" class="w-full h-screen flex flex-col items-center justify-center absolute inset-0 bg-[#050508] z-50 transition-all duration-700">
+        <!-- Tu Logo -->
+        <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
+             alt="Zenthrith Logo" 
+             class="w-[280px] md:w-[380px] animate-pulse drop-shadow-[0_0_40px_#6366f1]">
+
+        <!-- Texto del Nombre -->
+        <h1 class="mt-8 text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#c4b5fd] via-[#60a5fa] to-[#a5b4fc] tracking-widest">ZENTHRITH</h1>
+        <p class="text-gray-400 text-lg mt-2">EL MUNDO QUE ESTABAS ESPERANDO</p>
+
+        <!-- Barra de Carga -->
+        <div class="w-[80%] max-w-[450px] h-3 bg-gray-800 rounded-full mt-12 overflow-hidden">
+            <div id="barraCarga" class="h-full bg-gradient-to-r from-[#3b82f6] via-[#8b5cf6] to-[#3b82f6] rounded-full w-0 transition-all duration-300"></div>
+        </div>
+
+        <p id="textoCarga" class="text-gray-500 mt-4 text-sm">Cargando mundo... 0%</p>
+    </div>
+
+    <!-- Lo que verás cuando termine de cargar -->
+    <div id="contenidoPrincipal" class="hidden w-full min-h-screen flex flex-col items-center justify-center text-white p-4">
+        <h2 class="text-4xl font-bold text-center">¡Bienvenido a ZENTHRITH WORLD! 🌍</h2>
+        <p class="text-center text-gray-300 mt-4 max-w-2xl">Aquí vamos a crear todo: tus mundos, tus juegos, tus personajes y todo lo que imagines. ¡Esto recién empieza! ✨</p>
+        <button class="mt-8 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-[0_0_25px_#165DFF] transition-all">
+            ENTRAR AL MUNDO
+        </button>
+    </div>
+
+    <script>
+        // Animación de la barra de carga
+        let porcentaje = 0;
+        const barra = document.getElementById('barraCarga');
+        const texto = document.getElementById('textoCarga');
+        const pantallaCarga = document.getElementById('splash');
+        const contenido = document.getElementById('contenidoPrincipal');
+
+        function cargar() {
+            if(porcentaje < 100) {
+                porcentaje++;
+                barra.style.width = porcentaje + '%';
+                texto.innerText = `Cargando mundo... ${porcentaje}%`;
+                // Simulamos que tarda un poquito, como un juego real
+                setTimeout(cargar, 25);
+            } else {
+                // Cuando llega al 100%: se va la pantalla de carga y sale lo principal
+                setTimeout(() => {
+                    pantallaCarga.classList.add('opacity-0', '-translate-y-full');
+                    setTimeout(() => {
+                        pantallaCarga.classList.add('hidden');
+                        contenido.classList.remove('hidden');
+                        contenido.classList.add('flex');
+                    }, 700);
+                }, 500);
+            }
+        }
+
+        // Empezamos a cargar en cuanto abra la página
+        window.onload = function() {
+            cargar();
+        }
+    </script>
+
+</body>
+</html>
