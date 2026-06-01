@@ -67,7 +67,7 @@
                     📧 Crear cuenta con correo electrónico
                 </button>
 
-                <!-- ✅ BOTÓN PARA CUENTA INVITADO (EL QUE YA TE ANDABA BIEN) -->
+                <!-- ✅ BOTÓN PARA CUENTA INVITADO -->
                 <button id="botonInvitado" class="w-full p-4 rounded-xl bg-transparent border-2 border-white/60 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300">
                     👤 Crear cuenta invitado
                 </button>
@@ -116,7 +116,7 @@
         <!-- 👤 NOMBRE DE JUGADOR -->
         <div class="mb-8">
             <label class="block text-white text-base mb-2">Nombre de jugador</label>
-            <input type="text placeholder="El nombre con el que te van a ver todos" class="w-full p-4 rounded-xl bg-azulOscuro text-white text-lg placeholder:text-blue-300/60 outline-none border border-white/10 focus:border-azulClaro">
+            <input type="text" placeholder="El nombre con el que te van a ver todos" class="w-full p-4 rounded-xl bg-azulOscuro text-white text-lg placeholder:text-blue-300/60 outline-none border border-white/10 focus:border-azulClaro">
         </div>
 
 
@@ -133,7 +133,7 @@
     </div>
 
 
-    <!-- 🟦 PANTALLA DE CUENTA INVITADO (LA QUE YA TENÍAMOS BIEN) -->
+    <!-- 🟦 PANTALLA DE CUENTA INVITADO -->
     <div id="pantallaInvitado" class="hidden w-full min-h-screen bg-azulApagado p-5">
 
         <div class="flex items-center justify-between border-b border-white/20 pb-4 mb-6">
@@ -207,7 +207,7 @@
         window.onload = cargar;
 
 
-        // 🟦 IR A PANTALLA DE CORREO
+        // 🟦 IR A PANTALLA DE CORREO (YA NO SALE EL AVISO, VA DIRECTO)
         document.getElementById('botonCorreo').addEventListener('click', function(){
             menuPrincipal.classList.add('hidden');
             pantallaCorreo.classList.remove('hidden');
@@ -263,5 +263,5 @@
     </script>
 
 </body>
-                                                                                                                      </html>
-                                                                                                                      
+                    </html>
+                    
