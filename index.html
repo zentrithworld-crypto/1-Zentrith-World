@@ -19,281 +19,285 @@
     </script>
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-        .boton-juego {
-            -webkit-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
+        html, body {
+            min-height: 100vh;
+            font-family: sans-serif;
+        }
+        .oculto {
+            display: none !important;
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen font-sans m-0 p-0 pb-24">
+<body>
 
-    <!-- PANTALLA DE CARGA -->
-    <div id="carga" class="fixed inset-0 bg-sky-100 flex flex-col items-center justify-center z-50">
-        <h1 class="text-5xl font-bold text-azulOscuro mb-4">ZENTRITH WORLD</h1>
-        <div class="w-64 h-2 bg-sky-200 rounded-full overflow-hidden">
-            <div id="barra" class="h-full bg-azulOscuro w-0"></div>
-        </div>
-        <p class="text-azulOscuro/60 mt-2">Cargando...</p>
+<!-- PANTALLA DE CARGA -->
+<div id="pantallaCarga" class="fixed inset-0 bg-sky-100 flex flex-col items-center justify-center z-50">
+    <h1 class="text-5xl font-bold text-azulOscuro mb-4">ZENTRITH WORLD</h1>
+    <div class="w-64 h-2 bg-sky-200 rounded-full overflow-hidden">
+        <div id="barraCarga" class="h-full bg-azulOscuro w-0"></div>
     </div>
+    <p class="text-azulOscuro/60 mt-2">Cargando...</p>
+</div>
 
-    <!-- MENÚ PRINCIPAL -->
-    <div id="menu" class="hidden min-h-screen bg-gradient-to-b from-sky-200 to-sky-300 flex flex-col items-center justify-center p-4">
-        <h1 class="text-6xl font-bold text-white text-center mb-10">ZENTRITH WORLD</h1>
-        <div class="bg-white/90 rounded-2xl p-6 w-full max-w-md shadow-xl">
-            <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">¡Bienvenido!</h2>
-            <div class="space-y-4">
-                <button onclick="irACorreo()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">
-                    📧 Crear cuenta con correo
-                </button>
-                <button onclick="irAInvitado()" class="w-full p-4 rounded-xl bg-white border-2 border-sky-300 text-azulOscuro font-bold text-lg">
-                    👤 Cuenta invitado
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PANTALLA CORREO -->
-    <div id="pagCorreo" class="hidden min-h-screen bg-sky-50 p-4">
-        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
-        <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta con correo</h2>
-        <input type="email" placeholder="Tu correo" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-        <input type="password" placeholder="Contraseña" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-        <input type="date" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-        <input type="text" id="nombreCorreo" placeholder="Tu nombre de jugador" class="w-full p-4 rounded-xl border border-sky-300 mb-6">
-        <button onclick="irAReglas('correo')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Crear cuenta!</button>
-    </div>
-
-    <!-- PANTALLA INVITADO -->
-    <div id="pagInvitado" class="hidden min-h-screen bg-sky-50 p-4">
-        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
-        <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta invitado</h2>
-        <input type="date" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-        <input type="text" id="nombreInvitado" placeholder="Tu nombre de jugador" value="ZentriDueño" class="w-full p-4 rounded-xl border border-sky-300 mb-6">
-        <div class="grid grid-cols-2 gap-3 mb-6">
-            <button id="btnMujer" onclick="elegirGenero('mujer')" class="p-4 rounded-xl border border-sky-300 text-azulOscuro">♀️ Mujer</button>
-            <button id="btnHombre" onclick="elegirGenero('hombre')" class="p-4 rounded-xl border border-sky-300 text-azulOscuro">♂️ Hombre</button>
-        </div>
-        <button onclick="irAReglas('invitado')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Entrar!</button>
-    </div>
-
-    <!-- PANTALLA REGLAS -->
-    <div id="pagReglas" class="hidden min-h-screen bg-sky-50 p-4">
-        <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">📜 NUESTRA COMUNIDAD</h2>
-        <div class="bg-white rounded-xl p-5 shadow">
-            <p class="text-gray-700 mb-4">Somos una comunidad conjunta: acá todos somos parte, nos cuidamos y nos respetamos.</p>
-            <h3 class="font-bold text-azulOscuro mb-2">✅ Lo que sí podés hacer:</h3>
-            <ul class="list-disc pl-5 text-gray-600 mb-4">
-                <li>Jugar y crear todo lo que quieras</li>
-                <li>Invitar amigos a jugar con vos</li>
-                <li>Hablar con respeto y ser amable</li>
-            </ul>
-            <h3 class="font-bold text-azulOscuro mb-2">❌ Lo que NO podés hacer:</h3>
-            <ul class="list-disc pl-5 text-gray-600 mb-6">
-                <li>No decir malas palabras ni insultar</li>
-                <li>No molestar ni hacer sentir mal a nadie</li>
-                <li>No dar datos personales reales</li>
-            </ul>
-            <button onclick="irAdentro()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Entrar al juego</button>
+<!-- MENÚ PRINCIPAL -->
+<div id="menuPrincipal" class="oculto min-h-screen bg-gradient-to-b from-sky-200 to-sky-300 flex flex-col items-center justify-center p-4">
+    <h1 class="text-6xl font-bold text-white text-center mb-10">ZENTRITH WORLD</h1>
+    <div class="bg-white/90 rounded-2xl p-6 w-full max-w-md shadow-xl">
+        <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">¡Bienvenido!</h2>
+        <div class="space-y-4">
+            <button onclick="irACorreo()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">
+                📧 Crear cuenta con correo
+            </button>
+            <button onclick="irAInvitado()" class="w-full p-4 rounded-xl bg-white border-2 border-sky-300 text-azulOscuro font-bold text-lg">
+                👤 Cuenta invitado
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- ADENTRO DEL JUEGO -->
-    <div id="pagAdentro" class="hidden min-h-screen bg-gray-50">
-        <div class="bg-white p-4 flex items-center justify-between shadow">
-            <h1 class="text-2xl font-bold">Inicio</h1>
-            <div class="flex items-center gap-4">
-                <span onclick="irABuscar()" class="boton-juego text-2xl cursor-pointer">🔍</span>
-                <span onclick="irANotificaciones()" class="boton-juego text-2xl cursor-pointer">🔔</span>
-            </div>
-        </div>
+<!-- PANTALLA CORREO -->
+<div id="pagCorreo" class="oculto min-h-screen bg-sky-50 p-4">
+    <button onclick="volverAlMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+    <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta con correo</h2>
+    <input type="email" placeholder="Tu correo" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
+    <input type="password" placeholder="Contraseña" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
+    <input type="date" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
+    <input type="text" id="nombreCorreo" placeholder="Tu nombre de jugador" class="w-full p-4 rounded-xl border border-sky-300 mb-6">
+    <button onclick="irAReglas('correo')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Crear cuenta!</button>
+</div>
 
-        <div class="p-4">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-14 h-14 rounded-full bg-sky-400 flex items-center justify-center text-white text-xl cursor-pointer" onclick="irACrearPersonaje()">
-                    ✏️
-                </div>
-                <span class="text-xl font-bold flex items-center gap-2" id="nombreUsuario">🦁 ZentriDueño 🐯</span>
-            </div>
+<!-- PANTALLA INVITADO -->
+<div id="pagInvitado" class="oculto min-h-screen bg-sky-50 p-4">
+    <button onclick="volverAlMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+    <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta invitado</h2>
+    <input type="date" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
+    <input type="text" id="nombreInvitado" placeholder="Tu nombre de jugador" value="ZentriDueño" class="w-full p-4 rounded-xl border border-sky-300 mb-6">
+    <div class="grid grid-cols-2 gap-3 mb-6">
+        <button id="btnMujer" onclick="elegirGenero('mujer')" class="p-4 rounded-xl border border-sky-300 text-azulOscuro">♀️ Mujer</button>
+        <button id="btnHombre" onclick="elegirGenero('hombre')" class="p-4 rounded-xl border border-sky-300 text-azulOscuro">♂️ Hombre</button>
+    </div>
+    <button onclick="irAReglas('invitado')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Entrar!</button>
+</div>
 
-            <div class="bg-white rounded-xl p-4 shadow mb-6">
-                <h3 class="font-bold text-lg mb-2">🔒 Desbloquear chat seguro</h3>
-                <p class="text-gray-600 text-sm mb-3">Para hablar seguro con los demás jugadores</p>
-                <button class="w-full p-3 rounded-xl bg-azulOscuro text-white font-bold">Desbloquear</button>
-            </div>
+<!-- PANTALLA REGLAS -->
+<div id="pagReglas" class="oculto min-h-screen bg-sky-50 p-4">
+    <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">📜 NUESTRA COMUNIDAD</h2>
+    <div class="bg-white rounded-xl p-5 shadow">
+        <p class="text-gray-700 mb-4">Somos una comunidad conjunta: acá todos somos parte, nos cuidamos y nos respetamos.</p>
+        <h3 class="font-bold text-azulOscuro mb-2">✅ Lo que sí podés hacer:</h3>
+        <ul class="list-disc pl-5 text-gray-600 mb-4">
+            <li>Jugar y crear todo lo que quieras</li>
+            <li>Invitar amigos a jugar con vos</li>
+            <li>Hablar con respeto y ser amable</li>
+        </ul>
+        <h3 class="font-bold text-azulOscuro mb-2">❌ Lo que NO podés hacer:</h3>
+        <ul class="list-disc pl-5 text-gray-600 mb-6">
+            <li>No decir malas palabras ni insultar</li>
+            <li>No molestar ni hacer sentir mal a nadie</li>
+            <li>No dar datos personales reales</li>
+        </ul>
+        <button onclick="irAlJuego()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Entrar al juego</button>
+    </div>
+</div>
 
-            <div class="bg-white rounded-xl p-4 shadow mb-6">
-                <h3 class="font-bold text-lg mb-2">👥 Amigos y mucho más</h3>
-                <p class="text-gray-600 text-sm mb-3">Jugá con tus amigos y pasalo mejor</p>
-                <button class="w-full p-3 rounded-xl border border-azulOscuro text-azulOscuro font-bold">Invitar amigos</button>
-            </div>
-        </div>
-
-        <!-- MENÚ DE ABAJO -->
-        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-6">
-            <div class="flex items-center justify-around">
-                <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium">
-                    <span class="text-2xl">🏠</span>
-                    <span class="text-sm">Inicio</span>
-                </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500" onclick="irACrearPersonaje()">
-                    <span class="text-2xl">👤</span>
-                    <span class="text-sm">Personaje</span>
-                </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
-                    <span class="text-2xl">👥</span>
-                    <span class="text-sm">Amigos</span>
-                </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
-                    <span class="text-2xl">⚙️</span>
-                    <span class="text-sm">Ajustes</span>
-                </button>
-            </div>
+<!-- DENTRO DEL JUEGO - PANTALLA PRINCIPAL -->
+<div id="pagJuego" class="oculto min-h-screen bg-gray-50">
+    <div class="bg-white p-4 flex items-center justify-between shadow">
+        <h1 class="text-2xl font-bold">Inicio</h1>
+        <div class="flex items-center gap-4">
+            <span onclick="abrirBuscar()" class="text-2xl cursor-pointer">🔍</span>
+            <span onclick="abrirNotificaciones()" class="text-2xl cursor-pointer">🔔</span>
         </div>
     </div>
 
-    <!-- ✅ PANTALLA NOTIFICACIONES - EXACTA, NO BLANCA -->
-    <div id="pagNotificaciones" class="hidden min-h-screen bg-white">
-        <div class="flex items-center justify-between p-4 border-b border-gray-200">
-            <button onclick="volverInicio()" class="text-black text-2xl">←</button>
-            <h2 class="text-2xl font-bold text-black">Notificaciones</h2>
-            <div class="w-8"></div>
+    <div class="p-4">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-14 h-14 rounded-full bg-sky-400 flex items-center justify-center text-white text-xl cursor-pointer" onclick="irAPersonaje()">
+                ✏️
+            </div>
+            <span class="text-xl font-bold flex items-center gap-2" id="nombreUsuario">🦁 ZentriDueño 🐯</span>
         </div>
-        <div class="flex items-center justify-center h-[70vh]">
-            <p class="text-gray-500 text-2xl font-medium text-center">¡Ya estás al tanto de todo!</p>
+
+        <div class="bg-white rounded-xl p-4 shadow mb-6">
+            <h3 class="font-bold text-lg mb-2">🔒 Desbloquear chat seguro</h3>
+            <p class="text-gray-600 text-sm mb-3">Para hablar seguro con los demás jugadores</p>
+            <button class="w-full p-3 rounded-xl bg-azulOscuro text-white font-bold">Desbloquear</button>
+        </div>
+
+        <div class="bg-white rounded-xl p-4 shadow mb-6">
+            <h3 class="font-bold text-lg mb-2">👥 Amigos y mucho más</h3>
+            <p class="text-gray-600 text-sm mb-3">Jugá con tus amigos y pasalo mejor</p>
+            <button class="w-full p-3 rounded-xl border border-azulOscuro text-azulOscuro font-bold">Invitar amigos</button>
         </div>
     </div>
 
-    <!-- ✅ PANTALLA BÚSQUEDA - EXACTA, FONDO AZUL OSCURO -->
-    <div id="pagBuscar" class="hidden min-h-screen bg-azulFondo text-white">
-        <div class="p-4">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="flex-1 bg-gray-100 rounded-xl p-3 flex items-center gap-2">
-                    <span class="text-gray-500 text-xl">🔍</span>
-                    <input type="text" placeholder="Buscar" class="bg-transparent w-full text-black text-lg outline-none">
-                </div>
-                <button onclick="volverInicio()" class="text-white text-lg font-medium">Cancelar</button>
-            </div>
-            <h3 class="text-2xl font-medium text-white mb-5">Intenta buscar</h3>
-            <div class="flex flex-wrap gap-3">
-                <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Magnate</span>
-                <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Fuga</span>
-                <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Supervivencia</span>
-            </div>
+    <!-- MENÚ DE ABAJO -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-6">
+        <div class="flex items-center justify-around">
+            <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium">
+                <span class="text-2xl">🏠</span>
+                <span class="text-sm">Inicio</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 text-gray-500" onclick="irAPersonaje()">
+                <span class="text-2xl">👤</span>
+                <span class="text-sm">Personaje</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 text-gray-500">
+                <span class="text-2xl">👥</span>
+                <span class="text-sm">Amigos</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 text-gray-500">
+                <span class="text-2xl">⚙️</span>
+                <span class="text-sm">Ajustes</span>
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- PANTALLA CREAR PERSONAJE -->
-    <div id="pagPersonaje" class="hidden min-h-screen bg-sky-50 p-4">
-        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
-        <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">✏️ Creá tu personaje</h2>
-        <div class="bg-white rounded-xl p-5 shadow text-center">
-            <div class="w-32 h-32 rounded-full bg-sky-400 mx-auto mb-6 flex items-center justify-center text-white text-4xl">
-                🎨
+<!-- ✅ PANTALLA NOTIFICACIONES - EXACTA, NADA DE BLANCO -->
+<div id="pagNotificaciones" class="oculto min-h-screen bg-white">
+    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+        <button onclick="volverAlInicio()" class="text-black text-2xl">←</button>
+        <h2 class="text-2xl font-bold text-black">Notificaciones</h2>
+        <div class="w-8"></div>
+    </div>
+    <div class="flex items-center justify-center h-[70vh]">
+        <p class="text-gray-500 text-2xl font-medium text-center">¡Ya estás al tanto de todo!</p>
+    </div>
+</div>
+
+<!-- ✅ PANTALLA BÚSQUEDA - EXACTA, FONDO AZUL OSCURO -->
+<div id="pagBuscar" class="oculto min-h-screen bg-azulFondo text-white">
+    <div class="p-4">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="flex-1 bg-gray-100 rounded-xl p-3 flex items-center gap-2">
+                <span class="text-gray-500 text-xl">🔍</span>
+                <input type="text" placeholder="Buscar" class="bg-transparent w-full text-black text-lg outline-none">
             </div>
-            <p class="text-gray-600 mb-6">Acá vas a poder elegir tu cara, ropa, colores y todo lo que quieras para que tu personaje sea único.</p>
-            <button class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Guardar cambios</button>
+            <button onclick="volverAlInicio()" class="text-white text-lg font-medium">Cancelar</button>
+        </div>
+        <h3 class="text-2xl font-medium text-white mb-5">Intenta buscar</h3>
+        <div class="flex flex-wrap gap-3">
+            <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Magnate</span>
+            <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Fuga</span>
+            <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Supervivencia</span>
         </div>
     </div>
+</div>
+
+<!-- PANTALLA PERSONAJE -->
+<div id="pagPersonaje" class="oculto min-h-screen bg-sky-50 p-4">
+    <button onclick="volverAlInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+    <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">✏️ Creá tu personaje</h2>
+    <div class="bg-white rounded-xl p-5 shadow text-center">
+        <div class="w-32 h-32 rounded-full bg-sky-400 mx-auto mb-6 flex items-center justify-center text-white text-4xl">
+            🎨
+        </div>
+        <p class="text-gray-600 mb-6">Acá vas a poder elegir tu cara, ropa, colores y todo lo que quieras para que tu personaje sea único.</p>
+        <button class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Guardar cambios</button>
+    </div>
+</div>
 
 
-    <script>
-        let tipoCuenta = localStorage.getItem("tipoCuenta") || "";
-        let nombreJugador = localStorage.getItem("nombreJugador") || "";
+<script>
+// Variables
+let tipoCuenta = localStorage.getItem("tipoCuenta") || "";
+let nombreJugador = localStorage.getItem("nombreJugador") || "";
 
-        // CARGA
-        let progreso = 0;
-        function cargar() {
-            if(progreso < 100) {
-                progreso++;
-                document.getElementById('barra').style.width = progreso + '%';
-                setTimeout(cargar, 10);
-            } else {
-                if(tipoCuenta && nombreJugador) {
-                    document.getElementById('carga').classList.add('hidden');
-                    document.getElementById('pagAdentro').classList.remove('hidden');
-                    document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
-                } else {
-                    document.getElementById('carga').classList.add('hidden');
-                    document.getElementById('menu').classList.remove('hidden');
-                }
-            }
-        }
-        window.onload = cargar;
-
-        // FUNCIONES
-        function irACorreo() {
-            document.getElementById('menu').classList.add('hidden');
-            document.getElementById('pagCorreo').classList.remove('hidden');
-        }
-
-        function irAInvitado() {
-            document.getElementById('menu').classList.add('hidden');
-            document.getElementById('pagInvitado').class.remove('hidden');
-        }
-
-        function volverMenu() {
-            document.getElementById('pagCorreo').classList.add('hidden');
-            document.getElementById('pagInvitado').class.add('hidden');
-            document.getElementById('menu').class.remove('hidden');
-        }
-
-        function elegirGenero(tipo) {
-            if(tipo === 'mujer') {
-                document.getElementById('btnMujer').classList.add('bg-azulOscuro', 'text-white');
-                document.getElementById('btnHombre').classList.remove('bg-azulOscuro', 'text-white');
-            } else {
-                document.getElementById('btnHombre').classList.add('bg-azulOscuro', 'text-white');
-                document.getElementById('btnMujer').class.remove('bg-azulOscuro', 'text-white');
-            }
-        }
-
-        function irAReglas(tipo) {
-            tipoCuenta = tipo;
-            if(tipo === "correo") {
-                nombreJugador = document.getElementById('nombreCorreo').value || "Jugador";
-            } else {
-                nombreJugador = document.getElementById('nombreInvitado').value || "ZentriDueño";
-            }
-            localStorage.setItem("tipoCuenta", tipoCuenta);
-            localStorage.setItem("nombreJugador", nombreJugador);
-
-            document.getElementById('pagCorreo').classList.add('hidden');
-            document.getElementById('pagInvitado').class.add('hidden');
-            document.getElementById('pagReglas').class.remove('hidden');
-        }
-
-        function irAdentro() {
-            document.getElementById('pagReglas').classList.add('hidden');
-            document.getElementById('pagAdentro').class.remove('hidden');
+// CARGA RÁPIDA
+let progreso = 0;
+function cargar() {
+    if(progreso < 100) {
+        progreso++;
+        document.getElementById('barraCarga').style.width = progreso + '%';
+        setTimeout(cargar, 8);
+    } else {
+        document.getElementById('pantallaCarga').classList.add('oculto');
+        if(tipoCuenta && nombreJugador) {
+            document.getElementById('pagJuego').classList.remove('oculto');
             document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
+        } else {
+            document.getElementById('menuPrincipal').classList.remove('oculto');
         }
+    }
+}
+window.onload = cargar;
 
-        function irACrearPersonaje() {
-            document.getElementById('pagAdentro').classList.add('hidden');
-            document.getElementById('pagPersonaje').class.remove('hidden');
-        }
+// FUNCIONES PARA CAMBIAR DE PANTALLAS
+function irACorreo() {
+    document.getElementById('menuPrincipal').classList.add('oculto');
+    document.getElementById('pagCorreo').classList.remove('oculto');
+}
 
-        function irABuscar() {
-            document.getElementById('pagAdentro').classList.add('hidden');
-            document.getElementById('pagBuscar').class.remove('hidden');
-        }
+function irAInvitado() {
+    document.getElementById('menuPrincipal').classList.add('oculto');
+    document.getElementById('pagInvitado').class.remove('oculto');
+}
 
-        function irANotificaciones() {
-            document.getElementById('pagAdentro').classList.add('hidden');
-            document.getElementById('pagNotificaciones').class.remove('hidden');
-        }
+function volverAlMenu() {
+    document.getElementById('pagCorreo').classList.add('oculto');
+    document.getElementById('pagInvitado').classList.add('oculto');
+    document.getElementById('menuPrincipal').class.remove('oculto');
+}
 
-        function volverInicio() {
-            document.getElementById('pagPersonaje').classList.add('hidden');
-            document.getElementById('pagBuscar').class.add('hidden');
-            document.getElementById('pagNotificaciones').class.add('hidden');
-            document.getElementById('pagAdentro').class.remove('hidden');
-        }
-    </script>
+function elegirGenero(tipo) {
+    if(tipo === 'mujer') {
+        document.getElementById('btnMujer').classList.add('bg-azulOscuro', 'text-white');
+        document.getElementById('btnHombre').classList.remove('bg-azulOscuro', 'text-white');
+    } else {
+        document.getElementById('btnHombre').classList.add('bg-azulOscuro', 'text-white');
+        document.getElementById('btnMujer').classList.remove('bg-azulOscuro', 'text-white');
+    }
+}
+
+function irAReglas(tipo) {
+    tipoCuenta = tipo;
+    if(tipo === "correo") {
+        nombreJugador = document.getElementById('nombreCorreo').value || "Jugador";
+    } else {
+        nombreJugador = document.getElementById('nombreInvitado').value || "ZentriDueño";
+    }
+    localStorage.setItem("tipoCuenta", tipoCuenta);
+    localStorage.setItem("nombreJugador", nombreJugador);
+
+    document.getElementById('pagCorreo').classList.add('oculto');
+    document.getElementById('pagInvitado').classList.add('oculto');
+    document.getElementById('pagReglas').class.remove('oculto');
+}
+
+function irAlJuego() {
+    document.getElementById('pagReglas').classList.add('oculto');
+    document.getElementById('pagJuego').class.remove('oculto');
+    document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
+}
+
+function irAPersonaje() {
+    document.getElementById('pagJuego').classList.add('oculto');
+    document.getElementById('pagPersonaje').class.remove('oculto');
+}
+
+function abrirBuscar() {
+    document.getElementById('pagJuego').classList.add('oculto');
+    document.getElementById('pagBuscar').class.remove('oculto');
+}
+
+function abrirNotificaciones() {
+    document.getElementById('pagJuego').classList.add('oculto');
+    document.getElementById('pagNotificaciones').class.remove('oculto');
+}
+
+function volverAlInicio() {
+    document.getElementById('pagPersonaje').classList.add('oculto');
+    document.getElementById('pagBuscar').classList.add('oculto');
+    document.getElementById('pagNotificaciones').class.add('oculto');
+    document.getElementById('pagJuego').class.remove('oculto');
+}
+</script>
 
 </body>
                     </html>
-    
+                    
