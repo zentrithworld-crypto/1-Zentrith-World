@@ -18,6 +18,16 @@
             }
         }
     </script>
+    <style>
+        /* Evitamos que los botones activen menús extra del teléfono */
+        .boton-juego {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 min-h-screen font-sans m-0 p-0 pb-24">
 
@@ -96,50 +106,51 @@
         <div class="bg-white p-4 flex items-center justify-between shadow">
             <h1 class="text-2xl font-bold">Inicio</h1>
             <div class="flex items-center gap-4">
-                <!-- ✅ LUPA: AHORA SÍ FUNCIONA, TOCÁ Y ANDA -->
-                <span onclick="irABuscar()" class="text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔍</span>
-                <!-- ✅ CAMPANITA: AHORA SÍ FUNCIONA, TOCÁ Y ANDA -->
-                <span onclick="irANotificaciones()" class="text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔔</span>
+                <!-- 🔍 LUPA: YA NO ACTIVA MENÚS DEL TELÉFONO -->
+                <span onclick="irABuscar()" class="boton-juego text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔍</span>
+                <!-- 🔔 CAMPANITA: YA NO SALE ESE MENÚ DE ABAJO, SOLO VA A SU PANTALLA -->
+                <span onclick="irANotificaciones()" class="boton-juego text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔔</span>
             </div>
         </div>
 
         <div class="p-4">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-14 h-14 rounded-full bg-azulClaro flex items-center justify-center text-white text-xl cursor-pointer" onclick="irACrearPersonaje()">
+                <div class="w-14 h-14 rounded-full bg-azulClaro flex items-center justify-center text-white text-xl cursor-pointer boton-juego" onclick="irACrearPersonaje()">
                     ✏️
                 </div>
+                <!-- ✅ YA NO SE REPITEN LOS EMOJIS, SIEMPRE SALE IGUAL -->
                 <span class="text-xl font-bold flex items-center gap-2" id="nombreUsuario">🦁 ZentriDueño 🐯</span>
             </div>
 
             <div class="bg-white rounded-xl p-4 shadow mb-6">
                 <h3 class="font-bold text-lg mb-2">🔒 Desbloquear chat seguro</h3>
                 <p class="text-gray-600 text-sm mb-3">Para hablar seguro con los demás jugadores</p>
-                <button class="w-full p-3 rounded-xl bg-azulOscuro text-white font-bold">Desbloquear</button>
+                <button class="w-full p-3 rounded-xl bg-azulOscuro text-white font-bold boton-juego">Desbloquear</button>
             </div>
 
             <div class="bg-white rounded-xl p-4 shadow mb-6">
                 <h3 class="font-bold text-lg mb-2">👥 Amigos y mucho más</h3>
                 <p class="text-gray-600 text-sm mb-3">Jugá con tus amigos y pasalo mejor</p>
-                <button class="w-full p-3 rounded-xl border border-azulOscuro text-azulOscuro font-bold">Invitar amigos</button>
+                <button class="w-full p-3 rounded-xl border border-azulOscuro text-azulOscuro font-bold boton-juego">Invitar amigos</button>
             </div>
         </div>
 
         <!-- MENÚ DE ABAJO -->
         <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-6">
             <div class="flex items-center justify-around">
-                <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium">
+                <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium boton-juego">
                     <span class="text-2xl">🏠</span>
                     <span class="text-sm">Inicio</span>
                 </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500" onclick="irACrearPersonaje()">
+                <button class="flex flex-col items-center gap-1 text-gray-500 boton-juego" onclick="irACrearPersonaje()">
                     <span class="text-2xl">👤</span>
                     <span class="text-sm">Personaje</span>
                 </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
+                <button class="flex flex-col items-center gap-1 text-gray-500 boton-juego">
                     <span class="text-2xl">👥</span>
                     <span class="text-sm">Amigos</span>
                 </button>
-                <button class="flex flex-col items-center gap-1 text-gray-500">
+                <button class="flex flex-col items-center gap-1 text-gray-500 boton-juego">
                     <span class="text-2xl">⚙️</span>
                     <span class="text-sm">Ajustes</span>
                 </button>
@@ -147,9 +158,9 @@
         </div>
     </div>
 
-    <!-- ✅ PANTALLA DE LA LUPA - BUSCAR -->
+    <!-- PANTALLA DE LA LUPA - BUSCAR -->
     <div id="pagBuscar" class="hidden min-h-screen bg-gray-50 p-4">
-        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
         <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔍 Buscar</h2>
         <input type="text" placeholder="Buscar mundos, jugadores, amigos..." class="w-full p-4 rounded-xl border border-azulClaro mb-6 text-lg">
         <div class="space-y-4">
@@ -157,9 +168,9 @@
         </div>
     </div>
 
-    <!-- ✅ PANTALLA DE LA CAMPANITA - NOTIFICACIONES -->
+    <!-- PANTALLA DE LA CAMPANITA - NOTIFICACIONES -->
     <div id="pagNotificaciones" class="hidden min-h-screen bg-gray-50 p-4">
-        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
         <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔔 Notificaciones</h2>
         <div class="bg-white rounded-xl p-4 shadow mb-4">
             <p class="text-gray-700">📩 Tienes una solicitud de amistad</p>
@@ -174,20 +185,19 @@
 
     <!-- PANTALLA CREAR PERSONAJE -->
     <div id="pagPersonaje" class="hidden min-h-screen bg-sky-50 p-4">
-        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
         <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">✏️ Creá tu personaje</h2>
         <div class="bg-white rounded-xl p-5 shadow text-center">
             <div class="w-32 h-32 rounded-full bg-azulClaro mx-auto mb-6 flex items-center justify-center text-white text-4xl">
                 🎨
             </div>
             <p class="text-gray-600 mb-6">Acá vas a poder elegir tu cara, ropa, colores y todo lo que quieras para que tu personaje sea único.</p>
-            <button class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Guardar cambios</button>
+            <button class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg boton-juego">Guardar cambios</button>
         </div>
     </div>
 
 
     <script>
-        // GUARDAMOS LA SESIÓN PARA QUE NO VUELVA A SALIR LA PANTALLA DE ENTRADA
         let tipoCuenta = localStorage.getItem("tipoCuenta") || "";
         let nombreJugador = localStorage.getItem("nombreJugador") || "";
 
@@ -199,10 +209,10 @@
                 document.getElementById('barra').style.width = progreso + '%';
                 setTimeout(cargar, 15);
             } else {
-                // Si ya entró antes, va directo al juego
                 if(tipoCuenta && nombreJugador) {
                     document.getElementById('carga').classList.add('hidden');
                     document.getElementById('pagAdentro').classList.remove('hidden');
+                    // ✅ ASEGURAMOS QUE SIEMPRE SALGA BIEN, SIN DUPLICAR NADA
                     document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
                 } else {
                     document.getElementById('carga').classList.add('hidden');
@@ -246,7 +256,6 @@
             } else {
                 nombreJugador = document.getElementById('nombreInvitado').value || "ZentriDueño";
             }
-            // GUARDAMOS LOS DATOS PARA QUE NO SE PIERDAN
             localStorage.setItem("tipoCuenta", tipoCuenta);
             localStorage.setItem("nombreJugador", nombreJugador);
 
@@ -266,24 +275,24 @@
             document.getElementById('pagPersonaje').class.remove('hidden');
         }
 
-        // ✅ FUNCIONES CORREGIDAS Y LISTAS: LUPA Y CAMPANITA
         function irABuscar() {
-            document.getElementById('pagAdentro').class.add('hidden');
+            document.getElementById('pagAdentro').classList.add('hidden');
             document.getElementById('pagBuscar').class.remove('hidden');
         }
 
         function irANotificaciones() {
-            document.getElementById('pagAdentro').class.add('hidden');
+            document.getElementById('pagAdentro').classList.add('hidden');
             document.getElementById('pagNotificaciones').class.remove('hidden');
         }
 
         function volverInicio() {
-            document.getElementById('pagPersonaje').class.add('hidden');
-            document.getElementById('pagBuscar').class.add('hidden');
-            document.getElementById('pagNotificaciones').class.add('hidden');
+            document.getElementById('pagPersonaje').classList.add('hidden');
+            document.getElementById('pagBuscar').classList.add('hidden');
+            document.getElementById('pagNotificaciones').classList.add('hidden');
             document.getElementById('pagAdentro').class.remove('hidden');
         }
     </script>
 
 </body>
-</html>
+        </html>
+                                                                                                                            
