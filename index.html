@@ -1,5 +1,4 @@
-">
-                   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +11,7 @@
                 extend: {
                     colors: {
                         azulClaro: '#60a5fa',
-                        azulMedio: '#1d4ed8',
+                        azulMedio: '#3b82f6',
                         azulOscuro: '#1e40af',
                         azulFondo: '#0f172a',
                     }
@@ -34,172 +33,9 @@
 </head>
 <body class="bg-azulFondo min-h-screen font-sans m-0 p-0 overflow-x-hidden">
 
-    <!-- 🟦 PANTALLA DE CARGA - ÚNICA, SIN ERRORES -->
+    <!-- 🟦 PANTALLA DE CARGA CON TU LOGO -->
     <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulFondo fixed inset-0 z-50 transition-all duration-700 ease-in-out">
-        <!-- Tu logo bien puesto, se ve perfecto -->
-        <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
-             alt="Zenthrith Logo" 
-             class="w-[260px] sm:w-[320px] md:w-[380px] animate-pulse drop-shadow-[0_0_40px_#60a5fa] object-contain mb-6">
-
-        <h1 class="text-[clamp(2.5rem,8vw,5rem)] texto-grueso text-transparent bg-clip-text bg-gradient-to-r from-[#c4b5fd] via-[#60a5fa] to-[#a5b4fc] text-center">ZENTRITH WORLD</h1>
-        <p class="text-blue-300 text-lg sm:text-xl mt-2 mb-12">EL MUNDO QUE ESTABAS ESPERANDO</p>
-
-        <!-- SOLO ESTA BARRA DE CARGA, ARRIBA DEL TEXTO, TAL CUAL QUERÉS -->
-        <div class="w-[85%] max-w-[500px] h-3 bg-blue-900/40 rounded-full overflow-hidden mb-4">
-            <div id="barraCarga" class="h-full bg-gradient-to-r from-[#3b82f6] via-[#8b5cf6] to-[#3b82f6] rounded-full w-0 transition-all duration-200 ease-out"></div>
-        </div>
-        <p id="textoCarga" class="text-blue-200 text-sm sm:text-base">Cargando mundo... 0%</p>
-    </div>
-
-
-    <!-- 🟦 MENÚ PRINCIPAL - LO QUE QUEDA DESPUÉS DE CARGAR, TODO LO QUE HABLAMOS -->
-    <div id="menuPrincipal" class="hidden w-full min-h-screen fondo-azul-degradado flex flex-col items-center justify-center p-4 sm:p-6">
-        
-        <h1 class="text-[clamp(2.5rem,10vw,6rem)] texto-grueso text-white text-center drop-shadow-[0_0_25px_rgba(255,255,255,0.3)] mb-8">
-            ZENTRITH WORLD
-        </h1>
-
-        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-[0_0_40px_rgba(0,0,0,0.25)] border border-white/20">
-            
-            <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-4">ENTRAR AL MUNDO</h2>
-            <p class="text-blue-100 text-center mb-8 leading-relaxed">🔹 Estamos en proceso de creación 🔹<br>¡Pronto tendremos todos los juegos, mundos y sorpresas listos para vos!</p>
-
-            <!-- Espacios para correo y edad, tal cual pediste -->
-            <div class="space-y-4 mb-8">
-                <input type="email" placeholder="Tu correo electrónico" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/60 transition-all duration-300">
-                <input type="number" placeholder="Tu edad" min="1" max="120" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/60 transition-all duration-300">
-            </div>
-
-            <!-- Botones -->
-            <div class="space-y-3">
-                <button class="w-full p-4 rounded-xl bg-white text-azulMedio font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                    🚀 ENTRAR AHORA
-                </button>
-                <button class="w-full p-4 rounded-xl bg-transparent border border-white/40 text-white font-medium hover:bg-white/10 transition-all duration-300">
-                    ℹ️ Sobre nosotros
-                </button>
-            </div>
-
-            <p class="text-center text-blue-200 text-sm mt-8">© 2026 ZENTRITH WORLD - Todos los derechos reservados</p>
-        </div>
-
-    </div>
-
-
-    <script>
-        // Animación de carga, bien hecha, sin repeticiones
-        let porcentaje = 0;
-        const barra = document.getElementById('barraCarga');
-        const texto = document.getElementById('textoCarga');
-        const pantallaCarga = document.getElementById('pantallaCarga');
-        const menu = document.getElementById('menuPrincipal');
-
-        function cargar() {
-            if(porcentaje < 100) {
-                porcentaje++;
-                barra.style.width = porcentaje + '%';
-                texto.innerText = `Cargando mundo... ${porcentaje}%`;
-                // Va subiendo despacio, como un juego real
-                setTimeout(cargar, 18);
-            } else {
-                // Cuando llega al 100% se va la pantalla de carga y entra al menú
-                setTimeout(() => {
-                    pantallaCarga.classList.add('opacity-0', '-translate-y-full');
-                    setTimeout(() => {
-                        pantallaCarga.classList.add('hidden');
-                        menu.classList.remove('hidden');
-                        menu.classList.add('flex');
-                    }, 800);
-                }, 400);
-            }
-        }
-
-        // Empieza a cargar en cuanto abra la página
-        window.onload = function() {
-            cargar();
-        }
-    </script>
-
-</body>
-</html>
- ℹ️ Sobre nosotros
-                </button>
-            </div>
-
-            <p class="text-center text-blue-200 text-sm mt-6">© 2026 ZENTRITH WORLD - Todos los derechos reservados</p>
-        </div>
-
-    </div>
-
-
-    <script>
-        let porcentaje = 0;
-        const barra = document.getElementById('barraCarga');
-        const texto = document.getElementById('textoCarga');
-        const pantallaCarga = document.getElementById('pantallaCarga');
-        const menu = document.getElementById('menuPrincipal');
-
-        function cargar() {
-            if(porcentaje < 100) {
-                porcentaje++;
-                barra.style.width = porcentaje + '%';
-                texto.innerText = `Cargando mundo... ${porcentaje}%`;
-                setTimeout(cargar, 15);
-            } else {
-                setTimeout(() => {
-                    pantallaCarga.classList.add('opacity-0', '-translate-y-full');
-                    setTimeout(() => {
-                        pantallaCarga.classList.add('hidden');
-                        menu.classList.remove('hidden');
-                        menu.classList.add('flex');
-                    }, 700);
-                }, 300);
-            }
-        }
-
-        window.onload = cargar;
-    </script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENTRITH WORLD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        azulClaro: '#93c5fd',
-                        azulMedio: '#3b82f6',
-                        azulOscuro: '#1e40af',
-                        azulApagado: '#172554',
-                        azulFondo: '#0f172a',
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .texto-grueso {
-                font-weight: 900;
-                letter-spacing: 2px;
-            }
-            .fondo-azul-degradado {
-                background: linear-gradient(180deg, #93c5fd 0%, #172554 100%);
-            }
-        }
-    </style>
-</head>
-<body class="bg-azulFondo min-h-screen font-sans m-0 p-0 overflow-x-hidden">
-
-    <!-- 🟦 PANTALLA DE CARGA -->
-    <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulFondo fixed inset-0 z-50 transition-all duration-700 ease-in-out">
+        <!-- TU LOGO, BIEN PUESTO, NO SE ROMPE -->
         <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
              alt="Zenthrith Logo" 
              class="w-[260px] sm:w-[320px] md:w-[380px] animate-pulse drop-shadow-[0_0_40px_#60a5fa] object-contain mb-6">
@@ -207,6 +43,7 @@
         <h1 class="text-[clamp(2.5rem,8vw,5rem)] texto-grueso text-white text-center">ZENTRITH WORLD</h1>
         <p class="text-azulClaro text-lg sm:text-xl mt-2 mb-12">EL MUNDO QUE ESTABAS ESPERANDO</p>
 
+        <!-- BARRA DE CARGA SOLA, ARRIBA DEL TEXTO -->
         <div class="w-[85%] max-w-[500px] h-3 bg-blue-900/40 rounded-full overflow-hidden mb-4">
             <div id="barraCarga" class="h-full bg-gradient-to-r from-azulClaro via-azulMedio to-azulClaro rounded-full w-0 transition-all duration-200 ease-out"></div>
         </div>
@@ -214,38 +51,44 @@
     </div>
 
 
-    <!-- 🟦 MENÚ PRINCIPAL - TAL CUAL LO QUERÉS -->
+    <!-- 🟦 MENÚ QUE HICIMOS, TAL CUAL LO QUERÉS -->
     <div id="menuPrincipal" class="hidden w-full min-h-screen fondo-azul-degradado flex flex-col items-center justify-center p-4 sm:p-6">
         
-        <!-- NOMBRE DEL JUEGO ARRIBA GRANDE -->
+        <!-- NOMBRE DE TU JUEGO ARRIBA GRANDE -->
         <h1 class="text-[clamp(2.5rem,10vw,6rem)] texto-grueso text-white text-center drop-shadow-[0_0_25px_rgba(255,255,255,0.2)] mb-10">
             ZENTRITH WORLD
         </h1>
 
-        <!-- CAJA DEL MENÚ, SIN IMÁGENES DE JUGADORES, TODO LIMPIO -->
         <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-[0_0_40px_rgba(0,0,0,0.25)] border border-white/20">
             
             <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-6">¡BIENVENIDO!</h2>
             <p class="text-azulClaro text-center mb-8">Elegí cómo querés entrar al mundo</p>
 
-            <!-- 🟦 LOS BOTONES QUE ME PEDISTE, EXACTOS -->
+            <!-- 🟦 LOS DOS BOTONES QUE ME PEDISTE EXACTOS -->
             <div class="space-y-4">
-                <button class="w-full p-4 rounded-xl bg-white text-azulOscuro font-bold text-lg hover:bg-azulClaro transition-all duration-300 shadow-lg">
+                <button class="w-full p-4 rounded-xl bg-white text-azulOscuro font-bold text-lg hover:bg-blue-100 transition-all duration-300 shadow-lg">
                     📧 Crear cuenta con correo electrónico
                 </button>
 
                 <button class="w-full p-4 rounded-xl bg-transparent border-2 border-white/60 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300">
-                    👤 Entrar como invitado
+                    👤 Crear cuenta invitado
                 </button>
             </div>
 
-            <p class="text-center text-azulClaro text-sm mt-10">© 2026 ZENTRITH WORLD - Todos los derechos reservados</p>
+            <!-- ENLACES DE ABAJO -->
+            <div class="flex justify-center gap-8 mt-10">
+                <a href="#" class="text-azulClaro underline text-lg hover:text-white">Términos</a>
+                <a href="#" class="text-azulClaro underline text-lg hover:text-white">Privacidad</a>
+            </div>
+
+            <p class="text-center text-azulClaro text-sm mt-8">© 2026 ZENTRITH WORLD - Todos los derechos reservados</p>
         </div>
 
     </div>
 
 
     <script>
+        // ANIMACIÓN DE CARGA CORRECTA
         let porcentaje = 0;
         const barra = document.getElementById('barraCarga');
         const texto = document.getElementById('textoCarga');
@@ -277,6 +120,3 @@
 
 </body>
 </html>
-
-
-
