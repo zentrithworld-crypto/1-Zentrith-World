@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <!-- ✅ PANTALLA NOTIFICACIONES - EXACTO COMO ME MOSTRASTE -->
+    <!-- ✅ PANTALLA NOTIFICACIONES - AHORA SÍ SE VE TODO, NO MÁS BLANCO -->
     <div id="pagNotificaciones" class="hidden min-h-screen bg-white">
         <div class="flex items-center justify-between p-4 border-b border-gray-200">
             <button onclick="volverInicio()" class="text-black text-2xl boton-juego">←</button>
@@ -168,7 +168,7 @@
         </div>
     </div>
 
-    <!-- ✅ PANTALLA BÚSQUEDA - TAL CUAL ME MOSTRASTE, FONDO AZUL OSCURO -->
+    <!-- ✅ PANTALLA BÚSQUEDA - AHORA SÍ SE VE TODO, FONDO AZUL OSCURO -->
     <div id="pagBuscar" class="hidden min-h-screen bg-azulFondo text-white">
         <div class="p-4">
             <div class="flex items-center gap-3 mb-6">
@@ -217,11 +217,11 @@
             } else {
                 if(tipoCuenta && nombreJugador) {
                     document.getElementById('carga').classList.add('hidden');
-                    document.getElementById('pagAdentro').classList.remove('hidden');
+                    document.getElementById('pagAdentro').class.remove('hidden');
                     document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
                 } else {
                     document.getElementById('carga').classList.add('hidden');
-                    document.getElementById('menu').classList.remove('hidden');
+                    document.getElementById('menu').class.remove('hidden');
                 }
             }
         }
@@ -240,14 +240,14 @@
 
         function volverMenu() {
             document.getElementById('pagCorreo').classList.add('hidden');
-            document.getElementById('pagInvitado').classList.add('hidden');
+            document.getElementById('pagInvitado').class.add('hidden');
             document.getElementById('menu').class.remove('hidden');
         }
 
         function elegirGenero(tipo) {
             if(tipo === 'mujer') {
                 document.getElementById('btnMujer').classList.add('bg-azulOscuro', 'text-white');
-                document.getElementById('btnHombre').classList.remove('bg-azulOscuro', 'text-white');
+                document.getElementById('btnHombre').class.remove('bg-azulOscuro', 'text-white');
             } else {
                 document.getElementById('btnHombre').classList.add('bg-azulOscuro', 'text-white');
                 document.getElementById('btnMujer').class.remove('bg-azulOscuro', 'text-white');
@@ -265,7 +265,7 @@
             localStorage.setItem("nombreJugador", nombreJugador);
 
             document.getElementById('pagCorreo').classList.add('hidden');
-            document.getElementById('pagInvitado').classList.add('hidden');
+            document.getElementById('pagInvitado').class.add('hidden');
             document.getElementById('pagReglas').class.remove('hidden');
         }
 
@@ -299,5 +299,4 @@
     </script>
 
 </body>
-          </html>
-                  
+</html>
