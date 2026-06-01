@@ -19,7 +19,6 @@
         }
     </script>
     <style>
-        /* Evitamos que los botones activen menús extra del teléfono */
         .boton-juego {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -58,26 +57,26 @@
 
     <!-- PANTALLA CORREO -->
     <div id="pagCorreo" class="hidden min-h-screen bg-sky-50 p-4">
-        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
         <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta con correo</h2>
         <input type="email" placeholder="Tu correo" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
         <input type="password" placeholder="Contraseña" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
         <input type="date" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
         <input type="text" id="nombreCorreo" placeholder="Tu nombre de jugador" class="w-full p-4 rounded-xl border border-azulClaro mb-6">
-        <button onclick="irAReglas('correo')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Crear cuenta!</button>
+        <button onclick="irAReglas('correo')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg boton-juego">¡Crear cuenta!</button>
     </div>
 
     <!-- PANTALLA INVITADO -->
     <div id="pagInvitado" class="hidden min-h-screen bg-sky-50 p-4">
-        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
         <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta invitado</h2>
         <input type="date" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
         <input type="text" id="nombreInvitado" placeholder="Tu nombre de jugador" value="ZentriDueño" class="w-full p-4 rounded-xl border border-azulClaro mb-6">
         <div class="grid grid-cols-2 gap-3 mb-6">
-            <button id="btnMujer" onclick="elegirGenero('mujer')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro">♀️ Mujer</button>
-            <button id="btnHombre" onclick="elegirGenero('hombre')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro">♂️ Hombre</button>
+            <button id="btnMujer" onclick="elegirGenero('mujer')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro boton-juego">♀️ Mujer</button>
+            <button id="btnHombre" onclick="elegirGenero('hombre')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro boton-juego">♂️ Hombre</button>
         </div>
-        <button onclick="irAReglas('invitado')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Entrar!</button>
+        <button onclick="irAReglas('invitado')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg boton-juego">¡Entrar!</button>
     </div>
 
     <!-- PANTALLA REGLAS -->
@@ -97,7 +96,7 @@
                 <li>No molestar ni hacer sentir mal a nadie</li>
                 <li>No dar datos personales reales</li>
             </ul>
-            <button onclick="irAdentro()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Entrar al juego</button>
+            <button onclick="irAdentro()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg boton-juego">Entrar al juego</button>
         </div>
     </div>
 
@@ -106,9 +105,7 @@
         <div class="bg-white p-4 flex items-center justify-between shadow">
             <h1 class="text-2xl font-bold">Inicio</h1>
             <div class="flex items-center gap-4">
-                <!-- 🔍 LUPA: YA NO ACTIVA MENÚS DEL TELÉFONO -->
                 <span onclick="irABuscar()" class="boton-juego text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔍</span>
-                <!-- 🔔 CAMPANITA: YA NO SALE ESE MENÚ DE ABAJO, SOLO VA A SU PANTALLA -->
                 <span onclick="irANotificaciones()" class="boton-juego text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔔</span>
             </div>
         </div>
@@ -118,7 +115,6 @@
                 <div class="w-14 h-14 rounded-full bg-azulClaro flex items-center justify-center text-white text-xl cursor-pointer boton-juego" onclick="irACrearPersonaje()">
                     ✏️
                 </div>
-                <!-- ✅ YA NO SE REPITEN LOS EMOJIS, SIEMPRE SALE IGUAL -->
                 <span class="text-xl font-bold flex items-center gap-2" id="nombreUsuario">🦁 ZentriDueño 🐯</span>
             </div>
 
@@ -158,29 +154,47 @@
         </div>
     </div>
 
-    <!-- PANTALLA DE LA LUPA - BUSCAR -->
+    <!-- ✅ PANTALLA BUSCAR - ARREGLADA, NO MÁS BLANCO VACÍO -->
     <div id="pagBuscar" class="hidden min-h-screen bg-gray-50 p-4">
         <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
-        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔍 Buscar</h2>
-        <input type="text" placeholder="Buscar mundos, jugadores, amigos..." class="w-full p-4 rounded-xl border border-azulClaro mb-6 text-lg">
-        <div class="space-y-4">
-            <p class="text-gray-500 text-center">Acá vas a poder encontrar todo lo que busques en el juego</p>
+        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔍 Buscar jugadores, mundos y amigos</h2>
+        <input type="text" placeholder="Escribí acá lo que querés buscar..." class="w-full p-4 rounded-xl border border-azulClaro mb-6 text-lg bg-white">
+        
+        <div class="bg-white rounded-xl p-4 shadow mb-4">
+            <h3 class="font-bold text-gray-700 mb-2">✨ Sugerencias</h3>
+            <p class="text-gray-500 text-sm">• Mundos nuevos para explorar</p>
+            <p class="text-gray-500 text-sm">• Jugadores populares</p>
+            <p class="text-gray-500 text-sm">• Amigos que podés agregar</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-4 shadow">
+            <p class="text-gray-600 text-center">Empezá a escribir para encontrar todo lo que buscas en ZENTRITH WORLD</p>
         </div>
     </div>
 
-    <!-- PANTALLA DE LA CAMPANITA - NOTIFICACIONES -->
+    <!-- ✅ PANTALLA NOTIFICACIONES - ARREGLADA, NO MÁS BLANCO VACÍO -->
     <div id="pagNotificaciones" class="hidden min-h-screen bg-gray-50 p-4">
         <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
-        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔔 Notificaciones</h2>
+        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔔 Tus notificaciones</h2>
+
         <div class="bg-white rounded-xl p-4 shadow mb-4">
-            <p class="text-gray-700">📩 Tienes una solicitud de amistad</p>
-            <p class="text-gray-400 text-sm">Hace 5 minutos</p>
+            <p class="text-gray-700 font-medium">📩 Tenés una solicitud de amistad de: <span class="text-azulOscuro">Jugador123</span></p>
+            <p class="text-gray-400 text-sm mt-1">Hace 5 minutos</p>
+            <div class="flex gap-2 mt-3">
+                <button class="px-4 py-2 rounded-lg bg-azulOscuro text-white text-sm boton-juego">Aceptar</button>
+                <button class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 text-sm boton-juego">Rechazar</button>
+            </div>
         </div>
+
         <div class="bg-white rounded-xl p-4 shadow mb-4">
-            <p class="text-gray-700">🎉 ¡Bienvenido a ZENTRITH WORLD!</p>
-            <p class="text-gray-400 text-sm">Hace 1 día</p>
+            <p class="text-gray-700 font-medium">🎉 ¡Bienvenido a ZENTRITH WORLD!</p>
+            <p class="text-gray-600 text-sm mt-1">Gracias por ser parte de nuestra comunidad, ¡divertite mucho!</p>
+            <p class="text-gray-400 text-sm mt-1">Hace 1 día</p>
         </div>
-        <p class="text-gray-500 text-center mt-6">No tienes más notificaciones por ahora</p>
+
+        <div class="bg-white rounded-xl p-4 shadow">
+            <p class="text-gray-500 text-center">No tenés más notificaciones nuevas por ahora ✅</p>
+        </div>
     </div>
 
     <!-- PANTALLA CREAR PERSONAJE -->
@@ -212,7 +226,6 @@
                 if(tipoCuenta && nombreJugador) {
                     document.getElementById('carga').classList.add('hidden');
                     document.getElementById('pagAdentro').classList.remove('hidden');
-                    // ✅ ASEGURAMOS QUE SIEMPRE SALGA BIEN, SIN DUPLICAR NADA
                     document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
                 } else {
                     document.getElementById('carga').classList.add('hidden');
@@ -287,12 +300,12 @@
 
         function volverInicio() {
             document.getElementById('pagPersonaje').classList.add('hidden');
-            document.getElementById('pagBuscar').classList.add('hidden');
-            document.getElementById('pagNotificaciones').classList.add('hidden');
+            document.getElementById('pagBuscar').class.add('hidden');
+            document.getElementById('pagNotificaciones').class.add('hidden');
             document.getElementById('pagAdentro').class.remove('hidden');
         }
     </script>
 
 </body>
-    </html>
-    
+                </html>
+                    
