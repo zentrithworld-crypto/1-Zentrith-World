@@ -13,15 +13,13 @@
                         azulClaro: '#93c5fd',
                         azulSuave: '#bfdbfe',
                         azulOscuro: '#1d4ed8',
-                        diamanteAzul: '#3b82f6',
-                        cristalVerde: '#22c55e',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-gray-50 min-h-screen font-sans m-0 p-0 pb-20">
+<body class="bg-gray-50 min-h-screen font-sans m-0 p-0 pb-24">
 
     <!-- PANTALLA DE CARGA -->
     <div id="carga" class="fixed inset-0 bg-sky-100 flex flex-col items-center justify-center z-50">
@@ -64,7 +62,7 @@
         <button onclick="volverMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
         <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta invitado</h2>
         <input type="date" class="w-full p-4 rounded-xl border border-azulClaro mb-4">
-        <input type="text" id="nombreInvitado" placeholder="Tu nombre de jugador" class="w-full p-4 rounded-xl border border-azulClaro mb-6">
+        <input type="text" id="nombreInvitado" placeholder="Tu nombre de jugador" value="ZentriDueño" class="w-full p-4 rounded-xl border border-azulClaro mb-6">
         <div class="grid grid-cols-2 gap-3 mb-6">
             <button id="btnMujer" onclick="elegirGenero('mujer')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro">♀️ Mujer</button>
             <button id="btnHombre" onclick="elegirGenero('hombre')" class="p-4 rounded-xl border border-azulClaro text-azulOscuro">♂️ Hombre</button>
@@ -93,9 +91,8 @@
         </div>
     </div>
 
-    <!-- ADENTRO DEL JUEGO - AHORA AJUSTADO COMO QUERÍAS -->
+    <!-- ADENTRO DEL JUEGO -->
     <div id="pagAdentro" class="hidden min-h-screen bg-gray-50">
-        <!-- ARRIBA: SIN MONEDAS AL PRINCIPIO, SOLO LO BÁSICO -->
         <div class="bg-white p-4 flex items-center justify-between shadow">
             <h1 class="text-2xl font-bold">Inicio</h1>
             <div class="flex items-center gap-4">
@@ -105,12 +102,11 @@
         </div>
 
         <div class="p-4">
-            <!-- PERFIL: SALE EL NOMBRE QUE ELLOS ELIGIERON + BOTÓN PARA CREAR PERSONAJE -->
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-14 h-14 rounded-full bg-azulClaro flex items-center justify-center text-white text-xl cursor-pointer" onclick="irACrearPersonaje()">
                     ✏️
                 </div>
-                <span class="text-xl font-bold" id="nombreUsuario">TuNombre</span>
+                <span class="text-xl font-bold flex items-center gap-2" id="nombreUsuario">🦁 ZentriDueño 🐯</span>
             </div>
 
             <div class="bg-white rounded-xl p-4 shadow mb-6">
@@ -126,7 +122,7 @@
             </div>
         </div>
 
-        <!-- MENÚ DE ABAJO QUE TE FALTABA, YA ESTÁ DE VUELTA -->
+        <!-- MENÚ DE ABAJO -->
         <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-6">
             <div class="flex items-center justify-around">
                 <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium">
@@ -150,7 +146,7 @@
 
     </div>
 
-    <!-- PANTALLA PARA CREAR / EDITAR PERSONAJE -->
+    <!-- PANTALLA CREAR PERSONAJE -->
     <div id="pagPersonaje" class="hidden min-h-screen bg-sky-50 p-4">
         <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
         <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">✏️ Creá tu personaje</h2>
@@ -165,6 +161,10 @@
 
 
     <script>
+        // ✅ GUARDAMOS LA SESIÓN PARA QUE NO VUELVA A SALIR LA PANTALLA DE ENTRADA
+        let tipoCuenta = localStorage.getItem("tipoCuenta") || "";
+        let nombreJugador = localStorage.getItem("nombreJugador") || "";
+
         // CARGA RÁPIDA
         let progreso = 0;
         function cargar() {
@@ -173,15 +173,18 @@
                 document.getElementById('barra').style.width = progreso + '%';
                 setTimeout(cargar, 15);
             } else {
-                document.getElementById('carga').classList.add('hidden');
-                document.getElementById('menu').classList.remove('hidden');
+                // Si ya entró antes, va directo al juego
+                if(tipoCuenta && nombreJugador) {
+                    document.getElementById('carga').classList.add('hidden');
+                    document.getElementById('pagAdentro').classList.remove('hidden');
+                    document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
+                } else {
+                    document.getElementById('carga').classList.add('hidden');
+                    document.getElementById('menu').classList.remove('hidden');
+                }
             }
         }
         window.onload = cargar;
-
-        // GUARDAR QUÉ TIPO DE CUENTA ES Y SU NOMBRE
-        let tipoCuenta = "";
-        let nombreJugador = "";
 
         // FUNCIONES PARA CAMBIAR DE PANTALLA
         function irACorreo() {
@@ -206,7 +209,7 @@
                 document.getElementById('btnHombre').classList.remove('bg-azulOscuro', 'text-white');
             } else {
                 document.getElementById('btnHombre').classList.add('bg-azulOscuro', 'text-white');
-                document.getElementById('btnMujer').classList.remove('bg-azulOscuro', 'text-white');
+                document.getElementById('btnMujer').class.remove('bg-azulOscuro', 'text-white');
             }
         }
 
@@ -215,8 +218,12 @@
             if(tipo === "correo") {
                 nombreJugador = document.getElementById('nombreCorreo').value || "Jugador";
             } else {
-                nombreJugador = document.getElementById('nombreInvitado').value || "Invitado";
+                nombreJugador = document.getElementById('nombreInvitado').value || "ZentriDueño";
             }
+            // ✅ GUARDAMOS LOS DATOS PARA QUE NO SE PIERDAN
+            localStorage.setItem("tipoCuenta", tipoCuenta);
+            localStorage.setItem("nombreJugador", nombreJugador);
+
             document.getElementById('pagCorreo').classList.add('hidden');
             document.getElementById('pagInvitado').classList.add('hidden');
             document.getElementById('pagReglas').classList.remove('hidden');
@@ -224,19 +231,18 @@
 
         function irAdentro() {
             document.getElementById('pagReglas').classList.add('hidden');
-            document.getElementById('pagAdentro').classList.remove('hidden');
-            // PONEMOS EL NOMBRE QUE ELLOS ELIGIERON
-            document.getElementById('nombreUsuario').innerText = nombreJugador;
+            document.getElementById('pagAdentro').class.remove('hidden');
+            document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
         }
 
         function irACrearPersonaje() {
             document.getElementById('pagAdentro').classList.add('hidden');
-            document.getElementById('pagPersonaje').classList.remove('hidden');
+            document.getElementById('pagPersonaje').class.remove('hidden');
         }
 
         function volverInicio() {
             document.getElementById('pagPersonaje').classList.add('hidden');
-            document.getElementById('pagAdentro').classList.remove('hidden');
+            document.getElementById('pagAdentro').class.remove('hidden');
         }
     </script>
 
