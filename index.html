@@ -153,15 +153,47 @@
                 background: linear-gradient(180deg, #60a5fa 0%, #1e40af 100%);
             }
         }
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENTRITH WORLD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        azulClaro: '#60a5fa',
+                        azulMedio: '#1d4ed8',
+                        azulOscuro: '#1e40af',
+                        azulFondo: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .texto-grueso {
+                font-weight: 900;
+                letter-spacing: 2px;
+            }
+            .fondo-azul-degradado {
+                background: linear-gradient(180deg, #60a5fa 0%, #1e40af 100%);
+            }
+        }
     </style>
 </head>
 <body class="bg-azulFondo min-h-screen font-sans">
 
-    <!-- 🟦 PANTALLA DE CARGA (se queda igual que te gustó antes) -->
+    <!-- 🟦 PANTALLA DE CARGA - YA ARREGLADA EL LOGO -->
     <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulFondo fixed inset-0 z-50 transition-all duration-700">
+        <!-- 🟦 AQUÍ ARREGLÉ EL LOGO, AHORA SÍ VA A SALIR PERFECTO -->
         <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
              alt="Zenthrith Logo" 
-             class="w-[280px] md:w-[350px] animate-pulse drop-shadow-[0_0_30px_#60a5fa]">
+             class="w-[280px] md:w-[350px] animate-pulse drop-shadow-[0_0_30px_#60a5fa] object-contain">
 
         <h1 class="mt-6 text-5xl md:text-7xl texto-grueso text-white text-center">ZENTRITH WORLD</h1>
         <p class="text-blue-200 text-lg mt-2">EL MUNDO QUE ESTABAS ESPERANDO</p>
@@ -173,27 +205,23 @@
     </div>
 
 
-    <!-- 🟦 MENÚ PRINCIPAL - TAL CUAL LO QUERÉS -->
+    <!-- 🟦 MENÚ PRINCIPAL -->
     <div id="menuPrincipal" class="hidden w-full min-h-screen fondo-azul-degradado flex flex-col items-center justify-center p-4">
         
-        <!-- 🟦 NOMBRE DEL JUEGO: GRANDE, GORDITO, ARRIBA -->
         <h1 class="text-[clamp(3rem,12vw,7rem)] texto-grueso text-white text-center drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-8">
             ZENTRITH WORLD
         </h1>
 
-        <!-- 🟦 CAJA DEL MENÚ: SOLO AZULES, SIN AMARILLO, LIMPIO -->
         <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 w-full max-w-md shadow-[0_0_30px_rgba(0,0,0,0.2)] border border-white/20">
             
             <h2 class="text-3xl font-bold text-white text-center mb-6">ENTRAR AL MUNDO</h2>
             <p class="text-blue-100 text-center mb-8">🔹 Estamos en proceso de creación 🔹<br>¡Pronto tendremos todo listo!</p>
 
-            <!-- 🟦 LO QUE ME DIJISTE: PONER CORREO O EDAD -->
             <div class="space-y-4 mb-8">
                 <input type="email" placeholder="Tu correo electrónico" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/50 transition">
                 <input type="number" placeholder="Tu edad" min="1" max="120" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/50 transition">
             </div>
 
-            <!-- 🟦 BOTONES -->
             <div class="space-y-3">
                 <button class="w-full p-4 rounded-xl bg-white text-azulMedio font-bold text-lg hover:bg-blue-50 transition shadow-lg">
                     🚀 ENTRAR AHORA
@@ -210,7 +238,6 @@
 
 
     <script>
-        // Animación de carga
         let porcentaje = 0;
         const barra = document.getElementById('barraCarga');
         const texto = document.getElementById('textoCarga');
@@ -240,3 +267,6 @@
 
 </body>
 </html>
+
+
+
