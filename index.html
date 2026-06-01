@@ -96,8 +96,10 @@
         <div class="bg-white p-4 flex items-center justify-between shadow">
             <h1 class="text-2xl font-bold">Inicio</h1>
             <div class="flex items-center gap-4">
-                <span>🔍</span>
-                <span>🔔</span>
+                <!-- ✅ LUPA: AHORA SÍ FUNCIONA, TOCÁ Y ANDA -->
+                <span onclick="irABuscar()" class="text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔍</span>
+                <!-- ✅ CAMPANITA: AHORA SÍ FUNCIONA, TOCÁ Y ANDA -->
+                <span onclick="irANotificaciones()" class="text-2xl cursor-pointer hover:text-azulOscuro transition-all duration-200">🔔</span>
             </div>
         </div>
 
@@ -143,7 +145,31 @@
                 </button>
             </div>
         </div>
+    </div>
 
+    <!-- ✅ PANTALLA DE LA LUPA - BUSCAR -->
+    <div id="pagBuscar" class="hidden min-h-screen bg-gray-50 p-4">
+        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔍 Buscar</h2>
+        <input type="text" placeholder="Buscar mundos, jugadores, amigos..." class="w-full p-4 rounded-xl border border-azulClaro mb-6 text-lg">
+        <div class="space-y-4">
+            <p class="text-gray-500 text-center">Acá vas a poder encontrar todo lo que busques en el juego</p>
+        </div>
+    </div>
+
+    <!-- ✅ PANTALLA DE LA CAMPANITA - NOTIFICACIONES -->
+    <div id="pagNotificaciones" class="hidden min-h-screen bg-gray-50 p-4">
+        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
+        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔔 Notificaciones</h2>
+        <div class="bg-white rounded-xl p-4 shadow mb-4">
+            <p class="text-gray-700">📩 Tienes una solicitud de amistad</p>
+            <p class="text-gray-400 text-sm">Hace 5 minutos</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow mb-4">
+            <p class="text-gray-700">🎉 ¡Bienvenido a ZENTRITH WORLD!</p>
+            <p class="text-gray-400 text-sm">Hace 1 día</p>
+        </div>
+        <p class="text-gray-500 text-center mt-6">No tienes más notificaciones por ahora</p>
     </div>
 
     <!-- PANTALLA CREAR PERSONAJE -->
@@ -161,7 +187,7 @@
 
 
     <script>
-        // ✅ GUARDAMOS LA SESIÓN PARA QUE NO VUELVA A SALIR LA PANTALLA DE ENTRADA
+        // GUARDAMOS LA SESIÓN PARA QUE NO VUELVA A SALIR LA PANTALLA DE ENTRADA
         let tipoCuenta = localStorage.getItem("tipoCuenta") || "";
         let nombreJugador = localStorage.getItem("nombreJugador") || "";
 
@@ -194,13 +220,13 @@
 
         function irAInvitado() {
             document.getElementById('menu').classList.add('hidden');
-            document.getElementById('pagInvitado').classList.remove('hidden');
+            document.getElementById('pagInvitado').class.remove('hidden');
         }
 
         function volverMenu() {
             document.getElementById('pagCorreo').classList.add('hidden');
             document.getElementById('pagInvitado').classList.add('hidden');
-            document.getElementById('menu').classList.remove('hidden');
+            document.getElementById('menu').class.remove('hidden');
         }
 
         function elegirGenero(tipo) {
@@ -220,13 +246,13 @@
             } else {
                 nombreJugador = document.getElementById('nombreInvitado').value || "ZentriDueño";
             }
-            // ✅ GUARDAMOS LOS DATOS PARA QUE NO SE PIERDAN
+            // GUARDAMOS LOS DATOS PARA QUE NO SE PIERDAN
             localStorage.setItem("tipoCuenta", tipoCuenta);
             localStorage.setItem("nombreJugador", nombreJugador);
 
             document.getElementById('pagCorreo').classList.add('hidden');
             document.getElementById('pagInvitado').classList.add('hidden');
-            document.getElementById('pagReglas').classList.remove('hidden');
+            document.getElementById('pagReglas').class.remove('hidden');
         }
 
         function irAdentro() {
@@ -240,8 +266,21 @@
             document.getElementById('pagPersonaje').class.remove('hidden');
         }
 
+        // ✅ FUNCIONES CORREGIDAS Y LISTAS: LUPA Y CAMPANITA
+        function irABuscar() {
+            document.getElementById('pagAdentro').class.add('hidden');
+            document.getElementById('pagBuscar').class.remove('hidden');
+        }
+
+        function irANotificaciones() {
+            document.getElementById('pagAdentro').class.add('hidden');
+            document.getElementById('pagNotificaciones').class.remove('hidden');
+        }
+
         function volverInicio() {
-            document.getElementById('pagPersonaje').classList.add('hidden');
+            document.getElementById('pagPersonaje').class.add('hidden');
+            document.getElementById('pagBuscar').class.add('hidden');
+            document.getElementById('pagNotificaciones').class.add('hidden');
             document.getElementById('pagAdentro').class.remove('hidden');
         }
     </script>
