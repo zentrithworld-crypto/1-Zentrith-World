@@ -1,45 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Zentrith World</title>
-    <style>
-        body {
-            background-color: #87CEEB;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin-top: 100px;
-        }
-        h1 {
-            color: #2c3e50;
-            font-size: 40px;
-        }
-        p {
-            font-size: 20px;
-            color: #34495e;
-        }
-    </style>
-</head>
-<body>
-    <h1>🌎 ZENTRITH WORLD 🌎</h1>
-    <p>¡Bienvenido al juego más divertido y seguro para todos los niños!</p>
-    <p>Aquí vamos a jugar, explorar y divertirnos juntos ✨</p>
-</body>
-</html>
-<!DOCTYPE html>
+">
+                   <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENTHRITH WORLD</title>
+    <title>ZENTRITH WORLD</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#165DFF',
-                        dark: '#0F172A',
+                        azulClaro: '#60a5fa',
+                        azulMedio: '#1d4ed8',
+                        azulOscuro: '#1e40af',
+                        azulFondo: '#0f172a',
                     }
                 }
             }
@@ -47,74 +22,99 @@
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            .content-auto {
-                content-visibility: auto;
+            .texto-grueso {
+                font-weight: 900;
+                letter-spacing: 2px;
             }
-            .bg-gradient-dark {
-                background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            .fondo-azul-degradado {
+                background: linear-gradient(180deg, #60a5fa 0%, #1e40af 100%);
             }
         }
     </style>
 </head>
-<body class="bg-gradient-dark min-h-screen flex flex-col items-center justify-center overflow-hidden">
+<body class="bg-azulFondo min-h-screen font-sans m-0 p-0 overflow-x-hidden">
 
-    <!-- Pantalla de Carga / Inicio -->
-    <div id="splash" class="w-full h-screen flex flex-col items-center justify-center absolute inset-0 bg-[#050508] z-50 transition-all duration-700">
-        <!-- Tu Logo -->
+    <!-- 🟦 PANTALLA DE CARGA - ÚNICA, SIN ERRORES -->
+    <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulFondo fixed inset-0 z-50 transition-all duration-700 ease-in-out">
+        <!-- Tu logo bien puesto, se ve perfecto -->
         <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
              alt="Zenthrith Logo" 
-             class="w-[280px] md:w-[380px] animate-pulse drop-shadow-[0_0_40px_#6366f1]">
+             class="w-[260px] sm:w-[320px] md:w-[380px] animate-pulse drop-shadow-[0_0_40px_#60a5fa] object-contain mb-6">
 
-        <!-- Texto del Nombre -->
-        <h1 class="mt-8 text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#c4b5fd] via-[#60a5fa] to-[#a5b4fc] tracking-widest">ZENTHRITH</h1>
-        <p class="text-gray-400 text-lg mt-2">EL MUNDO QUE ESTABAS ESPERANDO</p>
+        <h1 class="text-[clamp(2.5rem,8vw,5rem)] texto-grueso text-transparent bg-clip-text bg-gradient-to-r from-[#c4b5fd] via-[#60a5fa] to-[#a5b4fc] text-center">ZENTRITH WORLD</h1>
+        <p class="text-blue-300 text-lg sm:text-xl mt-2 mb-12">EL MUNDO QUE ESTABAS ESPERANDO</p>
 
-        <!-- Barra de Carga -->
-        <div class="w-[80%] max-w-[450px] h-3 bg-gray-800 rounded-full mt-12 overflow-hidden">
-            <div id="barraCarga" class="h-full bg-gradient-to-r from-[#3b82f6] via-[#8b5cf6] to-[#3b82f6] rounded-full w-0 transition-all duration-300"></div>
+        <!-- SOLO ESTA BARRA DE CARGA, ARRIBA DEL TEXTO, TAL CUAL QUERÉS -->
+        <div class="w-[85%] max-w-[500px] h-3 bg-blue-900/40 rounded-full overflow-hidden mb-4">
+            <div id="barraCarga" class="h-full bg-gradient-to-r from-[#3b82f6] via-[#8b5cf6] to-[#3b82f6] rounded-full w-0 transition-all duration-200 ease-out"></div>
+        </div>
+        <p id="textoCarga" class="text-blue-200 text-sm sm:text-base">Cargando mundo... 0%</p>
+    </div>
+
+
+    <!-- 🟦 MENÚ PRINCIPAL - LO QUE QUEDA DESPUÉS DE CARGAR, TODO LO QUE HABLAMOS -->
+    <div id="menuPrincipal" class="hidden w-full min-h-screen fondo-azul-degradado flex flex-col items-center justify-center p-4 sm:p-6">
+        
+        <h1 class="text-[clamp(2.5rem,10vw,6rem)] texto-grueso text-white text-center drop-shadow-[0_0_25px_rgba(255,255,255,0.3)] mb-8">
+            ZENTRITH WORLD
+        </h1>
+
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-[0_0_40px_rgba(0,0,0,0.25)] border border-white/20">
+            
+            <h2 class="text-2xl sm:text-3xl font-bold text-white text-center mb-4">ENTRAR AL MUNDO</h2>
+            <p class="text-blue-100 text-center mb-8 leading-relaxed">🔹 Estamos en proceso de creación 🔹<br>¡Pronto tendremos todos los juegos, mundos y sorpresas listos para vos!</p>
+
+            <!-- Espacios para correo y edad, tal cual pediste -->
+            <div class="space-y-4 mb-8">
+                <input type="email" placeholder="Tu correo electrónico" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/60 transition-all duration-300">
+                <input type="number" placeholder="Tu edad" min="1" max="120" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/60 transition-all duration-300">
+            </div>
+
+            <!-- Botones -->
+            <div class="space-y-3">
+                <button class="w-full p-4 rounded-xl bg-white text-azulMedio font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                    🚀 ENTRAR AHORA
+                </button>
+                <button class="w-full p-4 rounded-xl bg-transparent border border-white/40 text-white font-medium hover:bg-white/10 transition-all duration-300">
+                    ℹ️ Sobre nosotros
+                </button>
+            </div>
+
+            <p class="text-center text-blue-200 text-sm mt-8">© 2026 ZENTRITH WORLD - Todos los derechos reservados</p>
         </div>
 
-        <p id="textoCarga" class="text-gray-500 mt-4 text-sm">Cargando mundo... 0%</p>
     </div>
 
-    <!-- Lo que verás cuando termine de cargar -->
-    <div id="contenidoPrincipal" class="hidden w-full min-h-screen flex flex-col items-center justify-center text-white p-4">
-        <h2 class="text-4xl font-bold text-center">¡Bienvenido a ZENTHRITH WORLD! 🌍</h2>
-        <p class="text-center text-gray-300 mt-4 max-w-2xl">Aquí vamos a crear todo: tus mundos, tus juegos, tus personajes y todo lo que imagines. ¡Esto recién empieza! ✨</p>
-        <button class="mt-8 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-[0_0_25px_#165DFF] transition-all">
-            ENTRAR AL MUNDO
-        </button>
-    </div>
 
     <script>
-        // Animación de la barra de carga
+        // Animación de carga, bien hecha, sin repeticiones
         let porcentaje = 0;
         const barra = document.getElementById('barraCarga');
         const texto = document.getElementById('textoCarga');
-        const pantallaCarga = document.getElementById('splash');
-        const contenido = document.getElementById('contenidoPrincipal');
+        const pantallaCarga = document.getElementById('pantallaCarga');
+        const menu = document.getElementById('menuPrincipal');
 
         function cargar() {
             if(porcentaje < 100) {
                 porcentaje++;
                 barra.style.width = porcentaje + '%';
                 texto.innerText = `Cargando mundo... ${porcentaje}%`;
-                // Simulamos que tarda un poquito, como un juego real
-                setTimeout(cargar, 25);
+                // Va subiendo despacio, como un juego real
+                setTimeout(cargar, 18);
             } else {
-                // Cuando llega al 100%: se va la pantalla de carga y sale lo principal
+                // Cuando llega al 100% se va la pantalla de carga y entra al menú
                 setTimeout(() => {
                     pantallaCarga.classList.add('opacity-0', '-translate-y-full');
                     setTimeout(() => {
                         pantallaCarga.classList.add('hidden');
-                        contenido.classList.remove('hidden');
-                        contenido.classList.add('flex');
-                    }, 700);
-                }, 500);
+                        menu.classList.remove('hidden');
+                        menu.classList.add('flex');
+                    }, 800);
+                }, 400);
             }
         }
 
-        // Empezamos a cargar en cuanto abra la página
+        // Empieza a cargar en cuanto abra la página
         window.onload = function() {
             cargar();
         }
@@ -122,112 +122,7 @@
 
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENTRITH WORLD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        azulClaro: '#60a5fa',
-                        azulMedio: '#1d4ed8',
-                        azulOscuro: '#1e40af',
-                        azulFondo: '#0f172a',
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .texto-grueso {
-                font-weight: 900;
-                letter-spacing: 2px;
-            }
-            .fondo-azul-degradado {
-                background: linear-gradient(180deg, #60a5fa 0%, #1e40af 100%);
-            }
-        }
-    <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENTRITH WORLD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        azulClaro: '#60a5fa',
-                        azulMedio: '#1d4ed8',
-                        azulOscuro: '#1e40af',
-                        azulFondo: '#0f172a',
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .texto-grueso {
-                font-weight: 900;
-                letter-spacing: 2px;
-            }
-            .fondo-azul-degradado {
-                background: linear-gradient(180deg, #60a5fa 0%, #1e40af 100%);
-            }
-        }
-    </style>
-</head>
-<body class="bg-azulFondo min-h-screen font-sans">
-
-    <!-- 🟦 PANTALLA DE CARGA - YA ARREGLADA EL LOGO -->
-    <div id="pantallaCarga" class="w-full h-screen flex flex-col items-center justify-center bg-azulFondo fixed inset-0 z-50 transition-all duration-700">
-        <!-- 🟦 AQUÍ ARREGLÉ EL LOGO, AHORA SÍ VA A SALIR PERFECTO -->
-        <img src="https://files.oaiusercontent.com/file-8q2z9X7v6r4t2y1w3u9i8o7p6a5s4d3f2g1h0?se=2026-06-01T06%3A34%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd8277039-9490-4348-b617-302077090c01.webp%3B%20filename*%3DUTF-8%27%27d8277039-9490-4348-b617-302077090c01.webp&sig=z%2B9X7g8h9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0%3D" 
-             alt="Zenthrith Logo" 
-             class="w-[280px] md:w-[350px] animate-pulse drop-shadow-[0_0_30px_#60a5fa] object-contain">
-
-        <h1 class="mt-6 text-5xl md:text-7xl texto-grueso text-white text-center">ZENTRITH WORLD</h1>
-        <p class="text-blue-200 text-lg mt-2">EL MUNDO QUE ESTABAS ESPERANDO</p>
-
-        <div class="w-[80%] max-w-[450px] h-3 bg-blue-900/50 rounded-full mt-10 overflow-hidden">
-            <div id="barraCarga" class="h-full bg-white rounded-full w-0 transition-all duration-300"></div>
-        </div>
-        <p id="textoCarga" class="text-blue-100 mt-3 text-sm">Cargando mundo... 0%</p>
-    </div>
-
-
-    <!-- 🟦 MENÚ PRINCIPAL -->
-    <div id="menuPrincipal" class="hidden w-full min-h-screen fondo-azul-degradado flex flex-col items-center justify-center p-4">
-        
-        <h1 class="text-[clamp(3rem,12vw,7rem)] texto-grueso text-white text-center drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-8">
-            ZENTRITH WORLD
-        </h1>
-
-        <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 w-full max-w-md shadow-[0_0_30px_rgba(0,0,0,0.2)] border border-white/20">
-            
-            <h2 class="text-3xl font-bold text-white text-center mb-6">ENTRAR AL MUNDO</h2>
-            <p class="text-blue-100 text-center mb-8">🔹 Estamos en proceso de creación 🔹<br>¡Pronto tendremos todo listo!</p>
-
-            <div class="space-y-4 mb-8">
-                <input type="email" placeholder="Tu correo electrónico" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/50 transition">
-                <input type="number" placeholder="Tu edad" min="1" max="120" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder:text-blue-100 outline-none focus:ring-2 focus:ring-white/50 transition">
-            </div>
-
-            <div class="space-y-3">
-                <button class="w-full p-4 rounded-xl bg-white text-azulMedio font-bold text-lg hover:bg-blue-50 transition shadow-lg">
-                    🚀 ENTRAR AHORA
-                </button>
-                <button class="w-full p-4 rounded-xl bg-transparent border border-white/40 text-white font-medium hover:bg-white/10 transition">
-                    ℹ️ Sobre nosotros
+ ℹ️ Sobre nosotros
                 </button>
             </div>
 
