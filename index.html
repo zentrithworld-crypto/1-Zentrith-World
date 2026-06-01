@@ -12,7 +12,8 @@
                     colors: {
                         azulClaro: '#93c5fd',
                         azulSuave: '#bfdbfe',
-                        azulOscuro: '#1d4ed8',
+                        azulOscuro: '#165DFF',
+                        azulFondo: '#0F172A',
                     }
                 }
             }
@@ -154,46 +155,37 @@
         </div>
     </div>
 
-    <!-- ✅ PANTALLA BUSCAR - ARREGLADA, NO MÁS BLANCO VACÍO -->
-    <div id="pagBuscar" class="hidden min-h-screen bg-gray-50 p-4">
-        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
-        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔍 Buscar jugadores, mundos y amigos</h2>
-        <input type="text" placeholder="Escribí acá lo que querés buscar..." class="w-full p-4 rounded-xl border border-azulClaro mb-6 text-lg bg-white">
-        
-        <div class="bg-white rounded-xl p-4 shadow mb-4">
-            <h3 class="font-bold text-gray-700 mb-2">✨ Sugerencias</h3>
-            <p class="text-gray-500 text-sm">• Mundos nuevos para explorar</p>
-            <p class="text-gray-500 text-sm">• Jugadores populares</p>
-            <p class="text-gray-500 text-sm">• Amigos que podés agregar</p>
+    <!-- ✅ PANTALLA NOTIFICACIONES - EXACTO COMO ME MOSTRASTE -->
+    <div id="pagNotificaciones" class="hidden min-h-screen bg-white">
+        <div class="flex items-center justify-between p-4 border-b border-gray-200">
+            <button onclick="volverInicio()" class="text-black text-2xl boton-juego">←</button>
+            <h2 class="text-2xl font-bold text-black">Notificaciones</h2>
+            <div class="w-8"></div>
         </div>
 
-        <div class="bg-white rounded-xl p-4 shadow">
-            <p class="text-gray-600 text-center">Empezá a escribir para encontrar todo lo que buscas en ZENTRITH WORLD</p>
+        <div class="flex items-center justify-center h-[70vh]">
+            <p class="text-gray-500 text-2xl font-medium text-center">¡Ya estás al tanto de todo!</p>
         </div>
     </div>
 
-    <!-- ✅ PANTALLA NOTIFICACIONES - ARREGLADA, NO MÁS BLANCO VACÍO -->
-    <div id="pagNotificaciones" class="hidden min-h-screen bg-gray-50 p-4">
-        <button onclick="volverInicio()" class="text-azulOscuro text-xl font-bold mb-4 boton-juego">← Volver</button>
-        <h2 class="text-2xl font-bold text-azulOscuro mb-6">🔔 Tus notificaciones</h2>
-
-        <div class="bg-white rounded-xl p-4 shadow mb-4">
-            <p class="text-gray-700 font-medium">📩 Tenés una solicitud de amistad de: <span class="text-azulOscuro">Jugador123</span></p>
-            <p class="text-gray-400 text-sm mt-1">Hace 5 minutos</p>
-            <div class="flex gap-2 mt-3">
-                <button class="px-4 py-2 rounded-lg bg-azulOscuro text-white text-sm boton-juego">Aceptar</button>
-                <button class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 text-sm boton-juego">Rechazar</button>
+    <!-- ✅ PANTALLA BÚSQUEDA - TAL CUAL ME MOSTRASTE, FONDO AZUL OSCURO -->
+    <div id="pagBuscar" class="hidden min-h-screen bg-azulFondo text-white">
+        <div class="p-4">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="flex-1 bg-gray-100 rounded-xl p-3 flex items-center gap-2">
+                    <span class="text-gray-500 text-xl">🔍</span>
+                    <input type="text" placeholder="Buscar" class="bg-transparent w-full text-black text-lg outline-none">
+                </div>
+                <button onclick="volverInicio()" class="text-white text-lg font-medium boton-juego">Cancelar</button>
             </div>
-        </div>
 
-        <div class="bg-white rounded-xl p-4 shadow mb-4">
-            <p class="text-gray-700 font-medium">🎉 ¡Bienvenido a ZENTRITH WORLD!</p>
-            <p class="text-gray-600 text-sm mt-1">Gracias por ser parte de nuestra comunidad, ¡divertite mucho!</p>
-            <p class="text-gray-400 text-sm mt-1">Hace 1 día</p>
-        </div>
+            <h3 class="text-2xl font-medium text-white mb-5">Intenta buscar</h3>
 
-        <div class="bg-white rounded-xl p-4 shadow">
-            <p class="text-gray-500 text-center">No tenés más notificaciones nuevas por ahora ✅</p>
+            <div class="flex flex-wrap gap-3">
+                <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Magnate</span>
+                <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Fuga</span>
+                <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Supervivencia</span>
+            </div>
         </div>
     </div>
 
@@ -238,7 +230,7 @@
         // FUNCIONES PARA CAMBIAR DE PANTALLA
         function irACorreo() {
             document.getElementById('menu').classList.add('hidden');
-            document.getElementById('pagCorreo').classList.remove('hidden');
+            document.getElementById('pagCorreo').class.remove('hidden');
         }
 
         function irAInvitado() {
@@ -307,5 +299,4 @@
     </script>
 
 </body>
-                </html>
-                    
+</html>
