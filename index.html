@@ -1,303 +1,254 @@
+<!-- ESTRUCTURA GENERAL - ZENTRITH WORLD -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENTRITH WORLD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        azulOscuro: '#165DFF',
-                        azulFondo: '#0F172A',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Zentrith World</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            min-height: 100vh;
-            font-family: sans-serif;
-        }
-        .oculto {
-            display: none !important;
-        }
+        /* ESTILOS GENERALES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: #0a0a1a; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .pantalla { display: none; width: 100%; max-width: 1200px; padding: 2rem; text-align: center; }
+        .pantalla.activa { display: block; }
+        h1, h2 { color: #64b5f6; margin-bottom: 1.5rem; }
+        button { background-color: #2196f3; color: white; border: none; padding: 0.8rem 1.5rem; margin: 0.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
+        button:hover { background-color: #1976d2; }
+        input, select { padding: 0.7rem; margin: 0.4rem; border-radius: 6px; border: 1px solid #555; background-color: #222; color: white; width: 280px; }
+        .recurso { display: inline-block; background-color: #263238; padding: 0.5rem 1rem; border-radius: 20px; margin: 0.3rem; }
+        .insignia { display: inline-block; background-color: #424242; padding: 0.4rem 0.8rem; border-radius: 15px; margin: 0.2rem; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-<!-- PANTALLA DE CARGA -->
-<div id="pantallaCarga" class="fixed inset-0 bg-sky-100 flex flex-col items-center justify-center z-50">
-    <h1 class="text-5xl font-bold text-azulOscuro mb-4">ZENTRITH WORLD</h1>
-    <div class="w-64 h-2 bg-sky-200 rounded-full overflow-hidden">
-        <div id="barraCarga" class="h-full bg-azulOscuro w-0"></div>
+<!-- ==============================================
+   PANTALLA 1: PANTALLA DE INICIO
+============================================== -->
+<div id="pantalla-inicio" class="pantalla activa">
+    <h1 style="font-size: 4rem; color: #bbdefb; text-shadow: 0 0 15px #2196f3;">ZENTRITH WORLD</h1>
+    
+    <div style="margin: 3rem 0;">
+        <button onclick="irAPantalla('pantalla-login')">Iniciar Sesión</button>
+        <button onclick="irAPantalla('pantalla-registro')">Crear Cuenta</button>
+        <button onclick="entrarComoInvitado()">Entrar como Invitado</button>
     </div>
-    <p class="text-azulOscuro/60 mt-2">Cargando...</p>
-</div>
 
-<!-- MENÚ PRINCIPAL -->
-<div id="menuPrincipal" class="oculto min-h-screen bg-gradient-to-b from-sky-200 to-sky-300 flex flex-col items-center justify-center p-4">
-    <h1 class="text-6xl font-bold text-white text-center mb-10">ZENTRITH WORLD</h1>
-    <div class="bg-white/90 rounded-2xl p-6 w-full max-w-md shadow-xl">
-        <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">¡Bienvenido!</h2>
-        <div class="space-y-4">
-            <button onclick="irACorreo()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">
-                📧 Crear cuenta con correo
-            </button>
-            <button onclick="irAInvitado()" class="w-full p-4 rounded-xl bg-white border-2 border-sky-300 text-azulOscuro font-bold text-lg">
-                👤 Cuenta invitado
-            </button>
-        </div>
+    <div style="position: absolute; top: 20px; right: 20px;">
+        <button onclick="abrirConfiguracion()">⚙️ Configuración</button>
+        <button onclick="verNoticias()">📰 Noticias</button>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1rem; background-color: #1a1a2e; border-radius: 10px; max-width: 400px; margin-left: auto; margin-right: auto;">
+        <p>👥 Jugadores en línea: <span id="jugadores-en-linea">1247</span></p>
+        <p>⚡ Eventos activos: <span id="eventos-activos">2</span></p>
     </div>
 </div>
 
-<!-- PANTALLA CORREO -->
-<div id="pagCorreo" class="oculto min-h-screen bg-sky-50 p-4">
-    <button onclick="volverAlMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
-    <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta con correo</h2>
-    <input type="email" placeholder="Tu correo" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-    <input type="password" placeholder="Contraseña" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-    <input type="date" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-    <input type="text" id="nombreCorreo" placeholder="Tu nombre de jugador" class="w-full p-4 rounded-xl border border-sky-300 mb-6">
-    <button onclick="irAReglas('correo')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Crear cuenta!</button>
+
+<!-- ==============================================
+   PANTALLA 2: REGISTRO E INICIO DE SESIÓN
+============================================== -->
+<div id="pantalla-login" class="pantalla">
+    <h2>Iniciar Sesión</h2>
+    <input type="text" id="login-usuario-correo" placeholder="Correo o Nombre de Usuario"><br>
+    <input type="password" id="login-contrasena" placeholder="Contraseña"><br>
+    <button onclick="iniciarSesion()">Ingresar</button>
+    <br>
+    <button onclick="irAPantalla('pantalla-recuperar-cuenta')">¿Olvidaste tu contraseña?</button>
+    <br><br>
+    <button onclick="irAPantalla('pantalla-inicio')">⬅️ Volver</button>
 </div>
 
-<!-- PANTALLA INVITADO -->
-<div id="pagInvitado" class="oculto min-h-screen bg-sky-50 p-4">
-    <button onclick="volverAlMenu()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
-    <h2 class="text-2xl font-bold text-azulOscuro mb-6">Cuenta invitado</h2>
-    <input type="date" class="w-full p-4 rounded-xl border border-sky-300 mb-4">
-    <input type="text" id="nombreInvitado" placeholder="Tu nombre de jugador" value="ZentriDueño" class="w-full p-4 rounded-xl border border-sky-300 mb-6">
-    <div class="grid grid-cols-2 gap-3 mb-6">
-        <button id="btnMujer" onclick="elegirGenero('mujer')" class="p-4 rounded-xl border border-sky-300 text-azulOscuro">♀️ Mujer</button>
-        <button id="btnHombre" onclick="elegirGenero('hombre')" class="p-4 rounded-xl border border-sky-300 text-azulOscuro">♂️ Hombre</button>
-    </div>
-    <button onclick="irAReglas('invitado')" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">¡Entrar!</button>
+<div id="pantalla-registro" class="pantalla">
+    <h2>Crear Nueva Cuenta</h2>
+    <input type="text" id="reg-usuario" placeholder="Nombre de Usuario"><br>
+    <input type="email" id="reg-correo" placeholder="Correo Electrónico"><br>
+    <input type="password" id="reg-contrasena" placeholder="Contraseña"><br>
+    <input type="date" id="reg-nacimiento" placeholder="Fecha de Nacimiento"><br>
+    <button onclick="registrarCuenta()">Registrarse</button>
+    <br><br>
+    <button onclick="irAPantalla('pantalla-inicio')">⬅️ Volver</button>
 </div>
 
-<!-- PANTALLA REGLAS -->
-<div id="pagReglas" class="oculto min-h-screen bg-sky-50 p-4">
-    <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">📜 NUESTRA COMUNIDAD</h2>
-    <div class="bg-white rounded-xl p-5 shadow">
-        <p class="text-gray-700 mb-4">Somos una comunidad conjunta: acá todos somos parte, nos cuidamos y nos respetamos.</p>
-        <h3 class="font-bold text-azulOscuro mb-2">✅ Lo que sí podés hacer:</h3>
-        <ul class="list-disc pl-5 text-gray-600 mb-4">
-            <li>Jugar y crear todo lo que quieras</li>
-            <li>Invitar amigos a jugar con vos</li>
-            <li>Hablar con respeto y ser amable</li>
-        </ul>
-        <h3 class="font-bold text-azulOscuro mb-2">❌ Lo que NO podés hacer:</h3>
-        <ul class="list-disc pl-5 text-gray-600 mb-6">
-            <li>No decir malas palabras ni insultar</li>
-            <li>No molestar ni hacer sentir mal a nadie</li>
-            <li>No dar datos personales reales</li>
-        </ul>
-        <button onclick="irAlJuego()" class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Entrar al juego</button>
+<div id="pantalla-recuperar-cuenta" class="pantalla">
+    <h2>Recuperar Cuenta</h2>
+    <input type="email" id="recuperar-correo" placeholder="Ingresa tu correo electrónico"><br>
+    <button onclick="enviarRecuperacion()">Enviar enlace de recuperación</button>
+    <br><br>
+    <button onclick="irAPantalla('pantalla-login')">⬅️ Volver</button>
+</div>
+
+
+<!-- ==============================================
+   PANTALLA 3: MENÚ PRINCIPAL
+============================================== -->
+<div id="pantalla-menu-principal" class="pantalla">
+    <h2>¡Bienvenido, <span id="nombre-jugador-menu">Jugador</span>!</h2>
+
+    <!-- RECURSOS DEL JUGADOR -->
+    <div style="margin: 1rem 0;">
+        <span class="recurso">💰 Z-Coins: <span id="z-coins-menu">5000</span></span>
+        <span class="recurso">💎 Gemas Z: <span id="gemas-z-menu">150</span></span>
+    </div>
+
+    <!-- OPCIONES DEL MENÚ -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; max-width: 800px; margin: 2rem auto;">
+        <button onclick="irAJugar()">🎮 Jugar</button>
+        <button onclick="irAAmigos()">👥 Amigos</button>
+        <button onclick="irAChat()">💬 Chat</button>
+        <button onclick="irAMisiones()">📜 Misiones</button>
+        <button onclick="irATienda()">🛒 Tienda</button>
+        <button onclick="irALogros()">🏆 Logros</button>
+        <button onclick="verNotificaciones()">🔔 Notificaciones</button>
+        <button onclick="irAAjustes()">⚙️ Ajustes</button>
+        <button onclick="irAPantallaPerfil()">👤 Ver Mi Perfil</button>
     </div>
 </div>
 
-<!-- DENTRO DEL JUEGO - PANTALLA PRINCIPAL -->
-<div id="pagJuego" class="oculto min-h-screen bg-gray-50">
-    <div class="bg-white p-4 flex items-center justify-between shadow">
-        <h1 class="text-2xl font-bold">Inicio</h1>
-        <div class="flex items-center gap-4">
-            <span onclick="abrirBuscar()" class="text-2xl cursor-pointer">🔍</span>
-            <span onclick="abrirNotificaciones()" class="text-2xl cursor-pointer">🔔</span>
-        </div>
-    </div>
 
-    <div class="p-4">
-        <div class="flex items-center gap-3 mb-6">
-            <div class="w-14 h-14 rounded-full bg-sky-400 flex items-center justify-center text-white text-xl cursor-pointer" onclick="irAPersonaje()">
-                ✏️
+<!-- ==============================================
+   PANTALLA 4: PERFIL DEL JUGADOR
+============================================== -->
+<div id="pantalla-perfil" class="pantalla">
+    <h2>Perfil del Jugador</h2>
+
+    <div style="background-color: #16213e; padding: 2rem; border-radius: 12px; max-width: 600px; margin: auto;">
+        <h3 id="nombre-perfil">Jugador_123</h3>
+        <p style="color: #b0bec5; font-size: 0.9rem;">ID Único: <span id="id-unico-perfil">ZEN-789-ABC-456</span></p>
+        
+        <div style="margin: 1rem 0;">
+            <p>Nivel: <strong id="nivel-perfil">25</strong></p>
+            <div style="background-color: #333; border-radius: 10px; height: 20px; overflow: hidden; margin: 0.5rem 0;">
+                <div id="barra-experiencia" style="width: 65%; height: 100%; background-color: #4caf50;"></div>
             </div>
-            <span class="text-xl font-bold flex items-center gap-2" id="nombreUsuario">🦁 ZentriDueño 🐯</span>
+            <p>Experiencia: <span id="exp-perfil">12.500 / 18.000</span></p>
         </div>
 
-        <div class="bg-white rounded-xl p-4 shadow mb-6">
-            <h3 class="font-bold text-lg mb-2">🔒 Desbloquear chat seguro</h3>
-            <p class="text-gray-600 text-sm mb-3">Para hablar seguro con los demás jugadores</p>
-            <button class="w-full p-3 rounded-xl bg-azulOscuro text-white font-bold">Desbloquear</button>
+        <div style="margin: 1rem 0;">
+            <span class="recurso">💰 Z-Coins: <span id="z-coins-perfil">5000</span></span>
+            <span class="recurso">💎 Gemas Z: <span id="gemas-z-perfil">150</span></span>
         </div>
 
-        <div class="bg-white rounded-xl p-4 shadow mb-6">
-            <h3 class="font-bold text-lg mb-2">👥 Amigos y mucho más</h3>
-            <p class="text-gray-600 text-sm mb-3">Jugá con tus amigos y pasalo mejor</p>
-            <button class="w-full p-3 rounded-xl border border-azulOscuro text-azulOscuro font-bold">Invitar amigos</button>
-        </div>
-    </div>
-
-    <!-- MENÚ DE ABAJO -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-6">
-        <div class="flex items-center justify-around">
-            <button class="flex flex-col items-center gap-1 text-azulOscuro font-medium">
-                <span class="text-2xl">🏠</span>
-                <span class="text-sm">Inicio</span>
-            </button>
-            <button class="flex flex-col items-center gap-1 text-gray-500" onclick="irAPersonaje()">
-                <span class="text-2xl">👤</span>
-                <span class="text-sm">Personaje</span>
-            </button>
-            <button class="flex flex-col items-center gap-1 text-gray-500">
-                <span class="text-2xl">👥</span>
-                <span class="text-sm">Amigos</span>
-            </button>
-            <button class="flex flex-col items-center gap-1 text-gray-500">
-                <span class="text-2xl">⚙️</span>
-                <span class="text-sm">Ajustes</span>
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- ✅ PANTALLA NOTIFICACIONES -->
-<div id="pagNotificaciones" class="oculto min-h-screen bg-white">
-    <div class="flex items-center justify-between p-4 border-b border-gray-200">
-        <button onclick="volverAlInicio()" class="text-black text-2xl">←</button>
-        <h2 class="text-2xl font-bold text-black">Notificaciones</h2>
-        <div class="w-8"></div>
-    </div>
-    <div class="flex items-center justify-center h-[70vh]">
-        <p class="text-gray-500 text-2xl font-medium text-center">¡Ya estás al tanto de todo!</p>
-    </div>
-</div>
-
-<!-- ✅ PANTALLA BÚSQUEDA -->
-<div id="pagBuscar" class="oculto min-h-screen bg-azulFondo text-white">
-    <div class="p-4">
-        <div class="flex items-center gap-3 mb-6">
-            <div class="flex-1 bg-gray-100 rounded-xl p-3 flex items-center gap-2">
-                <span class="text-gray-500 text-xl">🔍</span>
-                <input type="text" placeholder="Buscar" class="bg-transparent w-full text-black text-lg outline-none">
+        <div style="margin: 1.5rem 0;">
+            <h4>🏆 Insignias y Logros</h4>
+            <div id="lista-insignias">
+                <span class="insignia">⚔️ Guerrero Novato</span>
+                <span class="insignia">💼 Primer Comercio</span>
+                <span class="insignia">👑 Rey de la Semana</span>
+                <span class="insignia">🚀 Nivel 20 Alcanzado</span>
             </div>
-            <button onclick="volverAlInicio()" class="text-white text-lg font-medium">Cancelar</button>
         </div>
-        <h3 class="text-2xl font-medium text-white mb-5">Intenta buscar</h3>
-        <div class="flex flex-wrap gap-3">
-            <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Magnate</span>
-            <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Fuga</span>
-            <span class="bg-white/10 text-white rounded-full px-5 py-2 text-lg">Supervivencia</span>
-        </div>
-    </div>
-</div>
 
-<!-- PANTALLA PERSONAJE -->
-<div id="pagPersonaje" class="oculto min-h-screen bg-sky-50 p-4">
-    <button onclick="volverAlInicio()" class="text-azulOscuro text-xl font-bold mb-4">← Volver</button>
-    <h2 class="text-2xl font-bold text-azulOscuro text-center mb-6">✏️ Creá tu personaje</h2>
-    <div class="bg-white rounded-xl p-5 shadow text-center">
-        <div class="w-32 h-32 rounded-full bg-sky-400 mx-auto mb-6 flex items-center justify-center text-white text-4xl">
-            🎨
+        <div style="margin-top: 2rem;">
+            <button onclick="editarAvatar()">✏️ Editar Avatar</button>
+            <button onclick="irAConfiguracionCuenta()">⚙️ Configuración de la Cuenta</button>
         </div>
-        <p class="text-gray-600 mb-6">Acá vas a poder elegir tu cara, ropa, colores y todo lo que quieras para que tu personaje sea único.</p>
-        <button class="w-full p-4 rounded-xl bg-azulOscuro text-white font-bold text-lg">Guardar cambios</button>
     </div>
+
+    <br>
+    <button onclick="irAPantalla('pantalla-menu-principal')">⬅️ Volver al Menú</button>
 </div>
 
 
+<!-- ==============================================
+   LÓGICA Y FUNCIONES DEL JUEGO
+============================================== -->
 <script>
-// Variables
-let tipoCuenta = localStorage.getItem("tipoCuenta") || "";
-let nombreJugador = localStorage.getItem("nombreJugador") || "";
+// Función para cambiar entre pantallas
+function irAPantalla(idPantalla) {
+    document.querySelectorAll('.pantalla').forEach(pantalla => {
+        pantalla.classList.remove('activa');
+    });
+    document.getElementById(idPantalla).classList.add('activa');
+}
 
-// CARGA RÁPIDA
-let progreso = 0;
-function cargar() {
-    if(progreso < 100) {
-        progreso++;
-        document.getElementById('barraCarga').style.width = progreso + '%';
-        setTimeout(cargar, 8);
-    } else {
-        document.getElementById('pantallaCarga').classList.add('oculto');
-        if(tipoCuenta && nombreJugador) {
-            document.getElementById('pagJuego').classList.remove('oculto');
-            document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
-        } else {
-            document.getElementById('menuPrincipal').classList.remove('oculto');
-        }
+// ---------------------------
+// LÓGICA PANTALLA 1: INICIO
+// ---------------------------
+function entrarComoInvitado() {
+    alert("¡Bienvenido, Invitado! Tu progreso no se guardará permanentemente.");
+    irAPantalla('pantalla-menu-principal');
+}
+
+function abrirConfiguracion() {
+    alert("Abriendo menú de Configuración...");
+}
+
+function verNoticias() {
+    alert("📰 Noticias recientes:\n- Nuevo evento: La Guerra de los Reinos\n- Actualización de tienda: Nuevos trajes disponibles");
+}
+
+// ---------------------------
+// LÓGICA PANTALLA 2: CUENTAS
+// ---------------------------
+function iniciarSesion() {
+    let usuario = document.getElementById('login-usuario-correo').value;
+    let contrasena = document.getElementById('login-contrasena').value;
+
+    if(usuario === "" || contrasena === "") {
+        alert("⚠️ Completa todos los campos.");
+        return;
     }
-}
-window.onload = cargar;
 
-// FUNCIONES PARA CAMBIAR DE PANTALLAS
-function irACorreo() {
-    document.getElementById('menuPrincipal').classList.add('oculto');
-    document.getElementById('pagCorreo').classList.remove('oculto');
+    // Simulación de validación
+    alert(`Bienvenido de nuevo, ${usuario}!`);
+    document.getElementById('nombre-jugador-menu').textContent = usuario;
+    irAPantalla('pantalla-menu-principal');
 }
 
-function irAInvitado() {
-    document.getElementById('menuPrincipal').classList.add('oculto');
-    document.getElementById('pagInvitado').classList.remove('oculto');
-}
+function registrarCuenta() {
+    let usuario = document.getElementById('reg-usuario').value;
+    let correo = document.getElementById('reg-correo').value;
+    let contrasena = document.getElementById('reg-contrasena').value;
+    let nacimiento = document.getElementById('reg-nacimiento').value;
 
-function volverAlMenu() {
-    document.getElementById('pagCorreo').classList.add('oculto');
-    document.getElementById('pagInvitado').classList.add('oculto');
-    document.getElementById('menuPrincipal').class.remove('oculto');
-}
-
-function elegirGenero(tipo) {
-    if(tipo === 'mujer') {
-        document.getElementById('btnMujer').classList.add('bg-azulOscuro', 'text-white');
-        document.getElementById('btnHombre').classList.remove('bg-azulOscuro', 'text-white');
-    } else {
-        document.getElementById('btnHombre').classList.add('bg-azulOscuro', 'text-white');
-        document.getElementById('btnMujer').classList.remove('bg-azulOscuro', 'text-white');
+    // Validaciones básicas
+    if(!usuario || !correo || !contrasena || !nacimiento) {
+        alert("⚠️ Todos los campos son obligatorios.");
+        return;
     }
-}
 
-function irAReglas(tipo) {
-    tipoCuenta = tipo;
-    if(tipo === "correo") {
-        nombreJugador = document.getElementById('nombreCorreo').value || "Jugador";
-    } else {
-        nombreJugador = document.getElementById('nombreInvitado').value || "ZentriDueño";
+    // Simulación de validación: Nombres/correos repetidos
+    if(usuario === "Administrador" || correo === "admin@zentrith.com") {
+        alert("❌ El nombre de usuario o correo ya está registrado. ¡Prueba con otro!");
+        return;
     }
-    localStorage.setItem("tipoCuenta", tipoCuenta);
-    localStorage.setItem("nombreJugador", nombreJugador);
 
-    document.getElementById('pagCorreo').classList.add('oculto');
-    document.getElementById('pagInvitado').classList.add('oculto');
-    document.getElementById('pagReglas').class.remove('oculto');
+    alert("✅ ¡Cuenta creada con éxito! Bienvenido a Zentrith World.");
+    document.getElementById('nombre-jugador-menu').textContent = usuario;
+    document.getElementById('nombre-perfil').textContent = usuario;
+    irAPantalla('pantalla-menu-principal');
 }
 
-function irAlJuego() {
-    document.getElementById('pagReglas').classList.add('oculto');
-    document.getElementById('pagJuego').class.remove('oculto');
-    document.getElementById('nombreUsuario').innerText = "🦁 " + nombreJugador + " 🐯";
+function enviarRecuperacion() {
+    let correo = document.getElementById('recuperar-correo').value;
+    if(!correo) {
+        alert("Escribe tu correo electrónico.");
+        return;
+    }
+    alert(`📧 Hemos enviado un enlace de recuperación a: ${correo}`);
+    irAPantalla('pantalla-login');
 }
 
-function irAPersonaje() {
-    document.getElementById('pagJuego').classList.add('oculto');
-    document.getElementById('pagPersonaje').class.remove('oculto');
-}
+// ---------------------------
+// LÓGICA PANTALLA 3: MENÚ
+// ---------------------------
+function irAJugar() { alert("Cargando modos de juego..."); }
+function irAAmigos() { alert("Abriendo lista de amigos..."); }
+function irAChat() { alert("Cargando salas de chat..."); }
+function irAMisiones() { alert("Tus misiones están cargando..."); }
+function irATienda() { alert("Abriendo Tienda Z..."); }
+function irALogros() { irAPantalla('pantalla-perfil'); }
+function verNotificaciones() { alert("🔔 Tienes 3 notificaciones nuevas."); }
+function irAAjustes() { alert("Abriendo ajustes del sistema..."); }
+function irAPantallaPerfil() { irAPantalla('pantalla-perfil'); }
 
-function abrirBuscar() {
-    document.getElementById('pagJuego').classList.add('oculto');
-    document.getElementById('pagBuscar').class.remove('oculto');
-}
-
-function abrirNotificaciones() {
-    document.getElementById('pagJuego').classList.add('oculto');
-    document.getElementById('pagNotificaciones').class.remove('oculto');
-}
-
-function volverAlInicio() {
-    document.getElementById('pagPersonaje').classList.add('oculto');
-    document.getElementById('pagBuscar').classList.add('oculto');
-    document.getElementById('pagNotificaciones').class.add('oculto');
-    document.getElementById('pagJuego').class.remove('oculto');
-}
+// ---------------------------
+// LÓGICA PANTALLA 4: PERFIL
+// ---------------------------
+function editarAvatar() { alert("Abriendo editor de avatar..."); }
+function irAConfiguracionCuenta() { alert("Cargando configuración de tu cuenta..."); }
 </script>
 
 </body>
-</html>
-🪙 12.450 Z-Coins    💎 87 Gemas Z    🔔 3    👤 Perfil
+                                                                                 </html>
+                                                                                 
