@@ -1,43 +1,190 @@
-<!-- ESTRUCTURA GENERAL - ZENTRITH WORLD -->
+<!-- ESTRUCTURA GENERAL - ZENTRITH WORLD - ESTILO ROBLOX GRANDE -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Zentrith World</title>
     <style>
-        /* ESTILOS GENERALES */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        body { background-color: #0a0a1a; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-        .pantalla { display: none; width: 100%; max-width: 1200px; padding: 2rem; text-align: center; }
+        /* ESTILOS GENERALES - ¡TODO MÁS GRANDE Y FUERTE! */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial Black', 'Roboto', sans-serif; }
+        body { 
+            background-color: #1e1e2f; 
+            color: #fff; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            overflow: hidden;
+        }
+
+        /* PANTALLA DE PRESENTACIÓN - TU NOMBRE PRIMERO */
+        #pantalla-presentacion {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #2385bb; /* Color azul estilo Roblox */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: desaparecer 4s forwards; /* Se queda 4 segundos y se va */
+        }
+
+        #nombre-creador {
+            font-size: 7rem; /* ¡ENORME! */
+            color: #ffffff;
+            text-shadow: 0 0 20px #00000080;
+            margin-bottom: 2rem;
+            transform: scale(1);
+            animation: palpitar 1.5s infinite alternate;
+        }
+
+        #texto-juego {
+            font-size: 4rem;
+            color: #f9a825; /* Naranja brillante */
+        }
+
+        @keyframes palpitar {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        @keyframes desaparecer {
+            0% { opacity: 1; visibility: visible; }
+            90% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; display: none; }
+        }
+
+        /* EL RESTO DE PANTALLAS */
+        .pantalla { 
+            display: none; 
+            width: 100%; 
+            max-width: 1400px; 
+            padding: 3rem; 
+            text-align: center; 
+        }
         .pantalla.activa { display: block; }
-        h1, h2 { color: #64b5f6; margin-bottom: 1.5rem; }
-        button { background-color: #2196f3; color: white; border: none; padding: 0.8rem 1.5rem; margin: 0.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
-        button:hover { background-color: #1976d2; }
-        input, select { padding: 0.7rem; margin: 0.4rem; border-radius: 6px; border: 1px solid #555; background-color: #222; color: white; width: 280px; }
-        .recurso { display: inline-block; background-color: #263238; padding: 0.5rem 1rem; border-radius: 20px; margin: 0.3rem; }
-        .insignia { display: inline-block; background-color: #424242; padding: 0.4rem 0.8rem; border-radius: 15px; margin: 0.2rem; font-size: 0.9rem; }
+
+        /* 🎨 ESTILO TIPO ROBLOX: Botones Grandes y Fuertes */
+        h1 { 
+            font-size: 6rem; /* LETRA GIGANTE */
+            color: #f9a825; 
+            margin-bottom: 2rem; 
+            text-shadow: 3px 3px 0 #000;
+        }
+        h2 { 
+            font-size: 4rem; 
+            color: #64b5f6; 
+            margin-bottom: 2rem; 
+            text-shadow: 2px 2px 0 #000;
+        }
+        p, label { 
+            font-size: 2rem; /* LETRA MUY GRANDE PARA LEER FÁCIL */
+            margin: 1rem 0;
+        }
+
+        /* 🔘 BOTONES ENORMES - ¡ESTE ES EL CAMBIO PRINCIPAL! */
+        button { 
+            background-color: #2385bb; /* Azul estilo Roblox */
+            color: white; 
+            border: none; 
+            padding: 1.5rem 3rem; /* MÁS GRUESOS Y GRANDES */
+            margin: 1rem; 
+            border-radius: 12px; /* Esquinas redondeadas estilo juego */
+            cursor: pointer; 
+            font-size: 2.2rem; /* LETRA DE BOTÓN ENORME */
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border-bottom: solid 8px #12547a; /* Efecto de botón presionable */
+        }
+        button:hover { 
+            background-color: #2996d1; 
+            transform: translateY(-5px);
+            border-bottom-width: 4px;
+        }
+        button:active {
+            transform: translateY(4px);
+            border-bottom-width: 2px;
+        }
+
+        input { 
+            padding: 1.2rem; 
+            margin: 0.8rem; 
+            border-radius: 10px; 
+            border: 3px solid #555; 
+            background-color: #fff; 
+            color: #000; 
+            width: 400px; 
+            font-size: 2rem; /* Letra grande dentro de casillas */
+            font-weight: bold;
+        }
+
+        .recurso { 
+            display: inline-block; 
+            background-color: #2ecc71; /* Verde brillante */
+            padding: 1rem 2rem; 
+            border-radius: 15px; 
+            margin: 0.8rem; 
+            font-size: 2.2rem; /* Recursos grandes */
+            font-weight: bold;
+            border: solid 3px #000;
+        }
+        .insignia { 
+            display: inline-block; 
+            background-color: #f1c40f; /* Amarillo oro */
+            padding: 1rem 1.5rem; 
+            border-radius: 20px; 
+            margin: 0.5rem; 
+            font-size: 1.8rem; /* Insignias grandes */
+            color: #000;
+            font-weight: bold;
+            border: solid 2px #000;
+        }
+
+        /* NOMBRE DEL CREADOR EN EL MENÚ Y PERFIL */
+        .nombre-creador-etiqueta {
+            font-size: 2.5rem;
+            color: #f9a825;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-shadow: 2px 2px #000;
+        }
     </style>
 </head>
 <body>
 
 <!-- ==============================================
+   🎬 PANTALLA DE PRESENTACIÓN - TU NOMBRE PRIMERO
+============================================== -->
+<div id="pantalla-presentacion">
+    <div id="nombre-creador">AQUÍ_TU_NOMBRE</div>  <!-- 👈 ¡PON AQUÍ TU NOMBRE! -->
+    <div id="texto-juego">Presenta:</div>
+    <h1 style="font-size: 5rem; margin-top: 2rem;">ZENTRITH WORLD</h1>
+</div>
+
+
+<!-- ==============================================
    PANTALLA 1: PANTALLA DE INICIO
 ============================================== -->
 <div id="pantalla-inicio" class="pantalla activa">
-    <h1 style="font-size: 4rem; color: #bbdefb; text-shadow: 0 0 15px #2196f3;">ZENTRITH WORLD</h1>
+    <h1>ZENTRITH WORLD</h1>
+    <div class="nombre-creador-etiqueta">Creado por: AQUÍ_TU_NOMBRE</div> <!-- 👈 TU NOMBRE AQUÍ TAMBIÉN -->
     
-    <div style="margin: 3rem 0;">
+    <div style="margin: 4rem 0;">
         <button onclick="irAPantalla('pantalla-login')">Iniciar Sesión</button>
         <button onclick="irAPantalla('pantalla-registro')">Crear Cuenta</button>
         <button onclick="entrarComoInvitado()">Entrar como Invitado</button>
     </div>
 
-    <div style="position: absolute; top: 20px; right: 20px;">
+    <div style="position: absolute; top: 30px; right: 30px;">
         <button onclick="abrirConfiguracion()">⚙️ Configuración</button>
         <button onclick="verNoticias()">📰 Noticias</button>
     </div>
 
-    <div style="margin-top: 2rem; padding: 1rem; background-color: #1a1a2e; border-radius: 10px; max-width: 400px; margin-left: auto; margin-right: auto;">
+    <div style="margin-top: 3rem; padding: 2rem; background-color: #1a1a2e; border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto; border: solid 4px #000;">
         <p>👥 Jugadores en línea: <span id="jugadores-en-linea">1247</span></p>
         <p>⚡ Eventos activos: <span id="eventos-activos">2</span></p>
     </div>
@@ -49,7 +196,8 @@
 ============================================== -->
 <div id="pantalla-login" class="pantalla">
     <h2>Iniciar Sesión</h2>
-    <input type="text" id="login-usuario-correo" placeholder="Correo o Nombre de Usuario"><br>
+    <div class="nombre-creador-etiqueta">Por: AQUÍ_TU_NOMBRE</div> <!-- 👈 TU NOMBRE -->
+    <input type="text" id="login-usuario-correo" placeholder="Correo o Usuario"><br>
     <input type="password" id="login-contrasena" placeholder="Contraseña"><br>
     <button onclick="iniciarSesion()">Ingresar</button>
     <br>
@@ -60,6 +208,7 @@
 
 <div id="pantalla-registro" class="pantalla">
     <h2>Crear Nueva Cuenta</h2>
+    <div class="nombre-creador-etiqueta">Creador: AQUÍ_TU_NOMBRE</div> <!-- 👈 TU NOMBRE -->
     <input type="text" id="reg-usuario" placeholder="Nombre de Usuario"><br>
     <input type="email" id="reg-correo" placeholder="Correo Electrónico"><br>
     <input type="password" id="reg-contrasena" placeholder="Contraseña"><br>
@@ -71,8 +220,8 @@
 
 <div id="pantalla-recuperar-cuenta" class="pantalla">
     <h2>Recuperar Cuenta</h2>
-    <input type="email" id="recuperar-correo" placeholder="Ingresa tu correo electrónico"><br>
-    <button onclick="enviarRecuperacion()">Enviar enlace de recuperación</button>
+    <input type="email" id="recuperar-correo" placeholder="Tu correo electrónico"><br>
+    <button onclick="enviarRecuperacion()">Enviar Enlace</button>
     <br><br>
     <button onclick="irAPantalla('pantalla-login')">⬅️ Volver</button>
 </div>
@@ -83,15 +232,16 @@
 ============================================== -->
 <div id="pantalla-menu-principal" class="pantalla">
     <h2>¡Bienvenido, <span id="nombre-jugador-menu">Jugador</span>!</h2>
+    <div class="nombre-creador-etiqueta">Tu creador: AQUÍ_TU_NOMBRE</div> <!-- 👈 TU NOMBRE -->
 
     <!-- RECURSOS DEL JUGADOR -->
-    <div style="margin: 1rem 0;">
+    <div style="margin: 2rem 0;">
         <span class="recurso">💰 Z-Coins: <span id="z-coins-menu">5000</span></span>
         <span class="recurso">💎 Gemas Z: <span id="gemas-z-menu">150</span></span>
     </div>
 
     <!-- OPCIONES DEL MENÚ -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; max-width: 800px; margin: 2rem auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 3rem auto;">
         <button onclick="irAJugar()">🎮 Jugar</button>
         <button onclick="irAAmigos()">👥 Amigos</button>
         <button onclick="irAChat()">💬 Chat</button>
@@ -110,26 +260,27 @@
 ============================================== -->
 <div id="pantalla-perfil" class="pantalla">
     <h2>Perfil del Jugador</h2>
+    <div class="nombre-creador-etiqueta">Juego creado por: AQUÍ_TU_NOMBRE</div> <!-- 👈 TU NOMBRE -->
 
-    <div style="background-color: #16213e; padding: 2rem; border-radius: 12px; max-width: 600px; margin: auto;">
-        <h3 id="nombre-perfil">Jugador_123</h3>
-        <p style="color: #b0bec5; font-size: 0.9rem;">ID Único: <span id="id-unico-perfil">ZEN-789-ABC-456</span></p>
+    <div style="background-color: #16213e; padding: 3rem; border-radius: 20px; max-width: 800px; margin: auto; border: solid 5px #000;">
+        <h3 id="nombre-perfil" style="font-size: 3rem; color:#4fc3f7;">Jugador_123</h3>
+        <p style="font-size: 1.5rem; color: #b0bec5;">ID Único: <span id="id-unico-perfil">ZEN-789-ABC-456</span></p>
         
-        <div style="margin: 1rem 0;">
-            <p>Nivel: <strong id="nivel-perfil">25</strong></p>
-            <div style="background-color: #333; border-radius: 10px; height: 20px; overflow: hidden; margin: 0.5rem 0;">
+        <div style="margin: 2rem 0;">
+            <p>Nivel: <strong id="nivel-perfil" style="font-size: 3rem;">25</strong></p>
+            <div style="background-color: #333; border-radius: 15px; height: 30px; overflow: hidden; margin: 1rem 0; border: solid 3px #000;">
                 <div id="barra-experiencia" style="width: 65%; height: 100%; background-color: #4caf50;"></div>
             </div>
             <p>Experiencia: <span id="exp-perfil">12.500 / 18.000</span></p>
         </div>
 
-        <div style="margin: 1rem 0;">
+        <div style="margin: 2rem 0;">
             <span class="recurso">💰 Z-Coins: <span id="z-coins-perfil">5000</span></span>
             <span class="recurso">💎 Gemas Z: <span id="gemas-z-perfil">150</span></span>
         </div>
 
-        <div style="margin: 1.5rem 0;">
-            <h4>🏆 Insignias y Logros</h4>
+        <div style="margin: 2rem 0;">
+            <h4 style="font-size: 2.5rem; color:#f1c40f;">🏆 Insignias y Logros</h4>
             <div id="lista-insignias">
                 <span class="insignia">⚔️ Guerrero Novato</span>
                 <span class="insignia">💼 Primer Comercio</span>
@@ -138,9 +289,9 @@
             </div>
         </div>
 
-        <div style="margin-top: 2rem;">
+        <div style="margin-top: 3rem;">
             <button onclick="editarAvatar()">✏️ Editar Avatar</button>
-            <button onclick="irAConfiguracionCuenta()">⚙️ Configuración de la Cuenta</button>
+            <button onclick="irAConfiguracionCuenta()">⚙️ Configuración</button>
         </div>
     </div>
 
@@ -165,7 +316,7 @@ function irAPantalla(idPantalla) {
 // LÓGICA PANTALLA 1: INICIO
 // ---------------------------
 function entrarComoInvitado() {
-    alert("¡Bienvenido, Invitado! Tu progreso no se guardará permanentemente.");
+    alert("¡Bienvenido, Invitado! Tu progreso no se guardará.");
     irAPantalla('pantalla-menu-principal');
 }
 
@@ -174,7 +325,7 @@ function abrirConfiguracion() {
 }
 
 function verNoticias() {
-    alert("📰 Noticias recientes:\n- Nuevo evento: La Guerra de los Reinos\n- Actualización de tienda: Nuevos trajes disponibles");
+    alert("📰 Noticias:\n- Nuevo evento: La Guerra de los Reinos\n- Nuevos trajes en la tienda");
 }
 
 // ---------------------------
@@ -188,10 +339,9 @@ function iniciarSesion() {
         alert("⚠️ Completa todos los campos.");
         return;
     }
-
-    // Simulación de validación
-    alert(`Bienvenido de nuevo, ${usuario}!`);
+    alert(`¡Bienvenido, ${usuario}!`);
     document.getElementById('nombre-jugador-menu').textContent = usuario;
+    document.getElementById('nombre-perfil').textContent = usuario;
     irAPantalla('pantalla-menu-principal');
 }
 
@@ -201,19 +351,15 @@ function registrarCuenta() {
     let contrasena = document.getElementById('reg-contrasena').value;
     let nacimiento = document.getElementById('reg-nacimiento').value;
 
-    // Validaciones básicas
     if(!usuario || !correo || !contrasena || !nacimiento) {
         alert("⚠️ Todos los campos son obligatorios.");
         return;
     }
-
-    // Simulación de validación: Nombres/correos repetidos
     if(usuario === "Administrador" || correo === "admin@zentrith.com") {
-        alert("❌ El nombre de usuario o correo ya está registrado. ¡Prueba con otro!");
+        alert("❌ El nombre o correo ya está registrado.");
         return;
     }
-
-    alert("✅ ¡Cuenta creada con éxito! Bienvenido a Zentrith World.");
+    alert("✅ ¡Cuenta creada con éxito!");
     document.getElementById('nombre-jugador-menu').textContent = usuario;
     document.getElementById('nombre-perfil').textContent = usuario;
     irAPantalla('pantalla-menu-principal');
@@ -225,7 +371,7 @@ function enviarRecuperacion() {
         alert("Escribe tu correo electrónico.");
         return;
     }
-    alert(`📧 Hemos enviado un enlace de recuperación a: ${correo}`);
+    alert(`📧 Enviado enlace a: ${correo}`);
     irAPantalla('pantalla-login');
 }
 
@@ -239,16 +385,15 @@ function irAMisiones() { alert("Tus misiones están cargando..."); }
 function irATienda() { alert("Abriendo Tienda Z..."); }
 function irALogros() { irAPantalla('pantalla-perfil'); }
 function verNotificaciones() { alert("🔔 Tienes 3 notificaciones nuevas."); }
-function irAAjustes() { alert("Abriendo ajustes del sistema..."); }
+function irAAjustes() { alert("Abriendo ajustes..."); }
 function irAPantallaPerfil() { irAPantalla('pantalla-perfil'); }
 
 // ---------------------------
 // LÓGICA PANTALLA 4: PERFIL
 // ---------------------------
 function editarAvatar() { alert("Abriendo editor de avatar..."); }
-function irAConfiguracionCuenta() { alert("Cargando configuración de tu cuenta..."); }
+function irAConfiguracionCuenta() { alert("Cargando configuración..."); }
 </script>
 
 </body>
-                                                                                 </html>
-                                                                                 
+</html>
