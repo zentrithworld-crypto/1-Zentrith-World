@@ -165,8 +165,8 @@
             line-height: 1.4;
         }
 
-        /* Estilos formularios */
-        .contenedor-botones {
+        /* Formularios (sin duplicados) */
+        .contenedor-acceso {
             display: flex;
             gap: 1rem;
             justify-content: center;
@@ -179,20 +179,10 @@
             color: white;
         }
 
-        .boton-invitado:hover {
-            background-color: #1d4ed8;
-            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
-        }
-
         .boton-correo {
             background-color: #1e293b;
             color: #e2e8f0;
             border: 1px solid #334155;
-        }
-
-        .boton-correo:hover {
-            background-color: #334155;
-            border-color: #2563eb;
         }
 
         .formulario {
@@ -314,12 +304,10 @@
         </div>
 
         <h2 class="titulo-menu">ZENTRITH WORLD</h2>
-        <p class="creado-por">Creado por: AQUÍ_TU_NOMBRE</p>
+        <p class="creado-por">Creado por: (tu nombre acá cuando quieras)</p>
 
         <div class="grupo-botones">
-            <button class="boton boton-ancho" id="btnIniciarSesion">Iniciar Sesión</button>
-            <button class="boton boton-ancho" id="btnCrearCuenta">Crear Cuenta</button>
-            <button class="boton boton-ancho" id="btnInvitadoMenu">Entrar como Invitado</button>
+            <button class="boton boton-ancho" id="btnAcceder">Entrar al mundo</button>
         </div>
 
         <div class="informacion">
@@ -328,24 +316,18 @@
         </div>
 
         <p class="reglas">
-            🛡️ Espacio seguro: Prohibido acoso, violencia o contenido inapropiado. 
-            Respetá a todos los jugadores.
+            🛡️ Espacio seguro: Prohibido acoso, violencia o contenido inapropiado. Respetá a todos.
         </p>
 
-        <!-- Contenedor de botones de acceso -->
-        <div class="contenedor-botones oculto" id="accesoContenedor">
-            <button id="btnInvitado" class="boton boton-invitado">
-                Entrar como Invitado
-            </button>
-            <button id="btnCorreo" class="boton boton-correo">
-                Usar cuenta con correo
-            </button>
+        <!-- Opciones de acceso (UNA SOLA VEZ) -->
+        <div class="contenedor-acceso oculto" id="accesoContenedor">
+            <button id="btnInvitado" class="boton boton-invitado">Entrar como Invitado</button>
+            <button id="btnCorreo" class="boton boton-correo">Usar cuenta con correo</button>
         </div>
 
-        <!-- Formulario Cuenta Invitado -->
+        <!-- Formulario Invitado -->
         <div id="formInvitado" class="formulario oculto">
             <h3>Cuenta Invitado</h3>
-
             <div class="opciones-genero">
                 <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
                 <button type="button" class="opcion-genero" data-valor="nina">👧 Niña</button>
@@ -358,25 +340,23 @@
                 <input type="number" id="mes" placeholder="Mes" min="1" max="12" required>
                 <input type="number" id="anio" placeholder="Año" min="1900" max="2021" required>
             </div>
-            <p class="texto-ayuda">*Solo se permite hasta el año 2021 por seguridad</p>
+            <p class="texto-ayuda">*Hasta 2021 por seguridad</p>
 
-            <label>Tu nombre (solo letras y números):</label>
-            <input type="text" id="nombreInvitado" placeholder="Elige tu nombre" required pattern="[A-Za-z0-9 ]+">
+            <label>Tu nombre:</label>
+            <input type="text" id="nombreInvitado" placeholder="Elige tu nombre" required>
             <p id="mensajeNombre" class="texto-error oculto"></p>
 
-            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al mundo</button>
+            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar</button>
             <button type="button" class="boton-volver">Volver</button>
         </div>
 
-        <!-- Formulario Cuenta con Correo -->
+        <!-- Formulario Correo -->
         <div id="formCorreo" class="formulario oculto">
             <h3>Cuenta con correo</h3>
-
-            <label>Correo electrónico:</label>
+            <label>Correo:</label>
             <input type="email" id="correoUsuario" placeholder="ejemplo@correo.com" required>
-
-            <label>Contraseña (mínimo 6 caracteres):</label>
-            <input type="password" id="claveUsuario" placeholder="Tu contraseña" required minlength="6">
+            <label>Contraseña:</label>
+            <input type="password" id="claveUsuario" placeholder="Tu contraseña" required>
 
             <button type="button" id="enviarCorreo" class="boton-enviar">Acceder</button>
             <button type="button" class="boton-volver">Volver</button>
@@ -384,7 +364,7 @@
     </div>
 
     <script>
-        // Lógica de la carga
+        // Carga
         let porcentaje = 0;
         const progreso = document.getElementById('progreso');
         const estado = document.getElementById('estadoCarga');
@@ -395,10 +375,9 @@
             porcentaje += 2;
             progreso.style.width = `${porcentaje}%`;
             estado.textContent = `Cargando mundo... ${porcentaje}%`;
-
             if (porcentaje >= 100) {
                 clearInterval(intervalo);
-                estado.textContent = "¡Mundo listo!";
+                estado.textContent = "¡Listo!";
                 setTimeout(() => {
                     pantallaCarga.classList.add('oculta');
                     menuPrincipal.classList.add('mostrar');
@@ -406,27 +385,22 @@
             }
         }, 80);
 
-        // 🛡️ SEGURIDAD: Palabras prohibidas
-        const palabrasProhibidas = [
-            "abuso", "sexual", "violencia", "muerte", "matar", "porno", "sexo",
-            "violar", "acoso", "amenaza", "drogas", "arma", "zentrith", "dueño",
-            "dueno", "admin", "administrador", "mod", "moderador"
-        ];
+        // Seguridad
+        const palabrasProhibidas = ["abuso", "sexual", "violencia", "admin", "dueño", "dueno", "zentrith"];
 
-        // Mostrar opciones de acceso
-        document.getElementById('btnInvitadoMenu').addEventListener('click', () => {
+        // Mostrar acceso
+        document.getElementById('btnAcceder').addEventListener('click', () => {
             document.getElementById('accesoContenedor').classList.remove('oculto');
         });
 
-        // Mostrar / ocultar formularios
+        // Cambiar formularios
         document.getElementById('btnInvitado').addEventListener('click', () => {
-            document.querySelector('.contenedor-botones').classList.add('oculto');
+            document.getElementById('accesoContenedor').classList.add('oculto');
             document.getElementById('formInvitado').classList.remove('oculto');
-            document.getElementById('mensajeNombre').classList.add('oculto');
         });
 
         document.getElementById('btnCorreo').addEventListener('click', () => {
-            document.querySelector('.contenedor-botones').classList.add('oculto');
+            document.getElementById('accesoContenedor').classList.add('oculto');
             document.getElementById('formCorreo').classList.remove('oculto');
         });
 
@@ -434,96 +408,37 @@
             btn.addEventListener('click', () => {
                 document.getElementById('formInvitado').classList.add('oculto');
                 document.getElementById('formCorreo').classList.add('oculto');
-                document.querySelector('.contenedor-botones').classList.remove('oculto');
+                document.getElementById('accesoContenedor').classList.remove('oculto');
             });
         });
 
-        // Selección de género
-        document.querySelectorAll('.opcion-genero').forEach(opcion => {
-            opcion.addEventListener('click', () => {
+        // Selección género
+        document.querySelectorAll('.opcion-genero').forEach(op => {
+            op.addEventListener('click', () => {
                 document.querySelectorAll('.opcion-genero').forEach(o => o.classList.remove('seleccionado'));
-                opcion.classList.add('seleccionado');
-                document.getElementById('generoInvitado').value = opcion.dataset.valor;
+                op.classList.add('seleccionado');
+                document.getElementById('generoInvitado').value = op.dataset.valor;
             });
         });
 
-        // Validación año máximo 2021
+        // Validaciones
         document.getElementById('anio').addEventListener('change', function() {
-            let anio = parseInt(this.value);
-            if (anio > 2021) {
-                alert('Solo se permite hasta el año 2021 por seguridad');
+            if (parseInt(this.value) > 2021) {
+                alert('Solo hasta 2021 por seguridad');
                 this.value = 2021;
             }
-            if (anio < 1900) this.value = 1900;
         });
 
-        // Validación de nombre: sin palabras prohibidas
         document.getElementById('nombreInvitado').addEventListener('input', () => {
-            const nombre = document.getElementById('nombreInvitado').value.trim().toLowerCase();
-            const mensaje = document.getElementById('mensajeNombre');
-            let tieneProhibida = palabrasProhibidas.some(palabra => nombre.includes(palabra));
-
-            if (tieneProhibida) {
-                mensaje.textContent = "El nombre no puede contener palabras prohibidas o inapropiadas.";
-                mensaje.classList.remove('oculto');
-            } else {
-                mensaje.classList.add('oculto');
-            }
+            const nombre = document.getElementById('nombreInvitado').value.toLowerCase();
+            const error = document.getElementById('mensajeNombre');
+            const tieneProhibida = palabrasProhibidas.some(p => nombre.includes(p));
+            error.classList.toggle('oculto', !tieneProhibida);
+            error.textContent = tieneProhibida ? "Nombre no permitido" : "";
         });
 
-        // Enviar formulario invitado
-        document.getElementById('enviarInvitado').addEventListener('click', () => {
-            const nombre = document.getElementById('nombreInvitado').value.trim().toLowerCase();
-            const datos = {
-                genero: document.getElementById('generoInvitado').value,
-                dia: parseInt(document.getElementById('dia').value),
-                mes: parseInt(document.getElementById('mes').value),
-                anio: parseInt(document.getElementById('anio').value),
-                nombre: document.getElementById('nombreInvitado').value.trim()
-            };
-
-            if (!datos.genero || !datos.dia || !datos.mes || !datos.anio || !datos.nombre) {
-                alert('Completá todos los campos correctamente');
-                return;
-            }
-
-            if (datos.dia < 1 || datos.dia > 31 || datos.mes < 1 || datos.mes > 12 || datos.anio > 2021) {
-                alert('La fecha ingresada no es válida');
-                return;
-            }
-
-            let tieneProhibida = palabrasProhibidas.some(palabra => nombre.includes(palabra));
-            if (tieneProhibida) {
-                alert("El nombre contiene palabras no permitidas. Elegí otro.");
-                return;
-            }
-
-            console.log('Datos de acceso:', datos);
-            alert('¡Bienvenido a Zentrith World! Gracias por respetar las reglas.');
-        });
-
-        // Enviar formulario correo
-        document.getElementById('enviarCorreo').addEventListener('click', () => {
-            const correo = document.getElementById('correoUsuario').value.trim();
-            const clave = document.getElementById('claveUsuario').value;
-
-            if (!correo || !clave || clave.length < 6) {
-                alert('Ingresá un correo válido y contraseña de al menos 6 caracteres');
-                return;
-            }
-
-            console.log('Acceso con correo:', correo);
-            alert('Procesando cuenta...');
-        });
-
-        // Botón reglas
         document.getElementById('btnReglas').addEventListener('click', () => {
-            alert(`📜 REGLAS DE ZENTRITH WORLD 🛡️
-1. No se permite acoso, amenazas ni abuso de ningún tipo
-2. Prohibido contenido sexual, violento o inapropiado
-3. Respetá a todos los jugadores y moderadores
-4. No usés nombres ofensivos o falsos
-5. Cualquier infracción puede llevar a suspensión permanente`);
+            alert("📜 Reglas: Sin acoso, sin violencia, respeto a todos. Infracción = suspensión.");
         });
     </script>
 
