@@ -45,17 +45,16 @@
         }
 
         h1.titulo-carga {
-            font-size: 4.5rem;
+            font-size: 3rem;
             text-align: center;
             color: #FFFFFF;
-            letter-spacing: 2px;
             margin-bottom: 10px;
         }
 
         .subtitulo-carga {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #93C5FD;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             text-align: center;
         }
 
@@ -77,14 +76,14 @@
         }
 
         .texto-carga {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #CBD5E1;
         }
 
         /* Menú principal */
         .menu-principal {
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             text-align: center;
             opacity: 0;
             transition: opacity 1s ease;
@@ -96,81 +95,85 @@
 
         .botones-superiores {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
         .boton {
             background-color: #2563EB;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            box-shadow: 0 4px 0 #1E40AF;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.1s;
+            transition: transform 0.1s;
         }
 
         .boton:active {
-            transform: translateY(4px);
-            box-shadow: 0 0 0 #1E40AF;
+            transform: translateY(2px);
         }
 
         h2.titulo-menu {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: #F59E0B;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .creado-por {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #F59E0B;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .grupo-botones {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .boton-ancho {
-            width: 220px;
+            width: 280px;
+            padding: 15px;
+            font-size: 1.2rem;
         }
 
         .informacion {
             background-color: #1E293B;
             border: 1px solid #334155;
             border-radius: 8px;
-            padding: 15px;
-            width: 280px;
+            padding: 18px;
+            width: 300px;
             margin: 0 auto 20px;
         }
 
         .info-linea {
             font-size: 1rem;
             color: #E2E8F0;
-            margin: 5px 0;
+            margin: 6px 0;
         }
 
+        /* Texto de seguridad completo y claro */
         .reglas {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #93C5FD;
-            max-width: 400px;
+            max-width: 420px;
             margin: 0 auto;
-            line-height: 1.4;
+            line-height: 1.5;
+            text-align: center;
+            padding: 10px;
         }
 
-        /* Formularios (sin duplicados) */
+        /* Formularios */
         .contenedor-acceso {
             display: flex;
             gap: 1rem;
             justify-content: center;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             flex-wrap: wrap;
         }
 
@@ -186,13 +189,14 @@
         }
 
         .formulario {
-            background-color: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 400px;
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 1.5rem;
+            max-width: 380px;
             margin: 0 auto;
             color: #f1f5f9;
+            text-align: left;
         }
 
         .oculto {
@@ -207,13 +211,13 @@
 
         .opcion-genero {
             flex: 1;
-            padding: 1rem;
-            background-color: #1e293b;
+            padding: 0.8rem;
+            background-color: #0F172A;
             border: 2px solid #334155;
-            border-radius: 10px;
+            border-radius: 8px;
             color: white;
             cursor: pointer;
-            transition: 0.2s;
+            text-align: center;
         }
 
         .opcion-genero.seleccionado {
@@ -223,41 +227,61 @@
 
         .fecha-nacimiento {
             display: flex;
-            gap: 0.8rem;
-            margin: 1rem 0;
+            gap: 0.7rem;
+            margin: 0.8rem 0;
         }
 
         .fecha-nacimiento input {
             flex: 1;
-            padding: 0.8rem;
-            background-color: #1e293b;
+            padding: 0.7rem;
+            background-color: #0F172A;
             border: 1px solid #334155;
-            border-radius: 8px;
+            border-radius: 6px;
             color: white;
             text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .formulario label {
+            font-size: 0.9rem;
+            color: #CBD5E1;
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
         }
 
         .formulario input {
             width: 100%;
-            padding: 0.9rem;
-            margin: 0.5rem 0 1.2rem;
-            background-color: #1e293b;
+            padding: 0.8rem;
+            background-color: #0F172A;
             border: 1px solid #334155;
-            border-radius: 8px;
+            border-radius: 6px;
             color: white;
-            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+
+        .texto-ayuda {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin: 0.3rem 0 1rem;
+        }
+
+        .texto-error {
+            font-size: 0.8rem;
+            color: #ef4444;
+            margin: -0.5rem 0 1rem;
         }
 
         .boton-enviar {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             background-color: #2563eb;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            margin-bottom: 1rem;
+            margin-top: 1rem;
         }
 
         .boton-volver {
@@ -267,18 +291,7 @@
             color: #94a3b8;
             border: none;
             cursor: pointer;
-        }
-
-        .texto-ayuda {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin: -0.5rem 0 1rem;
-        }
-
-        .texto-error {
-            font-size: 0.85rem;
-            color: #ef4444;
-            margin: -0.8rem 0 1rem;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
@@ -304,22 +317,26 @@
         </div>
 
         <h2 class="titulo-menu">ZENTRITH WORLD</h2>
-        <p class="creado-por">Creado por: (tu nombre acá cuando quieras)</p>
+        <p class="creado-por">Creado por: AQUÍ_TU_NOMBRE</p>
 
         <div class="grupo-botones">
-            <button class="boton boton-ancho" id="btnAcceder">Entrar al mundo</button>
+            <button class="boton boton-ancho">Iniciar Sesión</button>
+            <button class="boton boton-ancho">Crear Cuenta</button>
+            <button class="boton boton-ancho" id="btnInvitadoMenu">Entrar como Invitado</button>
         </div>
 
         <div class="informacion">
             <p class="info-linea">Jugadores en línea: 1247</p>
             <p class="info-linea">Eventos activos: 2</p>
+            <p class="info-linea">Servidores disponibles: 1</p>
         </div>
 
+        <!-- Texto de seguridad completo y bien visible -->
         <p class="reglas">
-            🛡️ Espacio seguro: Prohibido acoso, violencia o contenido inapropiado. Respetá a todos.
+            🛡️ Espacio seguro: Prohibido acoso, violencia o contenido inapropiado. Respetá a todos los jugadores. Máxima seguridad para todos.
         </p>
 
-        <!-- Opciones de acceso (UNA SOLA VEZ) -->
+        <!-- Opciones de acceso -->
         <div class="contenedor-acceso oculto" id="accesoContenedor">
             <button id="btnInvitado" class="boton boton-invitado">Entrar como Invitado</button>
             <button id="btnCorreo" class="boton boton-correo">Usar cuenta con correo</button>
@@ -327,7 +344,9 @@
 
         <!-- Formulario Invitado -->
         <div id="formInvitado" class="formulario oculto">
-            <h3>Cuenta Invitado</h3>
+            <h3 style="text-align:center; margin-bottom:1rem;">Cuenta Invitado</h3>
+            
+            <label>Soy:</label>
             <div class="opciones-genero">
                 <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
                 <button type="button" class="opcion-genero" data-valor="nina">👧 Niña</button>
@@ -338,23 +357,25 @@
             <div class="fecha-nacimiento">
                 <input type="number" id="dia" placeholder="Día" min="1" max="31" required>
                 <input type="number" id="mes" placeholder="Mes" min="1" max="12" required>
-                <input type="number" id="anio" placeholder="Año" min="1900" max="2021" required>
+                <input type="number" id="anio" placeholder="Año" min="1990" max="2021" required>
             </div>
-            <p class="texto-ayuda">*Hasta 2021 por seguridad</p>
+            <p class="texto-ayuda">*Solo se permite hasta el año 2021 (desde 2021 para abajo)</p>
 
-            <label>Tu nombre:</label>
-            <input type="text" id="nombreInvitado" placeholder="Elige tu nombre" required>
+            <label>Tu nombre de usuario:</label>
+            <input type="text" id="nombreInvitado" placeholder="Escribí tu nombre aquí" required>
             <p id="mensajeNombre" class="texto-error oculto"></p>
 
-            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar</button>
+            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al juego</button>
             <button type="button" class="boton-volver">Volver</button>
         </div>
 
         <!-- Formulario Correo -->
         <div id="formCorreo" class="formulario oculto">
-            <h3>Cuenta con correo</h3>
-            <label>Correo:</label>
-            <input type="email" id="correoUsuario" placeholder="ejemplo@correo.com" required>
+            <h3 style="text-align:center; margin-bottom:1rem;">Cuenta con correo</h3>
+            
+            <label>Correo electrónico:</label>
+            <input type="email" id="correoUsuario" placeholder="tu@correo.com" required>
+
             <label>Contraseña:</label>
             <input type="password" id="claveUsuario" placeholder="Tu contraseña" required>
 
@@ -388,12 +409,10 @@
         // Seguridad
         const palabrasProhibidas = ["abuso", "sexual", "violencia", "admin", "dueño", "dueno", "zentrith"];
 
-        // Mostrar acceso
-        document.getElementById('btnAcceder').addEventListener('click', () => {
+        document.getElementById('btnInvitadoMenu').addEventListener('click', () => {
             document.getElementById('accesoContenedor').classList.remove('oculto');
         });
 
-        // Cambiar formularios
         document.getElementById('btnInvitado').addEventListener('click', () => {
             document.getElementById('accesoContenedor').classList.add('oculto');
             document.getElementById('formInvitado').classList.remove('oculto');
@@ -412,7 +431,6 @@
             });
         });
 
-        // Selección género
         document.querySelectorAll('.opcion-genero').forEach(op => {
             op.addEventListener('click', () => {
                 document.querySelectorAll('.opcion-genero').forEach(o => o.classList.remove('seleccionado'));
@@ -421,11 +439,16 @@
             });
         });
 
-        // Validaciones
+        // Validación fecha: máximo 2021
         document.getElementById('anio').addEventListener('change', function() {
-            if (parseInt(this.value) > 2021) {
-                alert('Solo hasta 2021 por seguridad');
+            let valor = parseInt(this.value);
+            if (valor > 2021) {
+                alert('❌ Solo se permite hasta el año 2021');
                 this.value = 2021;
+            }
+            if (valor < 1990) {
+                alert('⚠️ Año muy antiguo, revisá por favor');
+                this.value = 2015;
             }
         });
 
@@ -433,12 +456,17 @@
             const nombre = document.getElementById('nombreInvitado').value.toLowerCase();
             const error = document.getElementById('mensajeNombre');
             const tieneProhibida = palabrasProhibidas.some(p => nombre.includes(p));
-            error.classList.toggle('oculto', !tieneProhibida);
-            error.textContent = tieneProhibida ? "Nombre no permitido" : "";
+            
+            if (tieneProhibida) {
+                error.textContent = "❌ Nombre no permitido";
+                error.classList.remove('oculto');
+            } else {
+                error.classList.add('oculto');
+            }
         });
 
         document.getElementById('btnReglas').addEventListener('click', () => {
-            alert("📜 Reglas: Sin acoso, sin violencia, respeto a todos. Infracción = suspensión.");
+            alert("📜 REGLAS:\n✅ Respetar a todos\n❌ Prohibido acoso o violencia\n❌ Nombres ofensivos\n⚠️ Infracción = suspensión");
         });
     </script>
 
