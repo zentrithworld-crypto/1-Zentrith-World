@@ -23,7 +23,7 @@
             padding: 20px;
         }
 
-        /* Estilos de la pantalla de carga */
+        /* Pantalla de carga */
         .pantalla-carga {
             width: 100%;
             height: 100vh;
@@ -81,7 +81,7 @@
             color: #CBD5E1;
         }
 
-        /* Estilos del menú principal */
+        /* Menú principal */
         .menu-principal {
             width: 100%;
             max-width: 500px;
@@ -98,7 +98,7 @@
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .boton {
@@ -127,7 +127,7 @@
         .creado-por {
             font-size: 1.2rem;
             color: #F59E0B;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .grupo-botones {
@@ -148,13 +148,147 @@
             border-radius: 8px;
             padding: 15px;
             width: 280px;
-            margin: 0 auto;
+            margin: 0 auto 20px;
         }
 
         .info-linea {
             font-size: 1rem;
             color: #E2E8F0;
             margin: 5px 0;
+        }
+
+        .reglas {
+            font-size: 0.85rem;
+            color: #93C5FD;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        /* Estilos formularios */
+        .contenedor-botones {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .boton-invitado {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .boton-invitado:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .boton-correo {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+        }
+
+        .boton-correo:hover {
+            background-color: #334155;
+            border-color: #2563eb;
+        }
+
+        .formulario {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+            color: #f1f5f9;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        .opciones-genero {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .opcion-genero {
+            flex: 1;
+            padding: 1rem;
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .opcion-genero.seleccionado {
+            border-color: #2563eb;
+            background-color: #1e3a8a;
+        }
+
+        .fecha-nacimiento {
+            display: flex;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .fecha-nacimiento input {
+            flex: 1;
+            padding: 0.8rem;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+        }
+
+        .formulario input {
+            width: 100%;
+            padding: 0.9rem;
+            margin: 0.5rem 0 1.2rem;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .boton-enviar {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .boton-volver {
+            width: 100%;
+            padding: 0.7rem;
+            background-color: transparent;
+            color: #94a3b8;
+            border: none;
+            cursor: pointer;
+        }
+
+        .texto-ayuda {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin: -0.5rem 0 1rem;
+        }
+
+        .texto-error {
+            font-size: 0.85rem;
+            color: #ef4444;
+            margin: -0.8rem 0 1rem;
         }
     </style>
 </head>
@@ -176,20 +310,76 @@
         <div class="botones-superiores">
             <button class="boton">Configuración</button>
             <button class="boton">Noticias</button>
+            <button class="boton" id="btnReglas">Reglas</button>
         </div>
 
         <h2 class="titulo-menu">ZENTRITH WORLD</h2>
         <p class="creado-por">Creado por: AQUÍ_TU_NOMBRE</p>
 
         <div class="grupo-botones">
-            <button class="boton boton-ancho">Iniciar Sesión</button>
-            <button class="boton boton-ancho">Crear Cuenta</button>
-            <button class="boton boton-ancho">Entrar como Invitado</button>
+            <button class="boton boton-ancho" id="btnIniciarSesion">Iniciar Sesión</button>
+            <button class="boton boton-ancho" id="btnCrearCuenta">Crear Cuenta</button>
+            <button class="boton boton-ancho" id="btnInvitadoMenu">Entrar como Invitado</button>
         </div>
 
         <div class="informacion">
             <p class="info-linea">Jugadores en línea: 1247</p>
             <p class="info-linea">Eventos activos: 2</p>
+        </div>
+
+        <p class="reglas">
+            🛡️ Espacio seguro: Prohibido acoso, violencia o contenido inapropiado. 
+            Respetá a todos los jugadores.
+        </p>
+
+        <!-- Contenedor de botones de acceso -->
+        <div class="contenedor-botones oculto" id="accesoContenedor">
+            <button id="btnInvitado" class="boton boton-invitado">
+                Entrar como Invitado
+            </button>
+            <button id="btnCorreo" class="boton boton-correo">
+                Usar cuenta con correo
+            </button>
+        </div>
+
+        <!-- Formulario Cuenta Invitado -->
+        <div id="formInvitado" class="formulario oculto">
+            <h3>Cuenta Invitado</h3>
+
+            <div class="opciones-genero">
+                <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
+                <button type="button" class="opcion-genero" data-valor="nina">👧 Niña</button>
+            </div>
+            <input type="hidden" id="generoInvitado" required>
+
+            <label>Fecha de nacimiento:</label>
+            <div class="fecha-nacimiento">
+                <input type="number" id="dia" placeholder="Día" min="1" max="31" required>
+                <input type="number" id="mes" placeholder="Mes" min="1" max="12" required>
+                <input type="number" id="anio" placeholder="Año" min="1900" max="2021" required>
+            </div>
+            <p class="texto-ayuda">*Solo se permite hasta el año 2021 por seguridad</p>
+
+            <label>Tu nombre (solo letras y números):</label>
+            <input type="text" id="nombreInvitado" placeholder="Elige tu nombre" required pattern="[A-Za-z0-9 ]+">
+            <p id="mensajeNombre" class="texto-error oculto"></p>
+
+            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al mundo</button>
+            <button type="button" class="boton-volver">Volver</button>
+        </div>
+
+        <!-- Formulario Cuenta con Correo -->
+        <div id="formCorreo" class="formulario oculto">
+            <h3>Cuenta con correo</h3>
+
+            <label>Correo electrónico:</label>
+            <input type="email" id="correoUsuario" placeholder="ejemplo@correo.com" required>
+
+            <label>Contraseña (mínimo 6 caracteres):</label>
+            <input type="password" id="claveUsuario" placeholder="Tu contraseña" required minlength="6">
+
+            <button type="button" id="enviarCorreo" class="boton-enviar">Acceder</button>
+            <button type="button" class="boton-volver">Volver</button>
         </div>
     </div>
 
@@ -209,328 +399,133 @@
             if (porcentaje >= 100) {
                 clearInterval(intervalo);
                 estado.textContent = "¡Mundo listo!";
-                // Mostrar el menú después de un momento after completar carga
                 setTimeout(() => {
                     pantallaCarga.classList.add('oculta');
                     menuPrincipal.classList.add('mostrar');
                 }, 600);
             }
         }, 80);
+
+        // 🛡️ SEGURIDAD: Palabras prohibidas
+        const palabrasProhibidas = [
+            "abuso", "sexual", "violencia", "muerte", "matar", "porno", "sexo",
+            "violar", "acoso", "amenaza", "drogas", "arma", "zentrith", "dueño",
+            "dueno", "admin", "administrador", "mod", "moderador"
+        ];
+
+        // Mostrar opciones de acceso
+        document.getElementById('btnInvitadoMenu').addEventListener('click', () => {
+            document.getElementById('accesoContenedor').classList.remove('oculto');
+        });
+
+        // Mostrar / ocultar formularios
+        document.getElementById('btnInvitado').addEventListener('click', () => {
+            document.querySelector('.contenedor-botones').classList.add('oculto');
+            document.getElementById('formInvitado').classList.remove('oculto');
+            document.getElementById('mensajeNombre').classList.add('oculto');
+        });
+
+        document.getElementById('btnCorreo').addEventListener('click', () => {
+            document.querySelector('.contenedor-botones').classList.add('oculto');
+            document.getElementById('formCorreo').classList.remove('oculto');
+        });
+
+        document.querySelectorAll('.boton-volver').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('formInvitado').classList.add('oculto');
+                document.getElementById('formCorreo').classList.add('oculto');
+                document.querySelector('.contenedor-botones').classList.remove('oculto');
+            });
+        });
+
+        // Selección de género
+        document.querySelectorAll('.opcion-genero').forEach(opcion => {
+            opcion.addEventListener('click', () => {
+                document.querySelectorAll('.opcion-genero').forEach(o => o.classList.remove('seleccionado'));
+                opcion.classList.add('seleccionado');
+                document.getElementById('generoInvitado').value = opcion.dataset.valor;
+            });
+        });
+
+        // Validación año máximo 2021
+        document.getElementById('anio').addEventListener('change', function() {
+            let anio = parseInt(this.value);
+            if (anio > 2021) {
+                alert('Solo se permite hasta el año 2021 por seguridad');
+                this.value = 2021;
+            }
+            if (anio < 1900) this.value = 1900;
+        });
+
+        // Validación de nombre: sin palabras prohibidas
+        document.getElementById('nombreInvitado').addEventListener('input', () => {
+            const nombre = document.getElementById('nombreInvitado').value.trim().toLowerCase();
+            const mensaje = document.getElementById('mensajeNombre');
+            let tieneProhibida = palabrasProhibidas.some(palabra => nombre.includes(palabra));
+
+            if (tieneProhibida) {
+                mensaje.textContent = "El nombre no puede contener palabras prohibidas o inapropiadas.";
+                mensaje.classList.remove('oculto');
+            } else {
+                mensaje.classList.add('oculto');
+            }
+        });
+
+        // Enviar formulario invitado
+        document.getElementById('enviarInvitado').addEventListener('click', () => {
+            const nombre = document.getElementById('nombreInvitado').value.trim().toLowerCase();
+            const datos = {
+                genero: document.getElementById('generoInvitado').value,
+                dia: parseInt(document.getElementById('dia').value),
+                mes: parseInt(document.getElementById('mes').value),
+                anio: parseInt(document.getElementById('anio').value),
+                nombre: document.getElementById('nombreInvitado').value.trim()
+            };
+
+            if (!datos.genero || !datos.dia || !datos.mes || !datos.anio || !datos.nombre) {
+                alert('Completá todos los campos correctamente');
+                return;
+            }
+
+            if (datos.dia < 1 || datos.dia > 31 || datos.mes < 1 || datos.mes > 12 || datos.anio > 2021) {
+                alert('La fecha ingresada no es válida');
+                return;
+            }
+
+            let tieneProhibida = palabrasProhibidas.some(palabra => nombre.includes(palabra));
+            if (tieneProhibida) {
+                alert("El nombre contiene palabras no permitidas. Elegí otro.");
+                return;
+            }
+
+            console.log('Datos de acceso:', datos);
+            alert('¡Bienvenido a Zentrith World! Gracias por respetar las reglas.');
+        });
+
+        // Enviar formulario correo
+        document.getElementById('enviarCorreo').addEventListener('click', () => {
+            const correo = document.getElementById('correoUsuario').value.trim();
+            const clave = document.getElementById('claveUsuario').value;
+
+            if (!correo || !clave || clave.length < 6) {
+                alert('Ingresá un correo válido y contraseña de al menos 6 caracteres');
+                return;
+            }
+
+            console.log('Acceso con correo:', correo);
+            alert('Procesando cuenta...');
+        });
+
+        // Botón reglas
+        document.getElementById('btnReglas').addEventListener('click', () => {
+            alert(`📜 REGLAS DE ZENTRITH WORLD 🛡️
+1. No se permite acoso, amenazas ni abuso de ningún tipo
+2. Prohibido contenido sexual, violento o inapropiado
+3. Respetá a todos los jugadores y moderadores
+4. No usés nombres ofensivos o falsos
+5. Cualquier infracción puede llevar a suspensión permanente`);
+        });
     </script>
 
 </body>
 </html>
-<!-- ==============================================
-     CÓDIGO FINAL - VALIDACIÓN DE NOMBRES RESERVADOS
-     ============================================== -->
-
-<!-- Contenedor de botones -->
-<div class="contenedor-botones">
-  <button id="btnInvitado" class="boton boton-invitado">
-    Entrar como Invitado
-  </button>
-
-  <button id="btnCorreo" class="boton boton-correo">
-    Usar cuenta con correo
-  </button>
-</div>
-
-<!-- Formulario Cuenta Invitado -->
-<div id="formInvitado" class="formulario oculto">
-  <h3>Cuenta Invitado</h3>
-
-  <!-- Selección niño / niña -->
-  <div class="opciones-genero">
-    <button type="button" class="opcion-genero" data-valor="nino">
-      👦 Niño
-    </button>
-    <button type="button" class="opcion-genero" data-valor="nina">
-      👧 Niña
-    </button>
-  </div>
-  <input type="hidden" id="generoInvitado" required>
-
-  <!-- Fecha de nacimiento -->
-  <label>Fecha de nacimiento:</label>
-  <div class="fecha-nacimiento">
-    <input type="number" id="dia" placeholder="Día" min="1" max="31" required>
-    <input type="number" id="mes" placeholder="Mes" min="1" max="12" required>
-    <input type="number" id="anio" placeholder="Año" min="1900" max="2021" required>
-  </div>
-  <p class="texto-ayuda">*Solo se permite hasta el año 2021</p>
-
-  <!-- Nombre -->
-  <label>Tu nombre:</label>
-  <input type="text" id="nombreInvitado" placeholder="Elige tu nombre" required>
-  <p id="mensajeNombre" class="texto-error oculto"></p>
-
-  <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al mundo</button>
-  <button type="button" class="boton-volver">Volver</button>
-</div>
-
-<!-- Formulario Cuenta con Correo -->
-<div id="formCorreo" class="formulario oculto">
-  <h3>Cuenta con correo</h3>
-
-  <label>Correo electrónico:</label>
-  <input type="email" id="correoUsuario" placeholder="ejemplo@correo.com" required>
-
-  <label>Contraseña:</label>
-  <input type="password" id="claveUsuario" placeholder="Tu contraseña" required>
-
-  <button type="button" id="enviarCorreo" class="boton-enviar">Acceder</button>
-  <button type="button" class="boton-volver">Volver</button>
-</div>
-
-<!-- Estilos -->
-<style>
-.contenedor-botones {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 2rem 0;
-  flex-wrap: wrap;
-}
-
-.boton {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.boton-invitado {
-  background-color: #2563eb;
-  color: white;
-}
-
-.boton-invitado:hover {
-  background-color: #1d4ed8;
-  box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
-}
-
-.boton-correo {
-  background-color: #1e293b;
-  color: #e2e8f0;
-  border: 1px solid #334155;
-}
-
-.boton-correo:hover {
-  background-color: #334155;
-  border-color: #2563eb;
-}
-
-.formulario {
-  background-color: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 400px;
-  margin: 0 auto;
-  color: #f1f5f9;
-}
-
-.oculto {
-  display: none;
-}
-
-.opciones-genero {
-  display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.opcion-genero {
-  flex: 1;
-  padding: 1rem;
-  background-color: #1e293b;
-  border: 2px solid #334155;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.opcion-genero.seleccionado {
-  border-color: #2563eb;
-  background-color: #1e3a8a;
-}
-
-.fecha-nacimiento {
-  display: flex;
-  gap: 0.8rem;
-  margin: 1rem 0;
-}
-
-.fecha-nacimiento input {
-  flex: 1;
-  padding: 0.8rem;
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  color: white;
-  text-align: center;
-}
-
-.formulario input {
-  width: 100%;
-  padding: 0.9rem;
-  margin: 0.5rem 0 1.2rem;
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  color: white;
-  box-sizing: border-box;
-}
-
-.boton-enviar {
-  width: 100%;
-  padding: 1rem;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
-}
-
-.boton-volver {
-  width: 100%;
-  padding: 0.7rem;
-  background-color: transparent;
-  color: #94a3b8;
-  border: none;
-  cursor: pointer;
-}
-
-.texto-ayuda {
-  font-size: 0.8rem;
-  color: #94a3b8;
-  margin: -0.5rem 0 1rem;
-}
-
-.texto-error {
-  font-size: 0.85rem;
-  color: #ef4444;
-  margin: -0.8rem 0 1rem;
-}
-</style>
-
-<!-- JavaScript -->
-<script>
-// 📋 NOMBRES RESERVADOS (no se pueden usar: juego, dueño, admin)
-const nombresOcupados = [
-  "zentrith",
-  "zentrith world",
-  "dueño",
-  "dueno",
-  "admin",
-  "administrador"
-];
-
-// Mostrar / ocultar formularios
-document.getElementById('btnInvitado').addEventListener('click', () => {
-  document.querySelector('.contenedor-botones').classList.add('oculto');
-  document.getElementById('formInvitado').classList.remove('oculto');
-  document.getElementById('mensajeNombre').classList.add('oculto');
-});
-
-document.getElementById('btnCorreo').addEventListener('click', () => {
-  document.querySelector('.contenedor-botones').classList.add('oculto');
-  document.getElementById('formCorreo').classList.remove('oculto');
-});
-
-document.querySelectorAll('.boton-volver').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.getElementById('formInvitado').classList.add('oculto');
-    document.getElementById('formCorreo').classList.add('oculto');
-    document.querySelector('.contenedor-botones').classList.remove('oculto');
-  });
-});
-
-// Selección de género
-document.querySelectorAll('.opcion-genero').forEach(opcion => {
-  opcion.addEventListener('click', () => {
-    document.querySelectorAll('.opcion-genero').forEach(o => o.classList.remove('seleccionado'));
-    opcion.classList.add('seleccionado');
-    document.getElementById('generoInvitado').value = opcion.dataset.valor;
-  });
-});
-
-// Validación año máximo 2021
-document.getElementById('anio').addEventListener('change', () => {
-  let anio = parseInt(this.value);
-  if (anio > 2021) {
-    alert('Solo se permite hasta el año 2021');
-    this.value = 2021;
-  }
-  if (anio < 1900) this.value = 1900;
-});
-
-// Validación de nombre en tiempo real
-document.getElementById('nombreInvitado').addEventListener('input', () => {
-  const nombre = document.getElementById('nombreInvitado').value.trim().toLowerCase();
-  const mensaje = document.getElementById('mensajeNombre');
-
-  if (nombresOcupados.includes(nombre)) {
-    mensaje.textContent = "Lo siento, este nombre ya está en uso. Tenés que buscar otro nombre distinto.";
-    mensaje.classList.remove('oculto');
-  } else {
-    mensaje.classList.add('oculto');
-  }
-});
-
-// Enviar formulario invitado
-document.getElementById('enviarInvitado').addEventListener('click', () => {
-  const nombre = document.getElementById('nombreInvitado').value.trim().toLowerCase();
-  const datos = {
-    genero: document.getElementById('generoInvitado').value,
-    dia: parseInt(document.getElementById('dia').value),
-    mes: parseInt(document.getElementById('mes').value),
-    anio: parseInt(document.getElementById('anio').value),
-    nombre: document.getElementById('nombreInvitado').value.trim()
-  };
-
-  // Validar campos completos
-  if (!datos.genero || !datos.dia || !datos.mes || !datos.anio || !datos.nombre) {
-    alert('Completá todos los campos correctamente');
-    return;
-  }
-
-  // Validar fecha correcta
-  if (datos.dia < 1 || datos.dia > 31 || datos.mes < 1 || datos.mes > 12 || datos.anio > 2021) {
-    alert('La fecha ingresada no es válida');
-    return;
-  }
-
-  // Validar nombre reservado
-  if (nombresOcupados.includes(nombre)) {
-    alert("Lo siento, este nombre ya está en uso. Tenés que buscar otro nombre distinto.");
-    return;
-  }
-
-  // ✅ Todo correcto
-  console.log('Datos de acceso:', datos);
-  alert('¡Bienvenido a Zentrith World!');
-  // Acá redirigís al menú principal de tu juego
-});
-
-// Enviar formulario correo
-document.getElementById('enviarCorreo').addEventListener('click', () => {
-  const correo = document.getElementById('correoUsuario').value.trim();
-  const clave = document.getElementById('claveUsuario').value;
-
-  if (!correo || !clave) {
-    alert('Ingresá tu correo y contraseña');
-    return;
-  }
-
-  console.log('Acceso con correo:', correo);
-  alert('Procesando cuenta...');
-});
-      </script>
-      
