@@ -17,9 +17,74 @@
             color: #E2E8F0;
             min-height: 100vh;
             padding-bottom: 85px;
+            overflow-x: hidden;
         }
 
-        /* Encabezado superior */
+        /* -------------------------- */
+        /* PANTALLA DE CARGA */
+        /* -------------------------- */
+        .pantalla-carga {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #08152E;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.8s ease;
+        }
+
+        .pantalla-carga.oculta {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .titulo-carga {
+            font-size: 3rem;
+            text-align: center;
+            color: #60A5FA;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitulo-carga {
+            font-size: 1.2rem;
+            color: #93C5FD;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .barra-carga {
+            width: 80%;
+            max-width: 400px;
+            height: 12px;
+            background-color: #0D1B3D;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid #1E293B;
+        }
+
+        .progreso {
+            width: 0%;
+            height: 100%;
+            background-color: #2563EB;
+            border-radius: 10px;
+            transition: width 0.08s linear;
+        }
+
+        .texto-carga {
+            font-size: 1rem;
+            color: #CBD5E1;
+        }
+
+        /* -------------------------- */
+        /* ENCABEZADO SUPERIOR */
+        /* -------------------------- */
         header {
             background-color: #0D1B3D;
             padding: 16px 24px;
@@ -27,6 +92,9 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #1E293B;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -53,7 +121,9 @@
         .cristales { color: #60A5FA; }
         .zenith { color: #FCD34D; }
 
-        /* Barra de búsqueda */
+        /* -------------------------- */
+        /* BARRA DE BÚSQUEDA */
+        /* -------------------------- */
         .busqueda {
             margin: 24px;
             display: flex;
@@ -78,15 +148,27 @@
             color: white;
             cursor: pointer;
             font-weight: 500;
+            transition: background-color 0.2s;
         }
 
-        /* Contenido principal */
+        .busqueda button:hover {
+            background-color: #2563EB;
+        }
+
+        /* -------------------------- */
+        /* CONTENIDO PRINCIPAL */
+        /* -------------------------- */
         main {
             padding: 0 24px 32px;
         }
 
         .seccion {
             margin-bottom: 36px;
+            display: none;
+        }
+
+        .seccion.activa {
+            display: block;
         }
 
         .seccion h2 {
@@ -94,9 +176,11 @@
             margin-bottom: 16px;
             color: #93C5FD;
             font-weight: 600;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1E293B;
         }
 
-        /* Cuadrícula de juegos */
+        /* Tarjetas de juegos */
         .grid-juegos {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -117,7 +201,7 @@
 
         .tarjeta-imagen {
             height: 120px;
-            background-color: #1E293B;
+            background-color: #0F172A;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -172,7 +256,72 @@
             line-height: 1.4;
         }
 
-        /* Barra de navegación inferior fija */
+        /* Sección Amigos */
+        .contenido-amigos {
+            background-color: #0D1B3D;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+        }
+
+        .funciones-amigos {
+            list-style: none;
+            margin: 16px 0;
+            color: #CBD5E1;
+        }
+
+        .funciones-amigos li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .funciones-amigos li::before {
+            content: "•";
+            color: #60A5FA;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Perfil y Ajustes */
+        .perfil-info {
+            background-color: #0D1B3D;
+            padding: 24px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+            margin-bottom: 20px;
+        }
+
+        .perfil-especial {
+            background-color: #0F2244;
+            border: 1px solid #2563EB;
+        }
+
+        .nombre-perfil {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #FCD34D;
+        }
+
+        .datos-perfil {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            color: #CBD5E1;
+        }
+
+        .dato {
+            padding: 8px;
+            background-color: #0F172A;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* -------------------------- */
+        /* BARRA DE NAVEGACIÓN INFERIOR */
+        /* -------------------------- */
         nav {
             position: fixed;
             bottom: 0;
@@ -198,38 +347,269 @@
             cursor: pointer;
             padding: 8px 12px;
             border-radius: 6px;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .nav-item.activo {
             color: #60A5FA;
+            background-color: #0F2244;
         }
 
-        .nav-item i {
+        .nav-item span:first-child {
             font-size: 22px;
+        }
+
+        /* -------------------------- */
+        /* FORMULARIOS DE ACCESO */
+        /* -------------------------- */
+        .contenedor-acceso {
+            max-width: 420px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .botones-acceso {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .boton-acceso {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .boton-invitado {
+            background-color: #2563EB;
+            color: white;
+        }
+
+        .boton-invitado:hover {
+            background-color: #1D4ED8;
+        }
+
+        .boton-correo {
+            background-color: #1E293B;
+            color: #E2E8F0;
+            border: 1px solid #334155 !important;
+        }
+
+        .boton-correo:hover {
+            background-color: #273549;
+        }
+
+        .formulario {
+            background-color: #0D1B3D;
+            border: 1px solid #1E293B;
+            border-radius: 10px;
+            padding: 1.8rem;
+            max-width: 380px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .formulario h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #93C5FD;
+        }
+
+        .opciones-genero {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .opcion-genero {
+            flex: 1;
+            padding: 0.9rem;
+            background-color: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .opcion-genero.seleccionado {
+            border-color: #2563EB;
+            background-color: #0F2244;
+        }
+
+        .fecha-nacimiento {
+            display: flex;
+            gap: 0.7rem;
+            margin: 0.8rem 0;
+        }
+
+        .fecha-nacimiento input {
+            flex: 1;
+            padding: 0.8rem;
+            background-color: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .formulario label {
+            font-size: 0.9rem;
+            color: #CBD5E1;
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .formulario input {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .texto-ayuda {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin: 0.3rem 0 1rem;
+        }
+
+        .texto-error {
+            font-size: 0.8rem;
+            color: #ef4444;
+            margin: -0.5rem 0 1rem;
+            min-height: 1rem;
+        }
+
+        .boton-enviar {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .boton-enviar:hover {
+            background-color: #1D4ED8;
+        }
+
+        .boton-volver {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: transparent;
+            color: #94a3b8;
+            border: none;
+            cursor: pointer;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .oculto {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <!-- Encabezado -->
+
+    <!-- PANTALLA DE CARGA -->
+    <div class="pantalla-carga" id="pantallaCarga">
+        <h1 class="titulo-carga">ZENTRITH WORLD</h1>
+        <p class="subtitulo-carga">EL MUNDO QUE ESTABAS ESPERANDO</p>
+        
+        <div class="barra-carga">
+            <div class="progreso" id="progreso"></div>
+        </div>
+        <p class="texto-carga" id="estadoCarga">Cargando mundo... 0%</p>
+    </div>
+
+    <!-- ENCABEZADO -->
     <header>
         <div class="logo">ZENTRITH WORLD</div>
         <div class="monedas">
-            <div class="moneda cristales">💎 Cristales Z <span>1.250</span></div>
-            <div class="moneda zenith">🪙 Zenith Coins <span>42</span></div>
+            <div class="moneda cristales">💎 Cristales Z <span id="cantidadCristales">0</span></div>
+            <div class="moneda zenith">🪙 Zenith Coins <span id="cantidadZenith">0</span></div>
         </div>
     </header>
 
-    <!-- Barra de búsqueda -->
+    <!-- BARRA DE BÚSQUEDA -->
     <div class="busqueda">
         <input type="text" placeholder="🔍 Buscar mundos, juegos o creadores...">
         <button>Buscar</button>
     </div>
 
-    <!-- Contenido principal -->
-    <main>
-        <!-- Sección Jugar -->
-        <section class="seccion" id="seccion-jugar">
+    <!-- CONTENEDOR DE ACCESO / MENÚ -->
+    <div class="contenedor-acceso oculto" id="accesoInicial">
+        <h2 style="text-align:center; color:#93C5FD; margin-bottom:1rem;">Bienvenido a Zentrith World</h2>
+        <p style="text-align:center; color:#94A3B8; margin-bottom:2rem;">Elige cómo quieres ingresar</p>
+        
+        <div class="botones-acceso">
+            <button class="boton-acceso boton-invitado" id="btnInvitado">Entrar como Invitado</button>
+            <button class="boton-acceso boton-correo" id="btnCorreo">Usar cuenta con correo</button>
+        </div>
+
+        <!-- Formulario Invitado -->
+        <div id="formInvitado" class="formulario oculto">
+            <h3>Cuenta Invitado</h3>
+            
+            <label>Soy:</label>
+            <div class="opciones-genero">
+                <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
+                <button type="button" class="opcion-genero" data-valor="nina">👧 Niña</button>
+            </div>
+            <input type="hidden" id="generoInvitado" required>
+
+            <label>Fecha de nacimiento:</label>
+            <div class="fecha-nacimiento">
+                <input type="number" id="dia" placeholder="" min="1" max="31" required>
+                <input type="number" id="mes" placeholder="" min="1" max="12" required>
+                <input type="number" id="anio" placeholder="" min="1990" max="2021" required>
+            </div>
+            <p class="texto-ayuda">*Solo se permite hasta el año 2021</p>
+
+            <label>Nombre de usuario:</label>
+            <input type="text" id="nombreInvitado" placeholder="" required>
+            <p id="mensajeNombre" class="texto-error"></p>
+
+            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al juego</button>
+            <button type="button" class="boton-volver">Volver</button>
+        </div>
+
+        <!-- Formulario Correo -->
+        <div id="formCorreo" class="formulario oculto">
+            <h3>Cuenta con correo</h3>
+            
+            <label>Correo electrónico:</label>
+            <input type="email" id="correoUsuario" placeholder="" required>
+
+            <label>Contraseña:</label>
+            <input type="password" id="claveUsuario" placeholder="" required>
+
+            <button type="button" id="enviarCorreo" class="boton-enviar">Acceder</button>
+            <button type="button" class="boton-volver">Volver</button>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL DEL JUEGO -->
+    <main id="contenidoJuego" class="oculto">
+        <!-- Sección Jugar / Inicio -->
+        <section class="seccion activa" id="seccion-jugar">
             <h2>🎮 Juegos populares</h2>
             <div class="grid-juegos">
                 <div class="tarjeta-juego">
@@ -268,7 +648,7 @@
                     <div class="tarjeta-imagen">Imagen del mundo</div>
                     <div class="tarjeta-info">
                         <h3 class="tarjeta-titulo">Bosque Antiguo</h3>
-                        <p class="tarjeta-jugadores">Creado por: El Arquitecto 🔮</p>
+                        <p class="tarjeta-jugadores">Creado por: 🔮 El Arquitecto</p>
                     </div>
                 </div>
                 <div class="tarjeta-juego">
@@ -282,7 +662,7 @@
         </section>
 
         <!-- Sección Crear -->
-        <section class="seccion" id="seccion-crear" style="display: none;">
+        <section class="seccion" id="seccion-crear">
             <h2>🔨 Crear tus propios mundos</h2>
             <div class="opciones-crear">
                 <div class="opcion-crear">
@@ -300,72 +680,4 @@
                 <div class="opcion-crear">
                     <h3 class="opcion-titulo">Publicar mundo</h3>
                     <p class="opcion-desc">Comparte tu creación con toda la comunidad y recibe comentarios.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección Amigos -->
-        <section class="seccion" id="seccion-amigos" style="display: none;">
-            <h2>👥 Mis amigos</h2>
-            <p style="color: #94A3B8; margin-bottom: 16px;">Funciones: enviar solicitudes, aceptar, bloquear y ver estado de conexión.</p>
-            <div style="background-color: #0D1B3D; padding: 20px; border-radius: 10px; border: 1px solid #1E293B;">
-                <p style="color: #93C5FD;">Sistema en desarrollo: pronto podrás agregar amigos y jugar juntos.</p>
-            </div>
-        </section>
-
-        <!-- Sección Ajustes -->
-        <section class="seccion" id="seccion-ajustes" style="display: none;">
-            <h2>⚙️ Ajustes y perfil</h2>
-            <div style="background-color: #0D1B3D; padding: 20px; border-radius: 10px; border: 1px solid #1E293B;">
-                <p><strong>Perfil:</strong> Nivel 8 • 3 amigos conectados • 2 mundos creados • 12 logros</p>
-                <hr style="margin: 16px 0; border: none; border-top: 1px solid #1E293B;">
-                <p style="color: #94A3B8;">Configuración de cuenta, privacidad, controles parentales y más opciones.</p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Barra de navegación inferior -->
-    <nav>
-        <button class="nav-item activo" data-seccion="jugar">
-            <span>🏠</span>
-            <span>Inicio</span>
-        </button>
-        <button class="nav-item" data-seccion="jugar">
-            <span>🎮</span>
-            <span>Jugar</span>
-        </button>
-        <button class="nav-item" data-seccion="crear">
-            <span>🔨</span>
-            <span>Crear</span>
-        </button>
-        <button class="nav-item" data-seccion="amigos">
-            <span>👥</span>
-            <span>Amigos</span>
-        </button>
-        <button class="nav-item" data-seccion="ajustes">
-            <span>⚙️</span>
-            <span>Ajustes</span>
-        </button>
-    </nav>
-
-    <script>
-        // Navegación entre secciones
-        const navItems = document.querySelectorAll('.nav-item');
-        const secciones = document.querySelectorAll('.seccion');
-
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Quitar activo de todos
-                navItems.forEach(nav => nav.classList.remove('activo'));
-                // Agregar activo al seleccionado
-                item.classList.add('activo');
-                // Ocultar todas las secciones
-                secciones.forEach(sec => sec.style.display = 'none');
-                // Mostrar la sección correspondiente
-                const seccionId = 'seccion-' + item.dataset.seccion;
-                document.getElementById(seccionId).style.display = 'block';
-            });
-        });
-    </script>
-</body>
-</html>
+                </d
