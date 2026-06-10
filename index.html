@@ -9,607 +9,363 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
-            background-color: #0F172A;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background-color: #08152E;
+            color: #E2E8F0;
             min-height: 100vh;
-            padding: 20px;
+            padding-bottom: 85px;
         }
 
-        /* Pantalla de carga */
-        .pantalla-carga {
-            width: 100%;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #0F172A;
+        /* Encabezado superior */
+        header {
+            background-color: #0D1B3D;
+            padding: 16px 24px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            transition: opacity 0.8s ease;
+            border-bottom: 1px solid #1E293B;
         }
 
-        .pantalla-carga.oculta {
-            opacity: 0;
-            pointer-events: none;
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #60A5FA;
+            letter-spacing: 1px;
         }
 
-        h1.titulo-carga {
-            font-size: 3rem;
-            text-align: center;
-            color: #FFFFFF;
-            margin-bottom: 10px;
-        }
-
-        .subtitulo-carga {
-            font-size: 1.2rem;
-            color: #93C5FD;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .barra-carga {
-            width: 80%;
-            height: 12px;
-            background-color: #1E293B;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .progreso {
-            width: 0%;
-            height: 100%;
-            background-color: #2563EB;
-            border-radius: 10px;
-            transition: width 0.08s linear;
-        }
-
-        .texto-carga {
-            font-size: 1rem;
-            color: #CBD5E1;
-        }
-
-        /* Aviso de servidor de pruebas */
-        .aviso-pruebas {
-            background-color: #1E293B;
-            border: 1px solid #F59E0B;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            color: #FCD34D;
-            font-size: 0.9rem;
-            max-width: 420px;
-        }
-
-        /* Menú principal */
-        .menu-principal {
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        .menu-principal.mostrar {
-            opacity: 1;
-        }
-
-        .botones-superiores {
+        .monedas {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .boton {
-            background-color: #2563EB;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: transform 0.1s;
-        }
-
-        .boton:active {
-            transform: translateY(2px);
-        }
-
-        h2.titulo-menu {
-            font-size: 2.8rem;
-            color: #F59E0B;
-            margin-bottom: 25px; /* Aumentamos margen para compensar */
-        }
-
-        /* ✅ Eliminado el texto con tu nombre */
-
-        /* Panel de monedas */
-        .panel-monedas {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
         }
 
         .moneda {
-            background-color: #1E293B;
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 16px;
         }
 
         .cristales { color: #60A5FA; }
-        .zenith { color: #FBBF24; }
+        .zenith { color: #FCD34D; }
 
-        .grupo-botones {
+        /* Barra de búsqueda */
+        .busqueda {
+            margin: 24px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .busqueda input {
+            flex: 1;
+            padding: 12px 16px;
+            background-color: #0F172A;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            color: #E2E8F0;
+            font-size: 15px;
+        }
+
+        .busqueda button {
+            padding: 12px 20px;
+            background-color: #1E40AF;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Contenido principal */
+        main {
+            padding: 0 24px 32px;
+        }
+
+        .seccion {
+            margin-bottom: 36px;
+        }
+
+        .seccion h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #93C5FD;
+            font-weight: 600;
+        }
+
+        /* Cuadrícula de juegos */
+        .grid-juegos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .tarjeta-juego {
+            background-color: #0D1B3D;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #1E293B;
+            transition: transform 0.2s ease;
+        }
+
+        .tarjeta-juego:hover {
+            transform: translateY(-3px);
+        }
+
+        .tarjeta-imagen {
+            height: 120px;
+            background-color: #1E293B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748B;
+        }
+
+        .tarjeta-info {
+            padding: 12px;
+        }
+
+        .tarjeta-titulo {
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .tarjeta-jugadores {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+
+        /* Sección Crear */
+        .opciones-crear {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .opcion-crear {
+            background-color: #0D1B3D;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .opcion-crear:hover {
+            background-color: #0F2244;
+        }
+
+        .opcion-titulo {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #93C5FD;
+        }
+
+        .opcion-desc {
+            font-size: 14px;
+            color: #94A3B8;
+            line-height: 1.4;
+        }
+
+        /* Barra de navegación inferior fija */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #0D1B3D;
+            border-top: 1px solid #1E293B;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 8px;
+            z-index: 100;
+        }
+
+        .nav-item {
             display: flex;
             flex-direction: column;
-            gap: 12px;
             align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .boton-ancho {
-            width: 280px;
-            padding: 15px;
-            font-size: 1.2rem;
-        }
-
-        .informacion {
-            background-color: #1E293B;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 18px;
-            width: 300px;
-            margin: 0 auto 20px;
-        }
-
-        .info-linea {
-            font-size: 1rem;
-            color: #E2E8F0;
-            margin: 6px 0;
-        }
-
-        /* Texto de seguridad */
-        .reglas {
-            font-size: 0.9rem;
-            color: #93C5FD;
-            max-width: 420px;
-            margin: 0 auto;
-            line-height: 1.5;
-            text-align: center;
-            padding: 10px;
-        }
-
-        /* Modal de recompensas diarias */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 20px;
-        }
-
-        .modal-contenido {
-            background-color: #1E293B;
-            padding: 25px;
-            border-radius: 12px;
-            max-width: 380px;
-            width: 100%;
-            border: 1px solid #3B82F6;
-        }
-
-        .modal h3 {
-            text-align: center;
-            color: #FBBF24;
-            margin-bottom: 15px;
-        }
-
-        .recompensa-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            margin: 5px 0;
-            background-color: #0F172A;
-            border-radius: 6px;
-        }
-
-        .recompensa-actual {
-            border: 1px solid #2563EB;
-            background-color: #1E3A8A;
-        }
-
-        .oculto {
-            display: none;
-        }
-
-        /* Formularios */
-        .contenedor-acceso {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-
-        .boton-invitado {
-            background-color: #2563eb;
-            color: white;
-        }
-
-        .boton-correo {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            border: 1px solid #334155;
-        }
-
-        .formulario {
-            background-color: #1E293B;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            padding: 1.5rem;
-            max-width: 380px;
-            margin: 0 auto;
-            color: #f1f5f9;
-            text-align: left;
-        }
-
-        .opciones-genero {
-            display: flex;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .opcion-genero {
-            flex: 1;
-            padding: 0.8rem;
-            background-color: #0F172A;
-            border: 2px solid #334155;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .opcion-genero.seleccionado {
-            border-color: #2563eb;
-            background-color: #1e3a8a;
-        }
-
-        .fecha-nacimiento {
-            display: flex;
-            gap: 0.7rem;
-            margin: 0.8rem 0;
-        }
-
-        .fecha-nacimiento input {
-            flex: 1;
-            padding: 0.7rem;
-            background-color: #0F172A;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: white;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .formulario label {
-            font-size: 0.9rem;
-            color: #CBD5E1;
-            display: block;
-            margin-top: 1rem;
-            margin-bottom: 0.4rem;
-        }
-
-        /* Campo de nombre sin texto visible */
-        .formulario input {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: #0F172A;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .texto-ayuda {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin: 0.3rem 0 1rem;
-        }
-
-        .texto-error {
-            font-size: 0.8rem;
-            color: #ef4444;
-            margin: -0.5rem 0 1rem;
-        }
-
-        .boton-enviar {
-            width: 100%;
-            padding: 0.9rem;
-            background-color: #2563eb;
-            color: white;
+            gap: 4px;
+            background: none;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            color: #94A3B8;
+            font-size: 12px;
             cursor: pointer;
-            margin-top: 1rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: color 0.2s ease;
         }
 
-        .boton-volver {
-            width: 100%;
-            padding: 0.7rem;
-            background-color: transparent;
-            color: #94a3b8;
-            border: none;
-            cursor: pointer;
-            margin-top: 0.5rem;
+        .nav-item.activo {
+            color: #60A5FA;
+        }
+
+        .nav-item i {
+            font-size: 22px;
         }
     </style>
 </head>
 <body>
-
-    <!-- Pantalla de Carga -->
-    <div class="pantalla-carga" id="pantallaCarga">
-        <h1 class="titulo-carga">ZENTRITH WORLD</h1>
-        <p class="subtitulo-carga">EL MUNDO QUE ESTABAS ESPERANDO</p>
-        
-        <div class="barra-carga">
-            <div class="progreso" id="progreso"></div>
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">ZENTRITH WORLD</div>
+        <div class="monedas">
+            <div class="moneda cristales">💎 Cristales Z <span>1.250</span></div>
+            <div class="moneda zenith">🪙 Zenith Coins <span>42</span></div>
         </div>
-        <p class="texto-carga" id="estadoCarga">Cargando mundo... 0%</p>
+    </header>
+
+    <!-- Barra de búsqueda -->
+    <div class="busqueda">
+        <input type="text" placeholder="🔍 Buscar mundos, juegos o creadores...">
+        <button>Buscar</button>
     </div>
 
-    <!-- Menú Principal -->
-    <div class="menu-principal" id="menuPrincipal">
-        <!-- Aviso de servidor de pruebas -->
-        <div class="aviso-pruebas">
-            ⚠️ Bienvenido al servidor de pruebas de Zentrith World. Algunas funciones pueden estar en desarrollo.
-        </div>
-
-        <div class="botones-superiores">
-            <button class="boton">Configuración</button>
-            <button class="boton">Noticias</button>
-            <button class="boton" id="btnRecompensas">🎁 Recompensas</button>
-            <button class="boton" id="btnReglas">Reglas</button>
-        </div>
-
-        <h2 class="titulo-menu">ZENTRITH WORLD</h2>
-        <!-- ✅ Eliminado: ya no aparece "Creado por: El Arquitecto 🔮" -->
-
-        <!-- Panel de monedas -->
-        <div class="panel-monedas">
-            <div class="moneda cristales">💎 Cristales Z: <span id="cantidadCristales">0</span></div>
-            <div class="moneda zenith">🌟 Zenith Coins: <span id="cantidadZenith">0</span></div>
-        </div>
-
-        <div class="grupo-botones">
-            <button class="boton boton-ancho">Iniciar Sesión</button>
-            <button class="boton boton-ancho">Crear Cuenta</button>
-            <button class="boton boton-ancho" id="btnInvitadoMenu">Entrar como Invitado</button>
-        </div>
-
-        <div class="informacion">
-            <p class="info-linea">Jugadores en línea: 1247</p>
-            <p class="info-linea">Eventos activos: 2</p>
-            <p class="info-linea">Servidores disponibles: 1</p>
-        </div>
-
-        <p class="reglas">
-            🛡️ Espacio seguro: Prohibido acoso, violencia o contenido inapropiado. Respetá a todos los jugadores. Máxima seguridad para todos.
-        </p>
-
-        <!-- Opciones de acceso -->
-        <div class="contenedor-acceso oculto" id="accesoContenedor">
-            <button id="btnInvitado" class="boton boton-invitado">Entrar como Invitado</button>
-            <button id="btnCorreo" class="boton boton-correo">Usar cuenta con correo</button>
-        </div>
-
-        <!-- Formulario Invitado -->
-        <div id="formInvitado" class="formulario oculto">
-            <h3 style="text-align:center; margin-bottom:1rem;">Cuenta Invitado</h3>
-            
-            <label>Soy:</label>
-            <div class="opciones-genero">
-                <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
-                <button type="button" class="opcion-genero" data-valor="nina">👧 Niña</button>
+    <!-- Contenido principal -->
+    <main>
+        <!-- Sección Jugar -->
+        <section class="seccion" id="seccion-jugar">
+            <h2>🎮 Juegos populares</h2>
+            <div class="grid-juegos">
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Aventura Oscura</h3>
+                        <p class="tarjeta-jugadores">1.240 jugando</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Isla Flotante</h3>
+                        <p class="tarjeta-jugadores">872 jugando</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Minijuegos Z</h3>
+                        <p class="tarjeta-jugadores">2.156 jugando</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Ciudad Futura</h3>
+                        <p class="tarjeta-jugadores">643 jugando</p>
+                    </div>
+                </div>
             </div>
-            <input type="hidden" id="generoInvitado" required>
 
-            <label>Fecha de nacimiento:</label>
-            <div class="fecha-nacimiento">
-                <input type="number" id="dia" placeholder="" min="1" max="31" required>
-                <input type="number" id="mes" placeholder="" min="1" max="12" required>
-                <input type="number" id="anio" placeholder="" min="1990" max="2021" required>
+            <h2 style="margin-top: 32px;">🌍 Mundos recomendados</h2>
+            <div class="grid-juegos">
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del mundo</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Bosque Antiguo</h3>
+                        <p class="tarjeta-jugadores">Creado por: El Arquitecto 🔮</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del mundo</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Montaña de Cristal</h3>
+                        <p class="tarjeta-jugadores">Actualizado recientemente</p>
+                    </div>
+                </div>
             </div>
-            <p class="texto-ayuda">*Solo se permite hasta el año 2021</p>
+        </section>
 
-            <label>Nombre de usuario:</label>
-            <input type="text" id="nombreInvitado" placeholder="" required>
-            <p id="mensajeNombre" class="texto-error oculto"></p>
+        <!-- Sección Crear -->
+        <section class="seccion" id="seccion-crear" style="display: none;">
+            <h2>🔨 Crear tus propios mundos</h2>
+            <div class="opciones-crear">
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Crear mundo</h3>
+                    <p class="opcion-desc">Diseña un espacio desde cero, elige terrenos, decoraciones y reglas.</p>
+                </div>
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Crear minijuego</h3>
+                    <p class="opcion-desc">Arma partidas rápidas, desafíos o competencias para jugar con amigos.</p>
+                </div>
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Mis proyectos</h3>
+                    <p class="opcion-desc">Accede a todos tus creaciones guardadas, borradores y trabajos en curso.</p>
+                </div>
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Publicar mundo</h3>
+                    <p class="opcion-desc">Comparte tu creación con toda la comunidad y recibe comentarios.</p>
+                </div>
+            </div>
+        </section>
 
-            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al juego</button>
-            <button type="button" class="boton-volver">Volver</button>
-        </div>
+        <!-- Sección Amigos -->
+        <section class="seccion" id="seccion-amigos" style="display: none;">
+            <h2>👥 Mis amigos</h2>
+            <p style="color: #94A3B8; margin-bottom: 16px;">Funciones: enviar solicitudes, aceptar, bloquear y ver estado de conexión.</p>
+            <div style="background-color: #0D1B3D; padding: 20px; border-radius: 10px; border: 1px solid #1E293B;">
+                <p style="color: #93C5FD;">Sistema en desarrollo: pronto podrás agregar amigos y jugar juntos.</p>
+            </div>
+        </section>
 
-        <!-- Formulario Correo -->
-        <div id="formCorreo" class="formulario oculto">
-            <h3 style="text-align:center; margin-bottom:1rem;">Cuenta con correo</h3>
-            
-            <label>Correo electrónico:</label>
-            <input type="email" id="correoUsuario" placeholder="" required>
+        <!-- Sección Ajustes -->
+        <section class="seccion" id="seccion-ajustes" style="display: none;">
+            <h2>⚙️ Ajustes y perfil</h2>
+            <div style="background-color: #0D1B3D; padding: 20px; border-radius: 10px; border: 1px solid #1E293B;">
+                <p><strong>Perfil:</strong> Nivel 8 • 3 amigos conectados • 2 mundos creados • 12 logros</p>
+                <hr style="margin: 16px 0; border: none; border-top: 1px solid #1E293B;">
+                <p style="color: #94A3B8;">Configuración de cuenta, privacidad, controles parentales y más opciones.</p>
+            </div>
+        </section>
+    </main>
 
-            <label>Contraseña:</label>
-            <input type="password" id="claveUsuario" placeholder="" required>
-
-            <button type="button" id="enviarCorreo" class="boton-enviar">Acceder</button>
-            <button type="button" class="boton-volver">Volver</button>
-        </div>
-    </div>
-
-    <!-- Modal Recompensas Diarias -->
-    <div class="modal oculto" id="modalRecompensas">
-        <div class="modal-contenido">
-            <h3>🎁 Recompensas por iniciar sesión</h3>
-            <div class="recompensa-item">
-                <span>Día 1</span>
-                <span>💎 50 Cristales Z</span>
-            </div>
-            <div class="recompensa-item">
-                <span>Día 2</span>
-                <span>💎 75 Cristales Z</span>
-            </div>
-            <div class="recompensa-item">
-                <span>Día 3</span>
-                <span>💎 100 Cristales Z</span>
-            </div>
-            <div class="recompensa-item">
-                <span>Día 4</span>
-                <span>💎 125 Cristales Z</span>
-            </div>
-            <div class="recompensa-item">
-                <span>Día 5</span>
-                <span>💎 150 Cristales Z</span>
-            </div>
-            <div class="recompensa-item">
-                <span>Día 6</span>
-                <span>💎 200 Cristales Z</span>
-            </div>
-            <div class="recompensa-item recompensa-actual">
-                <span>Día 7</span>
-                <span>🌟 1 Zenith Coin</span>
-            </div>
-            <button class="boton" style="width:100%; margin-top:15px;" id="cerrarRecompensas">Entendido</button>
-        </div>
-    </div>
+    <!-- Barra de navegación inferior -->
+    <nav>
+        <button class="nav-item activo" data-seccion="jugar">
+            <span>🏠</span>
+            <span>Inicio</span>
+        </button>
+        <button class="nav-item" data-seccion="jugar">
+            <span>🎮</span>
+            <span>Jugar</span>
+        </button>
+        <button class="nav-item" data-seccion="crear">
+            <span>🔨</span>
+            <span>Crear</span>
+        </button>
+        <button class="nav-item" data-seccion="amigos">
+            <span>👥</span>
+            <span>Amigos</span>
+        </button>
+        <button class="nav-item" data-seccion="ajustes">
+            <span>⚙️</span>
+            <span>Ajustes</span>
+        </button>
+    </nav>
 
     <script>
-        // Carga
-        let porcentaje = 0;
-        const progreso = document.getElementById('progreso');
-        const estado = document.getElementById('estadoCarga');
-        const pantallaCarga = document.getElementById('pantallaCarga');
-        const menuPrincipal = document.getElementById('menuPrincipal');
+        // Navegación entre secciones
+        const navItems = document.querySelectorAll('.nav-item');
+        const secciones = document.querySelectorAll('.seccion');
 
-        const intervalo = setInterval(() => {
-            porcentaje += 2;
-            progreso.style.width = `${porcentaje}%`;
-            estado.textContent = `Cargando mundo... ${porcentaje}%`;
-            if (porcentaje >= 100) {
-                clearInterval(intervalo);
-                estado.textContent = "¡Listo!";
-                setTimeout(() => {
-                    pantallaCarga.classList.add('oculta');
-                    menuPrincipal.classList.add('mostrar');
-                }, 600);
-            }
-        }, 80);
-
-        // Sistema de monedas
-        let cristalesZ = 0;
-        let zenithCoins = 0;
-
-        function actualizarMonedas() {
-            document.getElementById('cantidadCristales').textContent = cristalesZ;
-            document.getElementById('cantidadZenith').textContent = zenithCoins;
-        }
-
-        // Recompensas
-        document.getElementById('btnRecompensas').addEventListener('click', () => {
-            document.getElementById('modalRecompensas').classList.remove('oculto');
-        });
-
-        document.getElementById('cerrarRecompensas').addEventListener('click', () => {
-            document.getElementById('modalRecompensas').classList.add('oculto');
-            cristalesZ += 50;
-            actualizarMonedas();
-            alert("¡Recibiste 50 Cristales Z!");
-        });
-
-        // Seguridad
-        const palabrasProhibidas = ["abuso", "sexual", "violencia", "admin", "dueño", "dueno", "zentrith"];
-
-        document.getElementById('btnInvitadoMenu').addEventListener('click', () => {
-            document.getElementById('accesoContenedor').classList.remove('oculto');
-        });
-
-        document.getElementById('btnInvitado').addEventListener('click', () => {
-            document.getElementById('accesoContenedor').classList.add('oculto');
-            document.getElementById('formInvitado').classList.remove('oculto');
-        });
-
-        document.getElementById('btnCorreo').addEventListener('click', () => {
-            document.getElementById('accesoContenedor').classList.add('oculto');
-            document.getElementById('formCorreo').classList.remove('oculto');
-        });
-
-        document.querySelectorAll('.boton-volver').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.getElementById('formInvitado').classList.add('oculto');
-                document.getElementById('formCorreo').classList.add('oculto');
-                document.getElementById('accesoContenedor').classList.remove('oculto');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Quitar activo de todos
+                navItems.forEach(nav => nav.classList.remove('activo'));
+                // Agregar activo al seleccionado
+                item.classList.add('activo');
+                // Ocultar todas las secciones
+                secciones.forEach(sec => sec.style.display = 'none');
+                // Mostrar la sección correspondiente
+                const seccionId = 'seccion-' + item.dataset.seccion;
+                document.getElementById(seccionId).style.display = 'block';
             });
-        });
-
-        document.querySelectorAll('.opcion-genero').forEach(op => {
-            op.addEventListener('click', () => {
-                document.querySelectorAll('.opcion-genero').forEach(o => o.classList.remove('seleccionado'));
-                op.classList.add('seleccionado');
-                document.getElementById('generoInvitado').value = op.dataset.valor;
-            });
-        });
-
-        // Validación fecha: máximo 2021
-        document.getElementById('anio').addEventListener('change', function() {
-            let valor = parseInt(this.value);
-            if (valor > 2021) {
-                alert('❌ Solo se permite hasta el año 2021');
-                this.value = 2021;
-            }
-            if (valor < 1990) {
-                alert('⚠️ Año muy antiguo, revisá por favor');
-                this.value = 2015;
-            }
-        });
-
-        document.getElementById('nombreInvitado').addEventListener('input', () => {
-            const nombre = document.getElementById('nombreInvitado').value.toLowerCase();
-            const error = document.getElementById('mensajeNombre');
-            const tieneProhibida = palabrasProhibidas.some(p => nombre.includes(p));
-            
-            if (tieneProhibida) {
-                error.textContent = "❌ Nombre no permitido";
-                error.classList.remove('oculto');
-            } else {
-                error.classList.add('oculto');
-            }
-        });
-
-        document.getElementById('btnReglas').addEventListener('click', () => {
-            alert("📜 REGLAS:\n✅ Respetar a todos\n❌ Prohibido acoso o violencia\n❌ Nombres ofensivos\n⚠️ Infracción = suspensión");
         });
     </script>
-
 </body>
 </html>
