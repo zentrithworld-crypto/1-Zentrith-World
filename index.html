@@ -132,14 +132,10 @@
         h2.titulo-menu {
             font-size: 2.8rem;
             color: #F59E0B;
-            margin-bottom: 8px;
+            margin-bottom: 25px; /* Aumentamos margen para compensar */
         }
 
-        .creado-por {
-            font-size: 1.1rem;
-            color: #F59E0B;
-            margin-bottom: 20px;
-        }
+        /* ✅ Eliminado el texto con tu nombre */
 
         /* Panel de monedas */
         .panel-monedas {
@@ -326,6 +322,7 @@
             margin-bottom: 0.4rem;
         }
 
+        /* Campo de nombre sin texto visible */
         .formulario input {
             width: 100%;
             padding: 0.8rem;
@@ -399,7 +396,7 @@
         </div>
 
         <h2 class="titulo-menu">ZENTRITH WORLD</h2>
-        <p class="creado-por">Creado por: AQUÍ_TU_NOMBRE</p>
+        <!-- ✅ Eliminado: ya no aparece "Creado por: El Arquitecto 🔮" -->
 
         <!-- Panel de monedas -->
         <div class="panel-monedas">
@@ -442,14 +439,14 @@
 
             <label>Fecha de nacimiento:</label>
             <div class="fecha-nacimiento">
-                <input type="number" id="dia" placeholder="Día" min="1" max="31" required>
-                <input type="number" id="mes" placeholder="Mes" min="1" max="12" required>
-                <input type="number" id="anio" placeholder="Año" min="1990" max="2021" required>
+                <input type="number" id="dia" placeholder="" min="1" max="31" required>
+                <input type="number" id="mes" placeholder="" min="1" max="12" required>
+                <input type="number" id="anio" placeholder="" min="1990" max="2021" required>
             </div>
-            <p class="texto-ayuda">*Solo se permite hasta el año 2021 (desde 2021 para abajo)</p>
+            <p class="texto-ayuda">*Solo se permite hasta el año 2021</p>
 
-            <label>Tu nombre de usuario:</label>
-            <input type="text" id="nombreInvitado" placeholder="Escribí tu nombre aquí" required>
+            <label>Nombre de usuario:</label>
+            <input type="text" id="nombreInvitado" placeholder="" required>
             <p id="mensajeNombre" class="texto-error oculto"></p>
 
             <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al juego</button>
@@ -461,10 +458,10 @@
             <h3 style="text-align:center; margin-bottom:1rem;">Cuenta con correo</h3>
             
             <label>Correo electrónico:</label>
-            <input type="email" id="correoUsuario" placeholder="tu@correo.com" required>
+            <input type="email" id="correoUsuario" placeholder="" required>
 
             <label>Contraseña:</label>
-            <input type="password" id="claveUsuario" placeholder="Tu contraseña" required>
+            <input type="password" id="claveUsuario" placeholder="" required>
 
             <button type="button" id="enviarCorreo" class="boton-enviar">Acceder</button>
             <button type="button" class="boton-volver">Volver</button>
@@ -545,7 +542,6 @@
 
         document.getElementById('cerrarRecompensas').addEventListener('click', () => {
             document.getElementById('modalRecompensas').classList.add('oculto');
-            // Ejemplo: dar recompensa de día 1
             cristalesZ += 50;
             actualizarMonedas();
             alert("¡Recibiste 50 Cristales Z!");
@@ -616,5 +612,4 @@
     </script>
 
 </body>
-    </html>
-                                                                                                           
+</html>
