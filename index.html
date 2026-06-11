@@ -20,9 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* -------------------------- */
-        /* PANTALLA DE CARGA - ARREGLADA */
-        /* -------------------------- */
+        /* PANTALLA DE CARGA CORREGIDA */
         .pantalla-carga {
             width: 100%;
             height: 100vh;
@@ -35,7 +33,7 @@
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
         }
 
         .pantalla-carga.oculta {
@@ -74,7 +72,7 @@
             height: 100%;
             background-color: #2563EB;
             border-radius: 10px;
-            transition: width 0.05s linear;
+            transition: width 0.04s linear;
         }
 
         .texto-carga {
@@ -83,9 +81,7 @@
             min-height: 1.5rem;
         }
 
-        /* -------------------------- */
-        /* ENCABEZADO SUPERIOR */
-        /* -------------------------- */
+        /* RESTO DEL DISEÑO */
         header {
             background-color: #0D1B3D;
             padding: 16px 24px;
@@ -122,9 +118,6 @@
         .cristales { color: #60A5FA; }
         .zenith { color: #FCD34D; }
 
-        /* -------------------------- */
-        /* BARRA DE BÚSQUEDA */
-        /* -------------------------- */
         .busqueda {
             margin: 24px;
             display: flex;
@@ -156,9 +149,6 @@
             background-color: #2563EB;
         }
 
-        /* -------------------------- */
-        /* CONTENIDO PRINCIPAL */
-        /* -------------------------- */
         main {
             padding: 0 24px 32px;
         }
@@ -181,7 +171,6 @@
             border-bottom: 1px solid #1E293B;
         }
 
-        /* Tarjetas de juegos */
         .grid-juegos {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -224,7 +213,6 @@
             color: #94A3B8;
         }
 
-        /* Sección Crear */
         .opciones-crear {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -257,7 +245,6 @@
             line-height: 1.4;
         }
 
-        /* Sección Amigos */
         .contenido-amigos {
             background-color: #0D1B3D;
             padding: 20px;
@@ -284,7 +271,6 @@
             left: 0;
         }
 
-        /* Perfil y Ajustes */
         .perfil-info {
             background-color: #0D1B3D;
             padding: 24px;
@@ -320,9 +306,6 @@
             font-size: 14px;
         }
 
-        /* -------------------------- */
-        /* BARRA DE NAVEGACIÓN INFERIOR */
-        /* -------------------------- */
         nav {
             position: fixed;
             bottom: 0;
@@ -360,9 +343,6 @@
             font-size: 22px;
         }
 
-        /* -------------------------- */
-        /* FORMULARIOS DE ACCESO */
-        /* -------------------------- */
         .contenedor-acceso {
             max-width: 420px;
             margin: 40px auto;
@@ -532,7 +512,7 @@
 </head>
 <body>
 
-    <!-- PANTALLA DE CARGA -->
+    <!-- PANTALLA DE CARGA ESTABLE -->
     <div class="pantalla-carga" id="pantallaCarga">
         <h1 class="titulo-carga">ZENTRITH WORLD</h1>
         <p class="subtitulo-carga">EL MUNDO QUE ESTABAS ESPERANDO</p>
@@ -543,7 +523,6 @@
         <p class="texto-carga" id="estadoCarga">Cargando mundo... 0%</p>
     </div>
 
-    <!-- ENCABEZADO -->
     <header class="oculto" id="headerPrincipal">
         <div class="logo">ZENTRITH WORLD</div>
         <div class="monedas">
@@ -552,13 +531,11 @@
         </div>
     </header>
 
-    <!-- BARRA DE BÚSQUEDA -->
     <div class="busqueda oculto" id="busquedaPrincipal">
         <input type="text" placeholder="🔍 Buscar mundos, juegos o creadores...">
         <button>Buscar</button>
     </div>
 
-    <!-- CONTENEDOR DE ACCESO / MENÚ -->
     <div class="contenedor-acceso oculto" id="accesoInicial">
         <h2 style="text-align:center; color:#93C5FD; margin-bottom:1rem;">Bienvenido a Zentrith World</h2>
         <p style="text-align:center; color:#94A3B8; margin-bottom:2rem;">Elige cómo quieres ingresar</p>
@@ -568,10 +545,8 @@
             <button class="boton-acceso boton-correo" id="btnCorreo">Crear cuenta / Acceder</button>
         </div>
 
-        <!-- Formulario Invitado -->
         <div id="formInvitado" class="formulario oculto">
             <h3>Cuenta Invitado</h3>
-            
             <label>Soy:</label>
             <div class="opciones-genero">
                 <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
@@ -595,24 +570,18 @@
             <button type="button" class="boton-volver">Volver</button>
         </div>
 
-        <!-- Formulario Crear Cuenta -->
         <div id="formCorreo" class="formulario oculto">
             <h3>Crear cuenta</h3>
-            
             <label>Correo electrónico:</label>
             <input type="email" id="correoUsuario" placeholder="tu@correo.com" required>
-
             <label>Contraseña:</label>
             <input type="password" id="claveUsuario" placeholder="Mínimo 6 caracteres" required>
-
             <button type="button" id="enviarCorreo" class="boton-enviar">Crear cuenta</button>
             <button type="button" class="boton-volver">Volver</button>
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL DEL JUEGO -->
     <main id="contenidoJuego" class="oculto">
-        <!-- Sección Jugar / Inicio -->
         <section class="seccion activa" id="seccion-jugar">
             <h2>🎮 Juegos populares</h2>
             <div class="grid-juegos">
@@ -665,7 +634,6 @@
             </div>
         </section>
 
-        <!-- Sección Crear -->
         <section class="seccion" id="seccion-crear">
             <h2>🔨 Crear tus propios mundos</h2>
             <div class="opciones-crear">
@@ -680,4 +648,700 @@
                 <div class="opcion-crear">
                     <h3 class="opcion-titulo">Mis proyectos</h3>
                     <p class="opcion-desc">Accede a todos tus creaciones guardadas, borradores y trabajos en curso.</p>
-  
+                </div>
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Publicar mundo</h3>
+                    <p class="opcion-desc">Comparte tu creación con toda la comunidad y recibe comentarios.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion" id="seccion-amigos">
+            <h2>👥 Mis amigos</h2>
+            <div class="contenido-amigos">
+                <p style="margin-bottom:16px;">Sistema de gestión de amistades:</p>
+                <ul class="funciones-amigos">
+                    <li>Enviar solicitudes de amistad</li>
+                    <li>Aceptar o rechazar solicitudes</li>
+                    <li>Eliminar amigos de la lista</li>
+                    <li>Ocultar estado de conexión</li>
+                    <li>Bloquear o desbloquear usuarios</li>
+                </ul>
+                <p style="color:#93C5FD; margin-top:16px;">Estado: En desarrollo - próximamente disponible.</p>
+            </div>
+        </section>
+
+        <section class="seccion" id="se<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentrith World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #08152E;
+            color: #E2E8F0;
+            min-height: 100vh;
+            padding-bottom: 85px;
+            overflow-x: hidden;
+        }
+
+        /* PANTALLA DE CARGA CORREGIDA */
+        .pantalla-carga {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #08152E;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.6s ease;
+        }
+
+        .pantalla-carga.oculta {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .titulo-carga {
+            font-size: 3rem;
+            text-align: center;
+            color: #60A5FA;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitulo-carga {
+            font-size: 1.2rem;
+            color: #93C5FD;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .barra-carga {
+            width: 80%;
+            max-width: 400px;
+            height: 12px;
+            background-color: #0D1B3D;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid #1E293B;
+        }
+
+        .progreso {
+            width: 0%;
+            height: 100%;
+            background-color: #2563EB;
+            border-radius: 10px;
+            transition: width 0.04s linear;
+        }
+
+        .texto-carga {
+            font-size: 1rem;
+            color: #CBD5E1;
+            min-height: 1.5rem;
+        }
+
+        /* RESTO DEL DISEÑO */
+        header {
+            background-color: #0D1B3D;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1E293B;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #60A5FA;
+            letter-spacing: 1px;
+        }
+
+        .monedas {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .moneda {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .cristales { color: #60A5FA; }
+        .zenith { color: #FCD34D; }
+
+        .busqueda {
+            margin: 24px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .busqueda input {
+            flex: 1;
+            padding: 12px 16px;
+            background-color: #0F172A;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            color: #E2E8F0;
+            font-size: 15px;
+        }
+
+        .busqueda button {
+            padding: 12px 20px;
+            background-color: #1E40AF;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .busqueda button:hover {
+            background-color: #2563EB;
+        }
+
+        main {
+            padding: 0 24px 32px;
+        }
+
+        .seccion {
+            margin-bottom: 36px;
+            display: none;
+        }
+
+        .seccion.activa {
+            display: block;
+        }
+
+        .seccion h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #93C5FD;
+            font-weight: 600;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1E293B;
+        }
+
+        .grid-juegos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .tarjeta-juego {
+            background-color: #0D1B3D;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #1E293B;
+            transition: transform 0.2s ease;
+        }
+
+        .tarjeta-juego:hover {
+            transform: translateY(-3px);
+        }
+
+        .tarjeta-imagen {
+            height: 120px;
+            background-color: #0F172A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748B;
+        }
+
+        .tarjeta-info {
+            padding: 12px;
+        }
+
+        .tarjeta-titulo {
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .tarjeta-jugadores {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+
+        .opciones-crear {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .opcion-crear {
+            background-color: #0D1B3D;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .opcion-crear:hover {
+            background-color: #0F2244;
+        }
+
+        .opcion-titulo {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #93C5FD;
+        }
+
+        .opcion-desc {
+            font-size: 14px;
+            color: #94A3B8;
+            line-height: 1.4;
+        }
+
+        .contenido-amigos {
+            background-color: #0D1B3D;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+        }
+
+        .funciones-amigos {
+            list-style: none;
+            margin: 16px 0;
+            color: #CBD5E1;
+        }
+
+        .funciones-amigos li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .funciones-amigos li::before {
+            content: "•";
+            color: #60A5FA;
+            position: absolute;
+            left: 0;
+        }
+
+        .perfil-info {
+            background-color: #0D1B3D;
+            padding: 24px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+            margin-bottom: 20px;
+        }
+
+        .perfil-especial {
+            background-color: #0F2244;
+            border: 1px solid #2563EB;
+        }
+
+        .nombre-perfil {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #FCD34D;
+        }
+
+        .datos-perfil {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            color: #CBD5E1;
+        }
+
+        .dato {
+            padding: 8px;
+            background-color: #0F172A;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #0D1B3D;
+            border-top: 1px solid #1E293B;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 8px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            color: #94A3B8;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.activo {
+            color: #60A5FA;
+            background-color: #0F2244;
+        }
+
+        .nav-item span:first-child {
+            font-size: 22px;
+        }
+
+        .contenedor-acceso {
+            max-width: 420px;
+            margin: 40px auto;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .botones-acceso {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .boton-acceso {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            min-width: 160px;
+        }
+
+        .boton-invitado {
+            background-color: #2563EB;
+            color: white;
+        }
+
+        .boton-invitado:hover {
+            background-color: #1D4ED8;
+        }
+
+        .boton-correo {
+            background-color: #1E293B;
+            color: #E2E8F0;
+            border: 1px solid #334155 !important;
+        }
+
+        .boton-correo:hover {
+            background-color: #273549;
+        }
+
+        .formulario {
+            background-color: #0D1B3D;
+            border: 1px solid #1E293B;
+            border-radius: 10px;
+            padding: 1.8rem;
+            max-width: 380px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .formulario h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #93C5FD;
+        }
+
+        .opciones-genero {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .opcion-genero {
+            flex: 1;
+            padding: 0.9rem;
+            background-color: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .opcion-genero.seleccionado {
+            border-color: #2563EB;
+            background-color: #0F2244;
+        }
+
+        .fecha-nacimiento {
+            display: flex;
+            gap: 0.7rem;
+            margin: 0.8rem 0;
+        }
+
+        .fecha-nacimiento input {
+            flex: 1;
+            padding: 0.8rem;
+            background-color: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .formulario label {
+            font-size: 0.9rem;
+            color: #CBD5E1;
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .formulario input {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .texto-ayuda {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin: 0.3rem 0 1rem;
+        }
+
+        .texto-error {
+            font-size: 0.8rem;
+            color: #ef4444;
+            margin: -0.5rem 0 1rem;
+            min-height: 1rem;
+        }
+
+        .boton-enviar {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .boton-enviar:hover {
+            background-color: #1D4ED8;
+        }
+
+        .boton-volver {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: transparent;
+            color: #94a3b8;
+            border: none;
+            cursor: pointer;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .oculto {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA DE CARGA ESTABLE -->
+    <div class="pantalla-carga" id="pantallaCarga">
+        <h1 class="titulo-carga">ZENTRITH WORLD</h1>
+        <p class="subtitulo-carga">EL MUNDO QUE ESTABAS ESPERANDO</p>
+        
+        <div class="barra-carga">
+            <div class="progreso" id="progreso"></div>
+        </div>
+        <p class="texto-carga" id="estadoCarga">Cargando mundo... 0%</p>
+    </div>
+
+    <header class="oculto" id="headerPrincipal">
+        <div class="logo">ZENTRITH WORLD</div>
+        <div class="monedas">
+            <div class="moneda cristales">💎 Cristales Z <span id="cantidadCristales">0</span></div>
+            <div class="moneda zenith">🪙 Zenith Coins <span id="cantidadZenith">0</span></div>
+        </div>
+    </header>
+
+    <div class="busqueda oculto" id="busquedaPrincipal">
+        <input type="text" placeholder="🔍 Buscar mundos, juegos o creadores...">
+        <button>Buscar</button>
+    </div>
+
+    <div class="contenedor-acceso oculto" id="accesoInicial">
+        <h2 style="text-align:center; color:#93C5FD; margin-bottom:1rem;">Bienvenido a Zentrith World</h2>
+        <p style="text-align:center; color:#94A3B8; margin-bottom:2rem;">Elige cómo quieres ingresar</p>
+        
+        <div class="botones-acceso">
+            <button class="boton-acceso boton-invitado" id="btnInvitado">Entrar como Invitado</button>
+            <button class="boton-acceso boton-correo" id="btnCorreo">Crear cuenta / Acceder</button>
+        </div>
+
+        <div id="formInvitado" class="formulario oculto">
+            <h3>Cuenta Invitado</h3>
+            <label>Soy:</label>
+            <div class="opciones-genero">
+                <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
+                <button type="button" class="opcion-genero" data-valor="nina">👧 Niña</button>
+            </div>
+            <input type="hidden" id="generoInvitado" required>
+
+            <label>Fecha de nacimiento:</label>
+            <div class="fecha-nacimiento">
+                <input type="number" id="dia" placeholder="Día" min="1" max="31" required>
+                <input type="number" id="mes" placeholder="Mes" min="1" max="12" required>
+                <input type="number" id="anio" placeholder="Año" min="1990" max="2021" required>
+            </div>
+            <p class="texto-ayuda">*Solo se permite hasta el año 2021</p>
+
+            <label>Nombre de usuario:</label>
+            <input type="text" id="nombreInvitado" placeholder="Escribe tu nombre" required>
+            <p id="mensajeNombre" class="texto-error"></p>
+
+            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al juego</button>
+            <button type="button" class="boton-volver">Volver</button>
+        </div>
+
+        <div id="formCorreo" class="formulario oculto">
+            <h3>Crear cuenta</h3>
+            <label>Correo electrónico:</label>
+            <input type="email" id="correoUsuario" placeholder="tu@correo.com" required>
+            <label>Contraseña:</label>
+            <input type="password" id="claveUsuario" placeholder="Mínimo 6 caracteres" required>
+            <button type="button" id="enviarCorreo" class="boton-enviar">Crear cuenta</button>
+            <button type="button" class="boton-volver">Volver</button>
+        </div>
+    </div>
+
+    <main id="contenidoJuego" class="oculto">
+        <section class="seccion activa" id="seccion-jugar">
+            <h2>🎮 Juegos populares</h2>
+            <div class="grid-juegos">
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Aventura Oscura</h3>
+                        <p class="tarjeta-jugadores">1.240 jugando</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Isla Flotante</h3>
+                        <p class="tarjeta-jugadores">872 jugando</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Minijuegos Z</h3>
+                        <p class="tarjeta-jugadores">2.156 jugando</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del juego</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Ciudad Futura</h3>
+                        <p class="tarjeta-jugadores">643 jugando</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 32px;">🌍 Mundos recomendados</h2>
+            <div class="grid-juegos">
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del mundo</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Bosque Antiguo</h3>
+                        <p class="tarjeta-jugadores">Creado por: 🔮 El Arquitecto</p>
+                    </div>
+                </div>
+                <div class="tarjeta-juego">
+                    <div class="tarjeta-imagen">Imagen del mundo</div>
+                    <div class="tarjeta-info">
+                        <h3 class="tarjeta-titulo">Montaña de Cristal</h3>
+                        <p class="tarjeta-jugadores">Actualizado recientemente</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion" id="seccion-crear">
+            <h2>🔨 Crear tus propios mundos</h2>
+            <div class="opciones-crear">
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Crear mundo</h3>
+                    <p class="opcion-desc">Diseña un espacio desde cero, elige terrenos, decoraciones y reglas.</p>
+                </div>
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Crear minijuego</h3>
+                    <p class="opcion-desc">Arma partidas rápidas, desafíos o competencias para jugar con amigos.</p>
+                </div>
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Mis proyectos</h3>
+                    <p class="opcion-desc">Accede a todos tus creaciones guardadas, borradores y trabajos en curso.</p>
+                </div>
+                <div class="opcion-crear">
+                    <h3 class="opcion-titulo">Publicar mundo</h3>
+                    <p class="opcion-desc">Comparte tu creación con toda la comunidad y recibe comentarios.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion" id="seccion-amigos">
+            <h2>👥 Mis amigos</h2>
+            <div class="contenido-amigos">
+                <p style="margin-bottom:16px;">Sistema de gestión de amistades:</p>
+                <ul class="funciones-amigos">
+                    <li>Enviar solicitudes de amistad</li>
+                    <li>Aceptar o rechazar solicitudes</li>
+                    <li>Eliminar amigos de la lista</li>
+                    <li>Ocultar estado de conexión</li>
+                    <li>Bloquear o desbloquear usuarios</li>
+                </ul>
+                <p style="color:#93C5FD; margin-top:16px;">Estado: En desarrollo - próximamente disponible.</p>
+            </div>
+        </section>
+
+        <section class="seccion" id="se
