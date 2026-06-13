@@ -9,7 +9,7 @@
         body{background:#051027;color:#E2F0FF;min-height:100vh}
         .oculto{display:none!important}
 
-        /* Pantalla de carga - AZUL MÁS FUERTE */
+        /* Carga */
         .pantalla-carga{position:fixed;inset:0;background:#051027;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2000}
         .titulo-carga{font-size:3rem;color:#3B82F6;margin-bottom:12px;font-weight:700}
         .subtitulo{font-size:1.2rem;color:#93C5FD;margin-bottom:30px;text-align:center}
@@ -17,15 +17,25 @@
         .progreso{width:0%;height:100%;background:#2563EB;transition:width .04s linear}
         .texto-carga{margin-top:15px;font-size:1.1rem;color:#BFDBFE}
 
-        /* Resto de estilos */
-        .pantalla-servidores{max-width:550px;margin:40px auto;padding:20px;text-align:center}
+        /* Acceso */
+        .pantalla-acceso{max-width:420px;margin:60px auto;padding:25px;text-align:center}
+        .pantalla-acceso h2{color:#93C5FD;margin-bottom:25px}
+        .campo{width:100%;padding:12px;margin:10px 0;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;color:white;font-size:1rem}
+        .opciones-genero{display:flex;gap:15px;margin:20px 0}
+        .opcion{flex:1;padding:12px;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;cursor:pointer}
+        .opcion.seleccionado{border-color:#3B82F6;background:#102859}
+        .boton{width:100%;padding:14px;margin:15px 0;border:none;border-radius:8px;font-size:1.1rem;background:#2563EB;color:white;cursor:pointer}
+        .boton-volver{background:#1E3A8A;margin-top:5px}
+
+        /* Servidores */
+        .pantalla-servidores{max-width:550px;margin:60px auto;padding:25px;text-align:center}
         .servidor{padding:18px;margin:12px 0;border-radius:10px;border:1px solid #1E3A8A;background:#0F2044;cursor:pointer}
         .servidor.activo{border-color:#3B82F6;background:#102859}
-        .boton{padding:14px 24px;margin:10px;border:none;border-radius:8px;font-size:1rem;background:#2563EB;color:white;cursor:pointer}
     </style>
 </head>
 <body>
 
+<!-- 1. Carga -->
 <div class="pantalla-carga" id="pantallaCarga">
     <h1 class="titulo-carga">ZENTRITH WORLD</h1>
     <p class="subtitulo">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
@@ -33,45 +43,100 @@
     <p class="texto-carga" id="estadoCarga">Cargando... 0%</p>
 </div>
 
+<!-- 2. Acceso -->
+<div class="pantalla-acceso oculto" id="pantallaAcceso">
+    <h2>📝 Ingresá tus datos</h2>
+
+    <label>Fecha de nacimiento</label>
+    <div style="display:flex;gap:10px">
+        <input type="number" class="campo" id="dia" placeholder="Día" min="1" max="31">
+        <input type="number" class="campo" id="mes" placeholder="Mes" min="1" max="12">
+        <input type="number" class="campo" id="anio" placeholder="Año" min="1940" max="2025">
+    </div>
+
+    <label style="display:block;margin:20px 0 8px">Soy:</label>
+    <div class="opciones-genero">
+        <div class="opcion" onclick="elegirGenero('varon')">👦 Varón</div>
+        <div class="opcion" onclick="elegirGenero('chica')">👧 Chica</div>
+    </div>
+    <input type="hidden" id="genero">
+
+    <input type="text" class="campo" id="usuario" placeholder="Nombre de usuario">
+
+    <button class="boton" onclick="validarAcceso()">Continuar</button>
+    <button class="boton boton-volver" onclick="volverACarga()">Volver</button>
+</div>
+
+<!-- 3. Servidores -->
 <div class="pantalla-servidores oculto" id="pantallaServidores">
     <h2 style="color:#93C5FD;margin-bottom:25px">🌐 Elegí tu servidor</h2>
-    <div class="servidor activo" onclick="elegir(1)">🟢 Servidor 1 - Zentrith Norte</div>
-    <div class="servidor activo" onclick="elegir(2)">🟢 Servidor 2 - Zentrith Sur</div>
+    <div class="servidor activo" onclick="elegirServidor(1)">🟢 Servidor 1 - Zentrith Norte</div>
+    <div class="servidor activo" onclick="elegirServidor(2)">🟢 Servidor 2 - Zentrith Sur</div>
+    <button class="boton boton-volver" onclick="volverAAcceso()">Volver</button>
 </div>
 
 <script>
-// ⚙️ ESTADO DEL JUEGO: AQUÍ CONTROLAS SI ESTÁ PRENDIDO O APAGADO
-const ESTADO = {
-    activo: true,  // ✅ true = PRENDIDO / false = MODO DESCANSO
-    maxServidores: 10
-};
+// ⚙️ Configuración
+const ESTADO = { activo: true, modoPrueba: true };
 
-// 🚀 CARGA QUE SÍ AVANZA
+// 🚀 Carga
 let porcentaje = 0;
-const barra = document.getElementById('progreso');
-const texto = document.getElementById('estadoCarga');
-const pantalla = document.getElementById('pantallaCarga');
-const servidores = document.getElementById('pantallaServidores');
-
-const intervalo = setInterval(() => {
+const intervaloCarga = setInterval(() => {
     if (porcentaje < 100) {
         porcentaje++;
-        barra.style.width = porcentaje + '%';
-        texto.textContent = `Cargando... ${porcentaje}%`;
+        document.getElementById('progreso').style.width = porcentaje + '%';
+        document.getElementById('estadoCarga').textContent = `Cargando... ${porcentaje}%`;
     } else {
-        clearInterval(intervalo);
-        texto.textContent = "¡Listo!";
+        clearInterval(intervaloCarga);
         setTimeout(() => {
-            pantalla.classList.add('oculto');
-            if (ESTADO.activo) servidores.classList.remove('oculto');
-            else document.body.style.filter = 'grayscale(35%) brightness(0.6)';
+            document.getElementById('pantallaCarga').classList.add('oculto');
+            document.getElementById('pantallaAcceso').classList.remove('oculto');
         }, 700);
     }
 }, 30);
 
-function elegir(num) {
-    alert(`✅ Conectado al Servidor ${num}`);
-    // Acá seguimos agregando lo que falte
+// 📋 Elegir género
+function elegirGenero(valor) {
+    document.querySelectorAll('.opcion').forEach(op => op.classList.remove('seleccionado'));
+    event.currentTarget.classList.add('seleccionado');
+    document.getElementById('genero').value = valor;
+}
+
+// ✅ Validar acceso (modo prueba: no bloquea por edad)
+function validarAcceso() {
+    const dia = document.getElementById('dia').value;
+    const mes = document.getElementById('mes').value;
+    const anio = document.getElementById('anio').value;
+    const genero = document.getElementById('genero').value;
+    const usuario = document.getElementById('usuario').value.trim().toLowerCase();
+    const prohibidas = ["abuso", "violencia", "sexo", "link", "http"];
+
+    if (!dia || !mes || !anio) return alert("Completá la fecha");
+    if (!genero) return alert("Elegí tu género");
+    if (!usuario) return alert("Escribí un nombre");
+    if (prohibidas.some(p => usuario.includes(p))) return alert("Nombre no permitido");
+
+    // Pasar a servidores
+    document.getElementById('pantallaAcceso').classList.add('oculto');
+    document.getElementById('pantallaServidores').classList.remove('oculto');
+}
+
+// 🔙 Botones para volver
+function volverACarga() {
+    document.getElementById('pantallaAcceso').classList.add('oculto');
+    document.getElementById('pantallaCarga').classList.remove('oculto');
+    porcentaje = 0;
+    intervaloCarga;
+}
+
+function volverAAcceso() {
+    document.getElementById('pantallaServidores').classList.add('oculto');
+    document.getElementById('pantallaAcceso').classList.remove('oculto');
+}
+
+// 🌐 Elegir servidor
+function elegirServidor(numero) {
+    alert(`✅ Conectado al Servidor ${numero}`);
 }
 </script>
 
