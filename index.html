@@ -14,10 +14,10 @@
         .titulo-carga {font-size:3rem; color:#60A5FA; margin-bottom:10px; letter-spacing:2px;}
         .subtitulo-carga {font-size:1.2rem; color:#93C5FD; margin-bottom:30px; text-align:center;}
         .barra-carga {width:80%; max-width:400px; height:12px; background:#0D1B3D; border-radius:10px; overflow:hidden; border:1px solid #1E293B; margin-bottom:20px;}
-        .progreso {width:0%; height:100%; background:#2563EB; border-radius:10px; transition:width .04s linear;}
+        .progreso {width:0%; height:100%; background:#2563EB; border-radius:10px; transition:width .05s linear;}
         .texto-carga {font-size:1rem; color:#CBD5E1;}
 
-        /* ENCABEZADO */
+        /* ENCABEZADO Y RESTO */
         header {background:#0D1B3D; padding:16px 24px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1E293B; position:sticky; top:0; z-index:100; transition: all 0.7s ease;}
         .logo {font-size:24px; font-weight:700; color:#60A5FA; transition: all 0.7s ease;}
         .monedas {display:flex; gap:24px;}
@@ -86,7 +86,7 @@
 
         .oculto {display:none !important;}
 
-        /* 🎨 MODO RECUERDO / APAGADO */
+        /* MODO RECUERDO */
         body.modo-cerrado {background: linear-gradient(135deg, #050b18 0%, #081022 100%); filter: grayscale(35%) brightness(0.7);}
         body.modo-cerrado .logo {color: #4a6fa5; opacity: 0.5;}
         body.modo-cerrado .cristales {color: #3a5a8a; opacity: 0.35;}
@@ -101,7 +101,7 @@
         <h1 class="titulo-carga">ZENTRITH WORLD</h1>
         <p class="subtitulo-carga">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
         <div class="barra-carga"><div class="progreso" id="progreso"></div></div>
-        <p class="texto-carga" id="estadoCarga">Cargando sistema de seguridad... 0%</p>
+        <p class="texto-carga" id="estadoCarga">Cargando... 0%</p>
     </div>
 
     <header class="oculto" id="headerPrincipal">
@@ -253,35 +253,46 @@
     </nav>
 
     <script>
-        // ⚙️ CONFIGURACIÓN PRINCIPAL - LÍNEA PARA CAMBIAR MODO
+        // CONFIGURACIÓN
         const ESTADO_JUEGO = {
-            activo: true,               // true = ACTIVO | false = MODO RECUERDO/APAGADO
+            activo: true,
             permitirNuevasCuentas: true,
-            mensajeCierre: "📜 Zentrith World ha finalizado su actividad. Podés ver tus recuerdos, pero no iniciar nuevas partidas."
+            mensajeCierre: "📜 Zentrith World ha finalizado su actividad. Podés ver tus recuerdos."
         };
 
-        // Pantalla de carga
-        let porcentaje=0, progreso=document.getElementById('progreso'), estado=document.getElementById('estadoCarga'), pantalla=document.getElementById('pantallaCarga'), acceso=document.getElementById('accesoInicial');
-        const intervalo=setInterval(()=>{
-            if(porcentaje<100){porcentaje++; progreso.style.width=porcentaje+'%'; estado.textContent=`Cargando seguridad... ${porcentaje}%`;}
-            else{clearInterval(intervalo); estado.textContent="Sistema listo"; setTimeout(()=>{pantalla.classList.add('oculta'); acceso.classList.remove('oculto');},800);}
-        },30);
+        // CARGA CORREGIDA - ahora avanza seguro
+        let porcentaje = 0;
+        const progreso = document.getElementById('progreso');
+        const estado = document.getElementById('estadoCarga');
+        const pantallaCarga = document.getElementById('pantallaCarga');
+        const acceso = document.getElementById('accesoInicial');
+
+        const intervaloCarga = setInterval(() => {
+            if (porcentaje < 100) {
+                porcentaje++;
+                progreso.style.width = porcentaje + '%';
+                estado.textContent = `Cargando... ${porcentaje}%`;
+            } else {
+                clearInterval(intervaloCarga);
+                estado.textContent = "¡Listo!";
+                setTimeout(() => {
+                    pantallaCarga.classList.add('oculta');
+                    acceso.classList.remove('oculto');
+                }, 800);
+            }
+        }, 40);
 
         // Sistema de monedas
-        let cristalesZ=0, zenithCoins=0;
-        function actualizarMonedas(){
-            document.getElementById('cantidadCristales').textContent=cristalesZ;
-            document.getElementById('cantidadZenith').textContent=zenithCoins;
+        let cristalesZ = 0, zenithCoins = 0;
+        function actualizarMonedas() {
+            document.getElementById('cantidadCristales').textContent = cristalesZ;
+            document.getElementById('cantidadZenith').textContent = zenithCoins;
         }
 
-        // 🛡️ SEGURIDAD: Palabras prohibidas
-        const palabrasProhibidas = [
-            "abuso", "sexual", "violencia", "admin", "dueño", "dueno",
-            "chúpala", "chupar", "desnudo", "desnuda", "pene", "vagina", "sexo",
-            "putear", "grosería", "insulto", "matar", "golpear", "muerte", "link", "http", "www"
-        ];
+        // Palabras prohibidas
+        const palabrasProhibidas = ["abuso", "sexual", "violencia", "admin", "dueño", "dueno", "chúpala", "chupar", "desnudo", "desnuda", "pene", "vagina", "sexo", "putear", "grosería", "insulto", "matar", "golpear", "muerte", "link", "http", "www"];
 
-        // Aplicar estado del juego
+        // Aplicar estado
         function aplicarEstado() {
             if (!ESTADO_JUEGO.activo) {
                 document.body.classList.add('modo-cerrado');
@@ -294,31 +305,45 @@
         }
 
         // Acceso
-        document.getElementById('btnInvitado').addEventListener('click',()=>{
-            if(!ESTADO_JUEGO.permitirNuevasCuentas) return alert("El juego está cerrado para nuevos ingresos.");
-            acceso.classList.add('oculto'); document.getElementById('formInvitado').classList.remove('oculto');
+        document.getElementById('btnInvitado').addEventListener('click', () => {
+            if (!ESTADO_JUEGO.permitirNuevasCuentas) return alert("El juego está cerrado.");
+            acceso.classList.add('oculto');
+            document.getElementById('formInvitado').classList.remove('oculto');
         });
-        document.getElementById('btnCorreo').addEventListener('click',()=>{
-            if(!ESTADO_JUEGO.permitirNuevasCuentas) return alert("El juego está cerrado para nuevos ingresos.");
-            acceso.classList.add('oculto'); document.getElementById('formCorreo').classList.remove('oculto');
+
+        document.getElementById('btnCorreo').addEventListener('click', () => {
+            if (!ESTADO_JUEGO.permitirNuevasCuentas) return alert("El juego está cerrado.");
+            acceso.classList.add('oculto');
+            document.getElementById('formCorreo').classList.remove('oculto');
         });
-        document.querySelectorAll('.boton-volver').forEach(b=>b.addEventListener('click',()=>{
-            document.querySelectorAll('.formulario').forEach(f=>f.classList.add('oculto')); acceso.classList.remove('oculto');
+
+        document.querySelectorAll('.boton-volver').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('.formulario').forEach(f => f.classList.add('oculto'));
+            acceso.classList.remove('oculto');
         }));
-        document.querySelectorAll('.opcion-genero').forEach(o=>o.addEventListener('click',()=>{
-            document.querySelectorAll('.opcion-genero').forEach(x=>x.classList.remove('seleccionado'));
-            o.classList.add('seleccionado'); document.getElementById('generoInvitado').value=o.dataset.valor;
+
+        document.querySelectorAll('.opcion-genero').forEach(o => o.addEventListener('click', () => {
+            document.querySelectorAll('.opcion-genero').forEach(x => x.classList.remove('seleccionado'));
+            o.classList.add('seleccionado');
+            document.getElementById('generoInvitado').value = o.dataset.valor;
         }));
-        document.getElementById('anio').addEventListener('change',function(){
-            let v=parseInt(this.value); if(v>2021){alert('❌ Solo para menores de 15 años'); this.value=2021;}
+
+        document.getElementById('anio').addEventListener('change', function() {
+            let v = parseInt(this.value);
+            if (v > 2021) { alert('❌ Solo menores de 15 años'); this.value = 2021; }
         });
-        document.getElementById('nombreInvitado').addEventListener('input',()=>{
-            const n=document.getElementById('nombreInvitado').value.toLowerCase();
-            document.getElementById('mensajeNombre').textContent=palabrasProhibidas.some(p=>n.includes(p))?"❌ Nombre no permitido":"";
+
+        document.getElementById('nombreInvitado').addEventListener('input', () => {
+            const n = document.getElementById('nombreInvitado').value.toLowerCase();
+            document.getElementById('mensajeNombre').textContent = palabrasProhibidas.some(p => n.includes(p)) ? "❌ Nombre no permitido" : "";
         });
-        document.getElementById('enviarInvitado').addEventListener('click',()=>{
-            if(!document.getElementById('generoInvitado').value || !document.getElementById('dia').value || !document.getElementById('mes').value || !document.getElementById('anio').value || !document.getElementById('nombreInvitado').value) return alert("Completá todos los campos");
-            if(palabrasProhibidas.some(p=>document.getElementById('nombreInvitado').value.toLowerCase().includes(p))) return alert("El nombre contiene palabras no permitidas");
-            cristalesZ=50; zenithCoins=10; actualizarMonedas();
-            acceso.classList.add('oculto'); document.getElementById('headerPrincipal').classList.remove('oculto');
-            document.getElementById('busquedaPrincipal').classList.remove('oculto'); doc
+
+        document.getElementById('enviarInvitado').addEventListener('click', () => {
+            if (!document.getElementById('generoInvitado').value || !document.getElementById('dia').value || !document.getElementById('mes').value || !document.getElementById('anio').value || !document.getElementById('nombreInvitado').value) {
+                return alert("Completá todos los campos");
+            }
+            if (palabrasProhibidas.some(p => document.getElementById('nombreInvitado').value.toLowerCase().includes(p))) {
+                return alert("Nombre no permitido");
+            }
+            cristalesZ = 50; zenithCoins = 10; actualizarMonedas();
+            acceso.clas
