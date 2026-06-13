@@ -38,14 +38,16 @@
 
         /* Menú Principal */
         .menu-principal{max-width:900px;margin:40px auto;padding:25px}
-        .cabecera-menu{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #1E3A8A}
-        .navegacion{display:flex;gap:20px;margin:20px 0}
-        .nav-item{padding:8px 12px;border-radius:6px;cursor:pointer}
+        .cabecera-menu{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #1E3A8A;flex-wrap:wrap;gap:15px}
+        .navegacion{display:flex;gap:20px;margin:20px 0;flex-wrap:wrap}
+        .nav-item{padding:8px 12px;border-radius:6px;cursor:pointer;transition:background 0.2s}
         .nav-item.activo{background:#2563EB}
         .monedas{display:flex;gap:20px}
         .moneda{text-align:center}
         .contenido-menu{margin-top:30px}
         .tarjeta{background:#0F2044;border:1px solid #1E3A8A;border-radius:10px;padding:20px;margin-bottom:15px}
+        .buscador{width:100%;padding:10px;margin:10px 0;background:#081838;border:1px solid #1E3A8A;border-radius:6px;color:white}
+        .resultado{padding:10px;margin:8px 0;background:#081838;border-radius:6px;display:flex;justify-content:space-between;align-items:center}
     </style>
 </head>
 <body>
@@ -116,11 +118,11 @@
         <div class="monedas">
             <div class="moneda">
                 <div>💎 Cristales Z</div>
-                <div style="font-size:1.2rem; font-weight:bold">1000</div>
+                <div style="font-size:1.2rem; font-weight:bold" class="cristal-z">0</div>
             </div>
             <div class="moneda">
                 <div>🪙 Monedas Z</div>
-                <div style="font-size:1.2rem; font-weight:bold">1000</div>
+                <div style="font-size:1.2rem; font-weight:bold" class="moneda-z">0</div>
             </div>
         </div>
     </div>
@@ -136,7 +138,7 @@
     <div class="contenido-menu" id="contenidoMenu">
         <div class="tarjeta">
             <h3>📢 Bienvenido, <span id="nombreUsuario">Jugador</span></h3>
-            <p>Misiones diarias, regalos y novedades del juego.</p>
+            <p>🆔 Tu ID de cuenta: <strong id="idCuenta">---</strong></p>
             <br>
             <p>✅ Misión de hoy: Jugar 15 minutos → +20 Monedas Z</p>
             <p>✅ Regalo especial: Disponible en fechas festivas</p>
@@ -147,13 +149,28 @@
 </div>
 
 <script>
-// ⚙️ Configuración general
+// ⚙️ CONFIGURACIÓN GENERAL
 const CONFIG = {
     activo: true,
     modoPrueba: true,
     maxPorServidor: 500,
     maxServidores: 10,
-    usuarioActual: ""
+    usuarioActual: "",
+    idActual: "",
+    contadorId: 1000, // IDs normales empiezan acá
+    monedasZ: 0,
+    cristalesZ: 0,
+    // Tu perfil especial
+    creador: {
+        id: "01",
+        nombre: "El Arquitecto"
+    },
+    // Niveles de confianza para regalos
+    nivelesConfianza: {
+        bajo: { monedas: 50, cristales: 5 },
+        medio: { monedas: 500, cristales: 50 },
+        alto: { monedas: 5000, cristales: 500 }
+    }
 };
 
 // 🚀 Pantalla de carga
@@ -179,14 +196,37 @@ function elegirGenero(valor) {
     document.getElementById('genero').value = valor;
 }
 
-// ✅ Validar datos de acceso
+// 🆔 Generar ID y saldo
+function generarDatosCuenta() {
+    if (CONFIG.usuarioActual.trim().toLowerCase() === CONFIG.creador.nombre.toLowerCase()) {
+        // Datos para el creador
+        CONFIG.idActual = CONFIG.creador.id;
+        CONFIG.monedasZ = 999999;
+        CONFIG.cristalesZ = 999999;
+    } else {
+        // Datos para cualquier otro jugador
+        CONFIG.contadorId++;
+        CONFIG.idActual = CONFIG.contadorId.toString();
+        CONFIG.monedasZ = 0;
+        CONFIG.cristalesZ = 0;
+    }
+    actualizarVistaMonedas();
+}
+
+// 💰 Actualizar monedas en pantalla
+function actualizarVistaMonedas() {
+    document.querySelector('.moneda-z').textContent = CONFIG.monedasZ;
+    document.querySelector('.cristal-z').textContent = CONFIG.cristalesZ;
+}
+
+// ✅ Validar acceso
 function validarAcceso() {
     const dia = document.getElementById('dia').value;
     const mes = document.getElementById('mes').value;
     const anio = document.getElementById('anio').value;
     const genero = document.getElementById('genero').value;
     const usuario = document.getElementById('usuario').value.trim();
-    const prohibidas = ["abuso", "violencia", "sexo", "link", "http"];
+    const prohibidas = ["abuso", "violencia", "sexo", "link", "http", "estafa"];
 
     if (!dia || !mes || !anio) return alert("Completá todos los campos de fecha");
     if (!genero) return alert("Elegí tu género");
@@ -194,17 +234,18 @@ function validarAcceso() {
     if (prohibidas.some(p => usuario.toLowerCase().includes(p))) return alert("El nombre tiene palabras no permitidas");
 
     CONFIG.usuarioActual = usuario;
+    generarDatosCuenta();
+
     document.getElementById('pantallaAcceso').classList.add('oculto');
     document.getElementById('pantallaServidores').classList.remove('oculto');
 }
 
 // 🌐 Conectar al servidor
 function conectarServidor(numero) {
-    // Mensaje de confirmación y cambio de pantalla
-    console.log(`Conectado al Servidor ${numero}`);
     document.getElementById('pantallaServidores').classList.add('oculto');
     document.getElementById('menuPrincipal').classList.remove('oculto');
     document.getElementById('nombreUsuario').textContent = CONFIG.usuarioActual;
+    document.getElementById('idCuenta').textContent = CONFIG.idActual;
 }
 
 // 🔙 Volver entre pantallas
@@ -224,12 +265,13 @@ function volverAServidores() {
     document.getElementById('pantallaServidores').classList.remove('oculto');
 }
 
-// 📂 Cambiar secciones del menú
+// 🔍 Cambiar secciones del menú
 function cambiarSeccion(nombre) {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('activo'));
     event.currentTarget.classList.add('activo');
 
     const contenido = document.getElementById('contenidoMenu');
+
     if (nombre === 'inicio') {
         contenido.innerHTML = `
             <div class="tarjeta">
@@ -244,10 +286,44 @@ function cambiarSeccion(nombre) {
     } else if (nombre === 'crear') {
         contenido.innerHTML = `<div class="tarjeta"><h3>🛠️ Crear</h3><p>Espacio para diseñar tus propios mundos y juegos.</p></div>`;
     } else if (nombre === 'amigos') {
-        contenido.innerHTML = `<div class="tarjeta"><h3>👥 Amigos</h3><p>Buscar, agregar y ver quién está conectado.</p></div>`;
+        contenido.innerHTML = `
+            <div class="tarjeta">
+                <h3>👥 Amigos</h3>
+                <input type="text" class="buscador" id="buscarAmigo" placeholder="Buscar por ID o nombre..." oninput="buscarAmigo()">
+                <div id="resultadosBusqueda"></div>
+            </div>`;
+        buscarAmigo();
     } else if (nombre === 'ajustes') {
         contenido.innerHTML = `<div class="tarjeta"><h3>⚙️ Ajustes</h3><p>Idioma, privacidad, ayuda y salir.</p></div>`;
     }
+}
+
+// 🔎 Buscar amigos (incluye tu perfil)
+function buscarAmigo() {
+    const texto = document.getElementById('buscarAmigo').value.trim().toLowerCase();
+    const resultados = document.getElementById('resultadosBusqueda');
+    resultados.innerHTML = "";
+
+    // Mostrar tu perfil si coincide
+    if (CONFIG.creador.id.includes(texto) || CONFIG.creador.nombre.toLowerCase().includes(texto)) {
+        resultados.innerHTML += `
+            <div class="resultado">
+                <span>🆔 ${CONFIG.creador.id} | ${CONFIG.creador.nombre} (Creador)</span>
+                <button class="boton" style="padding:5px 10px;max-width:80px">Agregar</button>
+            </div>`;
+    }
+
+    // Si está vacío, mostrar mensaje
+    if (resultados.innerHTML === "") {
+        resultados.innerHTML = `<p style="text-align:center;opacity:0.7">Escribí un ID o nombre para buscar</p>`;
+    }
+}
+
+// 🎁 Sistema de regalos (solo para vos)
+function darRegalo(idDestino, nivel = "bajo") {
+    if (CONFIG.idActual !== CONFIG.creador.id) return alert("No tenés permiso para usar esta función");
+    const limites = CONFIG.nivelesConfianza[nivel];
+    return `✅ Regalo enviado: hasta ${limites.monedas} monedas y ${limites.cristales} cristales. Nivel: ${nivel}`;
 }
 </script>
 
