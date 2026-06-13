@@ -9,7 +9,7 @@
         body{background:#051027;color:#E2F0FF;min-height:100vh}
         .oculto{display:none!important}
 
-        /* Carga */
+        /* Pantalla de carga */
         .pantalla-carga{position:fixed;inset:0;background:#051027;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2000}
         .titulo-carga{font-size:3rem;color:#3B82F6;margin-bottom:12px;font-weight:700}
         .subtitulo{font-size:1.2rem;color:#93C5FD;margin-bottom:30px;text-align:center}
@@ -17,25 +17,29 @@
         .progreso{width:0%;height:100%;background:#2563EB;transition:width .04s linear}
         .texto-carga{margin-top:15px;font-size:1.1rem;color:#BFDBFE}
 
-        /* Acceso */
+        /* Pantalla de acceso */
         .pantalla-acceso{max-width:420px;margin:60px auto;padding:25px;text-align:center}
         .pantalla-acceso h2{color:#93C5FD;margin-bottom:25px}
         .campo{width:100%;padding:12px;margin:10px 0;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;color:white;font-size:1rem}
+        .fila-fecha{display:flex;gap:10px;justify-content:center}
         .opciones-genero{display:flex;gap:15px;margin:20px 0}
         .opcion{flex:1;padding:12px;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;cursor:pointer}
         .opcion.seleccionado{border-color:#3B82F6;background:#102859}
         .boton{width:100%;padding:14px;margin:15px 0;border:none;border-radius:8px;font-size:1.1rem;background:#2563EB;color:white;cursor:pointer}
         .boton-volver{background:#1E3A8A;margin-top:5px}
 
-        /* Servidores */
+        /* Pantalla de servidores */
         .pantalla-servidores{max-width:550px;margin:60px auto;padding:25px;text-align:center}
-        .servidor{padding:18px;margin:12px 0;border-radius:10px;border:1px solid #1E3A8A;background:#0F2044;cursor:pointer}
+        .pantalla-servidores h2{color:#93C5FD;margin-bottom:25px}
+        .servidor{padding:18px;margin:12px 0;border-radius:10px;border:1px solid #1E3A8A;background:#0F2044;cursor:pointer;transition:all 0.2s}
         .servidor.activo{border-color:#3B82F6;background:#102859}
+        .servidor.inactivo{opacity:0.4;cursor:not-allowed}
+        .estado-servidor{font-size:0.9rem;color:#94A3B8;margin-top:5px}
     </style>
 </head>
 <body>
 
-<!-- 1. Carga -->
+<!-- 1. PANTALLA DE CARGA -->
 <div class="pantalla-carga" id="pantallaCarga">
     <h1 class="titulo-carga">ZENTRITH WORLD</h1>
     <p class="subtitulo">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
@@ -43,14 +47,31 @@
     <p class="texto-carga" id="estadoCarga">Cargando... 0%</p>
 </div>
 
-<!-- 2. Acceso -->
+<!-- 2. PANTALLA DE ACCESO (meses en letras) -->
 <div class="pantalla-acceso oculto" id="pantallaAcceso">
     <h2>📝 Ingresá tus datos</h2>
 
     <label>Fecha de nacimiento</label>
-    <div style="display:flex;gap:10px">
+    <div class="fila-fecha">
         <input type="number" class="campo" id="dia" placeholder="Día" min="1" max="31">
-        <input type="number" class="campo" id="mes" placeholder="Mes" min="1" max="12">
+        
+        <!-- AQUÍ LOS MESES EN LETRAS -->
+        <select class="campo" id="mes">
+            <option value="">Mes</option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+        </select>
+
         <input type="number" class="campo" id="anio" placeholder="Año" min="1940" max="2025">
     </div>
 
@@ -67,19 +88,38 @@
     <button class="boton boton-volver" onclick="volverACarga()">Volver</button>
 </div>
 
-<!-- 3. Servidores -->
+<!-- 3. PANTALLA DE SERVIDORES -->
 <div class="pantalla-servidores oculto" id="pantallaServidores">
-    <h2 style="color:#93C5FD;margin-bottom:25px">🌐 Elegí tu servidor</h2>
-    <div class="servidor activo" onclick="elegirServidor(1)">🟢 Servidor 1 - Zentrith Norte</div>
-    <div class="servidor activo" onclick="elegirServidor(2)">🟢 Servidor 2 - Zentrith Sur</div>
+    <h2>🌐 Elegí tu servidor</h2>
+
+    <div class="servidor activo" onclick="conectarServidor(1)">
+        <div style="font-weight:500">🟢 Servidor 1 - Zentrith Norte</div>
+        <div class="estado-servidor">En línea · Capacidad: 500 jugadores</div>
+    </div>
+
+    <div class="servidor activo" onclick="conectarServidor(2)">
+        <div style="font-weight:500">🟢 Servidor 2 - Zentrith Sur</div>
+        <div class="estado-servidor">En línea · Capacidad: 500 jugadores</div>
+    </div>
+
+    <div class="servidor inactivo">
+        <div style="font-weight:500">⚪ Servidores 3 al 10</div>
+        <div class="estado-servidor">Se activan cuando sea necesario</div>
+    </div>
+
     <button class="boton boton-volver" onclick="volverAAcceso()">Volver</button>
 </div>
 
 <script>
-// ⚙️ Configuración
-const ESTADO = { activo: true, modoPrueba: true };
+// ⚙️ CONFIGURACIÓN
+const CONFIG = {
+    activo: true,
+    modoPrueba: true, // Acepta cualquier edad para probar
+    maxPorServidor: 500,
+    maxServidores: 10
+};
 
-// 🚀 Carga
+// 🚀 CARGA
 let porcentaje = 0;
 const intervaloCarga = setInterval(() => {
     if (porcentaje < 100) {
@@ -95,14 +135,14 @@ const intervaloCarga = setInterval(() => {
     }
 }, 30);
 
-// 📋 Elegir género
+// 📋 ELEGIR GÉNERO
 function elegirGenero(valor) {
     document.querySelectorAll('.opcion').forEach(op => op.classList.remove('seleccionado'));
     event.currentTarget.classList.add('seleccionado');
     document.getElementById('genero').value = valor;
 }
 
-// ✅ Validar acceso (modo prueba: no bloquea por edad)
+// ✅ VALIDAR DATOS
 function validarAcceso() {
     const dia = document.getElementById('dia').value;
     const mes = document.getElementById('mes').value;
@@ -111,22 +151,21 @@ function validarAcceso() {
     const usuario = document.getElementById('usuario').value.trim().toLowerCase();
     const prohibidas = ["abuso", "violencia", "sexo", "link", "http"];
 
-    if (!dia || !mes || !anio) return alert("Completá la fecha");
+    if (!dia || !mes || !anio) return alert("Completá todos los campos de fecha");
     if (!genero) return alert("Elegí tu género");
-    if (!usuario) return alert("Escribí un nombre");
-    if (prohibidas.some(p => usuario.includes(p))) return alert("Nombre no permitido");
+    if (!usuario) return alert("Escribí tu nombre de usuario");
+    if (prohibidas.some(p => usuario.includes(p))) return alert("El nombre tiene palabras no permitidas");
 
     // Pasar a servidores
     document.getElementById('pantallaAcceso').classList.add('oculto');
     document.getElementById('pantallaServidores').classList.remove('oculto');
 }
 
-// 🔙 Botones para volver
+// 🔙 VOLVER
 function volverACarga() {
     document.getElementById('pantallaAcceso').classList.add('oculto');
     document.getElementById('pantallaCarga').classList.remove('oculto');
     porcentaje = 0;
-    intervaloCarga;
 }
 
 function volverAAcceso() {
@@ -134,9 +173,12 @@ function volverAAcceso() {
     document.getElementById('pantallaAcceso').classList.remove('oculto');
 }
 
-// 🌐 Elegir servidor
-function elegirServidor(numero) {
-    alert(`✅ Conectado al Servidor ${numero}`);
+// 🌐 CONECTAR AL SERVIDOR
+function conectarServidor(numero) {
+    alert(`✅ Conectado al Servidor ${numero}
+Capacidad por servidor: ${CONFIG.maxPorServidor}
+Total máximo: ${CONFIG.maxPorServidor * CONFIG.maxServidores} jugadores`);
+    // Aquí después conectamos con el menú principal
 }
 </script>
 
