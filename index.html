@@ -9,7 +9,7 @@
         body{background:#051027;color:#E2F0FF;min-height:100vh}
         .oculto{display:none!important}
 
-        /* Pantalla de carga */
+        /* Carga */
         .pantalla-carga{position:fixed;inset:0;background:#051027;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2000}
         .titulo-carga{font-size:3rem;color:#3B82F6;margin-bottom:12px;font-weight:700}
         .subtitulo{font-size:1.2rem;color:#93C5FD;margin-bottom:30px;text-align:center}
@@ -17,7 +17,7 @@
         .progreso{width:0%;height:100%;background:#2563EB;transition:width .04s linear}
         .texto-carga{margin-top:15px;font-size:1.1rem;color:#BFDBFE}
 
-        /* Pantalla de acceso */
+        /* Acceso */
         .pantalla-acceso{max-width:420px;margin:60px auto;padding:25px;text-align:center}
         .pantalla-acceso h2{color:#93C5FD;margin-bottom:25px}
         .campo{width:100%;padding:12px;margin:10px 0;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;color:white;font-size:1rem}
@@ -28,34 +28,41 @@
         .boton{width:100%;padding:14px;margin:15px 0;border:none;border-radius:8px;font-size:1.1rem;background:#2563EB;color:white;cursor:pointer}
         .boton-volver{background:#1E3A8A;margin-top:5px}
 
-        /* Pantalla de servidores */
+        /* Servidores */
         .pantalla-servidores{max-width:550px;margin:60px auto;padding:25px;text-align:center}
         .pantalla-servidores h2{color:#93C5FD;margin-bottom:25px}
         .servidor{padding:18px;margin:12px 0;border-radius:10px;border:1px solid #1E3A8A;background:#0F2044;cursor:pointer;transition:all 0.2s}
         .servidor.activo{border-color:#3B82F6;background:#102859}
         .servidor.inactivo{opacity:0.4;cursor:not-allowed}
         .estado-servidor{font-size:0.9rem;color:#94A3B8;margin-top:5px}
+
+        /* Menú Principal */
+        .menu-principal{max-width:900px;margin:40px auto;padding:25px}
+        .cabecera-menu{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #1E3A8A}
+        .navegacion{display:flex;gap:20px;margin:20px 0}
+        .nav-item{padding:8px 12px;border-radius:6px;cursor:pointer}
+        .nav-item.activo{background:#2563EB}
+        .monedas{display:flex;gap:20px}
+        .moneda{text-align:center}
+        .contenido-menu{margin-top:30px}
+        .tarjeta{background:#0F2044;border:1px solid #1E3A8A;border-radius:10px;padding:20px;margin-bottom:15px}
     </style>
 </head>
 <body>
 
-<!-- 1. PANTALLA DE CARGA -->
+<!-- 1. Pantalla de Carga -->
 <div class="pantalla-carga" id="pantallaCarga">
     <h1 class="titulo-carga">ZENTRITH WORLD</h1>
     <p class="subtitulo">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
     <div class="barra-carga"><div class="progreso" id="progreso"></div></div>
-    <p class="texto-carga" id="estadoCarga">Cargando... 0%</p>
+    <p class="texto-carga" id="estadoCarga">Cargando sistema...</p>
 </div>
 
-<!-- 2. PANTALLA DE ACCESO (meses en letras) -->
+<!-- 2. Pantalla de Acceso -->
 <div class="pantalla-acceso oculto" id="pantallaAcceso">
     <h2>📝 Ingresá tus datos</h2>
-
-    <label>Fecha de nacimiento</label>
     <div class="fila-fecha">
         <input type="number" class="campo" id="dia" placeholder="Día" min="1" max="31">
-        
-        <!-- AQUÍ LOS MESES EN LETRAS -->
         <select class="campo" id="mes">
             <option value="">Mes</option>
             <option value="1">Enero</option>
@@ -71,55 +78,85 @@
             <option value="11">Noviembre</option>
             <option value="12">Diciembre</option>
         </select>
-
         <input type="number" class="campo" id="anio" placeholder="Año" min="1940" max="2025">
     </div>
-
     <label style="display:block;margin:20px 0 8px">Soy:</label>
     <div class="opciones-genero">
         <div class="opcion" onclick="elegirGenero('varon')">👦 Varón</div>
         <div class="opcion" onclick="elegirGenero('chica')">👧 Chica</div>
     </div>
     <input type="hidden" id="genero">
-
     <input type="text" class="campo" id="usuario" placeholder="Nombre de usuario">
-
     <button class="boton" onclick="validarAcceso()">Continuar</button>
     <button class="boton boton-volver" onclick="volverACarga()">Volver</button>
 </div>
 
-<!-- 3. PANTALLA DE SERVIDORES -->
+<!-- 3. Pantalla de Servidores -->
 <div class="pantalla-servidores oculto" id="pantallaServidores">
     <h2>🌐 Elegí tu servidor</h2>
-
     <div class="servidor activo" onclick="conectarServidor(1)">
         <div style="font-weight:500">🟢 Servidor 1 - Zentrith Norte</div>
         <div class="estado-servidor">En línea · Capacidad: 500 jugadores</div>
     </div>
-
     <div class="servidor activo" onclick="conectarServidor(2)">
         <div style="font-weight:500">🟢 Servidor 2 - Zentrith Sur</div>
         <div class="estado-servidor">En línea · Capacidad: 500 jugadores</div>
     </div>
-
     <div class="servidor inactivo">
         <div style="font-weight:500">⚪ Servidores 3 al 10</div>
         <div class="estado-servidor">Se activan cuando sea necesario</div>
     </div>
-
     <button class="boton boton-volver" onclick="volverAAcceso()">Volver</button>
 </div>
 
+<!-- 4. Menú Principal -->
+<div class="menu-principal oculto" id="menuPrincipal">
+    <div class="cabecera-menu">
+        <h2>ZENTRITH WORLD</h2>
+        <div class="monedas">
+            <div class="moneda">
+                <div>💎 Cristales Z</div>
+                <div style="font-size:1.2rem; font-weight:bold">0</div>
+            </div>
+            <div class="moneda">
+                <div>🪙 Monedas Z</div>
+                <div style="font-size:1.2rem; font-weight:bold">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navegacion">
+        <div class="nav-item activo" onclick="cambiarSeccion('inicio')">Inicio</div>
+        <div class="nav-item" onclick="cambiarSeccion('jugar')">Jugar</div>
+        <div class="nav-item" onclick="cambiarSeccion('crear')">Crear</div>
+        <div class="nav-item" onclick="cambiarSeccion('amigos')">Amigos</div>
+        <div class="nav-item" onclick="cambiarSeccion('ajustes')">Ajustes</div>
+    </div>
+
+    <div class="contenido-menu" id="contenidoMenu">
+        <div class="tarjeta">
+            <h3>📢 Bienvenido, <span id="nombreUsuario">Jugador</span></h3>
+            <p>Misiones diarias, regalos y novedades del juego.</p>
+            <br>
+            <p>✅ Misión de hoy: Jugar 15 minutos → +20 Monedas Z</p>
+            <p>✅ Regalo especial: Disponible en fechas festivas</p>
+        </div>
+    </div>
+
+    <button class="boton boton-volver" onclick="volverAServidores()">Cambiar de servidor</button>
+</div>
+
 <script>
-// ⚙️ CONFIGURACIÓN
+// ⚙️ Configuración general
 const CONFIG = {
     activo: true,
-    modoPrueba: true, // Acepta cualquier edad para probar
+    modoPrueba: true,
     maxPorServidor: 500,
-    maxServidores: 10
+    maxServidores: 10,
+    usuarioActual: ""
 };
 
-// 🚀 CARGA
+// 🚀 Pantalla de carga
 let porcentaje = 0;
 const intervaloCarga = setInterval(() => {
     if (porcentaje < 100) {
@@ -135,33 +172,42 @@ const intervaloCarga = setInterval(() => {
     }
 }, 30);
 
-// 📋 ELEGIR GÉNERO
+// 📋 Elegir género
 function elegirGenero(valor) {
     document.querySelectorAll('.opcion').forEach(op => op.classList.remove('seleccionado'));
     event.currentTarget.classList.add('seleccionado');
     document.getElementById('genero').value = valor;
 }
 
-// ✅ VALIDAR DATOS
+// ✅ Validar datos de acceso
 function validarAcceso() {
     const dia = document.getElementById('dia').value;
     const mes = document.getElementById('mes').value;
     const anio = document.getElementById('anio').value;
     const genero = document.getElementById('genero').value;
-    const usuario = document.getElementById('usuario').value.trim().toLowerCase();
+    const usuario = document.getElementById('usuario').value.trim();
     const prohibidas = ["abuso", "violencia", "sexo", "link", "http"];
 
     if (!dia || !mes || !anio) return alert("Completá todos los campos de fecha");
     if (!genero) return alert("Elegí tu género");
     if (!usuario) return alert("Escribí tu nombre de usuario");
-    if (prohibidas.some(p => usuario.includes(p))) return alert("El nombre tiene palabras no permitidas");
+    if (prohibidas.some(p => usuario.toLowerCase().includes(p))) return alert("El nombre tiene palabras no permitidas");
 
-    // Pasar a servidores
+    CONFIG.usuarioActual = usuario;
     document.getElementById('pantallaAcceso').classList.add('oculto');
     document.getElementById('pantallaServidores').classList.remove('oculto');
 }
 
-// 🔙 VOLVER
+// 🌐 Conectar al servidor
+function conectarServidor(numero) {
+    // Mensaje de confirmación y cambio de pantalla
+    console.log(`Conectado al Servidor ${numero}`);
+    document.getElementById('pantallaServidores').classList.add('oculto');
+    document.getElementById('menuPrincipal').classList.remove('oculto');
+    document.getElementById('nombreUsuario').textContent = CONFIG.usuarioActual;
+}
+
+// 🔙 Volver entre pantallas
 function volverACarga() {
     document.getElementById('pantallaAcceso').classList.add('oculto');
     document.getElementById('pantallaCarga').classList.remove('oculto');
@@ -173,12 +219,35 @@ function volverAAcceso() {
     document.getElementById('pantallaAcceso').classList.remove('oculto');
 }
 
-// 🌐 CONECTAR AL SERVIDOR
-function conectarServidor(numero) {
-    alert(`✅ Conectado al Servidor ${numero}
-Capacidad por servidor: ${CONFIG.maxPorServidor}
-Total máximo: ${CONFIG.maxPorServidor * CONFIG.maxServidores} jugadores`);
-    // Aquí después conectamos con el menú principal
+function volverAServidores() {
+    document.getElementById('menuPrincipal').classList.add('oculto');
+    document.getElementById('pantallaServidores').classList.remove('oculto');
+}
+
+// 📂 Cambiar secciones del menú
+function cambiarSeccion(nombre) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('activo'));
+    event.currentTarget.classList.add('activo');
+
+    const contenido = document.getElementById('contenidoMenu');
+    if (nombre === 'inicio') {
+        contenido.innerHTML = `
+            <div class="tarjeta">
+                <h3>📢 Inicio</h3>
+                <p>Bienvenido a Zentrith World. Aquí verás novedades, misiones y regalos.</p>
+                <br>
+                <p>✅ Misión diaria: Jugar 15 min → +20 Monedas Z</p>
+                <p>✅ Próximo evento: Día del Niño</p>
+            </div>`;
+    } else if (nombre === 'jugar') {
+        contenido.innerHTML = `<div class="tarjeta"><h3>🎮 Jugar</h3><p>Lista de mundos y juegos disponibles.</p></div>`;
+    } else if (nombre === 'crear') {
+        contenido.innerHTML = `<div class="tarjeta"><h3>🛠️ Crear</h3><p>Espacio para diseñar tus propios mundos y juegos.</p></div>`;
+    } else if (nombre === 'amigos') {
+        contenido.innerHTML = `<div class="tarjeta"><h3>👥 Amigos</h3><p>Buscar, agregar y ver quién está conectado.</p></div>`;
+    } else if (nombre === 'ajustes') {
+        contenido.innerHTML = `<div class="tarjeta"><h3>⚙️ Ajustes</h3><p>Idioma, privacidad, ayuda y salir.</p></div>`;
+    }
 }
 </script>
 
