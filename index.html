@@ -5,345 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zentrith World</title>
     <style>
-        * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
-        body {background:#08152E; color:#E2E8F0; min-height:100vh; padding-bottom:85px; transition: all 0.7s ease;}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+        body{background:#051027;color:#E2F0FF;min-height:100vh}
+        .oculto{display:none!important}
 
-        /* PANTALLA DE CARGA */
-        .pantalla-carga {position:fixed; inset:0; background:#08152E; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:2000; transition:opacity .6s;}
-        .pantalla-carga.oculta {opacity:0; pointer-events:none;}
-        .titulo-carga {font-size:3rem; color:#60A5FA; margin-bottom:10px; letter-spacing:2px;}
-        .subtitulo-carga {font-size:1.2rem; color:#93C5FD; margin-bottom:30px; text-align:center;}
-        .barra-carga {width:80%; max-width:400px; height:12px; background:#0D1B3D; border-radius:10px; overflow:hidden; border:1px solid #1E293B; margin-bottom:20px;}
-        .progreso {width:0%; height:100%; background:#2563EB; border-radius:10px; transition:width .05s linear;}
-        .texto-carga {font-size:1rem; color:#CBD5E1;}
+        /* Pantalla de carga - AZUL MÁS FUERTE */
+        .pantalla-carga{position:fixed;inset:0;background:#051027;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2000}
+        .titulo-carga{font-size:3rem;color:#3B82F6;margin-bottom:12px;font-weight:700}
+        .subtitulo{font-size:1.2rem;color:#93C5FD;margin-bottom:30px;text-align:center}
+        .barra-carga{width:80%;max-width:400px;height:12px;background:#0F2044;border-radius:10px;overflow:hidden;border:1px solid #1E3A8A}
+        .progreso{width:0%;height:100%;background:#2563EB;transition:width .04s linear}
+        .texto-carga{margin-top:15px;font-size:1.1rem;color:#BFDBFE}
 
-        /* ENCABEZADO Y RESTO */
-        header {background:#0D1B3D; padding:16px 24px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1E293B; position:sticky; top:0; z-index:100; transition: all 0.7s ease;}
-        .logo {font-size:24px; font-weight:700; color:#60A5FA; transition: all 0.7s ease;}
-        .monedas {display:flex; gap:24px;}
-        .moneda {display:flex; gap:8px; font-weight:500; transition: all 0.7s ease;}
-        .cristales {color:#60A5FA;} .zenith {color:#FCD34D;}
-
-        .busqueda {margin:24px; display:flex; gap:12px; transition: all 0.7s ease;}
-        .busqueda input {flex:1; padding:12px 16px; background:#0F172A; border:1px solid #1E293B; border-radius:8px; color:#E2E8F0;}
-        .busqueda button {padding:12px 20px; background:#1E40AF; border:none; border-radius:8px; color:white; cursor:pointer; transition: background-color 0.2s;}
-        .busqueda button:hover {background:#2563EB;}
-
-        main {padding:0 24px 32px; transition: all 0.7s ease;}
-        .seccion {display:none; margin-bottom:36px;}
-        .seccion.activa {display:block;}
-        .seccion h2 {font-size:20px; color:#93C5FD; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid #1E293B;}
-
-        .grid-juegos {display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:20px;}
-        .tarjeta-juego {background:#0D1B3D; border-radius:10px; overflow:hidden; border:1px solid #1E293B; padding:16px; transition: all 0.7s ease;}
-        .tarjeta-titulo {font-weight:500; margin-bottom:6px; font-size:16px;}
-        .tarjeta-jugadores {font-size:13px; color:#94A3B8;}
-
-        .opciones-crear {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;}
-        .opcion-crear {background:#0D1B3D; padding:20px; border-radius:10px; border:1px solid #1E293B; cursor:pointer; transition: all 0.7s ease;}
-        .opcion-crear:hover {background:#0F2244;}
-        .opcion-titulo {font-size:17px; color:#93C5FD; margin-bottom:8px;}
-        .opcion-desc {font-size:14px; color:#94A3B8;}
-
-        .contenido-amigos {background:#0D1B3D; padding:20px; border-radius:10px; border:1px solid #1E293B;}
-        .funciones-amigos {list-style:none; margin:16px 0; color:#CBD5E1;}
-        .funciones-amigos li {margin:8px 0; padding-left:20px; position:relative;}
-        .funciones-amigos li::before {content:"•"; color:#60A5FA; position:absolute; left:0;}
-
-        .perfil-info {background:#0D1B3D; padding:24px; border-radius:10px; border:1px solid #1E293B; margin-bottom:20px; transition: all 0.7s ease;}
-        .perfil-especial {background:#0F2244; border-color:#2563EB;}
-        .nombre-perfil {font-size:22px; color:#FCD34D; margin-bottom:12px;}
-        .datos-perfil {display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:16px; color:#CBD5E1;}
-        .dato {padding:8px; background:#0F172A; border-radius:6px; font-size:14px;}
-
-        nav {position:fixed; bottom:0; left:0; right:0; background:#0D1B3D; border-top:1px solid #1E293B; display:flex; justify-content:space-around; padding:12px 0 8px; z-index:100; transition: all 0.7s ease;}
-        .nav-item {display:flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; color:#94A3B8; font-size:12px; cursor:pointer; padding:8px 12px; border-radius:6px; transition: all 0.7s ease;}
-        .nav-item.activo {color:#60A5FA; background:#0F2244;}
-        .nav-item span:first-child {font-size:22px;}
-
-        .contenedor-acceso {max-width:420px; margin:40px auto; text-align:center; transition: all 0.7s ease;}
-        .botones-acceso {display:flex; gap:1rem; justify-content:center; margin:2rem 0; flex-wrap:wrap;}
-        .boton-acceso {padding:14px 24px; border:none; border-radius:8px; font-size:1rem; font-weight:500; cursor:pointer; min-width:160px; transition: all 0.7s ease;}
-        .boton-invitado {background:#2563EB; color:white;}
-        .boton-invitado:hover {background:#1D4ED8;}
-        .boton-correo {background:#1E293B; color:#E2E8F0; border:1px solid #334155 !important;}
-
-        .formulario {background:#0D1B3D; border:1px solid #1E293B; border-radius:10px; padding:1.8rem; max-width:380px; margin:0 auto; text-align:left;}
-        .formulario h3 {text-align:center; margin-bottom:1.5rem; color:#93C5FD;}
-        .opciones-genero {display:flex; gap:1rem; margin:1rem 0;}
-        .opcion-genero {flex:1; padding:.9rem; background:#0F172A; border:1px solid #334155; border-radius:8px; color:white; cursor:pointer; text-align:center;}
-        .opcion-genero.seleccionado {border-color:#2563EB; background:#0F2244;}
-        .fecha-nacimiento {display:flex; gap:.7rem; margin:.8rem 0;}
-        .fecha-nacimiento input {flex:1; padding:.8rem; background:#0F172A; border:1px solid #334155; border-radius:6px; color:white; text-align:center;}
-        .formulario label {font-size:.9rem; color:#CBD5E1; display:block; margin:1rem 0 .4rem;}
-        .formulario input {width:100%; padding:.9rem; background:#0F172A; border:1px solid #334155; border-radius:6px; color:white;}
-        .texto-ayuda {font-size:.75rem; color:#94A3B8; margin:.3rem 0 1rem;}
-        .texto-aviso {font-size:.8rem; color:#60A5FA; margin:.3rem 0 1rem; padding:8px; background:rgba(37, 99, 235, 0.1); border-radius:6px; text-align:center;}
-        .texto-error {font-size:.8rem; color:#ef4444; margin:-.5rem 0 1rem; min-height:1rem;}
-        .boton-enviar {width:100%; padding:1rem; background:#2563EB; color:white; border:none; border-radius:8px; font-size:1rem; cursor:pointer; margin-top:1rem; transition: background-color 0.2s;}
-        .boton-enviar:disabled {background:#1E293B; cursor:not-allowed; opacity:0.6;}
-        .boton-volver {width:100%; padding:.8rem; background:transparent; color:#94A3B8; border:none; cursor:pointer; margin-top:.8rem; font-size:.9rem;}
-
-        .oculto {display:none !important;}
-
-        /* MODO RECUERDO */
-        body.modo-cerrado {background: linear-gradient(135deg, #050b18 0%, #081022 100%); filter: grayscale(35%) brightness(0.7);}
-        body.modo-cerrado .logo {color: #4a6fa5; opacity: 0.5;}
-        body.modo-cerrado .cristales {color: #3a5a8a; opacity: 0.35;}
-        body.modo-cerrado .zenith {color: #7a6a3a; opacity: 0.35;}
-        body.modo-cerrado .opcion-crear, body.modo-cerrado .boton-acceso, body.modo-cerrado .tarjeta-juego {opacity: 0.3; pointer-events: none;}
-        .aviso-cierre {background: rgba(15, 34, 68, 0.85); border: 1px solid #2a3b5a; color: #93a5c8; padding: 18px; border-radius: 10px; text-align: center; margin: 20px 0; font-style: italic;}
+        /* Resto de estilos */
+        .pantalla-servidores{max-width:550px;margin:40px auto;padding:20px;text-align:center}
+        .servidor{padding:18px;margin:12px 0;border-radius:10px;border:1px solid #1E3A8A;background:#0F2044;cursor:pointer}
+        .servidor.activo{border-color:#3B82F6;background:#102859}
+        .boton{padding:14px 24px;margin:10px;border:none;border-radius:8px;font-size:1rem;background:#2563EB;color:white;cursor:pointer}
     </style>
 </head>
 <body>
 
-    <div class="pantalla-carga" id="pantallaCarga">
-        <h1 class="titulo-carga">ZENTRITH WORLD</h1>
-        <p class="subtitulo-carga">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
-        <div class="barra-carga"><div class="progreso" id="progreso"></div></div>
-        <p class="texto-carga" id="estadoCarga">Cargando... 0%</p>
-    </div>
+<div class="pantalla-carga" id="pantallaCarga">
+    <h1 class="titulo-carga">ZENTRITH WORLD</h1>
+    <p class="subtitulo">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
+    <div class="barra-carga"><div class="progreso" id="progreso"></div></div>
+    <p class="texto-carga" id="estadoCarga">Cargando... 0%</p>
+</div>
 
-    <header class="oculto" id="headerPrincipal">
-        <div class="logo">ZENTRITH WORLD</div>
-        <div class="monedas">
-            <div class="moneda cristales">💎 Cristales Z <span id="cantidadCristales">0</span></div>
-            <div class="moneda zenith">🪙 Zenith Coins <span id="cantidadZenith">0</span></div>
-        </div>
-    </header>
+<div class="pantalla-servidores oculto" id="pantallaServidores">
+    <h2 style="color:#93C5FD;margin-bottom:25px">🌐 Elegí tu servidor</h2>
+    <div class="servidor activo" onclick="elegir(1)">🟢 Servidor 1 - Zentrith Norte</div>
+    <div class="servidor activo" onclick="elegir(2)">🟢 Servidor 2 - Zentrith Sur</div>
+</div>
 
-    <div class="busqueda oculto" id="busquedaPrincipal">
-        <input type="text" placeholder="🔍 Buscar mundos seguros...">
-        <button>Buscar</button>
-    </div>
+<script>
+// ⚙️ ESTADO DEL JUEGO: AQUÍ CONTROLAS SI ESTÁ PRENDIDO O APAGADO
+const ESTADO = {
+    activo: true,  // ✅ true = PRENDIDO / false = MODO DESCANSO
+    maxServidores: 10
+};
 
-    <div class="contenedor-acceso oculto" id="accesoInicial">
-        <h2 style="text-align:center; color:#93C5FD; margin-bottom:1rem;">Bienvenido a Zentrith World</h2>
-        <p style="text-align:center; color:#94A3B8; margin-bottom:2rem;">Un espacio protegido para jugar y crear</p>
-        
-        <div class="botones-acceso">
-            <button class="boton-acceso boton-invitado" id="btnInvitado">Entrar como Invitado</button>
-            <button class="boton-acceso boton-correo" id="btnCorreo">Crear Cuenta Segura</button>
-        </div>
+// 🚀 CARGA QUE SÍ AVANZA
+let porcentaje = 0;
+const barra = document.getElementById('progreso');
+const texto = document.getElementById('estadoCarga');
+const pantalla = document.getElementById('pantallaCarga');
+const servidores = document.getElementById('pantallaServidores');
 
-        <div id="formInvitado" class="formulario oculto">
-            <h3>Cuenta de Invitado</h3>
-            <p class="texto-aviso">✅ Sin fotos, sin datos sensibles. Solo para jugar.</p>
-            <label>Soy:</label>
-            <div class="opciones-genero">
-                <button type="button" class="opcion-genero" data-valor="nino">👦 Niño</button>
-                <button type="button" class="opcion-genero" data-valor="nina">👧 Niña</button>
-            </div>
-            <input type="hidden" id="generoInvitado">
+const intervalo = setInterval(() => {
+    if (porcentaje < 100) {
+        porcentaje++;
+        barra.style.width = porcentaje + '%';
+        texto.textContent = `Cargando... ${porcentaje}%`;
+    } else {
+        clearInterval(intervalo);
+        texto.textContent = "¡Listo!";
+        setTimeout(() => {
+            pantalla.classList.add('oculto');
+            if (ESTADO.activo) servidores.classList.remove('oculto');
+            else document.body.style.filter = 'grayscale(35%) brightness(0.6)';
+        }, 700);
+    }
+}, 30);
 
-            <label>Fecha de nacimiento:</label>
-            <div class="fecha-nacimiento">
-                <input type="number" id="dia" placeholder="Día" min="1" max="31">
-                <input type="number" id="mes" placeholder="Mes" min="1" max="12">
-                <input type="number" id="anio" placeholder="Año" min="1990" max="2021">
-            </div>
-            <p class="texto-ayuda">*Solo para menores de 15 años</p>
+function elegir(num) {
+    alert(`✅ Conectado al Servidor ${num}`);
+    // Acá seguimos agregando lo que falte
+}
+</script>
 
-            <label>Nombre de usuario:</label>
-            <input type="text" id="nombreInvitado" placeholder="Solo letras y números">
-            <p id="mensajeNombre" class="texto-error"></p>
-
-            <button type="button" id="enviarInvitado" class="boton-enviar">Entrar al juego</button>
-            <button type="button" class="boton-volver">Volver</button>
-        </div>
-
-        <div id="formCorreo" class="formulario oculto">
-            <h3>Crear Cuenta Protegida</h3>
-            <p class="texto-aviso">⚠️ Todos los datos son revisados. Se envía aviso automático a los padres.</p>
-            
-            <label>Nombre completo:</label>
-            <input type="text" id="nombreCompleto" placeholder="Tu nombre real">
-
-            <label>Fecha de nacimiento:</label>
-            <div class="fecha-nacimiento">
-                <input type="number" id="diaC" placeholder="Día" min="1" max="31">
-                <input type="number" id="mesC" placeholder="Mes" min="1" max="12">
-                <input type="number" id="anioC" placeholder="Año" min="1990" max="2021">
-            </div>
-
-            <label>Correo electrónico del tutor:</label>
-            <input type="email" id="correoTutor" placeholder="mamá@correo.com / papá@correo.com">
-            <p class="texto-ayuda">*Se enviará un mensaje de confirmación</p>
-
-            <label>Correo propio (opcional):</label>
-            <input type="email" id="correoUsuario" placeholder="tu@correo.com">
-
-            <label>Contraseña:</label>
-            <input type="password" id="claveUsuario" placeholder="Mínimo 6 caracteres">
-
-            <p class="texto-aviso">📸 Si se sube una imagen para el perfil: <br>Será revisada manualmente y eliminada del sistema después de la verificación. No se usa IA automática.</p>
-
-            <button type="button" id="enviarCorreo" class="boton-enviar">Enviar para revisión</button>
-            <button type="button" class="boton-volver">Volver</button>
-        </div>
-    </div>
-
-    <main id="contenidoJuego" class="oculto">
-        <div class="aviso-cierre oculto" id="avisoCierre">
-            📜 Zentrith World está en modo recuerdo.<br>
-            Podés ver tus creaciones, pero no iniciar nuevas partidas.<br>
-            Gracias por tu paciencia y confianza.
-        </div>
-
-        <section class="seccion activa" id="seccion-jugar">
-            <h2>🎮 Juegos Seguros</h2>
-            <div class="grid-juegos">
-                <div class="tarjeta-juego">
-                    <h3 class="tarjeta-titulo">Aventura Protegida</h3>
-                    <p class="tarjeta-jugadores">Exploración sin riesgos</p>
-                </div>
-                <div class="tarjeta-juego">
-                    <h3 class="tarjeta-titulo">Isla Amistad</h3>
-                    <p class="tarjeta-jugadores">Solo contactos aprobados</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="seccion" id="seccion-crear">
-            <h2>🔨 Crear Mundos</h2>
-            <div class="opciones-crear">
-                <div class="opcion-crear">
-                    <h3 class="opcion-titulo">Diseñar Mundo</h3>
-                    <p class="opcion-desc">Herramientas seguras y controladas</p>
-                </div>
-                <div class="opcion-crear">
-                    <h3 class="opcion-titulo">Enviar para revisión</h3>
-                    <p class="opcion-desc">Todo pasa por aprobación antes de publicarse</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="seccion" id="seccion-amigos">
-            <h2>👥 Sistema de Amistades</h2>
-            <div class="contenido-amigos">
-                <p>✅ Solo solicitudes revisadas</p>
-                <p>✅ Bloqueo inmediato de comportamiento extraño</p>
-                <p>✅ Sin enlaces externos directos</p>
-            </div>
-        </section>
-
-        <section class="seccion" id="seccion-ajustes">
-            <h2>⚙️ Perfil y Seguridad</h2>
-            <div class="perfil-info perfil-especial">
-                <h3 class="nombre-perfil">🔮 El Arquitecto</h3>
-                <p style="color:#94A3B8;">Sistema de protección y revisión</p>
-            </div>
-            <div class="perfil-info">
-                <h3>Normas de seguridad</h3>
-                <ul class="funciones-amigos">
-                    <li>No se comparten datos personales</li>
-                    <li>Todo contenido es revisado</li>
-                    <li>Los padres reciben avisos importantes</li>
-                    <li>Las imágenes se eliminan después de verificar</li>
-                </ul>
-            </div>
-        </section>
-    </main>
-
-    <nav id="barraNavegacion" class="oculto">
-        <button class="nav-item activo" data-seccion="jugar"><span>🏠</span><span>Inicio</span></button>
-        <button class="nav-item" data-seccion="crear"><span>🔨</span><span>Crear</span></button>
-        <button class="nav-item" data-seccion="amigos"><span>👥</span><span>Seguridad</span></button>
-        <button class="nav-item" data-seccion="ajustes"><span>⚙️</span><span>Ajustes</span></button>
-    </nav>
-
-    <script>
-        // CONFIGURACIÓN
-        const ESTADO_JUEGO = {
-            activo: true,
-            permitirNuevasCuentas: true,
-            mensajeCierre: "📜 Zentrith World ha finalizado su actividad. Podés ver tus recuerdos."
-        };
-
-        // CARGA CORREGIDA - ahora avanza seguro
-        let porcentaje = 0;
-        const progreso = document.getElementById('progreso');
-        const estado = document.getElementById('estadoCarga');
-        const pantallaCarga = document.getElementById('pantallaCarga');
-        const acceso = document.getElementById('accesoInicial');
-
-        const intervaloCarga = setInterval(() => {
-            if (porcentaje < 100) {
-                porcentaje++;
-                progreso.style.width = porcentaje + '%';
-                estado.textContent = `Cargando... ${porcentaje}%`;
-            } else {
-                clearInterval(intervaloCarga);
-                estado.textContent = "¡Listo!";
-                setTimeout(() => {
-                    pantallaCarga.classList.add('oculta');
-                    acceso.classList.remove('oculto');
-                }, 800);
-            }
-        }, 40);
-
-        // Sistema de monedas
-        let cristalesZ = 0, zenithCoins = 0;
-        function actualizarMonedas() {
-            document.getElementById('cantidadCristales').textContent = cristalesZ;
-            document.getElementById('cantidadZenith').textContent = zenithCoins;
-        }
-
-        // Palabras prohibidas
-        const palabrasProhibidas = ["abuso", "sexual", "violencia", "admin", "dueño", "dueno", "chúpala", "chupar", "desnudo", "desnuda", "pene", "vagina", "sexo", "putear", "grosería", "insulto", "matar", "golpear", "muerte", "link", "http", "www"];
-
-        // Aplicar estado
-        function aplicarEstado() {
-            if (!ESTADO_JUEGO.activo) {
-                document.body.classList.add('modo-cerrado');
-                document.getElementById('avisoCierre').classList.remove('oculto');
-                ESTADO_JUEGO.permitirNuevasCuentas = false;
-            } else {
-                document.body.classList.remove('modo-cerrado');
-                document.getElementById('avisoCierre').classList.add('oculto');
-            }
-        }
-
-        // Acceso
-        document.getElementById('btnInvitado').addEventListener('click', () => {
-            if (!ESTADO_JUEGO.permitirNuevasCuentas) return alert("El juego está cerrado.");
-            acceso.classList.add('oculto');
-            document.getElementById('formInvitado').classList.remove('oculto');
-        });
-
-        document.getElementById('btnCorreo').addEventListener('click', () => {
-            if (!ESTADO_JUEGO.permitirNuevasCuentas) return alert("El juego está cerrado.");
-            acceso.classList.add('oculto');
-            document.getElementById('formCorreo').classList.remove('oculto');
-        });
-
-        document.querySelectorAll('.boton-volver').forEach(b => b.addEventListener('click', () => {
-            document.querySelectorAll('.formulario').forEach(f => f.classList.add('oculto'));
-            acceso.classList.remove('oculto');
-        }));
-
-        document.querySelectorAll('.opcion-genero').forEach(o => o.addEventListener('click', () => {
-            document.querySelectorAll('.opcion-genero').forEach(x => x.classList.remove('seleccionado'));
-            o.classList.add('seleccionado');
-            document.getElementById('generoInvitado').value = o.dataset.valor;
-        }));
-
-        document.getElementById('anio').addEventListener('change', function() {
-            let v = parseInt(this.value);
-            if (v > 2021) { alert('❌ Solo menores de 15 años'); this.value = 2021; }
-        });
-
-        document.getElementById('nombreInvitado').addEventListener('input', () => {
-            const n = document.getElementById('nombreInvitado').value.toLowerCase();
-            document.getElementById('mensajeNombre').textContent = palabrasProhibidas.some(p => n.includes(p)) ? "❌ Nombre no permitido" : "";
-        });
-
-        document.getElementById('enviarInvitado').addEventListener('click', () => {
-            if (!document.getElementById('generoInvitado').value || !document.getElementById('dia').value || !document.getElementById('mes').value || !document.getElementById('anio').value || !document.getElementById('nombreInvitado').value) {
-                return alert("Completá todos los campos");
-            }
-            if (palabrasProhibidas.some(p => document.getElementById('nombreInvitado').value.toLowerCase().includes(p))) {
-                return alert("Nombre no permitido");
-            }
-            cristalesZ = 50; zenithCoins = 10; actualizarMonedas();
-            acceso.clas
+</body>
+</html>
