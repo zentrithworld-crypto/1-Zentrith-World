@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zentrith World</title>
+    <title>Zentrith World - Plataforma Principal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: #051027; color: #E2F0FF; min-height: 100vh; line-height: 1.5; }
@@ -15,7 +15,7 @@
         .subtitulo { font-size: 1.2rem; color: #93C5FD; margin-bottom: 30px; text-align: center; }
         .barra-carga { width: 80%; max-width: 400px; height: 12px; background: #0F2044; border-radius: 10px; overflow: hidden; border: 1px solid #1E3A8A; }
         .progreso { width: 0%; height: 100%; background: #2563EB; transition: width 0.03s linear; }
-        .texto-carga { margin-top: 15px; font-size: 1.1rem; color: #BFDBFE; }
+        .texto-carga { margin-top: 15px; font-size: 1.1rem; color: #BFDBFE; text-align: center; padding: 0 20px; }
 
         /* Acceso */
         .pantalla-acceso { max-width: 450px; margin: 60px auto; padding: 25px; text-align: center; }
@@ -25,12 +25,12 @@
         .opciones-genero { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
         .opcion { flex: 1; padding: 12px; background: #0F2044; border: 1px solid #1E3A8A; border-radius: 8px; cursor: pointer; transition: 0.2s; }
         .opcion.seleccionado { border-color: #3B82F6; background: #102859; }
-        .boton { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 500; transition: 0.2s; }
-        .boton-azul { background: #2563EB; color: white; }
-        .boton-verde { background: #15803D; color: white; }
-        .boton-rojo { background: #991B1B; color: white; }
-        .boton-gris { background: #475569; color: white; cursor: not-allowed; }
-        .boton-volver { background: #1E3A8A; color: white; width: 100%; margin-top: 15px; }
+
+        /* Verificación */
+        .pantalla-verificacion { max-width: 500px; margin: 60px auto; padding: 25px; text-align: center; }
+        .aviso-legal { background: #0F2044; border: 1px solid #F59E0B; border-radius: 8px; padding: 15px; margin: 20px 0; color: #BFDBFE; font-size: 0.95rem; line-height: 1.5; }
+        #vistaPrevia { width: 200px; height: 200px; margin: 15px auto; border: 1px solid #1E3A8A; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94A3B8; overflow: hidden; }
+        #vistaPrevia img { width: 100%; height: 100%; object-fit: cover; }
 
         /* Servidores */
         .pantalla-servidores { max-width: 650px; margin: 60px auto; padding: 25px; text-align: center; }
@@ -47,25 +47,39 @@
         .navegacion { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
         .nav-item { padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: 0.2s; }
         .nav-item.activo { background: #2563EB; }
-        .monedas { display: flex; gap: 25px; }
+        .monedas { display: flex; gap: 25px; flex-wrap: wrap; }
         .moneda { text-align: center; }
         .contenido-menu { margin-top: 25px; }
         .tarjeta { background: #0F2044; border: 1px solid #1E3A8A; border-radius: 10px; padding: 20px; margin-bottom: 15px; }
         .tarjeta-grande { background: #0F2044; border: 1px solid #1E3A8A; border-radius: 10px; padding: 25px; margin-bottom: 20px; }
         .etiqueta-verificado { display: inline-block; background: #059669; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; margin-left: 8px; }
         .etiqueta-creador { background: #8B5CF6; }
-        .perfil-cabecera { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .avatar { width: 85px; height: 85px; border-radius: 50%; background: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; }
-        .mision { padding: 12px; margin: 10px 0; background: #081838; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .completada { opacity: 0.65; text-decoration: line-through; }
-        .historial-item { padding: 10px; margin: 8px 0; background: #081838; border-radius: 6px; display: flex; justify-content: space-between; flex-wrap: wrap; }
-        .resultado { padding: 14px; margin: 10px 0; background: #081838; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .info-jugador { display: flex; align-items: center; gap: 8px; }
-        .grupo-botones { display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap; }
-        .buscador { width: 100%; padding: 12px; margin: 10px 0; background: #081838; border: 1px solid #1E3A8A; border-radius: 6px; color: white; font-size: 1rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+
+        /* Vista del Jugador */
+        .jugador-vista { width: 220px; height: 280px; margin: 0 auto 25px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 5rem; background: #081838; border-radius: 12px; border: 2px solid #1E3A8A; overflow: hidden; }
+        .jugador-cara { position: absolute; top: 20%; font-size: 2.2rem; z-index: 2; }
+        .jugador-cuerpo { position: absolute; top: 30%; font-size: 3rem; z-index: 1; }
+        .jugador-accesorio { position: absolute; top: 35%; font-size: 2rem; z-index: 3; }
+        .jugador-ropa { position: absolute; top: 42%; font-size: 2.8rem; z-index: 1; }
+        .jugador-montura { position: absolute; bottom: 10%; font-size: 3.2rem; z-index: 0; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; margin-top: 15px; }
         .item { background: #081838; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #1E3A8A; }
-        .comprado { opacity: 0.6; }
+        .item.comprado { border-color: #15803D; }
+        .item.equipado { border-color: #F59E0B; background: #1A2446; }
+        .selector-idioma { padding: 8px; border-radius: 6px; background: #0F2044; color: white; border: 1px solid #1E3A8A; }
+
+        /* Botones */
+        .boton { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 500; transition: 0.2s; }
+        .boton:hover { filter: brightness(1.1); }
+        .boton:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
+        .boton-azul { background: #2563EB; color: white; }
+        .boton-verde { background: #15803D; color: white; }
+        .boton-rojo { background: #991B1B; color: white; }
+        .boton-gris { background: #475569; color: white; }
+        .boton-amarillo { background: #F59E0B; color: white; }
+        .boton-volver { background: #1E3A8A; color: white; width: 100%; margin-top: 15px; }
+        .boton-cat { margin: 0 5px 10px 0; }
     </style>
 </head>
 <body>
@@ -73,14 +87,15 @@
 <!-- Pantalla de Carga -->
 <div class="pantalla-carga" id="pantallaCarga">
     <h1 class="titulo-carga">ZENTRITH WORLD</h1>
-    <p class="subtitulo">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
+    <p class="subtitulo" data-tr="tagline">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
     <div class="barra-carga"><div class="progreso" id="barraProgreso"></div></div>
-    <p class="texto-carga" id="estadoCarga">Iniciando sistema...</p>
+    <p class="texto-carga" id="estadoCarga">Iniciando sistemas seguros...</p>
+    <p style="font-size:0.85rem; color:#94A3B8; margin-top:15px;">✅ Protección de menores | ✅ Cumplimiento legal | ✅ Datos protegidos</p>
 </div>
 
 <!-- Pantalla de Acceso -->
 <div class="pantalla-acceso oculto" id="pantallaAcceso">
-    <h2>📝 Ingreso de Cuenta</h2>
+    <h2 data-tr="loginTitle">📝 Ingreso de Cuenta</h2>
     <div class="fila-fecha">
         <input type="number" class="campo" id="dia" placeholder="Día" min="1" max="31">
         <select class="campo" id="mes">
@@ -92,66 +107,199 @@
         </select>
         <input type="number" class="campo" id="anio" placeholder="Año" min="1920" max="2026">
     </div>
-    <p style="margin:20px 0 8px">Género:</p>
+    <p style="margin:20px 0 8px" data-tr="genderLabel">Género:</p>
     <div class="opciones-genero">
-        <div class="opcion" onclick="elegirGenero('varon')">👦 Masculino</div>
-        <div class="opcion" onclick="elegirGenero('chica')">👧 Femenino</div>
-        <div class="opcion" onclick="elegirGenero('otro')">⚪ Otro</div>
+        <div class="opcion" onclick="elegirGenero('varon')" data-tr="genderMale">👦 Masculino</div>
+        <div class="opcion" onclick="elegirGenero('chica')" data-tr="genderFemale">👧 Femenino</div>
+        <div class="opcion" onclick="elegirGenero('otro')" data-tr="genderOther">⚪ Otro</div>
     </div>
     <input type="hidden" id="genero">
-    <input type="text" class="campo" id="usuario" placeholder="Nombre de usuario">
-    <button class="boton boton-azul" onclick="validarAcceso()">Ingresar</button>
-    <button class="boton boton-volver" onclick="volverACarga()">Volver</button>
+    <input type="text" class="campo" id="usuario" data-tr-placeholder="userPlaceholder" placeholder="Nombre de usuario">
+    <br>
+    <select class="selector-idioma" id="cambiarIdioma" onchange="cambiarIdioma()">
+        <option value="es">🇪🇸 Español</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+    </select>
+    <br><br>
+    <button class="boton boton-azul" onclick="validarAcceso()" data-tr="loginBtn">Continuar</button>
+    <button class="boton boton-volver" onclick="volverACarga()" data-tr="backBtn">Volver</button>
+</div>
+
+<!-- Pantalla de Verificación -->
+<div class="pantalla-verificacion oculto" id="pantallaVerificacion">
+    <h2>📋 Verificación de Edad</h2>
+    <div class="aviso-legal">
+        ⚠️ <strong>INFORMACIÓN IMPORTANTE</strong><br><br>
+        Esta foto se utiliza <strong>únicamente para verificar tu edad</strong>.<br>
+        ✅ Se borrará automáticamente en <strong>2 horas</strong> desde su envío<br>
+        ✅ No se guarda de forma permanente ni queda registrada<br>
+        ✅ No se comparte con nadie ni se usa para otros fines<br>
+        ✅ Cumplimos con normativas de protección de menores (COPPA, GDPR)
+    </div>
+    <p>Tomá o subí una foto donde se te vea claramente:</p>
+    <input type="file" id="fotoVerificacion" accept="image/*" capture="environment" style="margin:10px 0;">
+    <div id="vistaPrevia">Vista previa</div>
+    <br>
+    <button class="boton boton-azul" onclick="enviarVerificacion()">Enviar para revisión</button>
+    <button class="boton boton-gris" onclick="volverAAcceso()">Volver</button>
 </div>
 
 <!-- Pantalla de Servidores -->
 <div class="pantalla-servidores oculto" id="pantallaServidores">
-    <h2>🌐 Seleccionar Servidor</h2>
-    <!-- Servidor exclusivo del creador -->
+    <h2 data-tr="serverTitle">🌐 Seleccionar Servidor</h2>
     <div class="servidor especial" onclick="conectarServidor(0)">
-        <div style="font-weight:700; color:#A78BFA">🔒 Servidor del Creador</div>
-        <div class="estado-servidor">Acceso exclusivo | <span id="cant0">0</span> / 1 jugador</div>
+        <div style="font-weight:700; color:#A78BFA" data-tr="creatorServer">🔒 Servidor del Creador</div>
+        <div class="estado-servidor" id="cant0" data-tr="creatorServerDesc">Acceso exclusivo | 0 / 1 jugador</div>
     </div>
-
-    <!-- Servidores principales 1 a 20 -->
     <div id="listaServidoresPrincipales"></div>
-
-    <!-- Servidor de pruebas -->
     <div class="servidor" onclick="conectarServidor(21)">
-        <div style="font-weight:500">🟡 Servidor de Pruebas</div>
-        <div class="estado-servidor">Pruebas y ajustes | <span id="cant21">0</span> / 2.000 jugadores</div>
+        <div style="font-weight:500" data-tr="testServer">🟡 Servidor de Pruebas</div>
+        <div class="estado-servidor" id="cant21" data-tr="testServerDesc">Pruebas y ajustes | 0 / 2.000 jugadores</div>
     </div>
-
-    <button class="boton boton-volver" onclick="volverAAcceso()">Volver</button>
+    <button class="boton boton-volver" onclick="volverAVerificacion()">Volver</button>
 </div>
 
 <!-- Menú Principal -->
 <div class="menu-principal oculto" id="menuPrincipal">
     <div class="cabecera-menu">
         <h2>ZENTRITH WORLD</h2>
+        <div>
+            <select class="selector-idioma" id="cambiarIdioma2" onchange="cambiarIdioma()">
+                <option value="es">🇪🇸 Español</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="fr">🇫🇷 Français</option>
+            </select>
+        </div>
         <div class="monedas">
-            <div class="moneda"><div>🪙 Monedas Z</div><div id="txtMonedas">0</div></div>
-            <div class="moneda"><div>💎 Cristales Z</div><div id="txtCristales">0</div></div>
+            <div class="moneda"><div data-tr="coinZ">🪙 Monedas Z</div><div id="txtMonedas">0</div></div>
+            <div class="moneda"><div data-tr="crystalZ">💎 Cristales Z</div><div id="txtCristales">0</div></div>
+            <div class="moneda"><div>⚡ Energía</div><div id="txtEnergia">100 / 200</div></div>
+            <div class="moneda"><div>📈 Nivel</div><div id="txtNivel">1</div></div>
         </div>
     </div>
 
     <div class="navegacion">
-        <div class="nav-item activo" onclick="cambiarSeccion('inicio')">Inicio</div>
-        <div class="nav-item" onclick="cambiarSeccion('perfil')">👤 Perfil</div>
-        <div class="nav-item" onclick="cambiarSeccion('jugar')">🎮 Jugar</div>
-        <div class="nav-item" onclick="cambiarSeccion('crear')">🛠️ Crear</div>
-        <div class="nav-item" onclick="cambiarSeccion('tienda')">🛒 Tienda</div>
-        <div class="nav-item" onclick="cambiarSeccion('inventario')">🎒 Inventario</div>
-        <div class="nav-item" onclick="cambiarSeccion('amigos')">👥 Amigos</div>
-        <div class="nav-item" onclick="cambiarSeccion('ajustes')">⚙️ Ajustes</div>
+        <div class="nav-item activo" onclick="cambiarSeccion('inicio')" data-tr="navHome">Inicio</div>
+        <div class="nav-item" onclick="cambiarSeccion('perfil')" data-tr="navProfile">👤 Perfil</div>
+        <div class="nav-item" onclick="cambiarSeccion('apariencia')" data-tr="navAppearance">🎨 Apariencia</div>
+        <div class="nav-item" onclick="cambiarSeccion('misiones')">📜 Misiones</div>
+        <div class="nav-item" onclick="cambiarSeccion('equipos')">⚔️ Equipos</div>
+        <div class="nav-item" onclick="irAlJuego()" data-tr="navPlay">🎮 Ir al Juego</div>
+        <div class="nav-item" onclick="cambiarSeccion('tienda')" data-tr="navShop">🛒 Tienda</div>
+        <div class="nav-item" onclick="cambiarSeccion('inventario')" data-tr="navInventory">🎒 Inventario</div>
+        <div class="nav-item" onclick="cambiarSeccion('ajustes')" data-tr="navSettings">⚙️ Ajustes</div>
     </div>
 
     <div class="contenido-menu" id="contenidoMenu"></div>
-    <button class="boton boton-volver" onclick="volverAServidores()">Cambiar Servidor</button>
+    <button class="boton boton-volver" onclick="volverAServidores()" data-tr="changeServerBtn">Cambiar Servidor</button>
 </div>
 
 <script>
-// CONFIGURACIÓN GLOBAL ACTUALIZADA
+// 📚 Traducciones
+const TEXTOS = {
+    es: {
+        tagline: "ESPACIO SEGURO PARA JUGAR Y CREAR",
+        loading: "Cargando...",
+        loginTitle: "📝 Ingreso de Cuenta",
+        genderLabel: "Género:",
+        genderMale: "👦 Masculino",
+        genderFemale: "👧 Femenino",
+        genderOther: "⚪ Otro",
+        userPlaceholder: "Nombre de usuario",
+        loginBtn: "Continuar",
+        backBtn: "Volver",
+        serverTitle: "🌐 Seleccionar Servidor",
+        creatorServer: "🔒 Servidor del Creador",
+        creatorServerDesc: "Acceso exclusivo | {0} / 1 jugador",
+        testServer: "🟡 Servidor de Pruebas",
+        testServerDesc: "Pruebas y ajustes | {0} / 2.000 jugadores",
+        coinZ: "🪙 Monedas Z",
+        crystalZ: "💎 Cristales Z",
+        navHome: "Inicio",
+        navProfile: "👤 Perfil",
+        navAppearance: "🎨 Apariencia",
+        navPlay: "🎮 Ir al Juego",
+        navShop: "🛒 Tienda",
+        navInventory: "🎒 Inventario",
+        navSettings: "⚙️ Ajustes",
+        changeServerBtn: "Cambiar Servidor",
+        fillBirth: "Completá tu fecha de nacimiento",
+        selectGender: "Seleccioná tu género",
+        enterUser: "Escribí tu nombre de usuario",
+        invalidName: "El nombre contiene palabras no permitidas",
+        minAge: "Tenés que tener al menos 8 años para jugar",
+        serverOnlyCreator: "❌ Solo el creador puede entrar aquí",
+        serverFull: "⚠️ Servidor lleno, elegí otro",
+        shopTitle: "🛒 Tienda de Zentrith",
+        categoryAll: "Todo",
+        categoryFaces: "Caras",
+        categoryClothes: "Ropa",
+        categoryAccessories: "Accesorios",
+        buyBtn: "Comprar",
+        ownedBtn: "Adquirido",
+        equipBtn: "Equipar",
+        unequipBtn: "Quitar",
+        noMoney: "No tienes suficientes monedas",
+        purchaseOk: "✅ Artículo agregado al inventario",
+        appearanceTitle: "🎨 Personalizar Personaje",
+        infoMoneda: "Se obtienen solo jugando, sin dinero real"
+    },
+    en: {
+        tagline: "SAFE SPACE TO PLAY AND CREATE",
+        loading: "Loading...",
+        loginTitle: "📝 Account Login",
+        genderLabel: "Gender:",
+        genderMale: "👦 Male",
+        genderFemale: "👧 Female",
+        genderOther: "⚪ Other",
+        userPlaceholder: "Username",
+        loginBtn: "Continue",
+        backBtn: "Back",
+        serverTitle: "🌐 Select Server",
+        creatorServer: "🔒 Creator's Server",
+        creatorServerDesc: "Exclusive access | {0} / 1 player",
+        testServer: "🟡 Test Server",
+        testServerDesc: "Testing | {0} / 2,000 players",
+        coinZ: "🪙 Z Coins",
+        crystalZ: "💎 Z Crystals",
+        navHome: "Home",
+        navProfile: "👤 Profile",
+        navAppearance: "🎨 Appearance",
+        navPlay: "🎮 Play",
+        navShop: "🛒 Shop",
+        navInventory: "🎒 Inventory",
+        navSettings: "⚙️ Settings",
+        changeServerBtn: "Change Server",
+        fillBirth: "Enter your birth date",
+        selectGender: "Select your gender",
+        enterUser: "Enter your username",
+        invalidName: "Name has forbidden words",
+        minAge: "You must be at least 8 years old",
+        serverOnlyCreator: "❌ Only creator can enter",
+        serverFull: "⚠️ Server full, choose another",
+        shopTitle: "🛒 Zentrith Shop",
+        categoryAll: "All",
+        categoryFaces: "Faces",
+        categoryClothes: "Clothing",
+        categoryAccessories: "Accessories",
+        buyBtn: "Buy",
+        ownedBtn: "Owned",
+        equipBtn: "Equip",
+        unequipBtn: "Unequip",
+        noMoney: "Not enough coins",
+        purchaseOk: "✅ Item added",
+        appearanceTitle: "🎨 Customize Character",
+        infoMoneda: "Earned by playing, no real money"
+    }
+};
+
+let idiomaActual = "es";
+let progreso = 0;
+
+// ==============================================
+// 🔹 CONFIGURACIÓN GENERAL COMPLETA
+// ==============================================
 const CONFIG = {
     usuarioActual: "",
     idActual: "",
@@ -163,246 +311,45 @@ const CONFIG = {
     cristalesZ: 0,
     nivel: 1,
     experiencia: 0,
+    energia: 100,
+    energiaMaxima: 200,
+    ropaObligatoria: false,
     biografia: "Sin descripción",
     inventario: [],
-    jugadoresRegistrados: [],
-    listaAmigos: [],
-    solicitudes: [],
-    bloqueados: [],
-    reportes: [],
-    historial: [],
-    servidorConectado: null,
-
-    // 📊 Configuración de servidores tal cual pediste
+    apariencia: { cara: "🙂", cuerpo: null, ropa: null, accesorio: null, montura: null },
     servidores: [
         { id: 0, nombre: "Del Creador", capacidad: 1, conectados: 0, accesoExclusivo: true },
-        ...Array.from({ length: 20 }, (_, i) => ({
-            id: i + 1,
-            nombre: `Principal ${i + 1}`,
-            capacidad: 5000,
-            conectados: 0,
-            accesoExclusivo: false
-        })),
+        ...Array.from({ length: 20 }, (_, i) => ({ id: i + 1, nombre: `Principal ${i + 1}`, capacidad: 5000, conectados: 0, accesoExclusivo: false })),
         { id: 21, nombre: "De Pruebas", capacidad: 2000, conectados: 0, accesoExclusivo: false }
     ],
-
-    creador: {
-        id: "Z001",
-        nombre: "El Arquitecto 🔮",
-        monedas: 9999999,
-        cristales: 999999,
-        verificado: true
+    creador: { id: "Z001", nombre: "El Arquitecto 🔮", monedas: 9999999, cristales: 999999, verificado: true },
+    seguridad: { palabrasProhibidas: ["insulto", "violencia", "abuso", "sexo", "link", "estafa", "porno", "muerte"], edadMinima: 8, edadSegura: 13 },
+    equipos: {
+        activo: null,
+        lista: [
+            { id: 1, nombre: "Guardianes del Origen", color: "#2563EB", nivelMin: 8, energiaMin: 200, descripcion: "Defienden los territorios seguros" },
+            { id: 2, nombre: "Exploradores del Abismo", color: "#9333EA", nivelMin: 10, energiaMin: 250, descripcion: "Buscan nuevos lugares y desafíos" },
+            { id: 3, nombre: "Centinelas del Equilibrio", color: "#F59E0B", nivelMin: 12, energiaMin: 300, descripcion: "Mantienen las reglas en las zonas de combate" }
+        ]
     },
-    seguridad: {
-        palabrasProhibidas: ["insulto", "violencia", "abuso", "sexo", "link", "estafa", "porno", "muerte"],
-        edadMinima: 8,
-        edadSegura: 13
-    },
-    misiones: [
-        {id:1, texto: "Iniciar sesión", recompensa: 10, completada: false},
-        {id:2, texto: "Visitar tu perfil", recompensa: 15, completada: false},
-        {id:3, texto: "Agregar un amigo", recompensa: 25, completada: false},
-        {id:4, texto: "Conocer la zona de creación", recompensa: 20, completada: false},
-        {id:5, texto: "Realizar tu primera compra", recompensa: 30, completada: false}
+    zonasCombate: [
+        { id: 1, nombre: "Arena de Desafíos", edadMin: 13, accesoVerificado: true, estado: "abierta" },
+        { id: 2, nombre: "Frontera de Pruebas", edadMin: 16, accesoVerificado: true, estado: "controlada" }
     ],
+    misiones: [
+        { id: 1, titulo: "Primeros pasos", descripcion: "Ingresá al juego por primera vez", completada: false, recompensaMonedas: 150, recompensaEnergia: 30 },
+        { id: 2, titulo: "Explorador", descripcion: "Entrá a 2 servidores diferentes", completada: false, recompensaMonedas: 300, recompensaEnergia: 50 },
+        { id: 3, titulo: "Personalizador", descripcion: "Equipá ropa y accesorios", completada: false, recompensaMonedas: 200, recompensaEnergia: 40 }
+    ],
+
+    // 🎭 TODOS LOS TRAJES Y PERSONAJES
     tienda: [
-        {id:1, nombre: "Sombrero Básico", precioM: 150, precioC: 10, desc: "Accesorio sencillo"},
-        {id:2, nombre: "Herramienta de Construcción", precioM: 350, precioC: 20, desc: "Para crear objetos"},
-        {id:3, nombre: "Ropa de Aventurero", precioM: 500, precioC: 30, desc: "Mayor resistencia"},
-        {id:4, nombre: "Piedra Decorativa", precioM: 80, precioC: 5, desc: "Para embellecer espacios"},
-        {id:5, nombre: "Mochila Ampliada", precioM: 800, precioC: 45, desc: "Guarda más objetos"}
-    ]
-};
-
-// CARGA INICIAL
-let progreso = 0;
-const intervaloCarga = setInterval(() => {
-    if(progreso < 100) {
-        progreso++;
-        document.getElementById("barraProgreso").style.width = `${progreso}%`;
-        document.getElementById("estadoCarga").textContent = `Cargando... ${progreso}%`;
-    } else {
-        clearInterval(intervaloCarga);
-        setTimeout(() => {
-            document.getElementById("pantallaCarga").classList.add("oculto");
-            document.getElementById("pantallaAcceso").classList.remove("oculto");
-            generarListaServidores();
-            actualizarContadoresServidores();
-        }, 500);
-    }
-}, 20);
-
-// 📊 Generar lista de los 20 servidores principales
-function generarListaServidores() {
-    const contenedor = document.getElementById("listaServidoresPrincipales");
-    let html = "";
-    for (let i = 1; i <= 20; i++) {
-        html += `<div class="servidor" onclick="conectarServidor(${i})">
-            <div style="font-weight:500">🟢 Servidor Principal ${i}</div>
-            <div class="estado-servidor" id="cant${i}">En línea | 0 / 5.000 jugadores</div>
-        </div>`;
-    }
-    contenedor.innerHTML = html;
-}
-
-// 📊 Actualizar contadores de jugadores
-function actualizarContadoresServidores() {
-    CONFIG.servidores.forEach(servidor => {
-        const elem = document.getElementById(`cant${servidor.id}`);
-        if (elem) {
-            elem.textContent = `${servidor.conectados.toLocaleString("es-ES")} / ${servidor.capacidad.toLocaleString("es-ES")} jugadores`;
-        }
-    });
-}
-
-// FUNCIONES DE ACCESO
-function elegirGenero(valor) {
-    document.querySelectorAll(".opcion").forEach(op => op.classList.remove("seleccionado"));
-    event.currentTarget.classList.add("seleccionado");
-    document.getElementById("genero").value = valor;
-}
-
-function calcularEdad(dia, mes, anio) {
-    const hoy = new Date();
-    const nacimiento = new Date(anio, mes - 1, dia);
-    let edad = hoy.getFullYear() - nacimiento.getFullYear();
-    const mesActual = hoy.getMonth() + 1;
-    if(mesActual < mes || (mesActual === mes && hoy.getDate() < dia)) edad--;
-    return edad;
-}
-
-function filtrarTexto(texto) {
-    const textoMin = texto.toLowerCase();
-    return !CONFIG.seguridad.palabrasProhibidas.some(p => textoMin.includes(p));
-}
-
-function validarAcceso() {
-    const dia = parseInt(document.getElementById("dia").value);
-    const mes = parseInt(document.getElementById("mes").value);
-    const anio = parseInt(document.getElementById("anio").value);
-    const genero = document.getElementById("genero").value;
-    const usuario = document.getElementById("usuario").value.trim();
-
-    if(!dia || !mes || !anio) return alert("Completá tu fecha de nacimiento");
-    if(!genero) return alert("Seleccioná tu género");
-    if(!usuario) return alert("Escribí tu nombre de usuario");
-    if(!filtrarTexto(usuario)) return alert("El nombre contiene palabras no permitidas");
-
-    const edad = calcularEdad(dia, mes, anio);
-    if(edad < CONFIG.seguridad.edadMinima) return alert("No cumples la edad mínima para registrarte");
-
-    CONFIG.edad = edad;
-    CONFIG.fechaNacimiento = {dia, mes, anio};
-
-    if(usuario === CONFIG.creador.nombre) {
-        CONFIG.idActual = CONFIG.creador.id;
-        CONFIG.usuarioActual = CONFIG.creador.nombre;
-        CONFIG.monedasZ = CONFIG.creador.monedas;
-        CONFIG.cristalesZ = CONFIG.creador.cristales;
-        CONFIG.esVerificado = true;
-        CONFIG.esCreador = true;
-    } else {
-        CONFIG.idActual = `Z${Math.floor(Math.random() * 90000) + 10000}`;
-        CONFIG.usuarioActual = usuario;
-        CONFIG.monedasZ = edad >= CONFIG.seguridad.edadSegura ? 100 : 50;
-        CONFIG.cristalesZ = edad >= CONFIG.seguridad.edadSegura ? 10 : 5;
-        CONFIG.esVerificado = false;
-        CONFIG.esCreador = false;
-        CONFIG.jugadoresRegistrados.push({id: CONFIG.idActual, nombre: usuario});
-    }
-
-    document.getElementById("pantallaAcceso").classList.add("oculto");
-    document.getElementById("pantallaServidores").classList.remove("oculto");
-}
-
-// NAVEGACIÓN GENERAL
-function volverACarga() {
-    document.getElementById("pantallaAcceso").classList.add("oculto");
-    document.getElementById("pantallaCarga").classList.remove("oculto");
-    progreso = 0;
-}
-
-function volverAAcceso() {
-    document.getElementById("pantallaServidores").classList.add("oculto");
-    document.getElementById("pantallaAcceso").classList.remove("oculto");
-}
-
-function volverAServidores() {
-    if(CONFIG.servidorConectado) {
-        CONFIG.servidorConectado.conectados--;
-        actualizarContadoresServidores();
-        CONFIG.servidorConectado = null;
-    }
-    document.getElementById("menuPrincipal").classList.add("oculto");
-    document.getElementById("pantallaServidores").classList.remove("oculto");
-}
-
-function conectarServidor(id) {
-    const servidor = CONFIG.servidores.find(s => s.id === id);
-    if(!servidor) return;
-
-    // ✅ Restricción: solo el creador entra al servidor exclusivo
-    if(servidor.accesoExclusivo && !CONFIG.esCreador) {
-        return alert("❌ Este servidor es de acceso exclusivo, solo el creador puede ingresar");
-    }
-
-    if(servidor.conectados >= servidor.capacidad) {
-        return alert("⚠️ Este servidor está lleno, elegí otro");
-    }
-
-    servidor.conectados++;
-    CONFIG.servidorConectado = servidor;
-    actualizarContadoresServidores();
-
-    actualizarSaldos();
-    document.getElementById("pantallaServidores").classList.add("oculto");
-    document.getElementById("menuPrincipal").classList.remove("oculto");
-    cumplirMision(1);
-    cambiarSeccion("inicio");
-}
-
-function actualizarSaldos() {
-    document.getElementById("txtMonedas").textContent = CONFIG.monedasZ.toLocaleString("es-ES");
-    document.getElementById("txtCristales").textContent = CONFIG.cristalesZ.toLocaleString("es-ES");
-}
-
-function agregarHistorial(texto) {
-    const fecha = new Date().toLocaleString("es-ES");
-    CONFIG.historial.unshift({texto, fecha});
-    if(CONFIG.historial.length > 20) CONFIG.historial.pop();
-}
-
-// CAMBIAR SECCIONES
-function cambiarSeccion(nombre) {
-    document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("activo"));
-    event.currentTarget.classList.add("activo");
-    const cont = document.getElementById("contenidoMenu");
-
-    if(nombre === "inicio") {
-        let html = `<div class="tarjeta-grande">
-            <h2>👋 Bienvenido, ${CONFIG.usuarioActual} 
-                ${CONFIG.esVerificado ? `<span class="etiqueta-verificado ${CONFIG.esCreador ? 'etiqueta-creador' : ''}">✅ ${CONFIG.esCreador ? 'Creador' : 'Verificado'}</span>` : ''}
-            </h2>
-            <p>🆔 ID: ${CONFIG.idActual} | 📈 Nivel: ${CONFIG.nivel} | ⭐ Experiencia: ${CONFIG.experiencia}/100</p>
-            <p>🎂 Edad: ${CONFIG.edad} años | 🔒 Modo: ${CONFIG.edad < 13 ? "Seguro activado" : "Estándar"}</p>
-            <p>🌐 Servidor: ${CONFIG.servidorConectado.nombre} | Jugadores: ${CONFIG.servidorConectado.conectados.toLocaleString("es-ES")} / ${CONFIG.servidorConectado.capacidad.toLocaleString("es-ES")}</p>
-            <br><h3>📋 Misiones Disponibles</h3>`;
-        CONFIG.misiones.forEach(m => {
-            html += `<div class="mision ${m.completada ? 'completada' : ''}">
-                <span>${m.completada ? '✅' : '🔹'} ${m.texto}</span>
-                ${!m.completada ? `<button class="boton boton-verde" onclick="cumplirMision(${m.id})">+${m.recompensa}</button>` : `<span>Hecho</span>`}
-            </div>`;
-        });
-        html += `</div>`;
-        cont.innerHTML = html;
-    }
-
-    else if(nombre === "perfil") {
-        cumplirMision(2);
-        cont.innerHTML = `<div class="tarjeta-grande">
-            <div class="perfil-cabecera">
-                <div class="avatar">👤</div>
-                <div>
-                    <h2>${CONFIG.usuarioActual} ${CONFIG.esVerificado ? `<span class="etiqueta-verificado ${CONFIG.esCreador ? 'etiqueta-creador' : ''}">✅ ${CONFIG.esCreador ? 'Creador' : 'Verificado'}</span>` : ''}</h2>
-                    <p>🆔 ${CONFIG.idActual}</p>
-                    <p>📈 
+        // Ítems básicos
+        { id: 1, tipo: "cara", nombre: "Sonriente", desc: "Expresión amigable", precioM: 50, precioC: 5, icono: "🙂" },
+        { id: 2, tipo: "cara", nombre: "Seria", desc: "Tranquila", precioM: 50, precioC: 5, icono: "😐" },
+        { id: 3, tipo: "cara", nombre: "Alegre", desc: "Muy contento", precioM: 80, precioC: 8, icono: "😃" },
+        { id: 4, tipo: "ropa", nombre: "Camisa Básica", desc: "Sencilla", precioM: 100, precioC: 10, icono: "👕" },
+        { id: 5, tipo: "ropa", nombre: "Pantalón", desc: "Resistente", precioM: 200, precioC: 15, icono: "👖" },
+        { id: 6, tipo: "ropa", nombre: "Traje Explorador", desc: "Completo", precioM: 450, precioC: 30, icono: "🧥" },
+        { id: 7, tipo: "ropa", nombre: "Vestido", desc: "Cómodo", precioM: 180, precioC: 12, icono: "👗" },
+        { id: 8, tipo: "accesorio", nombre: "Gorra", desc: "Clásica", precioM
