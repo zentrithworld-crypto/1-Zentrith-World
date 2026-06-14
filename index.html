@@ -10,82 +10,60 @@
         .oculto{display:none!important}
 
         /* Carga */
-        .pantalla-carga{position:fixed;inset:0;background:#051027;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2000}
-        .titulo-carga{font-size:3rem;color:#3B82F6;margin-bottom:12px;font-weight:700}
-        .subtitulo{font-size:1.2rem;color:#93C5FD;margin-bottom:30px;text-align:center}
-        .barra-carga{width:80%;max-width:400px;height:12px;background:#0F2044;border-radius:10px;overflow:hidden;border:1px solid #1E3A8A}
-        .progreso{width:0%;height:100%;background:#2563EB;transition:width .04s linear}
-        .texto-carga{margin-top:15px;font-size:1.1rem;color:#BFDBFE}
+        .carga{position:fixed;inset:0;background:#051027;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2000}
+        .carga h1{font-size:2.5rem;color:#3B82F6;margin-bottom:10px}
+        .barra{width:80%;max-width:400px;height:10px;background:#0F2044;border-radius:8px;overflow:hidden;margin:15px 0}
+        .progreso{width:0;height:100%;background:#2563EB;transition:width 0.03s}
 
-        /* Acceso */
-        .pantalla-acceso{max-width:420px;margin:60px auto;padding:25px;text-align:center}
-        .pantalla-acceso h2{color:#93C5FD;margin-bottom:25px}
-        .campo{width:100%;padding:12px;margin:10px 0;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;color:white;font-size:1rem}
-        .fila-fecha{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-        .opciones-genero{display:flex;gap:15px;margin:20px 0;flex-wrap:wrap}
-        .opcion{flex:1;padding:12px;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;cursor:pointer}
-        .opcion.seleccionado{border-color:#3B82F6;background:#102859}
-        .boton{padding:10px 14px;border:none;border-radius:6px;cursor:pointer;font-size:1rem;font-weight:500}
-        .boton-azul{background:#2563EB;color:white}
-        .boton-rojo{background:#991B1B;color:white}
-        .boton-verde{background:#15803D;color:white}
-        .boton-volver{background:#1E3A8A;color:white;width:100%;margin-top:15px}
-        .boton-gris{background:#475569;color:white;cursor:not-allowed}
+        /* Formularios */
+        .pantalla{max-width:450px;margin:50px auto;padding:20px;text-align:center}
+        .campo{width:100%;padding:12px;margin:8px 0;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;color:white;font-size:1rem}
+        .fila{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+        .opcion{flex:1;padding:10px;background:#0F2044;border:1px solid #1E3A8A;border-radius:6px;cursor:pointer}
+        .opcion.activa{border-color:#3B82F6;background:#102859}
+
+        /* Botones */
+        .boton{padding:10px 14px;border:none;border-radius:6px;cursor:pointer;font-size:1rem;font-weight:500;margin:5px}
+        .azul{background:#2563EB;color:white}
+        .verde{background:#15803D;color:white}
+        .gris{background:#475569;color:white;cursor:not-allowed}
+        .volver{background:#1E3A8A;color:white;width:100%}
 
         /* Servidores */
-        .pantalla-servidores{max-width:550px;margin:60px auto;padding:25px;text-align:center}
-        .pantalla-servidores h2{color:#93C5FD;margin-bottom:25px}
-        .servidor{padding:18px;margin:12px 0;border-radius:10px;border:1px solid #1E3A8A;background:#0F2044;cursor:pointer;transition:all 0.2s}
+        .servidor{padding:15px;margin:10px 0;border-radius:8px;border:1px solid #1E3A8A;background:#0F2044;cursor:pointer}
         .servidor.activo{border-color:#3B82F6;background:#102859}
-        .servidor.inactivo{opacity:0.4;cursor:not-allowed}
-        .estado-servidor{font-size:0.9rem;color:#94A3B8;margin-top:5px}
 
-        /* Menú Principal */
-        .menu-principal{max-width:950px;margin:40px auto;padding:20px}
-        .cabecera-menu{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #1E3A8A;flex-wrap:wrap;gap:15px}
-        .navegacion{display:flex;gap:15px;margin:20px 0;flex-wrap:wrap}
-        .nav-item{padding:8px 12px;border-radius:6px;cursor:pointer;transition:background 0.2s}
+        /* Menú principal */
+        .cabecera{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #1E3A8A;flex-wrap:wrap;gap:15px}
+        .nav{display:flex;gap:10px;margin:20px 0;flex-wrap:wrap}
+        .nav-item{padding:8px 12px;border-radius:6px;cursor:pointer}
         .nav-item.activo{background:#2563EB}
         .monedas{display:flex;gap:20px}
-        .moneda{text-align:center}
-        .contenido-menu{margin-top:25px}
         .tarjeta{background:#0F2044;border:1px solid #1E3A8A;border-radius:10px;padding:20px;margin-bottom:15px}
-        .buscador{width:100%;padding:12px;margin:10px 0;background:#081838;border:1px solid #1E3A8A;border-radius:6px;color:white;font-size:1rem}
-        .resultado{padding:14px;margin:10px 0;background:#081838;border-radius:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-        .info-jugador{display:flex;align-items:center;gap:8px}
-        .grupo-botones{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap}
-        .mision{padding:12px;margin:10px 0;background:#081838;border-radius:6px;display:flex;justify-content:space-between;align-items:center}
-        .completada{opacity:0.7;text-decoration:line-through}
 
-        /* Estilos para TIENDA */
-        .categorias{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-        .cat{padding:8px 16px;border-radius:6px;background:#081838;cursor:pointer}
+        /* Tienda */
+        .categorias{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}
+        .cat{padding:6px 12px;border-radius:6px;background:#081838;cursor:pointer}
         .cat.activa{background:#2563EB}
-        .grid-tienda{display:grid;grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));gap:15px}
-        .item-tienda{background:#081838;padding:15px;border-radius:8px;text-align:center;border:1px solid #1E3A8A}
-        .precio{margin:10px 0;font-weight:bold}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(160px,1fr));gap:12px}
+        .item{background:#081838;padding:12px;border-radius:8px;border:1px solid #1E3A8A}
         .comprado{opacity:0.6}
-        .insuficiente{color:#EF4444}
-
-        /* Campanita notificaciones */
-        .campana {position:relative;cursor:pointer;font-size:1.6rem;color:#E2F0FF}
-        .badge {position:absolute;top:-6px;right:-8px;background:#ef4444;color:white;font-size:0.7rem;font-weight:bold;padding:2px 6px;border-radius:12px;min-width:18px;text-align:center}
     </style>
 </head>
 <body>
 
-<!-- 1. Pantalla de Carga -->
-<div class="pantalla-carga" id="pantallaCarga">
-    <h1 class="titulo-carga">ZENTRITH WORLD</h1>
-    <p class="subtitulo">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
-    <div class="barra-carga"><div class="progreso" id="progreso"></div></div>
-    <p class="texto-carga" id="estadoCarga">Cargando sistema...</p>
+<!-- 1. PANTALLA DE CARGA -->
+<div class="carga" id="pantallaCarga">
+    <h1>ZENTRITH WORLD</h1>
+    <p>Espacio seguro para jugar y crear</p>
+    <div class="barra"><div class="progreso" id="barraProgreso"></div></div>
+    <p id="textoCarga">Cargando sistema...</p>
 </div>
 
-<!-- 2. Pantalla de Acceso -->
-<div class="pantalla-acceso oculto" id="pantallaAcceso">
+<!-- 2. PANTALLA DE ACCESO -->
+<div class="pantalla oculto" id="pantallaAcceso">
     <h2>📝 Ingresá tus datos</h2>
-    <div class="fila-fecha">
+    <div class="fila">
         <input type="number" class="campo" id="dia" placeholder="Día" min="1" max="31">
         <select class="campo" id="mes">
             <option value="">Mes</option>
@@ -104,278 +82,211 @@
         </select>
         <input type="number" class="campo" id="anio" placeholder="Año" min="1940" max="2025">
     </div>
-    <label style="display:block;margin:20px 0 8px">Soy:</label>
-    <div class="opciones-genero">
+
+    <p style="margin:15px 0">Soy:</p>
+    <div class="fila">
         <div class="opcion" onclick="elegirGenero('varon')">👦 Varón</div>
         <div class="opcion" onclick="elegirGenero('chica')">👧 Chica</div>
     </div>
     <input type="hidden" id="genero">
-    <input type="text" class="campo" id="usuario" placeholder="Nombre de usuario">
-    <button class="boton boton-azul" onclick="validarAcceso()">Continuar</button>
-    <button class="boton boton-volver" onclick="volverACarga()">Volver</button>
+
+    <input type="text" class="campo" id="usuario" placeholder="Escribí tu nombre aquí">
+    <button class="boton azul" onclick="validarAcceso()">Continuar</button>
 </div>
 
-<!-- 3. Pantalla de Servidores -->
-<div class="pantalla-servidores oculto" id="pantallaServidores">
+<!-- 3. PANTALLA DE SERVIDORES -->
+<div class="pantalla oculto" id="pantallaServidores">
     <h2>🌐 Elegí tu servidor</h2>
-    <div class="servidor activo" onclick="conectarServidor(1)">
-        <div style="font-weight:500">🟢 Servidor 1 - Zentrith Norte</div>
-        <div class="estado-servidor">En línea · Capacidad: 500 jugadores</div>
-    </div>
-    <div class="servidor activo" onclick="conectarServidor(2)">
-        <div style="font-weight:500">🟢 Servidor 2 - Zentrith Sur</div>
-        <div class="estado-servidor">En línea · Capacidad: 500 jugadores</div>
-    </div>
-    <div class="servidor inactivo">
-        <div style="font-weight:500">⚪ Servidores 3 al 10</div>
-        <div class="estado-servidor">Se activan cuando sea necesario</div>
-    </div>
-    <button class="boton boton-volver" onclick="volverAAcceso()">Volver</button>
+    <div class="servidor activo" onclick="irAlMenu()">🟢 Servidor 1 - Zentrith Norte</div>
+    <div class="servidor activo" onclick="irAlMenu()">🟢 Servidor 2 - Zentrith Sur</div>
+    <button class="boton volver" onclick="volverAAcceso()">Volver</button>
 </div>
 
-<!-- 4. Menú Principal -->
-<div class="menu-principal oculto" id="menuPrincipal">
-    <div class="cabecera-menu">
+<!-- 4. MENÚ PRINCIPAL -->
+<div class="pantalla oculto" id="menuPrincipal">
+    <div class="cabecera">
         <h2>ZENTRITH WORLD</h2>
-        <div style="display:flex;align-items:center;gap:15px">
-            <div class="campana" onclick="verNotificaciones()">🔔<span class="badge oculto" id="contadorAvisos">0</span></div>
-            <div class="monedas">
-                <div class="moneda"><div>💎 Cristales Z</div><div style="font-size:1.2rem; font-weight:bold" class="cristal-z">0</div></div>
-                <div class="moneda"><div>🪙 Monedas Z</div><div style="font-size:1.2rem; font-weight:bold" class="moneda-z">0</div></div>
-            </div>
+        <div class="monedas">
+            <div>🪙 <span id="txtMonedas">0</span></div>
+            <div>💎 <span id="txtCristales">0</span></div>
         </div>
     </div>
 
-    <div class="navegacion">
+    <div class="nav">
         <div class="nav-item activo" onclick="cambiarSeccion('inicio')">Inicio</div>
-        <div class="nav-item" onclick="cambiarSeccion('jugar')">Jugar</div>
-        <div class="nav-item" onclick="cambiarSeccion('crear')">Crear</div>
         <div class="nav-item" onclick="cambiarSeccion('tienda')">🛒 Tienda</div>
         <div class="nav-item" onclick="cambiarSeccion('inventario')">🎒 Inventario</div>
-        <div class="nav-item" onclick="cambiarSeccion('amigos')">Amigos</div>
-        <div class="nav-item" onclick="cambiarSeccion('ajustes')">Ajustes</div>
     </div>
 
-    <div class="contenido-menu" id="contenidoMenu"></div>
-
-    <button class="boton boton-volver" onclick="volverAServidores()">Cambiar de servidor</button>
+    <div id="contenido"></div>
 </div>
 
 <script>
-// ⚙️ CONFIGURACIÓN - CON TIENDA E INVENTARIO
+// ⚙️ CONFIGURACIÓN - TODO LO QUE USAMOS, SIN EXTRAS
 const CONFIG = {
-    activo: true,
-    modoPrueba: true,
-    maxPorServidor: 500,
-    maxServidores: 10,
-    usuarioActual: "",
-    idActual: "",
-    contadorId: 1000,
-    monedasZ: 0,
-    cristalesZ: 0,
-    jugadores: [],
-    inventario: [], // Lo que compres se guarda acá
-    // TU CUENTA OFICIAL
+    usuario: "",
+    monedas: 0,
+    cristales: 0,
+    inventario: [],
+    // TU CUENTA EXACTA
     creador: { 
-        id: "01", 
         nombre: "El Arquitecto 🔮",
         monedas: 9999999,
         cristales: 999999
     },
-    solicitudesRecibidas: [],
-    listaAmigos: [],
-    nivelesConfianza: { bajo: { monedas:50, cristales:5 }, medio: { monedas:500, cristales:50 }, alto: { monedas:5000, cristales:500 } },
-    misiones: [
-        { id:1, texto:"Jugar 15 minutos", recompensa:20, completada:false },
-        { id:2, texto:"Visitar la zona de creación", recompensa:15, completada:false },
-        { id:3, texto:"Agregar 1 amigo", recompensa:25, completada:false }
-    ],
-    // 🛒 CATÁLOGO DE LA TIENDA
     tienda: [
-        {id:1, nombre:"Sombrero Mágico", categoria:"apariencia", precioMonedas:250, precioCristales:15, descripcion:"Accesorio especial"},
-        {id:2, nombre:"Espada Básica", categoria:"objetos", precioMonedas:500, precioCristales:30, descripcion:"Para tus aventuras"},
-        {id:3, nombre:"Piedra Luminosa", categoria:"decoracion", precioMonedas:120, precioCristales:8, descripcion:"Decora tus espacios"},
-        {id:4, nombre:"Traje de Explorador", categoria:"apariencia", precioMonedas:800, precioCristales:45, descripcion:"Ropa resistente"},
-        {id:5, nombre:"Banco de Trabajo", categoria:"herramientas", precioMonedas:1500, precioCristales:70, descripcion:"Para crear mejor"},
-        {id:6, nombre:"Cristal de Energía", categoria:"objetos", precioMonedas:300, precioCristales:12, descripcion:"Recarga tus poderes"}
+        {id:1, nombre:"Sombrero Mágico", precioM:250, precioC:15, desc:"Accesorio especial"},
+        {id:2, nombre:"Espada Básica", precioM:500, precioC:30, desc:"Para tus aventuras"},
+        {id:3, nombre:"Piedra Luminosa", precioM:120, precioC:8, desc:"Decora tus espacios"},
+        {id:4, nombre:"Traje de Explorador", precioM:800, precioC:45, desc:"Ropa resistente"},
+        {id:5, nombre:"Banco de Trabajo", precioM:1500, precioC:70, desc:"Herramienta de creación"}
     ]
 };
 
-// 🚀 Pantalla de carga
-let porcentaje = 0;
+// 🚀 PANTALLA DE CARGA
+let progreso = 0;
 const intervaloCarga = setInterval(() => {
-    if (porcentaje < 100) { porcentaje++; document.getElementById('progreso').style.width = porcentaje + '%'; document.getElementById('estadoCarga').textContent = `Cargando... ${porcentaje}%`; }
-    else { clearInterval(intervaloCarga); setTimeout(() => { document.getElementById('pantallaCarga').classList.add('oculto'); document.getElementById('pantallaAcceso').classList.remove('oculto'); }, 700); }
-}, 30);
-
-// 📋 Elegir género
-function elegirGenero(valor) { document.querySelectorAll('.opcion').forEach(op => op.classList.remove('seleccionado')); event.currentTarget.classList.add('seleccionado'); document.getElementById('genero').value = valor; }
-
-// 🆔 Generar datos cuenta
-function generarDatosCuenta() {
-    const nombreIngresado = CONFIG.usuarioActual.trim();
-    if (nombreIngresado === CONFIG.creador.nombre) {
-        CONFIG.idActual = CONFIG.creador.id;
-        CONFIG.monedasZ = CONFIG.creador.monedas;
-        CONFIG.cristalesZ = CONFIG.creador.cristales;
+    if(progreso < 100) {
+        progreso++;
+        document.getElementById("barraProgreso").style.width = progreso + "%";
+        document.getElementById("textoCarga").textContent = `Cargando... ${progreso}%`;
     } else {
-        CONFIG.contadorId++;
-        CONFIG.idActual = CONFIG.contadorId.toString();
-        CONFIG.monedasZ = 0;
-        CONFIG.cristalesZ = 0;
-        CONFIG.jugadores.push({ id: CONFIG.idActual, nombre: nombreIngresado });
+        clearInterval(intervaloCarga);
+        setTimeout(() => {
+            document.getElementById("pantallaCarga").classList.add("oculto");
+            document.getElementById("pantallaAcceso").classList.remove("oculto");
+        }, 500);
     }
-    actualizarVistaMonedas();
-    actualizarAvisos();
+}, 25);
+
+// 📋 ELEGIR GÉNERO
+function elegirGenero(valor) {
+    document.querySelectorAll(".opcion").forEach(o => o.classList.remove("activa"));
+    event.currentTarget.classList.add("activa");
+    document.getElementById("genero").value = valor;
 }
 
-// 💰 Actualizar monedas en pantalla
-function actualizarVistaMonedas() { 
-    document.querySelector('.moneda-z').textContent = CONFIG.monedasZ.toLocaleString('es-ES'); 
-    document.querySelector('.cristal-z').textContent = CONFIG.cristalesZ.toLocaleString('es-ES'); 
-}
-
-// ✅ Validar acceso
+// ✅ VALIDAR ACCESO
 function validarAcceso() {
-    const dia = document.getElementById('dia').value, mes = document.getElementById('mes').value, anio = document.getElementById('anio').value, genero = document.getElementById('genero').value, usuario = document.getElementById('usuario').value.trim();
-    const prohibidas = ["abuso", "violencia", "sexo", "link", "http", "estafa"];
-    if (!dia || !mes || !anio) return alert("Completá todos los campos");
-    if (!genero) return alert("Elegí tu género");
-    if (!usuario) return alert("Escribí tu nombre");
-    if (prohibidas.some(p => usuario.toLowerCase().includes(p))) return alert("Nombre no permitido");
-    CONFIG.usuarioActual = usuario;
-    generarDatosCuenta();
-    document.getElementById('pantallaAcceso').classList.add('oculto');
-    document.getElementById('pantallaServidores').classList.remove('oculto');
+    const dia = document.getElementById("dia").value;
+    const mes = document.getElementById("mes").value;
+    const anio = document.getElementById("anio").value;
+    const genero = document.getElementById("genero").value;
+    const usuario = document.getElementById("usuario").value.trim();
+
+    if(!dia || !mes || !anio) return alert("Completá tu fecha de nacimiento");
+    if(!genero) return alert("Elegí tu género");
+    if(!usuario) return alert("Escribí tu nombre");
+
+    CONFIG.usuario = usuario;
+    // RECONOCE TU NOMBRE CON EMOJI
+    if(usuario === CONFIG.creador.nombre) {
+        CONFIG.monedas = CONFIG.creador.monedas;
+        CONFIG.cristales = CONFIG.creador.cristales;
+    } else {
+        CONFIG.monedas = 0;
+        CONFIG.cristales = 0;
+    }
+
+    document.getElementById("pantallaAcceso").classList.add("oculto");
+    document.getElementById("pantallaServidores").classList.remove("oculto");
 }
 
-// 🌐 Conectar servidor
-function conectarServidor(numero) {
-    document.getElementById('pantallaServidores').classList.add('oculto');
-    document.getElementById('menuPrincipal').classList.remove('oculto');
-    actualizarAvisos();
-    cambiarSeccion('inicio');
+// 🔙 VOLVER ATRÁS
+function volverAAcceso() {
+    document.getElementById("pantallaServidores").classList.add("oculto");
+    document.getElementById("pantallaAcceso").classList.remove("oculto");
 }
 
-// 🔙 Volver pantallas
-function volverACarga() { document.getElementById('pantallaAcceso').classList.add('oculto'); document.getElementById('pantallaCarga').classList.remove('oculto'); porcentaje = 0; }
-function volverAAcceso() { document.getElementById('pantallaServidores').classList.add('oculto'); document.getElementById('pantallaAcceso').classList.remove('oculto'); }
-function volverAServidores() { document.getElementById('menuPrincipal').classList.add('oculto'); document.getElementById('pantallaServidores').classList.remove('oculto'); }
+// 🌐 ENTRAR AL JUEGO
+function irAlMenu() {
+    actualizarSaldos();
+    document.getElementById("pantallaServidores").classList.add("oculto");
+    document.getElementById("menuPrincipal").classList.remove("oculto");
+    cambiarSeccion("inicio");
+}
 
-// 🔄 Cambiar secciones
+// 💰 ACTUALIZAR SALDOS
+function actualizarSaldos() {
+    document.getElementById("txtMonedas").textContent = CONFIG.monedas.toLocaleString("es-ES");
+    document.getElementById("txtCristales").textContent = CONFIG.cristales.toLocaleString("es-ES");
+}
+
+// 🔄 CAMBIAR PANTALLAS
 function cambiarSeccion(nombre) {
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('activo'));
-    event.currentTarget.classList.add('activo');
-    const contenido = document.getElementById('contenidoMenu');
+    document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("activo"));
+    event.currentTarget.classList.add("activo");
+    const cont = document.getElementById("contenido");
 
-    if (nombre === 'inicio') {
-        let html = `<div class="tarjeta"><h3>📢 Bienvenido, ${CONFIG.usuarioActual}</h3><p>🆔 Tu ID: ${CONFIG.idActual}</p><br><h4>📋 Misiones diarias</h4>`;
-        CONFIG.misiones.forEach(m => {
-            html += `<div class="mision ${m.completada ? 'completada' : ''}">
-                <span>${m.completada ? '✅' : '🔹'} ${m.texto}</span>
-                ${!m.completada ? `<button class="boton boton-verde" onclick="cumplirMision(${m.id})">Cumplir → +${m.recompensa}</button>` : `<span>Hecho</span>`}
-            </div>`;
-        });
-        html += `<p style="margin-top:15px">🎁 Tenés acceso a la tienda para probar tus monedas</p></div>`;
-        contenido.innerHTML = html;
+    if(nombre === "inicio") {
+        cont.innerHTML = `<div class="tarjeta"><h3>👋 Bienvenido, ${CONFIG.usuario}</h3>
+            <p>Tu saldo actual:</p>
+            <p>🪙 ${CONFIG.monedas.toLocaleString("es-ES")} Monedas Z</p>
+            <p>💎 ${CONFIG.cristales.toLocaleString("es-ES")} Cristales Z</p>
+            <p>Probá la tienda para ver cómo funcionan las compras.</p></div>`;
     }
 
-    else if (nombre === 'jugar') {
-        contenido.innerHTML = `<div class="tarjeta"><h3>🎮 Zona de Juego</h3><p>Próximamente: mundos, modos y mapas creados por vos.</p></div>`;
+    else if(nombre === "tienda") {
+        cont.innerHTML = `<div class="tarjeta"><h3>🛒 Tienda</h3>
+            <div class="categorias"><div class="cat activa" onclick="mostrarTienda()">Todos</div></div>
+            <div class="grid" id="listaTienda"></div></div>`;
+        mostrarTienda();
     }
 
-    else if (nombre === 'crear') {
-        contenido.innerHTML = `<div class="tarjeta"><h3>🛠️ Zona de Creación</h3><p>Herramientas para diseñar tus propios espacios.</p><br><button class="boton boton-azul" onclick="cumplirMision(2)">Visitar zona (+15 monedas)</button></div>`;
-    }
-
-    // 🛒 SECCIÓN TIENDA
-    else if (nombre === 'tienda') {
-        contenido.innerHTML = `
-            <div class="tarjeta">
-                <h3>🛒 Tienda de Zentrith</h3>
-                <div class="categorias">
-                    <div class="cat activa" onclick="cambiarCategoria('todos')">Todos</div>
-                    <div class="cat" onclick="cambiarCategoria('apariencia')">Apariencia</div>
-                    <div class="cat" onclick="cambiarCategoria('objetos')">Objetos</div>
-                    <div class="cat" onclick="cambiarCategoria('decoracion')">Decoración</div>
-                    <div class="cat" onclick="cambiarCategoria('herramientas')">Herramientas</div>
-                </div>
-                <div class="grid-tienda" id="listaTienda"></div>
-            </div>`;
-        cambiarCategoria('todos');
-    }
-
-    // 🎒 SECCIÓN INVENTARIO
-    else if (nombre === 'inventario') {
-        if (CONFIG.inventario.length === 0) {
-            contenido.innerHTML = `<div class="tarjeta"><h3>🎒 Mi Inventario</h3><p style="text-align:center;opacity:0.7;padding:20px">Aún no tenés nada. Comprá algo en la tienda para verlo acá.</p></div>`;
+    else if(nombre === "inventario") {
+        if(CONFIG.inventario.length === 0) {
+            cont.innerHTML = `<div class="tarjeta"><h3>🎒 Inventario</h3><p>Aún no tenés objetos. Comprá algo en la tienda.</p></div>`;
         } else {
-            let html = `<div class="tarjeta"><h3>🎒 Mi Inventario</h3><div class="grid-tienda">`;
-            CONFIG.inventario.forEach(item => {
-                html += `<div class="item-tienda comprado">
-                    <h4>${item.nombre}</h4>
-                    <p>${item.descripcion}</p>
-                    <span style="color:#86EFAC">✅ Adquirido</span>
-                </div>`;
-            });
+            let html = `<div class="tarjeta"><h3>Mis objetos</h3><div class="grid">`;
+            CONFIG.inventario.forEach(i => html += `<div class="item"><h4>${i.nombre}</h4><p>${i.desc}</p></div>`);
             html += `</div></div>`;
-            contenido.innerHTML = html;
+            cont.innerHTML = html;
         }
     }
-
-    else if (nombre === 'amigos') {
-        contenido.innerHTML = `
-            <div class="tarjeta">
-                <h3>👥 Amigos</h3>
-                <div class="grupo-botones">
-                    <button class="boton boton-azul" onclick="mostrarBusqueda()">Buscar</button>
-                    <button class="boton boton-azul" onclick="verSolicitudes()">Solicitudes</button>
-                    <button class="boton boton-azul" onclick="verAmigos()">Mis amigos</button>
-                </div>
-                <div id="zonaAmigos"></div>
-            </div>`;
-        mostrarBusqueda();
-    }
-
-    else if (nombre === 'ajustes') {
-        contenido.innerHTML = `<div class="tarjeta"><h3>⚙️ Ajustes</h3><p>Idioma, privacidad, notificaciones y cerrar sesión.</p><br><button class="boton boton-volver" onclick="cerrarSesion()">Cerrar sesión</button></div>`;
-    }
 }
 
-// 🛒 Cambiar categoría en tienda
-function cambiarCategoria(cat) {
-    document.querySelectorAll('.cat').forEach(c => c.classList.remove('activa'));
-    event.currentTarget.classList.add('activa');
-    const lista = document.getElementById('listaTienda');
-    let filtrados = cat === 'todos' ? CONFIG.tienda : CONFIG.tienda.filter(i => i.categoria === cat);
+// 🛒 MOSTRAR TIENDA
+function mostrarTienda() {
+    const lista = document.getElementById("listaTienda");
     let html = "";
-    filtrados.forEach(item => {
+    CONFIG.tienda.forEach(item => {
         const yaTiene = CONFIG.inventario.some(i => i.id === item.id);
-        const tieneMonedas = CONFIG.monedasZ >= item.precioMonedas;
-        const tieneCristales = CONFIG.cristalesZ >= item.precioCristales;
-        html += `<div class="item-tienda ${yaTiene ? 'comprado' : ''}">
+        html += `<div class="item ${yaTiene ? 'comprado' : ''}">
             <h4>${item.nombre}</h4>
-            <p style="font-size:0.9rem">${item.descripcion}</p>
-            <div class="precio">🪙 ${item.precioMonedas} <br> 💎 ${item.precioCristales}</div>
+            <p style="font-size:0.9rem">${item.desc}</p>
+            <p>🪙 ${item.precioM} | 💎 ${item.precioC}</p>
             ${yaTiene 
-                ? `<button class="boton boton-gris" disabled>Ya lo tenés</button>` 
-                : `<button class="boton boton-verde" onclick="comprarItem(${item.id})">Comprar</button>`
+                ? `<button class="boton gris" disabled>Ya lo tenés</button>` 
+                : `<button class="boton verde" onclick="comprar(${item.id})">Comprar</button>`
             }
         </div>`;
     });
     lista.innerHTML = html;
 }
 
-// ✅ COMPRAR ITEM - ACA SE PRUEBA SI FUNCIONAN LAS MONEDAS
-function comprarItem(id) {
+// ✅ COMPRAR OBJETO
+function comprar(id) {
     const item = CONFIG.tienda.find(i => i.id === id);
-    if (!item) return;
-    if (CONFIG.inventario.some(i => i.id === id)) return alert("Ya tenés este objeto");
+    if(!item) return;
+    if(CONFIG.inventario.some(i => i.id === id)) return alert("Ya tenés este objeto");
 
-    // Elegimos pagar con monedas primero
-    if (CONFIG.monedasZ >= item.precioMonedas) {
-        CONFIG.monedasZ -= item.precioMonedas;
+    if(CONFIG.monedas >= item.precioM) {
+        CONFIG.monedas -= item.precioM;
         CONFIG.inventario.push(item);
-        actualizarVistaMonedas();
-        cambiarCategoria(document.querySelector('.cat.activa').textContent.toLowerCase());
-        aler
+        actualizarSaldos();
+        mostrarTienda();
+        alert(`✅ Compraste: ${item.nombre}`);
+    } else if(CONFIG.cristales >= item.precioC) {
+        CONFIG.cristales -= item.precioC;
+        CONFIG.inventario.push(item);
+        actualizarSaldos();
+        mostrarTienda();
+        alert(`✅ Compraste: ${item.nombre}`);
+    } else {
+        alert("❌ No tenés saldo suficiente");
+    }
+}
+</script>
+
+</body>
+</html>
