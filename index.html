@@ -4,83 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zentrith World - Plataforma Principal</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #051027; color: #E2F0FF; min-height: 100vh; line-height: 1.5; }
-        .oculto { display: none !important; }
-
-        /* Carga */
-        .pantalla-carga { position: fixed; inset: 0; background: #051027; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; }
-        .titulo-carga { font-size: 2.8rem; color: #3B82F6; margin-bottom: 12px; font-weight: 700; }
-        .subtitulo { font-size: 1.2rem; color: #93C5FD; margin-bottom: 30px; text-align: center; }
-        .barra-carga { width: 80%; max-width: 400px; height: 12px; background: #0F2044; border-radius: 10px; overflow: hidden; border: 1px solid #1E3A8A; }
-        .progreso { width: 0%; height: 100%; background: #2563EB; transition: width 0.03s linear; }
-        .texto-carga { margin-top: 15px; font-size: 1.1rem; color: #BFDBFE; text-align: center; padding: 0 20px; }
-
-        /* Acceso */
-        .pantalla-acceso { max-width: 450px; margin: 60px auto; padding: 25px; text-align: center; }
-        .pantalla-acceso h2 { color: #93C5FD; margin-bottom: 25px; }
-        .campo { width: 100%; padding: 12px; margin: 10px 0; background: #0F2044; border: 1px solid #1E3A8A; border-radius: 8px; color: #fff; font-size: 1rem; }
-        .fila-fecha { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .opciones-genero { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
-        .opcion { flex: 1; padding: 12px; background: #0F2044; border: 1px solid #1E3A8A; border-radius: 8px; cursor: pointer; transition: 0.2s; }
-        .opcion.seleccionado { border-color: #3B82F6; background: #102859; }
-
-        /* Verificación */
-        .pantalla-verificacion { max-width: 500px; margin: 60px auto; padding: 25px; text-align: center; }
-        .aviso-legal { background: #0F2044; border: 1px solid #F59E0B; border-radius: 8px; padding: 15px; margin: 20px 0; color: #BFDBFE; font-size: 0.95rem; line-height: 1.5; }
-        #vistaPrevia { width: 200px; height: 200px; margin: 15px auto; border: 1px solid #1E3A8A; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94A3B8; overflow: hidden; }
-        #vistaPrevia img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Servidores */
-        .pantalla-servidores { max-width: 650px; margin: 60px auto; padding: 25px; text-align: center; }
-        .pantalla-servidores h2 { color: #93C5FD; margin-bottom: 25px; }
-        .servidor { padding: 18px; margin: 12px 0; border-radius: 10px; border: 1px solid #1E3A8A; background: #0F2044; cursor: pointer; transition: 0.2s; }
-        .servidor:hover { border-color: #3B82F6; background: #102859; }
-        .servidor.especial { border-color: #8B5CF6; background: #1A103D; }
-        .servidor.especial:hover { border-color: #A78BFA; background: #241452; }
-        .estado-servidor { font-size: 0.9rem; color: #94A3B8; margin-top: 5px; }
-
-        /* Menú Principal */
-        .menu-principal { max-width: 1000px; margin: 40px auto; padding: 20px; }
-        .cabecera-menu { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #1E3A8A; flex-wrap: wrap; gap: 15px; }
-        .navegacion { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
-        .nav-item { padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-        .nav-item.activo { background: #2563EB; }
-        .monedas { display: flex; gap: 25px; flex-wrap: wrap; }
-        .moneda { text-align: center; }
-        .contenido-menu { margin-top: 25px; }
-        .tarjeta { background: #0F2044; border: 1px solid #1E3A8A; border-radius: 10px; padding: 20px; margin-bottom: 15px; }
-        .tarjeta-grande { background: #0F2044; border: 1px solid #1E3A8A; border-radius: 10px; padding: 25px; margin-bottom: 20px; }
-        .etiqueta-verificado { display: inline-block; background: #059669; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; margin-left: 8px; }
-        .etiqueta-creador { background: #8B5CF6; }
-
-        /* Vista del Jugador */
-        .jugador-vista { width: 220px; height: 280px; margin: 0 auto 25px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 5rem; background: #081838; border-radius: 12px; border: 2px solid #1E3A8A; overflow: hidden; }
-        .jugador-cara { position: absolute; top: 20%; font-size: 2.2rem; z-index: 2; }
-        .jugador-cuerpo { position: absolute; top: 30%; font-size: 3rem; z-index: 1; }
-        .jugador-accesorio { position: absolute; top: 35%; font-size: 2rem; z-index: 3; }
-        .jugador-ropa { position: absolute; top: 42%; font-size: 2.8rem; z-index: 1; }
-        .jugador-montura { position: absolute; bottom: 10%; font-size: 3.2rem; z-index: 0; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; margin-top: 15px; }
-        .item { background: #081838; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #1E3A8A; }
-        .item.comprado { border-color: #15803D; }
-        .item.equipado { border-color: #F59E0B; background: #1A2446; }
-        .selector-idioma { padding: 8px; border-radius: 6px; background: #0F2044; color: white; border: 1px solid #1E3A8A; }
-
-        /* Botones */
-        .boton { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 500; transition: 0.2s; }
-        .boton:hover { filter: brightness(1.1); }
-        .boton:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
-        .boton-azul { background: #2563EB; color: white; }
-        .boton-verde { background: #15803D; color: white; }
-        .boton-rojo { background: #991B1B; color: white; }
-        .boton-gris { background: #475569; color: white; }
-        .boton-amarillo { background: #F59E0B; color: white; }
-        .boton-volver { background: #1E3A8A; color: white; width: 100%; margin-top: 15px; }
-        .boton-cat { margin: 0 5px 10px 0; }
-    </style>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
@@ -195,8 +119,92 @@
     <button class="boton boton-volver" onclick="volverAServidores()" data-tr="changeServerBtn">Cambiar Servidor</button>
 </div>
 
-<script>
-// 📚 Traducciones
+<script src="datos.js"></script>
+<script src="funciones.js"></script>
+</body>
+            </html>* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI, Roboto, sans-serif'; }
+body { background: #051027; color: #E2F0FF; min-height: 100vh; line-height: 1.5; }
+.oculto { display: none !important; }
+
+/* Carga */
+.pantalla-carga { position: fixed; inset: 0; background: #051027; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+.titulo-carga { font-size: clamp(2rem, 8vw, 2.8rem); color: #3B82F6; margin-bottom: 12px; font-weight: 700; text-align: center; }
+.subtitulo { font-size: clamp(1rem, 4vw, 1.2rem); color: #93C5FD; margin-bottom: 30px; text-align: center; }
+.barra-carga { width: 90%; max-width: 400px; height: 12px; background: #0F2044; border-radius: 10px; overflow: hidden; border: 1px solid #1E3A8A; }
+.progreso { width: 0%; height: 100%; background: #2563EB; transition: width 0.03s linear; }
+.texto-carga { margin-top: 15px; font-size: clamp(0.9rem, 3.5vw, 1.1rem); color: #BFDBFE; text-align: center; }
+
+/* Acceso */
+.pantalla-acceso { max-width: 450px; margin: 40px auto; padding: 25px; }
+.pantalla-acceso h2 { color: #93C5FD; margin-bottom: 25px; text-align: center; }
+.campo { width: 100%; padding: 12px; margin: 10px 0; background: #0F2044; border: 1px solid #1E3A8A; border-radius: 8px; color: #fff; font-size: 1rem; }
+.fila-fecha { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.opciones-genero { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; justify-content: center; }
+.opcion { flex: 1 1 100px; padding: 12px; background: #0F2044; border: 1px solid #1E3A8A; border-radius: 8px; cursor: pointer; transition: 0.2s; text-align: center; }
+.opcion.seleccionado { border-color: #3B82F6; background: #102859; }
+
+/* Verificación */
+.pantalla-verificacion { max-width: 500px; margin: 40px auto; padding: 25px; text-align: center; }
+.aviso-legal { background: #0F2044; border: 1px solid #F59E0B; border-radius: 8px; padding: 15px; margin: 20px 0; color: #BFDBFE; font-size: 0.95rem; text-align: left; }
+#vistaPrevia { width: 200px; height: 200px; margin: 15px auto; border: 1px solid #1E3A8A; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94A3B8; overflow: hidden; background: #081838; }
+#vistaPrevia img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Servidores */
+.pantalla-servidores { max-width: 650px; margin: 40px auto; padding: 25px; }
+.pantalla-servidores h2 { color: #93C5FD; margin-bottom: 25px; text-align: center; }
+.servidor { padding: 18px; margin: 12px 0; border-radius: 10px; border: 1px solid #1E3A8A; background: #0F2044; cursor: pointer; transition: 0.2s; }
+.servidor:hover { border-color: #3B82F6; background: #102859; }
+.servidor.especial { border-color: #8B5CF6; background: #1A103D; }
+.servidor.especial:hover { border-color: #A78BFA; background: #241452; }
+.estado-servidor { font-size: 0.9rem; color: #94A3B8; margin-top: 5px; }
+
+/* Menú Principal */
+.menu-principal { max-width: 1000px; margin: 20px auto; padding: 20px; }
+.cabecera-menu { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #1E3A8A; flex-wrap: wrap; gap: 15px; }
+.navegacion { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
+.nav-item { padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: 0.2s; background: #0F2044; }
+.nav-item.activo { background: #2563EB; }
+.monedas { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.moneda { text-align: center; }
+.contenido-menu { margin-top: 25px; }
+.tarjeta, .tarjeta-grande { background: #0F2044; border: 1px solid #1E3A8A; border-radius: 10px; padding: 20px; margin-bottom: 15px; }
+.tarjeta-grande { padding: 25px; }
+.etiqueta-verificado { display: inline-block; background: #059669; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; margin-left: 8px; }
+.etiqueta-creador { background: #8B5CF6; }
+
+/* Vista del Jugador */
+.jugador-vista { width: 220px; height: 280px; margin: 0 auto 25px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 5rem; background: #081838; border-radius: 12px; border: 2px solid #1E3A8A; overflow: hidden; }
+.jugador-cara { position: absolute; top: 20%; font-size: 2.2rem; z-index: 2; }
+.jugador-cuerpo { position: absolute; top: 30%; font-size: 3rem; z-index: 1; }
+.jugador-accesorio { position: absolute; top: 35%; font-size: 2rem; z-index: 3; }
+.jugador-ropa { position: absolute; top: 42%; font-size: 2.8rem; z-index: 1; }
+.jugador-montura { position: absolute; bottom: 10%; font-size: 3.2rem; z-index: 0; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 15px; }
+.item { background: #081838; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #1E3A8A; }
+.item.comprado { border-color: #15803D; }
+.item.equipado { border-color: #F59E0B; background: #1A2446; }
+.selector-idioma { padding: 8px; border-radius: 6px; background: #0F2044; color: white; border: 1px solid #1E3A8A; }
+
+/* Botones */
+.boton { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 500; transition: 0.2s; margin: 5px 0; }
+.boton:hover { filter: brightness(1.1); }
+.boton:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
+.boton-azul { background: #2563EB; color: white; }
+.boton-verde { background: #15803D; color: white; }
+.boton-rojo { background: #991B1B; color: white; }
+.boton-gris { background: #475569; color: white; }
+.boton-amarillo { background: #F59E0B; color: white; }
+.boton-volver { background: #1E3A8A; color: white; width: 100%; margin-top: 15px; }
+.boton-cat { margin: 0 5px 10px 0; }
+
+/* Ajustes para pantallas chicas */
+@media (max-width: 480px) {
+    .pantalla-acceso, .pantalla-verificacion, .pantalla-servidores, .menu-principal { padding: 15px; margin: 20px auto; }
+    .fila-fecha { flex-direction: column; }
+    .campo { max-width: 100%; }
+    .navegacion { justify-content: center; }
+}// 📚 Traducciones
 const TEXTOS = {
     es: {
         tagline: "ESPACIO SEGURO PARA JUGAR Y CREAR",
@@ -294,12 +302,7 @@ const TEXTOS = {
     }
 };
 
-let idiomaActual = "es";
-let progreso = 0;
-
-// ==============================================
-// 🔹 CONFIGURACIÓN GENERAL COMPLETA
-// ==============================================
+// ⚙️ Configuración General
 const CONFIG = {
     usuarioActual: "",
     idActual: "",
@@ -341,10 +344,7 @@ const CONFIG = {
         { id: 2, titulo: "Explorador", descripcion: "Entrá a 2 servidores diferentes", completada: false, recompensaMonedas: 300, recompensaEnergia: 50 },
         { id: 3, titulo: "Personalizador", descripcion: "Equipá ropa y accesorios", completada: false, recompensaMonedas: 200, recompensaEnergia: 40 }
     ],
-
-    // 🎭 TODOS LOS TRAJES Y PERSONAJES
     tienda: [
-        // Ítems básicos
         { id: 1, tipo: "cara", nombre: "Sonriente", desc: "Expresión amigable", precioM: 50, precioC: 5, icono: "🙂" },
         { id: 2, tipo: "cara", nombre: "Seria", desc: "Tranquila", precioM: 50, precioC: 5, icono: "😐" },
         { id: 3, tipo: "cara", nombre: "Alegre", desc: "Muy contento", precioM: 80, precioC: 8, icono: "😃" },
@@ -352,4 +352,339 @@ const CONFIG = {
         { id: 5, tipo: "ropa", nombre: "Pantalón", desc: "Resistente", precioM: 200, precioC: 15, icono: "👖" },
         { id: 6, tipo: "ropa", nombre: "Traje Explorador", desc: "Completo", precioM: 450, precioC: 30, icono: "🧥" },
         { id: 7, tipo: "ropa", nombre: "Vestido", desc: "Cómodo", precioM: 180, precioC: 12, icono: "👗" },
-        { id: 8, tipo: "accesorio", nombre: "Gorra", desc: "Clásica", precioM
+        { id: 8, tipo: "accesorio", nombre: "Gorra", desc: "Clásica", precioM: 120, precioC: 12, icono: "🧢" },
+        { id: 9, tipo: "accesorio", nombre: "Gafas", desc: "Modernas", precioM: 180, precioC: 18, icono: "👓" },
+        { id: 10, tipo: "accesorio", nombre: "Mochila", desc: "Para objetos", precioM: 300, precioC: 25, icono: "🎒" }
+    ]
+};
+let idiomaActual = "es";
+let progreso = 0;
+
+// 🚀 Iniciar carga
+window.addEventListener("load", iniciarCarga);
+function iniciarCarga() {
+    progreso = 0;
+    const intervalo = setInterval(() => {
+        if (progreso < 100) {
+            progreso++;
+            document.getElementById("barraProgreso").style.width = `${progreso}%`;
+            if (progreso < 30) document.getElementById("estadoCarga").textContent = "Verificando conexión segura...";
+            else if (progreso < 60) document.getElementById("estadoCarga").textContent = "Cargando reglas de seguridad...";
+            else if (progreso < 90) document.getElementById("estadoCarga").textContent = "Preparando sistema de cuentas...";
+            else document.getElementById("estadoCarga").textContent = "Todo listo";
+        } else {
+            clearInterval(intervalo);
+            setTimeout(() => {
+                document.getElementById("pantallaCarga").classList.add("oculto");
+                document.getElementById("pantallaAcceso").classList.remove("oculto");
+            }, 600);
+        }
+    }, 25);
+}
+
+// 🌐 Cambiar idioma
+function cambiarIdioma() {
+    idiomaActual = document.getElementById("cambiarIdioma").value;
+    document.getElementById("cambiarIdioma2").value = idiomaActual;
+    document.documentElement.lang = idiomaActual;
+    document.querySelectorAll("[data-tr]").forEach(el => {
+        const clave = el.getAttribute("data-tr");
+        el.textContent = TEXTOS[idiomaActual][clave] || el.textContent;
+    });
+    document.querySelectorAll("[data-tr-placeholder]").forEach(el => {
+        const clave = el.getAttribute("data-tr-placeholder");
+        el.placeholder = TEXTOS[idiomaActual][clave] || el.placeholder;
+    });
+    actualizarContadoresServidores();
+}
+
+// 📅 Calcular edad
+function calcularEdad(dia, mes, anio) {
+    const hoy = new Date();
+    const nacimiento = new Date(anio, mes - 1, dia);
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    if ((hoy.getMonth() + 1 < mes) || (hoy.getMonth() + 1 === mes && hoy.getDate() < dia)) edad--;
+    return edad;
+}
+
+// 🧍 Elegir género
+function elegirGenero(valor) {
+    document.querySelectorAll(".opcion").forEach(op => op.classList.remove("seleccionado"));
+    event.currentTarget.classList.add("seleccionado");
+    document.getElementById("genero").value = valor;
+}
+
+// 🚫 Filtrar texto prohibido
+function filtrarTexto(texto) {
+    return !CONFIG.seguridad.palabrasProhibidas.some(palabra => texto.toLowerCase().includes(palabra));
+}
+
+// ✅ Validar acceso
+function validarAcceso() {
+    const dia = parseInt(document.getElementById("dia").value);
+    const mes = parseInt(document.getElementById("mes").value);
+    const anio = parseInt(document.getElementById("anio").value);
+    const genero = document.getElementById("genero").value;
+    const usuario = document.getElementById("usuario").value.trim();
+
+    if (!dia || !mes || !anio) return alert(TEXTOS[idiomaActual].fillBirth);
+    if (!genero) return alert(TEXTOS[idiomaActual].selectGender);
+    if (!usuario) return alert(TEXTOS[idiomaActual].enterUser);
+    if (!filtrarTexto(usuario)) return alert(TEXTOS[idiomaActual].invalidName);
+
+    const edad = calcularEdad(dia, mes, anio);
+    if (edad < CONFIG.seguridad.edadMinima) return alert(TEXTOS[idiomaActual].minAge);
+
+    CONFIG.fechaNacimiento = { dia, mes, anio };
+    CONFIG.edad = edad;
+    CONFIG.usuarioActual = usuario;
+    CONFIG.idActual = `Z${Math.floor(Math.random() * 90000) + 10000}`;
+    CONFIG.monedasZ = edad >= 13 ? 100 : 50;
+    CONFIG.cristalesZ = edad >= 13 ? 10 : 5;
+
+    document.getElementById("pantallaAcceso").classList.add("oculto");
+    document.getElementById("pantallaVerificacion").classList.remove("oculto");
+}
+
+// 📸 Vista previa de foto
+document.getElementById("fotoVerificacion").addEventListener("change", function(e) {
+    const archivo = e.target.files[0];
+    if (!archivo) return;
+    const lector = new FileReader();
+    lector.onload = function(evt) {
+        document.getElementById("vistaPrevia").innerHTML = `<img src="${evt.target.result}">`;
+    };
+    lector.readAsDataURL(archivo);
+});
+
+// 📤 Enviar verificación
+function enviarVerificacion() {
+    const foto = document.getElementById("fotoVerificacion").files[0];
+    if (!foto) return alert("Seleccioná una foto primero");
+
+    alert("✅ Foto enviada. Se borrará automáticamente en 2 horas.");
+    setTimeout(() => {
+        document.getElementById("fotoVerificacion").value = "";
+        document.getElementById("vistaPrevia").innerHTML = "Vista previa";
+    }, 2 * 60 * 60 * 1000);
+
+    document.getElementById("pantallaVerificacion").classList.add("oculto");
+    document.getElementById("pantallaServidores").classList.remove("oculto");
+    generarListaServidores();
+}
+
+// 🖥️ Generar lista de servidores
+function generarListaServidores() {
+    const contenedor = document.getElementById("listaServidoresPrincipales");
+    let html = "";
+    for (let i = 1; i <= 20; i++) {
+        html += `<div class="servidor" onclick="conectarServidor(${i})">
+            <div style="font-weight:500">🟢 Servidor Principal ${i}</div>
+            <div class="estado-servidor" id="cant${i}">0 / 5.000 jugadores</div>
+        </div>`;
+    }
+    contenedor.innerHTML = html;
+}
+
+// 📊 Actualizar contadores
+function actualizarContadoresServidores() {
+    CONFIG.servidores.forEach(servidor => {
+        const elemento = document.getElementById(`cant${servidor.id}`);
+        if (!elemento) return;
+        const texto = TEXTOS[idiomaActual][servidor.id === 0 ? "creatorServerDesc" : servidor.id === 21 ? "testServerDesc" : ""];
+        elemento.textContent = texto ? texto.replace("{0}", servidor.conectados) : `${servidor.conectados} / ${servidor.capacidad}`;
+    });
+}
+
+// 🔌 Conectar a servidor
+function conectarServidor(id) {
+    const servidor = CONFIG.servidores.find(s => s.id === id);
+    if (!servidor) return;
+    if (servidor.accesoExclusivo && !CONFIG.esCreador) return alert(TEXTOS[idiomaActual].serverOnlyCreator);
+    if (servidor.conectados >= servidor.capacidad) return alert(TEXTOS[idiomaActual].serverFull);
+
+    servidor.conectados++;
+    CONFIG.servidorConectado = servidor;
+    actualizarContadoresServidores();
+    actualizarSaldos();
+
+    document.getElementById("pantallaServidores").classList.add("oculto");
+    document.getElementById("menuPrincipal").classList.remove("oculto");
+    cambiarSeccion("inicio");
+}
+
+// 💰 Actualizar monedas y datos
+function actualizarSaldos() {
+    document.getElementById("txtMonedas").textContent = CONFIG.monedasZ.toLocaleString("es-ES");
+    document.getElementById("txtCristales").textContent = CONFIG.cristalesZ.toLocaleString("es-ES");
+    document.getElementById("txtEnergia").textContent = `${CONFIG.energia} / ${CONFIG.energiaMaxima}`;
+    document.getElementById("txtNivel").textContent = CONFIG.nivel;
+}
+
+// 📂 Cambiar sección del menú
+function cambiarSeccion(nombre) {
+    document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("activo"));
+    if (event?.currentTarget) event.currentTarget.classList.add("activo");
+    const contenedor = document.getElementById("contenidoMenu");
+
+    if (nombre === "inicio") {
+        contenedor.innerHTML = `<div class="tarjeta-grande">
+            <h2>👋 ${CONFIG.usuarioActual} ${CONFIG.esVerificado ? `<span class="etiqueta-verificado ${CONFIG.esCreador ? 'etiqueta-creador' : ''}">✅ ${CONFIG.esCreador ? 'Creador' : 'Verificado'}</span>` : ''}</h2>
+            <p>🆔 ID: ${CONFIG.idActual}</p>
+            <p>🎂 Fecha: ${CONFIG.fechaNacimiento.dia}/${CONFIG.fechaNacimiento.mes}/${CONFIG.fechaNacimiento.anio} | Edad: ${CONFIG.edad} años</p>
+            <p>🌐 Servidor: ${CONFIG.servidorConectado?.nombre || 'Sin conectar'}</p>
+            <br><p style="font-style:italic; color:#94A3B8;">${TEXTOS[idiomaActual].infoMoneda}</p>
+        </div>`;
+    } else if (nombre === "apariencia") {
+        contenedor.innerHTML = `<div class="tarjeta-grande">
+            <h2>${TEXTOS[idiomaActual].appearanceTitle}</h2>
+            <div class="jugador-vista">
+                <div id="vistaMontura" class="jugador-montura"></div>
+                <div id="vistaCuerpo" class="jugador-cuerpo"></div>
+                <div id="vistaCara" class="jugador-cara"></div>
+                <div id="vistaAccesorio" class="jugador-accesorio"></div>
+                <div id="vistaRopa" class="jugador-ropa"></div>
+            </div>
+            <div id="listaEquipables" class="grid"></div>
+        </div>`;
+        actualizarVistaJugador();
+        mostrarEquipables();
+    } else if (nombre === "tienda") {
+        contenedor.innerHTML = `<div class="tarjeta-grande">
+            <h2>${TEXTOS[idiomaActual].shopTitle}</h2>
+            <div>
+                <button class="boton boton-cat boton-azul" onclick="mostrarCategoria('todos')">${TEXTOS[idiomaActual].categoryAll}</button>
+                <button class="boton boton-cat boton-azul" onclick="mostrarCategoria('cara')">${TEXTOS[idiomaActual].categoryFaces}</button>
+                <button class="boton boton-cat boton-azul" onclick="mostrarCategoria('ropa')">${TEXTOS[idiomaActual].categoryClothes}</button>
+                <button class="boton boton-cat boton-azul" onclick="mostrarCategoria('accesorio')">${TEXTOS[idiomaActual].categoryAccessories}</button>
+            </div>
+            <div id="listaTienda" class="grid"></div>
+        </div>`;
+        mostrarCategoria("todos");
+    } else if (nombre === "misiones") {
+        contenedor.innerHTML = `<div class="tarjeta-grande"><h2>📜 Misiones</h2><p>Próximamente</p></div>`;
+    } else if (nombre === "equipos") {
+        contenedor.innerHTML = `<div class="tarjeta-grande"><h2>⚔️ Equipos</h2><p>Próximamente</p></div>`;
+    } else if (nombre === "inventario") {
+        contenedor.innerHTML = `<div class="tarjeta-grande"><h2>🎒 Inventario</h2><p>Próximamente</p></div>`;
+    } else if (nombre === "ajustes") {
+        contenedor.innerHTML = `<div class="tarjeta-grande"><h2>⚙️ Ajustes</h2><p>Próximamente</p></div>`;
+    }
+}
+
+// 🎨 Actualizar vista del personaje
+function actualizarVistaJugador() {
+    document.getElementById("vistaCara").textContent = CONFIG.apariencia.cara;
+    document.getElementById("vistaCuerpo").textContent = CONFIG.apariencia.cuerpo ? CONFIG.apariencia.cuerpo.icono : "";
+    document.getElementById("vistaRopa").textContent = CONFIG.apariencia.ropa ? CONFIG.apariencia.ropa.icono : "";
+    document.getElementById("vistaAccesorio").textContent = CONFIG.apariencia.accesorio ? CONFIG.apariencia.accesorio.icono : "";
+    document.getElementById("vistaMontura").textContent = CONFIG.apariencia.montura ? CONFIG.apariencia.montura.icono : "";
+}
+
+// 🛒 Mostrar categoría en tienda
+function mostrarCategoria(tipo) {
+    const lista = document.getElementById("listaTienda");
+    const items = tipo === "todos" ? CONFIG.tienda : CONFIG.tienda.filter(i => i.tipo === tipo);
+    lista.innerHTML = items.map(item => {
+        const yaTiene = CONFIG.inventario.some(i => i.id === item.id);
+        return `<div class="item ${yaTiene ? 'comprado' : ''}">
+            <div style="font-size:2.5rem; margin:8px 0;">${item.icono}</div>
+            <h4>${item.nombre}</h4>
+            <p>${item.desc}</p>
+            <p>🪙 ${item.precioM}</p>
+            ${yaTiene ? `<button class="boton boton-gris" disabled>${TEXTOS[idiomaActual].ownedBtn}</button>` : `<button class="boton boton-verde" onclick="comprar(${item.id})">${TEXTOS[idiomaActual].buyBtn}</button>`}
+        </div>`;
+    }).join("");
+}
+
+// 💳 Comprar objeto
+function comprar(id) {
+    const item = CONFIG.tienda.find(i => i.id === id);
+    if (!item) return;
+    if (CONFIG.monedasZ >= item.precioM) {
+        CONFIG.monedasZ -= item.precioM;
+        CONFIG.inventario.push(item);
+        alert(TEXTOS[idiomaActual].purchaseOk);
+        actualizarSaldos();
+        mostrarCategoria(document.querySelector(".nav-item.activo").textContent.toLowerCase() || "todos");
+    } else {
+        alert(TEXTOS[idiomaActual].noMoney);
+    }
+}
+
+// 🎒 Mostrar objetos equipables
+function mostrarEquipables() {
+    const lista = document.getElementById("listaEquipables");
+    lista.innerHTML = CONFIG.inventario.length ? CONFIG.inventario.map(item => {
+        const equipado = 
+            (item.tipo === "cara" && CONFIG.apariencia.cara === item.icono) ||
+            (item.tipo === "ropa" && CONFIG.apariencia.ropa?.id === item.id) ||
+            (item.tipo === "accesorio" && CONFIG.apariencia.accesorio?.id === item.id);
+        return `<div class="item ${equipado ? 'equipado' : ''}">
+            <div style="font-size:2.5rem; margin:8px 0;">${item.icono}</div>
+            <h4>${item.nombre}</h4>
+            <button class="boton ${equipado ? 'boton-amarillo' : 'boton-verde'}" onclick="${equipado ? `quitar(${item.id})` : `equipar(${item.id})`}">
+                ${equipado ? TEXTOS[idiomaActual].unequipBtn : TEXTOS[idiomaActual].equipBtn}
+            </button>
+        </div>`;
+    }).join("") : `<p style="color:#94A3B8; text-align:center;">No tenés objetos todavía. Andá a la tienda.</p>`;
+}
+
+// ⚔️ Equipar objeto
+function equipar(id) {
+    const item = CONFIG.inventario.find(i => i.id === id);
+    if (!item) return;
+
+    if (item.tipo === "cara") CONFIG.apariencia.cara = item.icono;
+    if (item.tipo === "ropa") CONFIG.apariencia.ropa = item;
+    if (item.tipo === "accesorio") CONFIG.apariencia.accesorio = item;
+
+    actualizarVistaJugador();
+    mostrarEquipables();
+}
+
+// 🚪 Quitar objeto
+function quitar(id) {
+    const item = CONFIG.inventario.find(i => i.id === id);
+    if (!item) return;
+
+    if (item.tipo === "cara") CONFIG.apariencia.cara = "🙂";
+    if (item.tipo === "ropa") CONFIG.apariencia.ropa = null;
+    if (item.tipo === "accesorio") CONFIG.apariencia.accesorio = null;
+
+    actualizarVistaJugador();
+    mostrarEquipables();
+}
+
+// 🎮 Ir al juego
+function irAlJuego() {
+    if (CONFIG.ropaObligatoria && !CONFIG.apariencia.ropa) {
+        alert("⚠️ Equipá ropa antes de entrar al juego");
+        cambiarSeccion("apariencia");
+        return;
+    }
+    localStorage.setItem("datosJugador", JSON.stringify(CONFIG));
+    alert("✅ Entrando al juego...");
+}
+
+// ↩️ Volver entre pantallas
+function volverACarga() {
+    document.getElementById("pantallaAcceso").classList.add("oculto");
+    document.getElementById("pantallaCarga").classList.remove("oculto");
+    iniciarCarga();
+}
+function volverAAcceso() {
+    document.getElementById("pantallaVerificacion").classList.add("oculto");
+    document.getElementById("pantallaAcceso").classList.remove("oculto");
+}
+function volverAVerificacion() {
+    document.getElementById("pantallaServidores").classList.add("oculto");
+    document.getElementById("pantallaVerificacion").classList.remove("oculto");
+}
+function volverAServidores() {
+    document.getElementById("menuPrincipal").classList.add("oculto");
+    document.getElementById("pantallaServidores").classList.remove("oculto");
+}
+                                                                                                     
+
+            
