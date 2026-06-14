@@ -47,7 +47,11 @@
         .contenido-menu{margin-top:30px}
         .tarjeta{background:#0F2044;border:1px solid #1E3A8A;border-radius:10px;padding:20px;margin-bottom:15px}
         .buscador{width:100%;padding:10px;margin:10px 0;background:#081838;border:1px solid #1E3A8A;border-radius:6px;color:white}
-        .resultado{padding:10px;margin:8px 0;background:#081838;border-radius:6px;display:flex;justify-content:space-between;align-items:center}
+        .resultado{padding:10px;margin:8px 0;background:#081838;border-radius:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+        .boton-chico{padding:5px 10px;border:none;border-radius:4px;cursor:pointer;font-size:0.9rem}
+        .btn-azul{background:#2563EB;color:white}
+        .btn-rojo{background:#991B1B;color:white}
+        .btn-verde{background:#15803D;color:white}
     </style>
 </head>
 <body>
@@ -157,15 +161,15 @@ const CONFIG = {
     maxServidores: 10,
     usuarioActual: "",
     idActual: "",
-    contadorId: 1000, // IDs normales empiezan acá
+    contadorId: 1000,
     monedasZ: 0,
     cristalesZ: 0,
-    // Tu perfil especial
     creador: {
         id: "01",
         nombre: "El Arquitecto"
     },
-    // Niveles de confianza para regalos
+    solicitudesRecibidas: [],
+    listaAmigos: [],
     nivelesConfianza: {
         bajo: { monedas: 50, cristales: 5 },
         medio: { monedas: 500, cristales: 50 },
@@ -199,12 +203,10 @@ function elegirGenero(valor) {
 // 🆔 Generar ID y saldo
 function generarDatosCuenta() {
     if (CONFIG.usuarioActual.trim().toLowerCase() === CONFIG.creador.nombre.toLowerCase()) {
-        // Datos para el creador
         CONFIG.idActual = CONFIG.creador.id;
         CONFIG.monedasZ = 999999;
         CONFIG.cristalesZ = 999999;
     } else {
-        // Datos para cualquier otro jugador
         CONFIG.contadorId++;
         CONFIG.idActual = CONFIG.contadorId.toString();
         CONFIG.monedasZ = 0;
@@ -213,7 +215,7 @@ function generarDatosCuenta() {
     actualizarVistaMonedas();
 }
 
-// 💰 Actualizar monedas en pantalla
+// 💰 Actualizar monedas
 function actualizarVistaMonedas() {
     document.querySelector('.moneda-z').textContent = CONFIG.monedasZ;
     document.querySelector('.cristal-z').textContent = CONFIG.cristalesZ;
@@ -248,7 +250,7 @@ function conectarServidor(numero) {
     document.getElementById('idCuenta').textContent = CONFIG.idActual;
 }
 
-// 🔙 Volver entre pantallas
+// 🔙 Volver pantallas
 function volverACarga() {
     document.getElementById('pantallaAcceso').classList.add('oculto');
     document.getElementById('pantallaCarga').classList.remove('oculto');
@@ -265,7 +267,7 @@ function volverAServidores() {
     document.getElementById('pantallaServidores').classList.remove('oculto');
 }
 
-// 🔍 Cambiar secciones del menú
+// 🔍 Cambiar secciones
 function cambiarSeccion(nombre) {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('activo'));
     event.currentTarget.classList.add('activo');
@@ -289,39 +291,123 @@ function cambiarSeccion(nombre) {
         contenido.innerHTML = `
             <div class="tarjeta">
                 <h3>👥 Amigos</h3>
-                <input type="text" class="buscador" id="buscarAmigo" placeholder="Buscar por ID o nombre..." oninput="buscarAmigo()">
-                <div id="resultadosBusqueda"></div>
+                <div style="display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap">
+                    <button class="boton-chico btn-azul" onclick="mostrarBusqueda()">Buscar</button>
+                    <button class="boton-chico btn-azul" onclick="verSolicitudes()">Solicitudes</button>
+                    <button class="boton-chico btn-azul" onclick="verAmigos()">Mis amigos</button>
+                </div>
+                <div id="zonaAmigos"></div>
             </div>`;
-        buscarAmigo();
+        mostrarBusqueda();
     } else if (nombre === 'ajustes') {
         contenido.innerHTML = `<div class="tarjeta"><h3>⚙️ Ajustes</h3><p>Idioma, privacidad, ayuda y salir.</p></div>`;
     }
 }
 
-// 🔎 Buscar amigos (incluye tu perfil)
+// 🔎 Buscar amigos
+function mostrarBusqueda() {
+    document.getElementById('zonaAmigos').innerHTML = `
+        <input type="text" class="buscador" id="buscarAmigo" placeholder="Buscar por ID o nombre..." oninput="buscarAmigo()">
+        <div id="resultadosBusqueda"></div>`;
+    buscarAmigo();
+}
+
 function buscarAmigo() {
     const texto = document.getElementById('buscarAmigo').value.trim().toLowerCase();
     const resultados = document.getElementById('resultadosBusqueda');
     resultados.innerHTML = "";
 
-    // Mostrar tu perfil si coincide
     if (CONFIG.creador.id.includes(texto) || CONFIG.creador.nombre.toLowerCase().includes(texto)) {
         resultados.innerHTML += `
             <div class="resultado">
                 <span>🆔 ${CONFIG.creador.id} | ${CONFIG.creador.nombre} (Creador)</span>
-                <button class="boton" style="padding:5px 10px;max-width:80px">Agregar</button>
+                <button class="boton-chico btn-azul" onclick="enviarSolicitud('${CONFIG.creador.id}')">Agregar</button>
             </div>`;
     }
 
-    // Si está vacío, mostrar mensaje
     if (resultados.innerHTML === "") {
-        resultados.innerHTML = `<p style="text-align:center;opacity:0.7">Escribí un ID o nombre para buscar</p>`;
+        resultados.innerHTML = `<p style="text-align:center;opacity:0.7;padding:10px">Escribí un ID o nombre para buscar</p>`;
     }
 }
 
-// 🎁 Sistema de regalos (solo para vos)
+// 📩 Enviar solicitud
+function enviarSolicitud(idDestino) {
+    if (idDestino === CONFIG.idActual) return alert("❌ No podés agregarte a vos mismo");
+    if (CONFIG.listaAmigos.includes(idDestino)) return alert("ℹ️ Ya es tu amigo");
+    if (CONFIG.solicitudesRecibidas.includes(idDestino)) return alert("ℹ️ Ya tenés una solicitud pendiente");
+
+    alert("✅ Solicitud enviada correctamente");
+    if (idDestino === CONFIG.creador.id) {
+        CONFIG.solicitudesRecibidas.push(CONFIG.idActual);
+    }
+}
+
+// 📬 Ver solicitudes
+function verSolicitudes() {
+    const zona = document.getElementById('zonaAmigos');
+    if (CONFIG.solicitudesRecibidas.length === 0) {
+        zona.innerHTML = `<p style="text-align:center;opacity:0.7;padding:15px">📩 No tenés solicitudes pendientes</p>`;
+        return;
+    }
+    let html = `<h4 style="margin-bottom:10px">📩 Solicitudes recibidas</h4>`;
+    CONFIG.solicitudesRecibidas.forEach(id => {
+        const nombre = id === "01" ? "El Arquitecto" : `Jugador ${id}`;
+        html += `
+            <div class="resultado">
+                <span>🆔 ${id} | ${nombre}</span>
+                <div style="display:flex;gap:5px">
+                    <button class="boton-chico btn-verde" onclick="aceptarSolicitud('${id}')">Aceptar</button>
+                    <button class="boton-chico btn-rojo" onclick="rechazarSolicitud('${id}')">Rechazar</button>
+                </div>
+            </div>`;
+    });
+    zona.innerHTML = html;
+}
+
+// ✅ Aceptar solicitud
+function aceptarSolicitud(id) {
+    CONFIG.listaAmigos.push(id);
+    CONFIG.solicitudesRecibidas = CONFIG.solicitudesRecibidas.filter(i => i !== id);
+    alert("✅ Solicitud aceptada");
+    verSolicitudes();
+}
+
+// ❌ Rechazar solicitud
+function rechazarSolicitud(id) {
+    CONFIG.solicitudesRecibidas = CONFIG.solicitudesRecibidas.filter(i => i !== id);
+    alert("❌ Solicitud rechazada");
+    verSolicitudes();
+}
+
+// 👥 Ver amigos
+function verAmigos() {
+    const zona = document.getElementById('zonaAmigos');
+    if (CONFIG.listaAmigos.length === 0) {
+        zona.innerHTML = `<p style="text-align:center;opacity:0.7;padding:15px">👥 Todavía no tenés amigos agregados</p>`;
+        return;
+    }
+    let html = `<h4 style="margin-bottom:10px">👥 Mis amigos</h4>`;
+    CONFIG.listaAmigos.forEach(id => {
+        const nombre = id === "01" ? "El Arquitecto" : `Jugador ${id}`;
+        html += `
+            <div class="resultado">
+                <span>🆔 ${id} | ${nombre}</span>
+                <button class="boton-chico btn-rojo" onclick="eliminarAmigo('${id}')">Eliminar</button>
+            </div>`;
+    });
+    zona.innerHTML = html;
+}
+
+// 🗑️ Eliminar amigo
+function eliminarAmigo(id) {
+    CONFIG.listaAmigos = CONFIG.listaAmigos.filter(i => i !== id);
+    alert("🗑️ Amigo eliminado correctamente");
+    verAmigos();
+}
+
+// 🎁 Sistema de regalos
 function darRegalo(idDestino, nivel = "bajo") {
-    if (CONFIG.idActual !== CONFIG.creador.id) return alert("No tenés permiso para usar esta función");
+    if (CONFIG.idActual !== CONFIG.creador.id) return alert("❌ No tenés permiso");
     const limites = CONFIG.nivelesConfianza[nivel];
     return `✅ Regalo enviado: hasta ${limites.monedas} monedas y ${limites.cristales} cristales. Nivel: ${nivel}`;
 }
