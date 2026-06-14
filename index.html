@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zentrith World - Base Completa</title>
+    <title>Zentrith World</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: #051027; color: #E2F0FF; min-height: 100vh; line-height: 1.5; }
         .oculto { display: none !important; }
 
-        /* CARGA */
+        /* Carga */
         .pantalla-carga { position: fixed; inset: 0; background: #051027; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; }
         .titulo-carga { font-size: 2.8rem; color: #3B82F6; margin-bottom: 12px; font-weight: 700; }
         .subtitulo { font-size: 1.2rem; color: #93C5FD; margin-bottom: 30px; text-align: center; }
@@ -17,7 +17,7 @@
         .progreso { width: 0%; height: 100%; background: #2563EB; transition: width 0.03s linear; }
         .texto-carga { margin-top: 15px; font-size: 1.1rem; color: #BFDBFE; }
 
-        /* ACCESO */
+        /* Acceso */
         .pantalla-acceso { max-width: 450px; margin: 60px auto; padding: 25px; text-align: center; }
         .pantalla-acceso h2 { color: #93C5FD; margin-bottom: 25px; }
         .campo { width: 100%; padding: 12px; margin: 10px 0; background: #0F2044; border: 1px solid #1E3A8A; border-radius: 8px; color: #fff; font-size: 1rem; }
@@ -32,14 +32,16 @@
         .boton-gris { background: #475569; color: white; cursor: not-allowed; }
         .boton-volver { background: #1E3A8A; color: white; width: 100%; margin-top: 15px; }
 
-        /* SERVIDORES */
-        .pantalla-servidores { max-width: 580px; margin: 60px auto; padding: 25px; text-align: center; }
+        /* Servidores */
+        .pantalla-servidores { max-width: 650px; margin: 60px auto; padding: 25px; text-align: center; }
         .pantalla-servidores h2 { color: #93C5FD; margin-bottom: 25px; }
         .servidor { padding: 18px; margin: 12px 0; border-radius: 10px; border: 1px solid #1E3A8A; background: #0F2044; cursor: pointer; transition: 0.2s; }
         .servidor:hover { border-color: #3B82F6; background: #102859; }
+        .servidor.especial { border-color: #8B5CF6; background: #1A103D; }
+        .servidor.especial:hover { border-color: #A78BFA; background: #241452; }
         .estado-servidor { font-size: 0.9rem; color: #94A3B8; margin-top: 5px; }
 
-        /* MENÚ PRINCIPAL */
+        /* Menú Principal */
         .menu-principal { max-width: 1000px; margin: 40px auto; padding: 20px; }
         .cabecera-menu { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #1E3A8A; flex-wrap: wrap; gap: 15px; }
         .navegacion { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
@@ -51,6 +53,7 @@
         .tarjeta { background: #0F2044; border: 1px solid #1E3A8A; border-radius: 10px; padding: 20px; margin-bottom: 15px; }
         .tarjeta-grande { background: #0F2044; border: 1px solid #1E3A8A; border-radius: 10px; padding: 25px; margin-bottom: 20px; }
         .etiqueta-verificado { display: inline-block; background: #059669; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; margin-left: 8px; }
+        .etiqueta-creador { background: #8B5CF6; }
         .perfil-cabecera { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .avatar { width: 85px; height: 85px; border-radius: 50%; background: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; }
         .mision { padding: 12px; margin: 10px 0; background: #081838; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
@@ -67,7 +70,7 @@
 </head>
 <body>
 
-<!-- 1. PANTALLA DE CARGA -->
+<!-- Pantalla de Carga -->
 <div class="pantalla-carga" id="pantallaCarga">
     <h1 class="titulo-carga">ZENTRITH WORLD</h1>
     <p class="subtitulo">ESPACIO SEGURO PARA JUGAR Y CREAR</p>
@@ -75,7 +78,7 @@
     <p class="texto-carga" id="estadoCarga">Iniciando sistema...</p>
 </div>
 
-<!-- 2. PANTALLA DE ACCESO -->
+<!-- Pantalla de Acceso -->
 <div class="pantalla-acceso oculto" id="pantallaAcceso">
     <h2>📝 Ingreso de Cuenta</h2>
     <div class="fila-fecha">
@@ -101,25 +104,28 @@
     <button class="boton boton-volver" onclick="volverACarga()">Volver</button>
 </div>
 
-<!-- 3. PANTALLA DE SERVIDORES -->
+<!-- Pantalla de Servidores -->
 <div class="pantalla-servidores oculto" id="pantallaServidores">
     <h2>🌐 Seleccionar Servidor</h2>
-    <div class="servidor" onclick="conectarServidor(1)">
-        <div style="font-weight:500">🟢 Servidor Norte</div>
-        <div class="estado-servidor">En línea | Capacidad: 800 jugadores</div>
+    <!-- Servidor exclusivo del creador -->
+    <div class="servidor especial" onclick="conectarServidor(0)">
+        <div style="font-weight:700; color:#A78BFA">🔒 Servidor del Creador</div>
+        <div class="estado-servidor">Acceso exclusivo | <span id="cant0">0</span> / 1 jugador</div>
     </div>
-    <div class="servidor" onclick="conectarServidor(2)">
-        <div style="font-weight:500">🟢 Servidor Sur</div>
-        <div class="estado-servidor">En línea | Capacidad: 800 jugadores</div>
+
+    <!-- Servidores principales 1 a 20 -->
+    <div id="listaServidoresPrincipales"></div>
+
+    <!-- Servidor de pruebas -->
+    <div class="servidor" onclick="conectarServidor(21)">
+        <div style="font-weight:500">🟡 Servidor de Pruebas</div>
+        <div class="estado-servidor">Pruebas y ajustes | <span id="cant21">0</span> / 2.000 jugadores</div>
     </div>
-    <div class="servidor" onclick="conectarServidor(3)">
-        <div style="font-weight:500">🟡 Servidor Experimental</div>
-        <div class="estado-servidor">Pruebas | Capacidad: 200 jugadores</div>
-    </div>
+
     <button class="boton boton-volver" onclick="volverAAcceso()">Volver</button>
 </div>
 
-<!-- 4. MENÚ PRINCIPAL -->
+<!-- Menú Principal -->
 <div class="menu-principal oculto" id="menuPrincipal">
     <div class="cabecera-menu">
         <h2>ZENTRITH WORLD</h2>
@@ -145,7 +151,7 @@
 </div>
 
 <script>
-// CONFIGURACIÓN GLOBAL COMPLETA - BASE 100%
+// CONFIGURACIÓN GLOBAL ACTUALIZADA
 const CONFIG = {
     usuarioActual: "",
     idActual: "",
@@ -165,6 +171,21 @@ const CONFIG = {
     bloqueados: [],
     reportes: [],
     historial: [],
+    servidorConectado: null,
+
+    // 📊 Configuración de servidores tal cual pediste
+    servidores: [
+        { id: 0, nombre: "Del Creador", capacidad: 1, conectados: 0, accesoExclusivo: true },
+        ...Array.from({ length: 20 }, (_, i) => ({
+            id: i + 1,
+            nombre: `Principal ${i + 1}`,
+            capacidad: 5000,
+            conectados: 0,
+            accesoExclusivo: false
+        })),
+        { id: 21, nombre: "De Pruebas", capacidad: 2000, conectados: 0, accesoExclusivo: false }
+    ],
+
     creador: {
         id: "Z001",
         nombre: "El Arquitecto 🔮",
@@ -205,9 +226,34 @@ const intervaloCarga = setInterval(() => {
         setTimeout(() => {
             document.getElementById("pantallaCarga").classList.add("oculto");
             document.getElementById("pantallaAcceso").classList.remove("oculto");
+            generarListaServidores();
+            actualizarContadoresServidores();
         }, 500);
     }
 }, 20);
+
+// 📊 Generar lista de los 20 servidores principales
+function generarListaServidores() {
+    const contenedor = document.getElementById("listaServidoresPrincipales");
+    let html = "";
+    for (let i = 1; i <= 20; i++) {
+        html += `<div class="servidor" onclick="conectarServidor(${i})">
+            <div style="font-weight:500">🟢 Servidor Principal ${i}</div>
+            <div class="estado-servidor" id="cant${i}">En línea | 0 / 5.000 jugadores</div>
+        </div>`;
+    }
+    contenedor.innerHTML = html;
+}
+
+// 📊 Actualizar contadores de jugadores
+function actualizarContadoresServidores() {
+    CONFIG.servidores.forEach(servidor => {
+        const elem = document.getElementById(`cant${servidor.id}`);
+        if (elem) {
+            elem.textContent = `${servidor.conectados.toLocaleString("es-ES")} / ${servidor.capacidad.toLocaleString("es-ES")} jugadores`;
+        }
+    });
+}
 
 // FUNCIONES DE ACCESO
 function elegirGenero(valor) {
@@ -282,11 +328,32 @@ function volverAAcceso() {
 }
 
 function volverAServidores() {
+    if(CONFIG.servidorConectado) {
+        CONFIG.servidorConectado.conectados--;
+        actualizarContadoresServidores();
+        CONFIG.servidorConectado = null;
+    }
     document.getElementById("menuPrincipal").classList.add("oculto");
     document.getElementById("pantallaServidores").classList.remove("oculto");
 }
 
 function conectarServidor(id) {
+    const servidor = CONFIG.servidores.find(s => s.id === id);
+    if(!servidor) return;
+
+    // ✅ Restricción: solo el creador entra al servidor exclusivo
+    if(servidor.accesoExclusivo && !CONFIG.esCreador) {
+        return alert("❌ Este servidor es de acceso exclusivo, solo el creador puede ingresar");
+    }
+
+    if(servidor.conectados >= servidor.capacidad) {
+        return alert("⚠️ Este servidor está lleno, elegí otro");
+    }
+
+    servidor.conectados++;
+    CONFIG.servidorConectado = servidor;
+    actualizarContadoresServidores();
+
     actualizarSaldos();
     document.getElementById("pantallaServidores").classList.add("oculto");
     document.getElementById("menuPrincipal").classList.remove("oculto");
@@ -313,9 +380,12 @@ function cambiarSeccion(nombre) {
 
     if(nombre === "inicio") {
         let html = `<div class="tarjeta-grande">
-            <h2>👋 Bienvenido, ${CONFIG.usuarioActual} ${CONFIG.esVerificado ? '<span class="etiqueta-verificado">✅ Verificado</span>' : ''}</h2>
+            <h2>👋 Bienvenido, ${CONFIG.usuarioActual} 
+                ${CONFIG.esVerificado ? `<span class="etiqueta-verificado ${CONFIG.esCreador ? 'etiqueta-creador' : ''}">✅ ${CONFIG.esCreador ? 'Creador' : 'Verificado'}</span>` : ''}
+            </h2>
             <p>🆔 ID: ${CONFIG.idActual} | 📈 Nivel: ${CONFIG.nivel} | ⭐ Experiencia: ${CONFIG.experiencia}/100</p>
             <p>🎂 Edad: ${CONFIG.edad} años | 🔒 Modo: ${CONFIG.edad < 13 ? "Seguro activado" : "Estándar"}</p>
+            <p>🌐 Servidor: ${CONFIG.servidorConectado.nombre} | Jugadores: ${CONFIG.servidorConectado.conectados.toLocaleString("es-ES")} / ${CONFIG.servidorConectado.capacidad.toLocaleString("es-ES")}</p>
             <br><h3>📋 Misiones Disponibles</h3>`;
         CONFIG.misiones.forEach(m => {
             html += `<div class="mision ${m.completada ? 'completada' : ''}">
@@ -333,68 +403,6 @@ function cambiarSeccion(nombre) {
             <div class="perfil-cabecera">
                 <div class="avatar">👤</div>
                 <div>
-                    <h2>${CONFIG.usuarioActual} ${CONFIG.esVerificado ? '<span class="etiqueta-verificado">✅ Verificado</span>' : ''}</h2>
+                    <h2>${CONFIG.usuarioActual} ${CONFIG.esVerificado ? `<span class="etiqueta-verificado ${CONFIG.esCreador ? 'etiqueta-creador' : ''}">✅ ${CONFIG.esCreador ? 'Creador' : 'Verificado'}</span>` : ''}</h2>
                     <p>🆔 ${CONFIG.idActual}</p>
-                    <p>📈 Nivel ${CONFIG.nivel} | ⭐ ${CONFIG.experiencia} XP</p>
-                    <p>🎂 Edad: ${CONFIG.edad} años</p>
-                </div>
-            </div>
-            <br>
-            <h4>✍️ Biografía</h4>
-            <textarea class="campo" id="biografia" rows="3">${CONFIG.biografia}</textarea>
-            <button class="boton boton-azul" onclick="guardarBiografia()">Guardar cambios</button>
-            <br><br>
-            <h4>📊 Historial de Actividades</h4>
-            <div id="historialLista">${CONFIG.historial.length ? CONFIG.historial.map(h => `<div class="historial-item">${h.texto} <small>${h.fecha}</small></div>`).join('') : '<p>Sin actividad registrada</p>'}</div>
-        </div>`;
-    }
-
-    else if(nombre === "jugar") {
-        cont.innerHTML = `<div class="tarjeta-grande">
-            <h3>🎮 Zona de Juego</h3>
-            <p>Accedé a modos de juego, partidas y mapas disponibles.</p>
-            <br>
-            <button class="boton boton-azul" onclick="alert('Contenido listo para ampliar')">Ver modos</button>
-        </div>`;
-    }
-
-    else if(nombre === "crear") {
-        cumplirMision(4);
-        cont.innerHTML = `<div class="tarjeta-grande">
-            <h3>🛠️ Zona de Creación</h3>
-            <p>Herramientas para diseñar tus propios mundos, objetos y espacios.</p>
-            <br>
-            <button class="boton boton-verde" onclick="alert('Espacio de trabajo listo')">Abrir editor</button>
-        </div>`;
-    }
-
-    else if(nombre === "tienda") {
-        cont.innerHTML = `<div class="tarjeta-grande">
-            <h3>🛒 Tienda de Zentrith</h3>
-            <div class="grid" id="listaTienda"></div>
-        </div>`;
-        mostrarTienda();
-    }
-
-    else if(nombre === "inventario") {
-        cont.innerHTML = `<div class="tarjeta-grande">
-            <h3>🎒 Mi Inventario</h3>
-            ${CONFIG.inventario.length === 0 ? '<p>No tenés objetos aún</p>' : `<div class="grid">${CONFIG.inventario.map(i => `<div class="item"><h4>${i.nombre}</h4><p>${i.desc}</p></div>`).join('')}</div>`}
-        </div>`;
-    }
-
-    else if(nombre === "amigos") {
-        cont.innerHTML = `<div class="tarjeta-grande">
-            <h3>👥 Gestión de Amigos</h3>
-            <div class="grupo-botones">
-                <button class="boton boton-azul" onclick="mostrarBusqueda()">Buscar</button>
-                <button class="boton boton-azul" onclick="verSolicitudes()">Solicitudes (${CONFIG.solicitudes.length})</button>
-                <button class="boton boton-azul" onclick="verAmigos()">Mis amigos (${CONFIG.listaAmigos.length})</button>
-                <button class="boton boton-azul" onclick="verBloqueados()">Bloqueados (${CONFIG.bloqueados.length})</button>
-            </div>
-            <div id="zonaAmigos"></div>
-        </div>`;
-        mostrarBusqueda();
-    }
-
-    else if(nombre === "ajustes
+                    <p>📈 
