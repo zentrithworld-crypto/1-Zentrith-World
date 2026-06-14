@@ -21,12 +21,15 @@
         .pantalla-acceso{max-width:420px;margin:60px auto;padding:25px;text-align:center}
         .pantalla-acceso h2{color:#93C5FD;margin-bottom:25px}
         .campo{width:100%;padding:12px;margin:10px 0;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;color:white;font-size:1rem}
-        .fila-fecha{display:flex;gap:10px;justify-content:center}
-        .opciones-genero{display:flex;gap:15px;margin:20px 0}
+        .fila-fecha{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+        .opciones-genero{display:flex;gap:15px;margin:20px 0;flex-wrap:wrap}
         .opcion{flex:1;padding:12px;background:#0F2044;border:1px solid #1E3A8A;border-radius:8px;cursor:pointer}
         .opcion.seleccionado{border-color:#3B82F6;background:#102859}
-        .boton{width:100%;padding:14px;margin:15px 0;border:none;border-radius:8px;font-size:1.1rem;background:#2563EB;color:white;cursor:pointer}
-        .boton-volver{background:#1E3A8A;margin-top:5px}
+        .boton{padding:10px 14px;border:none;border-radius:6px;cursor:pointer;font-size:1rem;font-weight:500}
+        .boton-azul{background:#2563EB;color:white}
+        .boton-rojo{background:#991B1B;color:white}
+        .boton-verde{background:#15803D;color:white}
+        .boton-volver{background:#1E3A8A;color:white;width:100%;margin-top:15px}
 
         /* Servidores */
         .pantalla-servidores{max-width:550px;margin:60px auto;padding:25px;text-align:center}
@@ -37,21 +40,24 @@
         .estado-servidor{font-size:0.9rem;color:#94A3B8;margin-top:5px}
 
         /* Menú Principal */
-        .menu-principal{max-width:900px;margin:40px auto;padding:25px}
+        .menu-principal{max-width:900px;margin:40px auto;padding:20px}
         .cabecera-menu{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #1E3A8A;flex-wrap:wrap;gap:15px}
-        .navegacion{display:flex;gap:20px;margin:20px 0;flex-wrap:wrap}
+        .navegacion{display:flex;gap:15px;margin:20px 0;flex-wrap:wrap}
         .nav-item{padding:8px 12px;border-radius:6px;cursor:pointer;transition:background 0.2s}
         .nav-item.activo{background:#2563EB}
         .monedas{display:flex;gap:20px}
         .moneda{text-align:center}
-        .contenido-menu{margin-top:30px}
+        .contenido-menu{margin-top:25px}
         .tarjeta{background:#0F2044;border:1px solid #1E3A8A;border-radius:10px;padding:20px;margin-bottom:15px}
         .buscador{width:100%;padding:10px;margin:10px 0;background:#081838;border:1px solid #1E3A8A;border-radius:6px;color:white}
-        .resultado{padding:10px;margin:8px 0;background:#081838;border-radius:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-        .boton-chico{padding:5px 10px;border:none;border-radius:4px;cursor:pointer;font-size:0.9rem}
-        .btn-azul{background:#2563EB;color:white}
-        .btn-rojo{background:#991B1B;color:white}
-        .btn-verde{background:#15803D;color:white}
+        .resultado{padding:12px;margin:8px 0;background:#081838;border-radius:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .grupo-botones{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap}
+        .mision{padding:12px;margin:10px 0;background:#081838;border-radius:6px;display:flex;justify-content:space-between;align-items:center}
+        .completada{opacity:0.7;text-decoration:line-through}
+
+        /* Campanita notificaciones */
+        .campana {position:relative;cursor:pointer;font-size:1.6rem;color:#E2F0FF}
+        .badge {position:absolute;top:-6px;right:-8px;background:#ef4444;color:white;font-size:0.7rem;font-weight:bold;padding:2px 6px;border-radius:12px;min-width:18px;text-align:center}
     </style>
 </head>
 <body>
@@ -93,7 +99,7 @@
     </div>
     <input type="hidden" id="genero">
     <input type="text" class="campo" id="usuario" placeholder="Nombre de usuario">
-    <button class="boton" onclick="validarAcceso()">Continuar</button>
+    <button class="boton boton-azul" onclick="validarAcceso()">Continuar</button>
     <button class="boton boton-volver" onclick="volverACarga()">Volver</button>
 </div>
 
@@ -119,14 +125,11 @@
 <div class="menu-principal oculto" id="menuPrincipal">
     <div class="cabecera-menu">
         <h2>ZENTRITH WORLD</h2>
-        <div class="monedas">
-            <div class="moneda">
-                <div>💎 Cristales Z</div>
-                <div style="font-size:1.2rem; font-weight:bold" class="cristal-z">0</div>
-            </div>
-            <div class="moneda">
-                <div>🪙 Monedas Z</div>
-                <div style="font-size:1.2rem; font-weight:bold" class="moneda-z">0</div>
+        <div style="display:flex;align-items:center;gap:15px">
+            <div class="campana" onclick="verNotificaciones()">🔔<span class="badge oculto" id="contadorAvisos">0</span></div>
+            <div class="monedas">
+                <div class="moneda"><div>💎 Cristales Z</div><div style="font-size:1.2rem; font-weight:bold" class="cristal-z">0</div></div>
+                <div class="moneda"><div>🪙 Monedas Z</div><div style="font-size:1.2rem; font-weight:bold" class="moneda-z">0</div></div>
             </div>
         </div>
     </div>
@@ -139,15 +142,7 @@
         <div class="nav-item" onclick="cambiarSeccion('ajustes')">Ajustes</div>
     </div>
 
-    <div class="contenido-menu" id="contenidoMenu">
-        <div class="tarjeta">
-            <h3>📢 Bienvenido, <span id="nombreUsuario">Jugador</span></h3>
-            <p>🆔 Tu ID de cuenta: <strong id="idCuenta">---</strong></p>
-            <br>
-            <p>✅ Misión de hoy: Jugar 15 minutos → +20 Monedas Z</p>
-            <p>✅ Regalo especial: Disponible en fechas festivas</p>
-        </div>
-    </div>
+    <div class="contenido-menu" id="contenidoMenu"></div>
 
     <button class="boton boton-volver" onclick="volverAServidores()">Cambiar de servidor</button>
 </div>
@@ -164,144 +159,144 @@ const CONFIG = {
     contadorId: 1000,
     monedasZ: 0,
     cristalesZ: 0,
-    creador: {
-        id: "01",
-        nombre: "El Arquitecto"
+    // TU CUENTA ESPECIAL CON SALDO ALTO
+    creador: { 
+        id: "01", 
+        nombre: "El Arquitecto",
+        monedas: 9999999,    // Más de 9 millones de monedas
+        cristales: 999999    // Más de 900 mil cristales
     },
     solicitudesRecibidas: [],
     listaAmigos: [],
-    nivelesConfianza: {
-        bajo: { monedas: 50, cristales: 5 },
-        medio: { monedas: 500, cristales: 50 },
-        alto: { monedas: 5000, cristales: 500 }
-    }
+    nivelesConfianza: { bajo: { monedas:50, cristales:5 }, medio: { monedas:500, cristales:50 }, alto: { monedas:5000, cristales:500 } },
+    // Misiones diarias
+    misiones: [
+        { id:1, texto:"Jugar 15 minutos", recompensa:20, completada:false },
+        { id:2, texto:"Visitar la zona de creación", recompensa:15, completada:false },
+        { id:3, texto:"Agregar 1 amigo", recompensa:25, completada:false }
+    ]
 };
 
 // 🚀 Pantalla de carga
 let porcentaje = 0;
 const intervaloCarga = setInterval(() => {
-    if (porcentaje < 100) {
-        porcentaje++;
-        document.getElementById('progreso').style.width = porcentaje + '%';
-        document.getElementById('estadoCarga').textContent = `Cargando... ${porcentaje}%`;
-    } else {
-        clearInterval(intervaloCarga);
-        setTimeout(() => {
-            document.getElementById('pantallaCarga').classList.add('oculto');
-            document.getElementById('pantallaAcceso').classList.remove('oculto');
-        }, 700);
-    }
+    if (porcentaje < 100) { porcentaje++; document.getElementById('progreso').style.width = porcentaje + '%'; document.getElementById('estadoCarga').textContent = `Cargando... ${porcentaje}%`; }
+    else { clearInterval(intervaloCarga); setTimeout(() => { document.getElementById('pantallaCarga').classList.add('oculto'); document.getElementById('pantallaAcceso').classList.remove('oculto'); }, 700); }
 }, 30);
 
 // 📋 Elegir género
-function elegirGenero(valor) {
-    document.querySelectorAll('.opcion').forEach(op => op.classList.remove('seleccionado'));
-    event.currentTarget.classList.add('seleccionado');
-    document.getElementById('genero').value = valor;
-}
+function elegirGenero(valor) { document.querySelectorAll('.opcion').forEach(op => op.classList.remove('seleccionado')); event.currentTarget.classList.add('seleccionado'); document.getElementById('genero').value = valor; }
 
-// 🆔 Generar ID y saldo
+// 🆔 Generar datos cuenta
 function generarDatosCuenta() {
     if (CONFIG.usuarioActual.trim().toLowerCase() === CONFIG.creador.nombre.toLowerCase()) {
+        // ASIGNAMOS TU SALDO FIJO
         CONFIG.idActual = CONFIG.creador.id;
-        CONFIG.monedasZ = 999999;
-        CONFIG.cristalesZ = 999999;
+        CONFIG.monedasZ = CONFIG.creador.monedas;
+        CONFIG.cristalesZ = CONFIG.creador.cristales;
     } else {
+        // Otros jugadores empiezan en 0
         CONFIG.contadorId++;
         CONFIG.idActual = CONFIG.contadorId.toString();
         CONFIG.monedasZ = 0;
         CONFIG.cristalesZ = 0;
     }
     actualizarVistaMonedas();
+    actualizarAvisos();
 }
 
 // 💰 Actualizar monedas
-function actualizarVistaMonedas() {
-    document.querySelector('.moneda-z').textContent = CONFIG.monedasZ;
-    document.querySelector('.cristal-z').textContent = CONFIG.cristalesZ;
+function actualizarVistaMonedas() { 
+    document.querySelector('.moneda-z').textContent = CONFIG.monedasZ.toLocaleString('es-ES'); 
+    document.querySelector('.cristal-z').textContent = CONFIG.cristalesZ.toLocaleString('es-ES'); 
 }
 
 // ✅ Validar acceso
 function validarAcceso() {
-    const dia = document.getElementById('dia').value;
-    const mes = document.getElementById('mes').value;
-    const anio = document.getElementById('anio').value;
-    const genero = document.getElementById('genero').value;
-    const usuario = document.getElementById('usuario').value.trim();
+    const dia = document.getElementById('dia').value, mes = document.getElementById('mes').value, anio = document.getElementById('anio').value, genero = document.getElementById('genero').value, usuario = document.getElementById('usuario').value.trim();
     const prohibidas = ["abuso", "violencia", "sexo", "link", "http", "estafa"];
-
-    if (!dia || !mes || !anio) return alert("Completá todos los campos de fecha");
+    if (!dia || !mes || !anio) return alert("Completá todos los campos");
     if (!genero) return alert("Elegí tu género");
-    if (!usuario) return alert("Escribí tu nombre de usuario");
-    if (prohibidas.some(p => usuario.toLowerCase().includes(p))) return alert("El nombre tiene palabras no permitidas");
-
+    if (!usuario) return alert("Escribí tu nombre");
+    if (prohibidas.some(p => usuario.toLowerCase().includes(p))) return alert("Nombre no permitido");
     CONFIG.usuarioActual = usuario;
     generarDatosCuenta();
-
     document.getElementById('pantallaAcceso').classList.add('oculto');
     document.getElementById('pantallaServidores').classList.remove('oculto');
 }
 
-// 🌐 Conectar al servidor
+// 🌐 Conectar servidor
 function conectarServidor(numero) {
     document.getElementById('pantallaServidores').classList.add('oculto');
     document.getElementById('menuPrincipal').classList.remove('oculto');
     document.getElementById('nombreUsuario').textContent = CONFIG.usuarioActual;
     document.getElementById('idCuenta').textContent = CONFIG.idActual;
+    actualizarAvisos();
+    cambiarSeccion('inicio');
 }
 
 // 🔙 Volver pantallas
-function volverACarga() {
-    document.getElementById('pantallaAcceso').classList.add('oculto');
-    document.getElementById('pantallaCarga').classList.remove('oculto');
-    porcentaje = 0;
-}
+function volverACarga() { document.getElementById('pantallaAcceso').classList.add('oculto'); document.getElementById('pantallaCarga').classList.remove('oculto'); porcentaje = 0; }
+function volverAAcceso() { document.getElementById('pantallaServidores').classList.add('oculto'); document.getElementById('pantallaAcceso').classList.remove('oculto'); }
+function volverAServidores() { document.getElementById('menuPrincipal').classList.add('oculto'); document.getElementById('pantallaServidores').classList.remove('oculto'); }
 
-function volverAAcceso() {
-    document.getElementById('pantallaServidores').classList.add('oculto');
-    document.getElementById('pantallaAcceso').classList.remove('oculto');
-}
-
-function volverAServidores() {
-    document.getElementById('menuPrincipal').classList.add('oculto');
-    document.getElementById('pantallaServidores').classList.remove('oculto');
-}
-
-// 🔍 Cambiar secciones
+// 🔄 Cambiar secciones
 function cambiarSeccion(nombre) {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('activo'));
     event.currentTarget.classList.add('activo');
-
     const contenido = document.getElementById('contenidoMenu');
 
     if (nombre === 'inicio') {
-        contenido.innerHTML = `
-            <div class="tarjeta">
-                <h3>📢 Inicio</h3>
-                <p>Bienvenido a Zentrith World. Aquí verás novedades, misiones y regalos.</p>
-                <br>
-                <p>✅ Misión diaria: Jugar 15 min → +20 Monedas Z</p>
-                <p>✅ Próximo evento: Día del Niño</p>
+        let html = `<div class="tarjeta"><h3>📢 Bienvenido, ${CONFIG.usuarioActual}</h3><p>🆔 Tu ID: ${CONFIG.idActual}</p><br><h4>📋 Misiones diarias</h4>`;
+        CONFIG.misiones.forEach(m => {
+            html += `<div class="mision ${m.completada ? 'completada' : ''}">
+                <span>${m.completada ? '✅' : '🔹'} ${m.texto}</span>
+                ${!m.completada ? `<button class="boton boton-verde" onclick="cumplirMision(${m.id})">Cumplir → +${m.recompensa}</button>` : `<span>Hecho</span>`}
             </div>`;
-    } else if (nombre === 'jugar') {
-        contenido.innerHTML = `<div class="tarjeta"><h3>🎮 Jugar</h3><p>Lista de mundos y juegos disponibles.</p></div>`;
-    } else if (nombre === 'crear') {
-        contenido.innerHTML = `<div class="tarjeta"><h3>🛠️ Crear</h3><p>Espacio para diseñar tus propios mundos y juegos.</p></div>`;
-    } else if (nombre === 'amigos') {
+        });
+        html += `<p style="margin-top:15px">🎁 Regalos especiales: disponibles en fechas festivas</p></div>`;
+        contenido.innerHTML = html;
+    }
+
+    else if (nombre === 'jugar') {
+        contenido.innerHTML = `<div class="tarjeta"><h3>🎮 Zona de Juego</h3><p>Acá van los modos y mundos disponibles.</p><br><p>Por ahora: entrá y probá las misiones para ganar monedas.</p></div>`;
+    }
+
+    else if (nombre === 'crear') {
+        contenido.innerHTML = `<div class="tarjeta"><h3>🛠️ Zona de Creación</h3><p>Espacio para diseñar tus propios mapas y juegos.</p><br><button class="boton boton-azul" onclick="cumplirMision(2)">Visitar zona (+15 monedas)</button></div>`;
+    }
+
+    else if (nombre === 'amigos') {
         contenido.innerHTML = `
             <div class="tarjeta">
                 <h3>👥 Amigos</h3>
-                <div style="display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap">
-                    <button class="boton-chico btn-azul" onclick="mostrarBusqueda()">Buscar</button>
-                    <button class="boton-chico btn-azul" onclick="verSolicitudes()">Solicitudes</button>
-                    <button class="boton-chico btn-azul" onclick="verAmigos()">Mis amigos</button>
+                <div class="grupo-botones">
+                    <button class="boton boton-azul" onclick="mostrarBusqueda()">Buscar</button>
+                    <button class="boton boton-azul" onclick="verSolicitudes()">Solicitudes</button>
+                    <button class="boton boton-azul" onclick="verAmigos()">Mis amigos</button>
                 </div>
                 <div id="zonaAmigos"></div>
             </div>`;
         mostrarBusqueda();
-    } else if (nombre === 'ajustes') {
-        contenido.innerHTML = `<div class="tarjeta"><h3>⚙️ Ajustes</h3><p>Idioma, privacidad, ayuda y salir.</p></div>`;
     }
+
+    else if (nombre === 'ajustes') {
+        contenido.innerHTML = `<div class="tarjeta"><h3>⚙️ Ajustes</h3><p>Idioma, privacidad, notificaciones y cerrar sesión.</p><br><button class="boton boton-volver" onclick="cerrarSesion()">Cerrar sesión</button></div>`;
+    }
+}
+
+// ✅ Cumplir misión
+function cumplirMision(id) {
+    const m = CONFIG.misiones.find(m => m.id === id);
+    if (!m || m.completada) return;
+    m.completada = true;
+    // Si sos el creador, no cambia tu saldo (ya es alto), si no, suma normal
+    if (CONFIG.idActual !== CONFIG.creador.id) {
+        CONFIG.monedasZ += m.recompensa;
+    }
+    actualizarVistaMonedas();
+    alert(`✅ Misión cumplida! Ganaste ${m.recompensa} Monedas Z`);
+    cambiarSeccion('inicio');
 }
 
 // 🔎 Buscar amigos
@@ -316,50 +311,37 @@ function buscarAmigo() {
     const texto = document.getElementById('buscarAmigo').value.trim().toLowerCase();
     const resultados = document.getElementById('resultadosBusqueda');
     resultados.innerHTML = "";
-
     if (CONFIG.creador.id.includes(texto) || CONFIG.creador.nombre.toLowerCase().includes(texto)) {
         resultados.innerHTML += `
             <div class="resultado">
                 <span>🆔 ${CONFIG.creador.id} | ${CONFIG.creador.nombre} (Creador)</span>
-                <button class="boton-chico btn-azul" onclick="enviarSolicitud('${CONFIG.creador.id}')">Agregar</button>
+                <button class="boton boton-azul" onclick="enviarSolicitud('${CONFIG.creador.id}')">Agregar</button>
             </div>`;
     }
-
-    if (resultados.innerHTML === "") {
-        resultados.innerHTML = `<p style="text-align:center;opacity:0.7;padding:10px">Escribí un ID o nombre para buscar</p>`;
-    }
+    if (resultados.innerHTML === "") resultados.innerHTML = `<p style="text-align:center;opacity:0.7;padding:10px">Escribí un ID o nombre para buscar</p>`;
 }
 
 // 📩 Enviar solicitud
 function enviarSolicitud(idDestino) {
     if (idDestino === CONFIG.idActual) return alert("❌ No podés agregarte a vos mismo");
     if (CONFIG.listaAmigos.includes(idDestino)) return alert("ℹ️ Ya es tu amigo");
-    if (CONFIG.solicitudesRecibidas.includes(idDestino)) return alert("ℹ️ Ya tenés una solicitud pendiente");
-
-    alert("✅ Solicitud enviada correctamente");
-    if (idDestino === CONFIG.creador.id) {
-        CONFIG.solicitudesRecibidas.push(CONFIG.idActual);
-    }
+    if (CONFIG.solicitudesRecibidas.includes(idDestino)) return alert("ℹ️ Ya tenés solicitud pendiente");
+    alert("✅ Solicitud enviada");
+    if (idDestino === CONFIG.creador.id) { CONFIG.solicitudesRecibidas.push(CONFIG.idActual); actualizarAvisos(); }
 }
 
 // 📬 Ver solicitudes
 function verSolicitudes() {
     const zona = document.getElementById('zonaAmigos');
-    if (CONFIG.solicitudesRecibidas.length === 0) {
-        zona.innerHTML = `<p style="text-align:center;opacity:0.7;padding:15px">📩 No tenés solicitudes pendientes</p>`;
-        return;
-    }
+    if (CONFIG.solicitudesRecibidas.length === 0) { zona.innerHTML = `<p style="text-align:center;opacity:0.7;padding:15px">📩 No tenés solicitudes</p>`; return; }
     let html = `<h4 style="margin-bottom:10px">📩 Solicitudes recibidas</h4>`;
     CONFIG.solicitudesRecibidas.forEach(id => {
         const nombre = id === "01" ? "El Arquitecto" : `Jugador ${id}`;
-        html += `
-            <div class="resultado">
-                <span>🆔 ${id} | ${nombre}</span>
-                <div style="display:flex;gap:5px">
-                    <button class="boton-chico btn-verde" onclick="aceptarSolicitud('${id}')">Aceptar</button>
-                    <button class="boton-chico btn-rojo" onclick="rechazarSolicitud('${id}')">Rechazar</button>
-                </div>
-            </div>`;
+        html += `<div class="resultado">
+            <span>🆔 ${id} | ${nombre}</span>
+            <div><button class="boton boton-verde" onclick="aceptarSolicitud('${id}')">Aceptar</button>
+            <button class="boton boton-rojo" onclick="rechazarSolicitud('${id}')">Rechazar</button></div>
+        </div>`;
     });
     zona.innerHTML = html;
 }
@@ -368,48 +350,45 @@ function verSolicitudes() {
 function aceptarSolicitud(id) {
     CONFIG.listaAmigos.push(id);
     CONFIG.solicitudesRecibidas = CONFIG.solicitudesRecibidas.filter(i => i !== id);
+    actualizarAvisos();
+    cumplirMision(3); // Suma misión de agregar amigo
     alert("✅ Solicitud aceptada");
-    verSolicitudes();
+    verAmigos();
 }
 
 // ❌ Rechazar solicitud
-function rechazarSolicitud(id) {
-    CONFIG.solicitudesRecibidas = CONFIG.solicitudesRecibidas.filter(i => i !== id);
-    alert("❌ Solicitud rechazada");
-    verSolicitudes();
-}
+function rechazarSolicitud(id) { CONFIG.solicitudesRecibidas = CONFIG.solicitudesRecibidas.filter(i => i !== id); actualizarAvisos(); alert("❌ Solicitud rechazada"); verSolicitudes(); }
 
 // 👥 Ver amigos
 function verAmigos() {
     const zona = document.getElementById('zonaAmigos');
-    if (CONFIG.listaAmigos.length === 0) {
-        zona.innerHTML = `<p style="text-align:center;opacity:0.7;padding:15px">👥 Todavía no tenés amigos agregados</p>`;
-        return;
-    }
+    if (CONFIG.listaAmigos.length === 0) { zona.innerHTML = `<p style="text-align:center;opacity:0.7;padding:15px">👥 No tenés amigos aún</p>`; return; }
     let html = `<h4 style="margin-bottom:10px">👥 Mis amigos</h4>`;
     CONFIG.listaAmigos.forEach(id => {
         const nombre = id === "01" ? "El Arquitecto" : `Jugador ${id}`;
-        html += `
-            <div class="resultado">
-                <span>🆔 ${id} | ${nombre}</span>
-                <button class="boton-chico btn-rojo" onclick="eliminarAmigo('${id}')">Eliminar</button>
-            </div>`;
+        html += `<div class="resultado">
+            <span>🆔 ${id} | ${nombre}</span>
+            <button class="boton boton-rojo" onclick="eliminarAmigo('${id}')">Eliminar</button>
+        </div>`;
     });
     zona.innerHTML = html;
 }
 
 // 🗑️ Eliminar amigo
-function eliminarAmigo(id) {
-    CONFIG.listaAmigos = CONFIG.listaAmigos.filter(i => i !== id);
-    alert("🗑️ Amigo eliminado correctamente");
-    verAmigos();
-}
+function eliminarAmigo(id) { CONFIG.listaAmigos = CONFIG.listaAmigos.filter(i => i !== id); alert("🗑️ Amigo eliminado"); verAmigos(); }
 
-// 🎁 Sistema de regalos
-function darRegalo(idDestino, nivel = "bajo") {
-    if (CONFIG.idActual !== CONFIG.creador.id) return alert("❌ No tenés permiso");
-    const limites = CONFIG.nivelesConfianza[nivel];
-    return `✅ Regalo enviado: hasta ${limites.monedas} monedas y ${limites.cristales} cristales. Nivel: ${nivel}`;
+// 🛎️ Notificaciones
+function actualizarAvisos() { const cant = CONFIG.solicitudesRecibidas.length; const badge = document.getElementById('contadorAvisos'); if (cant>0) { badge.textContent = cant; badge.classList.remove('oculto'); } else badge.classList.add('oculto'); }
+function verNotificaciones() { cambiarSeccion('amigos'); verSolicitudes(); }
+
+// 🔒 Cerrar sesión
+function cerrarSesion() { if (confirm("¿Cerrar sesión?")) { location.reload(); } }
+
+// 🎁 Regalos / Comisiones
+function darRegalo(idDestino, nivel="bajo") { 
+    if (CONFIG.idActual !== CONFIG.creador.id) return alert("❌ Sin permiso"); 
+    const lim = CONFIG.nivelesConfianza[nivel]; 
+    return `✅ Regalo enviado: +${lim.monedas} Monedas Z, +${lim.cristales} Cristales Z`; 
 }
 </script>
 
