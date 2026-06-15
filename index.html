@@ -1,24 +1,34 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>Zentrith World - Imperio</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}body{--fondo:#051027;--superficie:#0F2044;--superficie-alt:#102859;--borde:#1E3A8A;--texto:#E2F0FF;--texto-suave:#94A3B8;--acento:#3B82F6;--acento-suave:#93C5FD;--exito:#10B981;--alerta:#F59E0B;background:var(--fondo);color:var(--texto);min-height:100vh}#contenedor{max-width:500px;margin:0 auto;padding:15px;width:100%}.pantalla{display:none;width:100%}.pantalla.activa{display:block}.tarjeta{background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:20px;margin:15px 0;box-shadow:0 2px 8px rgba(59,130,246,0.15)}.campo{width:100%;padding:12px;margin:10px 0;background:var(--superficie-alt);border:1px solid var(--borde);border-radius:8px;color:var(--texto);font-size:1rem}.boton{width:100%;padding:12px;border:none;border-radius:8px;background:var(--acento);color:white;font-size:1.1rem;font-weight:bold;cursor:pointer;margin-top:10px;transition:0.2s}.boton:hover{opacity:0.9}.boton:disabled{opacity:0.4;cursor:not-allowed}.boton-secundario{background:#475569}.boton-exito{background:var(--exito)}.boton-alerta{background:var(--alerta)}.barra-progreso{height:8px;background:var(--superficie-alt);border-radius:4px;overflow:hidden;margin:5px 0}.texto-centro{text-align:center}.divisor{border-bottom:1px solid var(--borde);margin:15px 0;padding-bottom:15px}</style></head><body><div id="contenedor">
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>Zentrith World</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}body{--fondo:#051027;--superficie:#0F2044;--superficie-alt:#102859;--borde:#1E3A8A;--texto:#E2F0FF;--texto-suave:#94A3B8;--acento:#3B82F6;--exito:#10B981;--alerta:#F59E0B;background:var(--fondo);color:var(--texto);min-height:100vh}#contenedor{max-width:500px;margin:0 auto;padding:15px;width:100%}.pantalla{display:none;width:100%}.pantalla.activa{display:block}.tarjeta{background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:20px;margin:15px 0;box-shadow:0 2px 8px rgba(59,130,246,0.15)}.campo{width:100%;padding:12px;margin:10px 0;background:var(--superficie-alt);border:1px solid var(--borde);border-radius:8px;color:var(--texto);font-size:1rem}.opciones{display:flex;gap:10px;margin:12px 0}.opcion{flex:1;padding:10px;border-radius:8px;border:1px solid var(--borde);background:var(--superficie-alt);text-align:center;cursor:pointer;transition:0.2s}.opcion.seleccionada{background:var(--acento);border-color:var(--acento)}.boton{width:100%;padding:12px;border:none;border-radius:8px;background:var(--acento);color:white;font-size:1.1rem;font-weight:bold;cursor:pointer;margin-top:10px;transition:0.2s}.boton:hover{opacity:0.9}.boton:disabled{opacity:0.4;cursor:not-allowed}.boton-secundario{background:#475569}.boton-exito{background:var(--exito)}.boton-alerta{background:var(--alerta)}.barra-progreso{height:8px;background:var(--superficie-alt);border-radius:4px;overflow:hidden;margin:5px 0}.texto-centro{text-align:center}</style></head><body><div id="contenedor">
 
-<!-- ⏳ PANTALLA DE CARGA -->
+<!-- ⏳ CARGA -->
 <div id="carga" class="pantalla activa tarjeta texto-centro">
-<h2>Zentrith World</h2><p>Cargando imperios...</p>
-<div class="barra-progreso"><div id="barraCarga" style="width:0%;height:100%;background:var(--acento);border-radius:4px"></div></div>
+<h2>Zentrith World</h2><p>Cargando mundo...</p>
+<div class="barra-progreso"><div id="barraCarga" style="width:0%;height:100%;background:var(--acento)"></div></div>
 </div>
 
 <!-- 🏠 INICIO -->
 <div id="inicio" class="pantalla tarjeta texto-centro">
 <h1 style="color:var(--acento);margin-bottom:15px">Zentrith World</h1>
-<p style="color:var(--texto-suave);margin-bottom:25px">Construye, lidera y domina. Tu imperio te espera.</p>
-<button class="boton" onclick="mostrar('acceso')">Comenzar la aventura</button>
+<p style="color:var(--texto-suave);margin-bottom:25px">Construye, explora y crea tu propio camino</p>
+<button class="boton" onclick="mostrar('acceso')">Comenzar</button>
 </div>
 
-<!-- 📥 ACCESO -->
+<!-- 📥 ACCESO CON GÉNERO -->
 <div id="acceso" class="pantalla tarjeta">
-<h2>Ingreso al Mundo</h2>
-<p style="color:var(--texto-suave);font-size:0.9rem;margin-bottom:15px">Tu nombre y fecha para adaptar todo a vos (seguro y privado)</p>
-<input type="text" class="campo" id="nombreJugador" placeholder="Tu nombre o apodo">
-<input type="date" class="campo" id="fechaNac">
+<h2>Ingreso</h2>
+<p style="color:var(--texto-suave);font-size:0.9rem;margin-bottom:15px">Usá un apodo cualquiera, no hace falta tu nombre real</p>
+
+<input type="text" class="campo" id="nombreJugador" placeholder="Tu apodo">
+
+<p style="margin:12px 0 6px">Soy:</p>
+<div class="opciones">
+  <div class="opcion" onclick="elegirGenero('niño')">👦 Niño</div>
+  <div class="opcion" onclick="elegirGenero('niña')">👧 Niña</div>
+  <div class="opcion" onclick="elegirGenero('no')">🤷 Prefiero no decir</div>
+</div>
+
+<input type="date" class="campo" id="fechaNac" placeholder="Fecha de nacimiento">
+
 <button class="boton" onclick="validarIngreso()">Entrar</button>
 </div>
 
@@ -26,49 +36,43 @@
 <div id="menu" class="pantalla tarjeta">
 <h2 class="texto-centro">🏠 Menú Principal</h2>
 <div class="tarjeta" style="background:var(--superficie-alt);margin:10px 0;padding:12px">
-<p class="texto-centro">👤 <b id="datoNombre">-</b> | Nivel: <b id="datoNivel">1</b></p>
+<p class="texto-centro">👤 <b id="datoNombre">-</b> | <span id="datoGenero">-</span> | <span id="grupoEdad">-</span></p>
+<p class="texto-centro">📈 Nivel: <b id="datoNivel">1</b> | EXP: <b id="datoExp">0/120</b></p>
 <p class="texto-centro">🪙 Monedas: <b id="datoMonedas">0</b> | 💎 Cristales: <b id="datoCristales">0</b></p>
 <p class="texto-centro">⚡ Energía: <b id="datoEnergia">200/200</b></p>
+<p style="font-size:0.8rem;color:var(--texto-suave);text-align:center;margin-top:8px">💾 Progreso guardado automáticamente</p>
 </div>
-
-<button class="boton boton-exito" onclick="mostrar('imperios')">🏰 MIS IMPERIOS</button>
+<button class="boton boton-exito" onclick="mostrar('imperios')">🏰 Mis Imperios</button>
 <button class="boton" onclick="mostrar('zonas')">🌍 Explorar Zonas</button>
-<button class="boton boton-alerta" onclick="mostrar('misiones')">📜 Misiones y Recompensas</button>
+<button class="boton boton-alerta" onclick="mostrar('misiones')">📜 Misiones</button>
 <button class="boton boton-secundario" onclick="mostrar('ajustes')">⚙️ Ajustes</button>
 </div>
 
-<!-- 🏰 IMPERIOS (2 DISPONIBLES) -->
+<!-- 🏰 IMPERIOS -->
 <div id="imperios" class="pantalla tarjeta">
 <h2 class="texto-centro">🏰 Mis Imperios</h2>
-
-<!-- IMPERIO 1 -->
 <div class="tarjeta" id="tarjetaImperio1">
 <h3>🔱 Primer Imperio</h3>
-<p id="estado1">Sin crear aún. ¡Construye tu legado!</p>
-<input type="text" class="campo" id="nomImperio1" placeholder="Nombre del primer imperio">
-<button class="boton boton-exito" onclick="crearImperio(1)">Crear Primer Imperio</button>
+<p id="estado1">Sin crear aún</p>
+<input type="text" class="campo" id="nomImperio1" placeholder="Nombre del imperio">
+<button class="boton boton-exito" onclick="crearImperio(1)">Crear</button>
 <div id="datosImp1" style="display:none;margin-top:10px;border-top:1px solid var(--borde);padding-top:10px">
-<p>Nivel: <b id="nivelImp1">1</b> | Miembros: <b id="miembrosImp1">1</b></p>
-<p>Territorios: <b id="territoriosImp1">0</b></p>
+<p>Nivel: <b id="nivelImp1">1</b> | Miembros: <b id="miembrosImp1">1</b> | Territorios: <b id="territoriosImp1">0</b></p>
 </div>
 </div>
-
-<!-- IMPERIO 2 -->
 <div class="tarjeta" id="tarjetaImperio2">
 <h3>⚜️ Segundo Imperio</h3>
-<p id="estado2">Desbloqueable al llegar a Nivel 5. ¡Prepárate para expandirte!</p>
+<p id="estado2">Se desbloquea al llegar a Nivel 5</p>
 <input type="text" class="campo" id="nomImperio2" placeholder="Nombre del segundo imperio" disabled>
-<button class="boton boton-exito" onclick="crearImperio(2)" disabled>Crear Segundo Imperio</button>
+<button class="boton boton-exito" onclick="crearImperio(2)" disabled>Crear</button>
 <div id="datosImp2" style="display:none;margin-top:10px;border-top:1px solid var(--borde);padding-top:10px">
-<p>Nivel: <b id="nivelImp2">1</b> | Miembros: <b id="miembrosImp2">1</b></p>
-<p>Territorios: <b id="territoriosImp2">0</b></p>
+<p>Nivel: <b id="nivelImp2">1</b> | Miembros: <b id="miembrosImp2">1</b> | Territorios: <b id="territoriosImp2">0</b></p>
 </div>
 </div>
-
 <button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
 </div>
 
-<!-- 📜 MISIONES FUNCIONALES -->
+<!-- 📜 MISIONES -->
 <div id="misiones" class="pantalla tarjeta">
 <h2 class="texto-centro">📜 Misiones Activas</h2>
 <div id="listaMisiones"></div>
@@ -77,50 +81,44 @@
 
 <!-- 🌍 ZONAS -->
 <div id="zonas" class="pantalla tarjeta">
-<h2>🌍 Zonas de Exploración</h2>
-<p>Recolecta recursos para mejorar tus imperios.</p>
+<h2>🌍 Zonas</h2>
+<p>Explorá para conseguir recursos</p>
 <div id="listaZonas"></div>
 <button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
 </div>
 
 <!-- ⚙️ AJUSTES -->
 <div id="ajustes" class="pantalla tarjeta">
-<h2>⚙️ Ajustes del Juego</h2>
-<p>🔊 Volumen de sonido: <span id="volValor">70%</span></p>
-<input type="range" min="0" max="100" value="70" style="width:100%;margin:8px 0" oninput="AUDIO.volumenGeneral=this.value;document.getElementById('volValor').textContent=this.value+'%'">
-<p style="margin-top:15px;color:var(--texto-suave);font-size:0.9rem">✅ Seguridad activa: adaptado según edad, sin contenido peligroso.</p>
+<h2>⚙️ Ajustes</h2>
+<p>🔊 Volumen: <span id="volValor">70%</span></p>
+<input type="range" min="0" max="100" value="70" style="width:100%;margin:8px 0" oninput="document.getElementById('volValor').textContent=this.value+'%'">
 <button class="boton boton-secundario" onclick="mostrar('menu')" style="margin-top:20px">Volver</button>
 </div>
 
 </div>
 <script>
-// CONFIGURACIÓN GENERAL
-const CONFIG = {
-    usuario: "", edad: 0, nivel: 1, exp: 0, expSig: 120,
+// 📦 CONFIGURACIÓN GENERAL
+let CONFIG = {
+    usuario: "", genero: "", edad: 0, grupoEdad: "", nivel: 1, exp: 0, expSig: 120,
     monedas: 0, cristales: 0, energia: 200, energiaMax: 200,
-    imperio1: null, imperio2: null,
-    misionesHechas: []
+    imperio1: null, imperio2: null, misionesHechas: []
 };
 
-// LISTA DE MISIONES
 const MISIONES = [
     {id:1,texto:"🪵 Recolectar recursos",exp:20,monedas:30,hecha:false},
-    {id:2,texto:"🤝 Ayudar en la comunidad",exp:35,monedas:50,hecha:false},
-    {id:3,texto:"🏰 Mejorar edificio del Imperio",exp:50,monedas:80,cristales:5,hecha:false},
+    {id:2,texto:"🤝 Ayudar en la zona",exp:35,monedas:50,hecha:false},
+    {id:3,texto:"🏰 Mejorar imperio",exp:50,monedas:80,cristales:5,hecha:false},
     {id:4,texto:"🗺️ Explorar zona nueva",exp:40,monedas:60,hecha:false}
 ];
 
-// SEGURIDAD (SIN BLOQUEOS, SOLO REGLAS INTERNAS)
-const SEGURIDAD = { 
-    menores13:{chat:"frases predefinidas",privados:"bloqueados",intercambios:"limitados"}, 
-    mayores13:{chat:"con filtro activo",privados:"permitidos",intercambios:"ampliados"} 
-};
-
-// AUDIO
-const AUDIO = { volumenGeneral:70, activo:true };
-
-// FUNCIONES BÁSICAS
+// 🛡️ FUNCIONES
 function mostrar(id){document.querySelectorAll('.pantalla').forEach(p=>p.classList.remove('activa'));document.getElementById(id).classList.add('activa')}
+
+function elegirGenero(valor){
+    document.querySelectorAll('.opcion').forEach(op=>op.classList.remove('seleccionada'));
+    event.currentTarget.classList.add('seleccionada');
+    CONFIG.genero = valor;
+}
 
 function calcularEdad(fecha){
     let hoy=new Date(),nac=new Date(fecha),e=hoy.getFullYear()-nac.getFullYear();
@@ -129,47 +127,58 @@ function calcularEdad(fecha){
     return e<8?8:e;
 }
 
+function definirGrupoEdad(edad){
+    if(edad < 8) return "🧒 Grupo Infantil";
+    if(edad < 13) return "👦👧 Grupo de Niños";
+    if(edad < 18) return "🧑 Grupo Adolescente";
+    return "🧑‍🦱 Grupo Adulto";
+}
+
 function validarIngreso(){
-    let nom=document.getElementById('nombreJugador').value.trim();
+    let nom=document.getElementById('nombreJugador').value.trim() || "Jugador";
     let fec=document.getElementById('fechaNac').value;
-    if(!nom||!fec){alert("Completá tu nombre y fecha de nacimiento");return}
+    if(!fec){alert("Ingresá tu fecha de nacimiento");return}
+    if(!CONFIG.genero) CONFIG.genero = "no";
+
     CONFIG.usuario=nom;
     CONFIG.edad=calcularEdad(fec);
-    aplicarReglasEdad();
+    CONFIG.grupoEdad=definirGrupoEdad(CONFIG.edad);
     actualizarDatosMenu();
     cargarMisiones();
+    guardarProgreso();
     mostrar('menu');
 }
 
-function aplicarReglasEdad(){
-    CONFIG.reglas = CONFIG.edad <13 ? SEGURIDAD.menores13 : SEGURIDAD.mayores13;
-}
-
 function actualizarDatosMenu(){
+    let textoGenero = "";
+    if(CONFIG.genero === "niño") textoGenero = "👦 Niño";
+    else if(CONFIG.genero === "niña") textoGenero = "👧 Niña";
+    else textoGenero = "🤷 No especificado";
+
     document.getElementById('datoNombre').textContent=CONFIG.usuario;
+    document.getElementById('datoGenero').textContent=textoGenero;
+    document.getElementById('grupoEdad').textContent=CONFIG.grupoEdad;
     document.getElementById('datoNivel').textContent=CONFIG.nivel;
+    document.getElementById('datoExp').textContent=`${CONFIG.exp}/${CONFIG.expSig}`;
     document.getElementById('datoMonedas').textContent=CONFIG.monedas;
     document.getElementById('datoCristales').textContent=CONFIG.cristales;
     document.getElementById('datoEnergia').textContent=`${Math.round(CONFIG.energia)}/${CONFIG.energiaMax}`;
-
+    
     if(CONFIG.nivel >=5){
-        document.getElementById('estado2').textContent="✅ ¡Desbloqueado! Ya podés crear tu segundo imperio.";
+        document.getElementById('estado2').textContent="✅ Desbloqueado";
         document.getElementById('nomImperio2').disabled=false;
         document.querySelector('#tarjetaImperio2 button').disabled=false;
     }
 }
 
 function crearImperio(num){
-    let nombre = document.getElementById(`nomImperio${num}`).value.trim();
-    if(!nombre){alert("Ponéle un nombre a tu imperio");return}
+    let nombre = document.getElementById(`nomImperio${num}`).value.trim() || `Imperio ${num}`;
     CONFIG[`imperio${num}`] = { nombre:nombre, nivel:1, miembros:1, territorios:0 };
     document.getElementById(`estado${num}`).style.display="none";
     document.getElementById(`nomImperio${num}`).style.display="none";
     document.querySelector(`#tarjetaImperio${num} button`).style.display="none";
     document.getElementById(`datosImp${num}`).style.display="block";
-    document.getElementById(`nivelImp${num}`).textContent=1;
-    document.getElementById(`miembrosImp${num}`).textContent=1;
-    document.getElementById(`territoriosImp${num}`).textContent=0;
+    guardarProgreso();
 }
 
 function cargarMisiones(){
@@ -180,9 +189,9 @@ function cargarMisiones(){
         cont.innerHTML += `
         <div class="tarjeta" style="background:var(--superficie-alt);padding:15px">
             <p>${m.texto}</p>
-            <p style="font-size:0.9rem;color:var(--texto-suave);margin:8px 0">🎁 Recompensa: +${m.monedas} 🪙 ${m.cristales?`| +${m.cristales} 💎`:''} | +${m.exp} EXP</p>
+            <p style="font-size:0.9rem;color:var(--texto-suave)">🎁 +${m.monedas} 🪙 | +${m.exp} EXP</p>
             <button class="boton ${hecho?'boton-secundario':'boton-exito'}" onclick="cobrarMision(${m.id})" ${hecho?'disabled':''}>
-                ${hecho?'✅ Hecho':'💰 Cobrar Recompensa'}
+                ${hecho?'✅ Hecho':'💰 Cobrar'}
             </button>
         </div>`;
     });
@@ -199,237 +208,43 @@ function cobrarMision(id){
         CONFIG.nivel++;
         CONFIG.exp -= CONFIG.expSig;
         CONFIG.expSig = Math.round(CONFIG.expSig * 1.3);
-        alert(`🎉 ¡Subiste al Nivel ${CONFIG.nivel}!`);
+        alert(`🎉 Subiste al Nivel ${CONFIG.nivel}`);
     }
     actualizarDatosMenu();
     cargarMisiones();
+    guardarProgreso();
 }
 
-// INICIO DEL JUEGO
+// 💾 GUARDADO Y CARGA
+function guardarProgreso(){
+    localStorage.setItem("zentrith_save", JSON.stringify(CONFIG));
+}
+
+function cargarProgreso(){
+    const guardado = localStorage.getItem("zentrith_save");
+    if(guardado){
+        CONFIG = JSON.parse(guardado);
+        return true;
+    }
+    return false;
+}
+
+// 🚀 INICIO
 window.onload=()=>{
     let prog=0;
     let carga=setInterval(()=>{
         prog+=6;
         document.getElementById('barraCarga').style.width=prog+"%";
-        if(prog>=100){ clearInterval(carga); mostrar('inicio'); }
+        if(prog>=100){
+            clearInterval(carga);
+            if(cargarProgreso()){
+                actualizarDatosMenu();
+                cargarMisiones();
+                mostrar('menu');
+            } else {
+                mostrar('inicio');
+            }
+        }
     },120);
 };
 </script></body></html>
-  <!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>Zentrith World - Imperio</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}body{--fondo:#051027;--superficie:#0F2044;--superficie-alt:#102859;--borde:#1E3A8A;--texto:#E2F0FF;--texto-suave:#94A3B8;--acento:#3B82F6;--acento-suave:#93C5FD;--exito:#10B981;--alerta:#F59E0B;background:var(--fondo);color:var(--texto);min-height:100vh}#contenedor{max-width:500px;margin:0 auto;padding:15px;width:100%}.pantalla{display:none;width:100%}.pantalla.activa{display:block}.tarjeta{background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:20px;margin:15px 0;box-shadow:0 2px 8px rgba(59,130,246,0.15)}.campo{width:100%;padding:12px;margin:10px 0;background:var(--superficie-alt);border:1px solid var(--borde);border-radius:8px;color:var(--texto);font-size:1rem}.boton{width:100%;padding:12px;border:none;border-radius:8px;background:var(--acento);color:white;font-size:1.1rem;font-weight:bold;cursor:pointer;margin-top:10px;transition:0.2s}.boton:hover{opacity:0.9}.boton:disabled{opacity:0.4;cursor:not-allowed}.boton-secundario{background:#475569}.boton-exito{background:var(--exito)}.boton-alerta{background:var(--alerta)}.barra-progreso{height:8px;background:var(--superficie-alt);border-radius:4px;overflow:hidden;margin:5px 0}.texto-centro{text-align:center}.divisor{border-bottom:1px solid var(--borde);margin:15px 0;padding-bottom:15px}</style></head><body><div id="contenedor">
-
-<!-- ⏳ PANTALLA DE CARGA -->
-<div id="carga" class="pantalla activa tarjeta texto-centro">
-<h2>Zentrith World</h2><p>Cargando imperios...</p>
-<div class="barra-progreso"><div id="barraCarga" style="width:0%;height:100%;background:var(--acento);border-radius:4px"></div></div>
-</div>
-
-<!-- 🏠 INICIO -->
-<div id="inicio" class="pantalla tarjeta texto-centro">
-<h1 style="color:var(--acento);margin-bottom:15px">Zentrith World</h1>
-<p style="color:var(--texto-suave);margin-bottom:25px">Construye, lidera y domina. Tu imperio te espera.</p>
-<button class="boton" onclick="mostrar('acceso')">Comenzar la aventura</button>
-</div>
-
-<!-- 📥 ACCESO -->
-<div id="acceso" class="pantalla tarjeta">
-<h2>Ingreso al Mundo</h2>
-<p style="color:var(--texto-suave);font-size:0.9rem;margin-bottom:15px">Tu nombre y fecha para adaptar todo a vos (seguro y privado)</p>
-<input type="text" class="campo" id="nombreJugador" placeholder="Tu nombre o apodo">
-<input type="date" class="campo" id="fechaNac">
-<button class="boton" onclick="validarIngreso()">Entrar</button>
-</div>
-
-<!-- 📋 MENÚ PRINCIPAL -->
-<div id="menu" class="pantalla tarjeta">
-<h2 class="texto-centro">🏠 Menú Principal</h2>
-<div class="tarjeta" style="background:var(--superficie-alt);margin:10px 0;padding:12px">
-<p class="texto-centro">👤 <b id="datoNombre">-</b> | Nivel: <b id="datoNivel">1</b></p>
-<p class="texto-centro">🪙 Monedas: <b id="datoMonedas">0</b> | 💎 Cristales: <b id="datoCristales">0</b></p>
-<p class="texto-centro">⚡ Energía: <b id="datoEnergia">200/200</b></p>
-</div>
-
-<button class="boton boton-exito" onclick="mostrar('imperios')">🏰 MIS IMPERIOS</button>
-<button class="boton" onclick="mostrar('zonas')">🌍 Explorar Zonas</button>
-<button class="boton boton-alerta" onclick="mostrar('misiones')">📜 Misiones y Recompensas</button>
-<button class="boton boton-secundario" onclick="mostrar('ajustes')">⚙️ Ajustes</button>
-</div>
-
-<!-- 🏰 IMPERIOS (2 DISPONIBLES) -->
-<div id="imperios" class="pantalla tarjeta">
-<h2 class="texto-centro">🏰 Mis Imperios</h2>
-
-<!-- IMPERIO 1 -->
-<div class="tarjeta" id="tarjetaImperio1">
-<h3>🔱 Primer Imperio</h3>
-<p id="estado1">Sin crear aún. ¡Construye tu legado!</p>
-<input type="text" class="campo" id="nomImperio1" placeholder="Nombre del primer imperio">
-<button class="boton boton-exito" onclick="crearImperio(1)">Crear Primer Imperio</button>
-<div id="datosImp1" style="display:none;margin-top:10px;border-top:1px solid var(--borde);padding-top:10px">
-<p>Nivel: <b id="nivelImp1">1</b> | Miembros: <b id="miembrosImp1">1</b></p>
-<p>Territorios: <b id="territoriosImp1">0</b></p>
-</div>
-</div>
-
-<!-- IMPERIO 2 -->
-<div class="tarjeta" id="tarjetaImperio2">
-<h3>⚜️ Segundo Imperio</h3>
-<p id="estado2">Desbloqueable al llegar a Nivel 5. ¡Prepárate para expandirte!</p>
-<input type="text" class="campo" id="nomImperio2" placeholder="Nombre del segundo imperio" disabled>
-<button class="boton boton-exito" onclick="crearImperio(2)" disabled>Crear Segundo Imperio</button>
-<div id="datosImp2" style="display:none;margin-top:10px;border-top:1px solid var(--borde);padding-top:10px">
-<p>Nivel: <b id="nivelImp2">1</b> | Miembros: <b id="miembrosImp2">1</b></p>
-<p>Territorios: <b id="territoriosImp2">0</b></p>
-</div>
-</div>
-
-<button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
-</div>
-
-<!-- 📜 MISIONES FUNCIONALES -->
-<div id="misiones" class="pantalla tarjeta">
-<h2 class="texto-centro">📜 Misiones Activas</h2>
-<div id="listaMisiones"></div>
-<button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
-</div>
-
-<!-- 🌍 ZONAS -->
-<div id="zonas" class="pantalla tarjeta">
-<h2>🌍 Zonas de Exploración</h2>
-<p>Recolecta recursos para mejorar tus imperios.</p>
-<div id="listaZonas"></div>
-<button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
-</div>
-
-<!-- ⚙️ AJUSTES -->
-<div id="ajustes" class="pantalla tarjeta">
-<h2>⚙️ Ajustes del Juego</h2>
-<p>🔊 Volumen de sonido: <span id="volValor">70%</span></p>
-<input type="range" min="0" max="100" value="70" style="width:100%;margin:8px 0" oninput="AUDIO.volumenGeneral=this.value;document.getElementById('volValor').textContent=this.value+'%'">
-<p style="margin-top:15px;color:var(--texto-suave);font-size:0.9rem">✅ Seguridad activa: adaptado según edad, sin contenido peligroso.</p>
-<button class="boton boton-secundario" onclick="mostrar('menu')" style="margin-top:20px">Volver</button>
-</div>
-
-</div>
-<script>
-// CONFIGURACIÓN GENERAL
-const CONFIG = {
-    usuario: "", edad: 0, nivel: 1, exp: 0, expSig: 120,
-    monedas: 0, cristales: 0, energia: 200, energiaMax: 200,
-    imperio1: null, imperio2: null,
-    misionesHechas: []
-};
-
-// LISTA DE MISIONES
-const MISIONES = [
-    {id:1,texto:"🪵 Recolectar recursos",exp:20,monedas:30,hecha:false},
-    {id:2,texto:"🤝 Ayudar en la comunidad",exp:35,monedas:50,hecha:false},
-    {id:3,texto:"🏰 Mejorar edificio del Imperio",exp:50,monedas:80,cristales:5,hecha:false},
-    {id:4,texto:"🗺️ Explorar zona nueva",exp:40,monedas:60,hecha:false}
-];
-
-// SEGURIDAD (SIN BLOQUEOS, SOLO REGLAS INTERNAS)
-const SEGURIDAD = { 
-    menores13:{chat:"frases predefinidas",privados:"bloqueados",intercambios:"limitados"}, 
-    mayores13:{chat:"con filtro activo",privados:"permitidos",intercambios:"ampliados"} 
-};
-
-// AUDIO
-const AUDIO = { volumenGeneral:70, activo:true };
-
-// FUNCIONES BÁSICAS
-function mostrar(id){document.querySelectorAll('.pantalla').forEach(p=>p.classList.remove('activa'));document.getElementById(id).classList.add('activa')}
-
-function calcularEdad(fecha){
-    let hoy=new Date(),nac=new Date(fecha),e=hoy.getFullYear()-nac.getFullYear();
-    let m=hoy.getMonth()-nac.getMonth();
-    if(m<0||(m===0&&hoy.getDate()<nac.getDate()))e--;
-    return e<8?8:e;
-}
-
-function validarIngreso(){
-    let nom=document.getElementById('nombreJugador').value.trim();
-    let fec=document.getElementById('fechaNac').value;
-    if(!nom||!fec){alert("Completá tu nombre y fecha de nacimiento");return}
-    CONFIG.usuario=nom;
-    CONFIG.edad=calcularEdad(fec);
-    aplicarReglasEdad();
-    actualizarDatosMenu();
-    cargarMisiones();
-    mostrar('menu');
-}
-
-function aplicarReglasEdad(){
-    CONFIG.reglas = CONFIG.edad <13 ? SEGURIDAD.menores13 : SEGURIDAD.mayores13;
-}
-
-function actualizarDatosMenu(){
-    document.getElementById('datoNombre').textContent=CONFIG.usuario;
-    document.getElementById('datoNivel').textContent=CONFIG.nivel;
-    document.getElementById('datoMonedas').textContent=CONFIG.monedas;
-    document.getElementById('datoCristales').textContent=CONFIG.cristales;
-    document.getElementById('datoEnergia').textContent=`${Math.round(CONFIG.energia)}/${CONFIG.energiaMax}`;
-
-    if(CONFIG.nivel >=5){
-        document.getElementById('estado2').textContent="✅ ¡Desbloqueado! Ya podés crear tu segundo imperio.";
-        document.getElementById('nomImperio2').disabled=false;
-        document.querySelector('#tarjetaImperio2 button').disabled=false;
-    }
-}
-
-function crearImperio(num){
-    let nombre = document.getElementById(`nomImperio${num}`).value.trim();
-    if(!nombre){alert("Ponéle un nombre a tu imperio");return}
-    CONFIG[`imperio${num}`] = { nombre:nombre, nivel:1, miembros:1, territorios:0 };
-    document.getElementById(`estado${num}`).style.display="none";
-    document.getElementById(`nomImperio${num}`).style.display="none";
-    document.querySelector(`#tarjetaImperio${num} button`).style.display="none";
-    document.getElementById(`datosImp${num}`).style.display="block";
-    document.getElementById(`nivelImp${num}`).textContent=1;
-    document.getElementById(`miembrosImp${num}`).textContent=1;
-    document.getElementById(`territoriosImp${num}`).textContent=0;
-}
-
-function cargarMisiones(){
-    let cont=document.getElementById('listaMisiones');
-    cont.innerHTML="";
-    MISIONES.forEach(m=>{
-        let hecho=CONFIG.misionesHechas.includes(m.id);
-        cont.innerHTML += `
-        <div class="tarjeta" style="background:var(--superficie-alt);padding:15px">
-            <p>${m.texto}</p>
-            <p style="font-size:0.9rem;color:var(--texto-suave);margin:8px 0">🎁 Recompensa: +${m.monedas} 🪙 ${m.cristales?`| +${m.cristales} 💎`:''} | +${m.exp} EXP</p>
-            <button class="boton ${hecho?'boton-secundario':'boton-exito'}" onclick="cobrarMision(${m.id})" ${hecho?'disabled':''}>
-                ${hecho?'✅ Hecho':'💰 Cobrar Recompensa'}
-            </button>
-        </div>`;
-    });
-}
-
-function cobrarMision(id){
-    let m = MISIONES.find(x=>x.id===id);
-    if(!m || CONFIG.misionesHechas.includes(id))return;
-    CONFIG.monedas += m.monedas;
-    CONFIG.exp += m.exp;
-    if(m.cristales) CONFIG.cristales += m.cristales;
-    CONFIG.misionesHechas.push(id);
-    if(CONFIG.exp >= CONFIG.expSig){
-        CONFIG.nivel++;
-        CONFIG.exp -= CONFIG.expSig;
-        CONFIG.expSig = Math.round(CONFIG.expSig * 1.3);
-        alert(`🎉 ¡Subiste al Nivel ${CONFIG.nivel}!`);
-    }
-    actualizarDatosMenu();
-    cargarMisiones();
-}
-
-// INICIO DEL JUEGO
-window.onload=()=>{
-    let prog=0;
-    let carga=setInterval(()=>{
-        prog+=6;
-        document.getElementById('barraCarga').style.width=prog+"%";
-        if(prog>=100){ clearInterval(carga); mostrar('inicio'); }
-    },120);
-};
-</script></body></html>
-  
