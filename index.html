@@ -24,7 +24,7 @@
             overflow: hidden;
         }
 
-        /* Contenedor de las mascotas y saludo */
+        /* Zona de bienvenida */
         .zona-bienvenida {
             text-align: center;
             margin-bottom: 3rem;
@@ -32,30 +32,205 @@
             transition: opacity 1.5s ease;
         }
 
+        /* Contenedor de las mascotas */
         .mascotas {
-            font-size: clamp(3rem, 12vw, 5rem);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 2.5rem;
+            height: 180px;
             margin-bottom: 1.5rem;
+        }
+
+        /* ------------------------------ */
+        /* ZORRO ANIMADO (dibujado en CSS) */
+        /* ------------------------------ */
+        .zorro {
+            position: relative;
+            width: 90px;
+            height: 110px;
             animation: flotar 4s ease-in-out infinite alternate;
         }
 
+        .cabeza-zorro {
+            width: 80px;
+            height: 70px;
+            background: #FF8A3C;
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+        }
+
+        .oreja-izq, .oreja-der {
+            position: absolute;
+            width: 35px;
+            height: 45px;
+            background: #FF8A3C;
+            border-radius: 50%;
+            top: -15px;
+        }
+        .oreja-izq { left: -8px; transform: rotate(-25deg); }
+        .oreja-der { right: -8px; transform: rotate(25deg); }
+        .oreja-int {
+            width: 20px;
+            height: 25px;
+            background: #FFD2B0;
+            border-radius: 50%;
+            margin: 8px;
+        }
+
+        .ojo-izq, .ojo-der {
+            position: absolute;
+            width: 12px;
+            height: 16px;
+            background: #222;
+            border-radius: 50%;
+            top: 25px;
+            animation: parpadear 5s infinite;
+        }
+        .ojo-izq { left: 20px; }
+        .ojo-der { right: 20px; }
+
+        .hocico {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 25px;
+            background: #FFD2B0;
+            border-radius: 50%;
+        }
+        .nariz {
+            width: 10px;
+            height: 8px;
+            background: #222;
+            border-radius: 50%;
+            margin: 5px auto 0;
+        }
+
+        .cuerpo-zorro {
+            width: 70px;
+            height: 60px;
+            background: #FF8A3C;
+            border-radius: 50% 50% 30% 30%;
+            margin: -10px auto 0;
+        }
+
+        .cola {
+            position: absolute;
+            width: 85px;
+            height: 60px;
+            background: #FF8A3C;
+            border-radius: 50%;
+            right: -50px;
+            top: 20px;
+            transform-origin: left center;
+            animation: moverCola 2s ease-in-out infinite alternate;
+        }
+        .cola-punta {
+            width: 35px;
+            height: 35px;
+            background: #FFF;
+            border-radius: 50%;
+            margin: 10px auto 0;
+        }
+
+        /* ------------------------------ */
+        /* ERIZO ANIMADO (dibujado en CSS) */
+        /* ------------------------------ */
+        .erizo {
+            position: relative;
+            width: 85px;
+            height: 95px;
+            animation: flotar 4s ease-in-out infinite alternate 0.5s;
+        }
+
+        .cuerpo-erizo {
+            width: 80px;
+            height: 75px;
+            background: #908070;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .púas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .púa {
+            position: absolute;
+            width: 12px;
+            height: 22px;
+            background: #706050;
+            border-radius: 50%;
+            transform-origin: bottom center;
+        }
+
+        .cabeza-erizo {
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 45px;
+            height: 45px;
+            background: #B0A090;
+            border-radius: 50%;
+        }
+
+        .ojo-erizo {
+            position: absolute;
+            width: 8px;
+            height: 10px;
+            background: #222;
+            border-radius: 50%;
+            top: 15px;
+            left: 20px;
+            animation: parpadear 6s infinite;
+        }
+
+        .nariz-erizo {
+            position: absolute;
+            width: 6px;
+            height: 5px;
+            background: #222;
+            border-radius: 50%;
+            top: 25px;
+            left: 10px;
+        }
+
+        /* ------------------------------ */
+        /* ANIMACIONES COMUNES */
+        /* ------------------------------ */
         @keyframes flotar {
             from { transform: translateY(0); }
             to { transform: translateY(-8px); }
         }
 
+        @keyframes moverCola {
+            from { transform: rotate(-15deg); }
+            to { transform: rotate(15deg); }
+        }
+
+        @keyframes parpadear {
+            0%, 95%, 100% { transform: scaleY(1); }
+            97% { transform: scaleY(0.1); }
+        }
+
+        /* ------------------------------ */
+        /* RESTO DE LA PANTALLA */
+        /* ------------------------------ */
         .saludo {
             font-size: clamp(1.4rem, 5vw, 1.8rem);
             color: #E0F2FE;
             text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
         }
 
-        /* Clase para ocultar el saludo */
         .ocultar {
             opacity: 0;
             pointer-events: none;
+            transition: opacity 1.2s ease;
         }
 
-        /* Nombre del juego */
         h1 {
             font-size: clamp(2.5rem, 10vw, 3.5rem);
             color: #FFD330;
@@ -66,7 +241,6 @@
             transition: all 1.2s ease 0.5s;
         }
 
-        /* Botones */
         .botones {
             width: 100%;
             max-width: 320px;
@@ -96,13 +270,11 @@
             box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
         }
 
-        /* Mostrar elementos después de la animación */
         .mostrar {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Versión del juego */
         .version {
             position: absolute;
             bottom: 1.5rem;
@@ -113,9 +285,47 @@
 </head>
 <body>
 
-    <!-- Zona de bienvenida con mascotas -->
     <div class="zona-bienvenida" id="bienvenida">
-        <div class="mascotas">🦊 🦔</div>
+        <div class="mascotas">
+            <!-- ZORRO -->
+            <div class="zorro">
+                <div class="cabeza-zorro">
+                    <div class="oreja-izq"><div class="oreja-int"></div></div>
+                    <div class="oreja-der"><div class="oreja-int"></div></div>
+                    <div class="ojo-izq"></div>
+                    <div class="ojo-der"></div>
+                    <div class="hocico"><div class="nariz"></div></div>
+                </div>
+                <div class="cuerpo-zorro"></div>
+                <div class="cola"><div class="cola-punta"></div></div>
+            </div>
+
+            <!-- ERIZO -->
+            <div class="erizo">
+                <div class="cuerpo-erizo">
+                    <div class="púas">
+                        <!-- Púas distribuidas -->
+                        <div class="púa" style="top: -10%; left: 20%; transform: rotate(-20deg);"></div>
+                        <div class="púa" style="top: -15%; left: 45%; transform: rotate(0deg);"></div>
+                        <div class="púa" style="top: -10%; left: 70%; transform: rotate(20deg);"></div>
+                        <div class="púa" style="top: 5%; left: 90%; transform: rotate(45deg);"></div>
+                        <div class="púa" style="top: 25%; left: 95%; transform: rotate(70deg);"></div>
+                        <div class="púa" style="top: 45%; left: 90%; transform: rotate(90deg);"></div>
+                        <div class="púa" style="top: 65%; left: 80%; transform: rotate(110deg);"></div>
+                        <div class="púa" style="top: 80%; left: 60%; transform: rotate(130deg);"></div>
+                        <div class="púa" style="top: 85%; left: 35%; transform: rotate(150deg);"></div>
+                        <div class="púa" style="top: 75%; left: 10%; transform: rotate(170deg);"></div>
+                        <div class="púa" style="top: 55%; left: 0%; transform: rotate(-160deg);"></div>
+                        <div class="púa" style="top: 35%; left: 5%; transform: rotate(-140deg);"></div>
+                    </div>
+                </div>
+                <div class="cabeza-erizo">
+                    <div class="ojo-erizo"></div>
+                    <div class="nariz-erizo"></div>
+                </div>
+            </div>
+        </div>
+
         <p class="saludo">¡Hola! Bienvenido a Zentrith World</p>
     </div>
 
@@ -129,14 +339,13 @@
 
     <div class="version">Versión Alpha 0.1</div>
 
-    <!-- Lógica de animación -->
     <script>
-        // Después de 3 segundos, ocultar saludo y mostrar el resto
+        // Ocultar bienvenida y mostrar menú
         setTimeout(() => {
             document.getElementById("bienvenida").classList.add("ocultar");
             document.getElementById("titulo").classList.add("mostrar");
             document.getElementById("botones").classList.add("mostrar");
-        }, 3000);
+        }, 3500);
     </script>
 
 </body>
