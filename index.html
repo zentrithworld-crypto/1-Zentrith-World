@@ -1,155 +1,134 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>Zentrith World</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}body{--fondo:#051027;--superficie:#0F2044;--superficie-alt:#102859;--borde:#1E3A8A;--texto:#E2F0FF;--texto-suave:#94A3B8;--acento:#3B82F6;--exito:#10B981;--alerta:#F59E0B;background:var(--fondo);color:var(--texto);min-height:100vh}#contenedor{max-width:500px;margin:0 auto;padding:15px;width:100%}.pantalla{display:none;width:100%}.pantalla.activa{display:block}.tarjeta{background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:20px;margin:15px 0;box-shadow:0 2px 8px rgba(59,130,246,0.15)}.campo{width:100%;padding:12px;margin:10px 0;background:var(--superficie-alt);border:1px solid var(--borde);border-radius:8px;color:var(--texto);font-size:1rem}.opciones{display:flex;gap:10px;margin:12px 0}.opcion{flex:1;padding:10px;border-radius:8px;border:1px solid var(--borde);background:var(--superficie-alt);text-align:center;cursor:pointer;transition:0.2s}.opcion.seleccionada{background:var(--acento);border-color:var(--acento)}.boton{width:100%;padding:12px;border:none;border-radius:8px;background:var(--acento);color:white;font-size:1.1rem;font-weight:bold;cursor:pointer;margin-top:10px;transition:0.2s}.boton:hover{opacity:0.9}.boton:disabled{opacity:0.4;cursor:not-allowed}.boton-secundario{background:#475569}.boton-exito{background:var(--exito)}.boton-alerta{background:var(--alerta)}.barra-progreso{height:8px;background:var(--superficie-alt);border-radius:4px;overflow:hidden;margin:5px 0}.texto-centro{text-align:center}</style></head><body><div id="contenedor">
-
-<!-- ⏳ PANTALLA DE CARGA -->
-<div id="carga" class="pantalla activa tarjeta texto-centro">
-<h2>Zentrith World</h2><p>Cargando mundo...</p>
-<div class="barra-progreso"><div id="barraCarga" style="width:0%;height:100%;background:var(--acento)"></div></div>
-</div>
-
-<!-- 🏠 PANTALLA DE INICIO -->
-<div id="inicio" class="pantalla tarjeta texto-centro">
-<h1 style="color:var(--acento);margin-bottom:15px">Zentrith World</h1>
-<p style="color:var(--texto-suave);margin-bottom:25px">Tu mundo, tus reglas, tu estilo</p>
-<button class="boton" onclick="mostrar('acceso')">Jugar</button>
-</div>
-
-<!-- 📥 ACCESO -->
-<div id="acceso" class="pantalla tarjeta">
-<h2>Ingreso</h2>
-<p style="color:var(--texto-suave);font-size:0.9rem;margin-bottom:15px">Solo usá tu apodo y fecha, todo privado</p>
-<input type="text" class="campo" id="nombreJugador" placeholder="Tu apodo">
-
-<p style="margin:12px 0 6px">Soy:</p>
-<div class="opciones">
-  <div class="opcion" onclick="elegirGenero('niño')">👦 Niño</div>
-  <div class="opcion" onclick="elegirGenero('niña')">👧 Niña</div>
-  <div class="opcion" onclick="elegirGenero('no')">🤷 Prefiero no decir</div>
-</div>
-
-<input type="date" class="campo" id="fechaNac">
-<button class="boton" onclick="validarIngreso()">Entrar</button>
-</div>
-
-<!-- 📋 MENÚ PRINCIPAL (ESTILO ORIGINAL) -->
-<div id="menu" class="pantalla tarjeta">
-<h2 class="texto-centro">🏠 Menú Principal</h2>
-<div class="tarjeta" style="background:var(--superficie-alt);margin:10px 0;padding:12px">
-<p class="texto-centro">👤 <b id="datoNombre">-</b> | <span id="datoGenero">-</span></p>
-<p class="texto-centro">📈 Nivel: <b id="datoNivel">1</b></p>
-<p class="texto-centro">🪙 Monedas: <b id="datoMonedas">0</b> | 💎 Cristales: <b id="datoCristales">0</b></p>
-<p style="font-size:0.8rem;color:var(--texto-suave);text-align:center;margin-top:8px">💾 Guardado automático activado</p>
-</div>
-
-<button class="boton boton-exito" onclick="mostrar('crear')">🛠️ Crear / Mis Mundos</button>
-<button class="boton" onclick="mostrar('jugar')">🎮 Jugar Mundos</button>
-<button class="boton boton-alerta" onclick="mostrar('tienda')">🛍️ Tienda</button>
-<button class="boton boton-secundario" onclick="mostrar('ajustes')">⚙️ Ajustes</button>
-</div>
-
-<!-- 🛠️ CREACIÓN DE MUNDOS -->
-<div id="crear" class="pantalla tarjeta">
-<h2 class="texto-centro">🛠️ Crear tu Mundo</h2>
-<p>Acá vas a armar tus propios espacios, como querés.</p>
-<button class="boton boton-exito" onclick="alert('Próximamente: podés poner nombre, tamaño y estilo')">Crear Mundo Nuevo</button>
-<button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
-</div>
-
-<!-- 🎮 JUGAR -->
-<div id="jugar" class="pantalla tarjeta">
-<h2 class="texto-centro">🎮 Explorar Mundos</h2>
-<p>Próximamente: lista de mundos disponibles.</p>
-<button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
-</div>
-
-<!-- 🛍️ TIENDA -->
-<div id="tienda" class="pantalla tarjeta">
-<h2 class="texto-centro">🛍️ Tienda</h2>
-<p>Acá van a estar los diseños, ropa y objetos con tu estilo.</p>
-<button class="boton boton-secundario" onclick="mostrar('menu')">Volver</button>
-</div>
-
-<!-- ⚙️ AJUSTES -->
-<div id="ajustes" class="pantalla tarjeta">
-<h2>⚙️ Ajustes</h2>
-<p>🔊 Volumen: <span id="volValor">70%</span></p>
-<input type="range" min="0" max="100" value="70" style="width:100%;margin:8px 0" oninput="document.getElementById('volValor').textContent=this.value+'%'">
-<button class="boton boton-secundario" onclick="mostrar('menu')" style="margin-top:20px">Volver</button>
-</div>
-
-</div>
-<script>
-// CONFIGURACIÓN BASE
-let CONFIG = {
-    usuario: "", genero: "", edad: 0, nivel: 1, monedas: 0, cristales: 0,
-    mundosCreados: []
-};
-
-function mostrar(id){document.querySelectorAll('.pantalla').forEach(p=>p.classList.remove('activa'));document.getElementById(id).classList.add('activa')}
-
-function elegirGenero(valor){
-    document.querySelectorAll('.opcion').forEach(op=>op.classList.remove('seleccionada'));
-    event.currentTarget.classList.add('seleccionada');
-    CONFIG.genero = valor;
-}
-
-function calcularEdad(fecha){
-    let hoy=new Date(),nac=new Date(fecha),e=hoy.getFullYear()-nac.getFullYear();
-    let m=hoy.getMonth()-nac.getMonth();
-    if(m<0||(m===0&&hoy.getDate()<nac.getDate()))e--;
-    return e;
-}
-
-function validarIngreso(){
-    let nom=document.getElementById('nombreJugador').value.trim() || "Jugador";
-    let fec=document.getElementById('fechaNac').value;
-    if(!fec){alert("Ingresá tu fecha de nacimiento");return}
-    if(!CONFIG.genero) CONFIG.genero = "no";
-
-    CONFIG.usuario = nom;
-    CONFIG.edad = calcularEdad(fec);
-    actualizarDatos();
-    guardarProgreso();
-    mostrar('menu');
-}
-
-function actualizarDatos(){
-    let textoGenero = CONFIG.genero === "niño" ? "👦 Niño" : CONFIG.genero === "niña" ? "👧 Niña" : "🤷 No especificado";
-    document.getElementById('datoNombre').textContent = CONFIG.usuario;
-    document.getElementById('datoGenero').textContent = textoGenero;
-    document.getElementById('datoNivel').textContent = CONFIG.nivel;
-    document.getElementById('datoMonedas').textContent = CONFIG.monedas;
-    document.getElementById('datoCristales').textContent = CONFIG.cristales;
-}
-
-// GUARDADO
-function guardarProgreso(){
-    localStorage.setItem("zentrith_save", JSON.stringify(CONFIG));
-}
-
-function cargarProgreso(){
-    const guardado = localStorage.getItem("zentrith_save");
-    if(guardado){
-        CONFIG = JSON.parse(guardado);
-        return true;
-    }
-    return false;
-}
-
-// INICIO
-window.onload=()=>{
-    let prog=0;
-    let carga=setInterval(()=>{
-        prog+=5;
-        document.getElementById('barraCarga').style.width=prog+"%";
-        if(prog>=100){
-            clearInterval(carga);
-            if(cargarProgreso()){
-                actualizarDatos();
-                mostrar('menu');
-            } else {
-                mostrar('inicio');
-            }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentrith World - Cargando</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-    },100);
-};
-</script></body></html>
+
+        body {
+            /* Fondo con degradado que imita la explosión cósmica */
+            background: linear-gradient(
+                135deg,
+                #0a0e27 0%,
+                #201b66 25%,
+                #702090 50%,
+                #ff6b35 75%,
+                #ffd029 100%
+            );
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estrellas de fondo */
+        .estrella {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: parpadear 3s infinite ease-in-out;
+        }
+
+        @keyframes parpadear {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Letra Z grande */
+        .letra-z {
+            font-size: clamp(8rem, 25vw, 12rem);
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 20px #93c5fd, 0 0 40px #3b82f6;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        /* Nombre del juego */
+        .nombre-juego {
+            font-size: clamp(2rem, 8vw, 3rem);
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 15px #60a5fa;
+            margin-bottom: 4rem;
+            letter-spacing: 2px;
+        }
+
+        /* Barra de carga */
+        .contenedor-barra {
+            width: 85%;
+            max-width: 450px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .barra-progreso {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ffd029, #ff6b35, #9333ea, #3b82f6);
+            border-radius: 10px;
+            animation: cargar 3s ease-in-out forwards infinite;
+        }
+
+        @keyframes cargar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Texto debajo de la barra */
+        .texto-carga {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #e0f2fe;
+            text-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Generamos algunas estrellas -->
+    <script>
+        for (let i = 0; i < 60; i++) {
+            const estrella = document.createElement('div');
+            estrella.classList.add('estrella');
+            estrella.style.width = `${Math.random() * 3 + 1}px`;
+            estrella.style.height = estrella.style.width;
+            estrella.style.left = `${Math.random() * 100}%`;
+            estrella.style.top = `${Math.random() * 100}%`;
+            estrella.style.animationDelay = `${Math.random() * 3}s`;
+            document.body.appendChild(estrella);
+        }
+    </script>
+
+    <div class="letra-z">Z</div>
+    <h1 class="nombre-juego">ZENTRITH WORLD</h1>
+
+    <div class="contenedor-barra">
+        <div class="barra-progreso"></div>
+    </div>
+
+    <p class="texto-carga">Iniciando sistemas seguros...</p>
+
+    <!-- Opcional: para pasar automáticamente a la pantalla siguiente -->
+    <script>
+        setTimeout(() => {
+            // Acá más adelante ponés el enlace a tu pantalla de inicio
+            console.log("Carga finalizada");
+            // window.location.href = "inicio.html";
+        }, 3200);
+    </script>
+</body>
+</html>
