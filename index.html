@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zentrith World - Cargando</title>
+    <title>Zentrith World - Inicio</title>
     <style>
         * {
             margin: 0;
@@ -13,175 +13,131 @@
         }
 
         body {
-            background: linear-gradient(
-                135deg,
-                #05081A 0%,
-                #121840 25%,
-                #451A75 50%,
-                #FF5A20 75%,
-                #FFD330 100%
-            );
+            background: linear-gradient(135deg, #121840 0%, #251B66 50%, #451A75 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
-            position: relative;
+            padding: 2rem;
             overflow: hidden;
         }
 
-        /* Estrellas parpadeantes */
-        .estrella {
-            position: absolute;
-            background: #ffffff;
-            border-radius: 50%;
-            animation: parpadear 4s infinite ease-in-out;
+        /* Contenedor de las mascotas y saludo */
+        .zona-bienvenida {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 1;
+            transition: opacity 1.5s ease;
         }
 
-        @keyframes parpadear {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
+        .mascotas {
+            font-size: clamp(3rem, 12vw, 5rem);
+            margin-bottom: 1.5rem;
+            animation: flotar 4s ease-in-out infinite alternate;
         }
 
-        /* Z grande: gira y brilla al mismo tiempo */
-        .letra-z {
-            font-size: clamp(8rem, 25vw, 13rem);
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 1rem;
-            transform-origin: center center;
-            animation: girarSuave 6s linear infinite, brillar 3s ease-in-out infinite alternate;
+        @keyframes flotar {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
         }
 
-        @keyframes girarSuave {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
+        .saludo {
+            font-size: clamp(1.4rem, 5vw, 1.8rem);
+            color: #E0F2FE;
+            text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
         }
 
-        @keyframes brillar {
-            from {
-                text-shadow: 0 0 15px #93C5FD, 0 0 30px #3B82F6, 0 0 45px #7C3AED;
-            }
-            to {
-                text-shadow: 0 0 25px #BFDBFE, 0 0 50px #60A5FA, 0 0 75px #A855F7;
-            }
+        /* Clase para ocultar el saludo */
+        .ocultar {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Nombre del juego */
-        .nombre-juego {
-            font-size: clamp(2rem, 8vw, 3rem);
-            font-weight: 600;
-            color: #ffffff;
-            text-shadow: 0 0 15px #60A5FA;
-            margin-bottom: 3.5rem;
-            letter-spacing: 2px;
+        h1 {
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            color: #FFD330;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 0 15px rgba(255, 211, 48, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.2s ease 0.5s;
         }
 
-        /* Barra de progreso */
-        .contenedor-barra {
-            width: 85%;
-            max-width: 460px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.18);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+        /* Botones */
+        .botones {
+            width: 100%;
+            max-width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.2s ease 0.7s;
         }
 
-        .barra-progreso {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #FFD330, #FF6025, #9333EA, #3B82F6);
-            border-radius: 10px;
-            animation: cargar 3.2s ease-in-out forwards;
-        }
-
-        @keyframes cargar {
-            0%   { width: 0%; }
-            25%  { width: 25%; }
-            50%  { width: 55%; }
-            75%  { width: 78%; }
-            100% { width: 100%; }
-        }
-
-        /* Texto de estado */
-        .texto-carga {
-            margin-top: 1.5rem;
+        .boton {
+            padding: 1.1rem;
             font-size: 1.2rem;
-            color: #E0F2FE;
-            text-shadow: 0 0 8px rgba(255,255,255,0.4);
-            min-height: 1.8rem;
-            text-align: center;
-            padding: 0 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #3B82F6, #2563EB);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .boton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Mostrar elementos después de la animación */
+        .mostrar {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Versión del juego */
         .version {
             position: absolute;
-            bottom: 2rem;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.65);
-            letter-spacing: 1px;
+            bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <!-- Generar estrellas de fondo -->
-    <script>
-        for (let i = 0; i < 70; i++) {
-            const estrella = document.createElement('div');
-            estrella.classList.add('estrella');
-            const tamano = Math.random() * 3 + 1;
-            estrella.style.width = `${tamano}px`;
-            estrella.style.height = `${tamano}px`;
-            estrella.style.left = `${Math.random() * 100}%`;
-            estrella.style.top = `${Math.random() * 100}%`;
-            estrella.style.animationDelay = `${Math.random() * 4}s`;
-            document.body.appendChild(estrella);
-        }
-    </script>
 
-    <div class="letra-z">Z</div>
-    <h1 class="nombre-juego">ZENTRITH WORLD</h1>
-
-    <div class="contenedor-barra">
-        <div class="barra-progreso"></div>
+    <!-- Zona de bienvenida con mascotas -->
+    <div class="zona-bienvenida" id="bienvenida">
+        <div class="mascotas">🦊 🦔</div>
+        <p class="saludo">¡Hola! Bienvenido a Zentrith World</p>
     </div>
 
-    <p class="texto-carga" id="mensajeCarga">Iniciando sistemas seguros...</p>
+    <h1 id="titulo">ZENTRITH WORLD</h1>
+
+    <div class="botones" id="botones">
+        <button class="boton">Iniciar Sesión</button>
+        <button class="boton">Crear Cuenta</button>
+        <button class="boton">Entrar como Invitado</button>
+    </div>
 
     <div class="version">Versión Alpha 0.1</div>
 
-    <!-- Lógica de mensajes y cambio de pantalla -->
+    <!-- Lógica de animación -->
     <script>
-        const mensajes = [
-            "Iniciando sistemas seguros...",
-            "Preparando Zentrith World...",
-            "Conectando servidores...",
-            "Cargando mundos y creaciones...",
-            "Verificando protección de datos...",
-            "Cargando perfiles y avatares...",
-            "Ajustando configuración...",
-            "¡Casi listo para jugar!"
-        ];
-
-        const elementoMensaje = document.getElementById("mensajeCarga");
-        let indice = 0;
-
-        // Cambiar mensaje cada 700ms
-        const intervalo = setInterval(() => {
-            elementoMensaje.textContent = mensajes[indice];
-            indice = (indice + 1) % mensajes.length;
-        }, 700);
-
-        // Al terminar carga, ir a la pantalla siguiente
+        // Después de 3 segundos, ocultar saludo y mostrar el resto
         setTimeout(() => {
-            clearInterval(intervalo);
-            elementoMensaje.textContent = "¡Listo!";
-            // Descomentá esta línea cuando tengas lista la pantalla de inicio:
-            // window.location.href = "inicio.html";
-        }, 3300);
+            document.getElementById("bienvenida").classList.add("ocultar");
+            document.getElementById("titulo").classList.add("mostrar");
+            document.getElementById("botones").classList.add("mostrar");
+        }, 3000);
     </script>
+
 </body>
 </html>
