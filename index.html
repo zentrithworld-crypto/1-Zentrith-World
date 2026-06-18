@@ -3,135 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zentrith World - Inicio</title>
+    <title>Zentrith World - Cargando</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #05081A 0%, #1A1E52 50%, #2E1A70 100%);
+            background: linear-gradient(
+                180deg,
+                #080C26 0%,
+                #251A63 38%,
+                #9A3242 72%,
+                #FF7620 92%,
+                #FFCC32 100%
+            );
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: white;
-            padding: 2rem;
+            color: #FFFFFF;
+            position: relative;
             overflow: hidden;
             transition: opacity 1.2s ease;
         }
 
-        /* Nombre principal del juego */
-        .logo-principal {
-            font-size: clamp(3rem, 12vw, 4.5rem);
-            font-weight: bold;
-            color: #FFD330;
-            text-align: center;
-            text-shadow: 
-                0 0 20px rgba(255, 211, 48, 0.7),
-                0 0 40px rgba(59, 130, 246, 0.5);
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: scale(0.8);
-            animation: aparecerLogo 1.5s ease-out forwards;
-        }
+        .desvanecer { opacity: 0; pointer-events: none; }
 
-        @keyframes aparecerLogo {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Subtítulo */
-        .subtitulo {
-            font-size: clamp(1.2rem, 5vw, 1.6rem);
-            color: #E0F2FE;
-            text-align: center;
-            margin-bottom: 4rem;
-            opacity: 0;
-            animation: aparecerTexto 1.5s ease-out 0.5s forwards;
-        }
-
-        @keyframes aparecerTexto {
-            to { opacity: 1; }
-        }
-
-        /* Botones de acceso */
-        .contenedor-botones {
-            width: 100%;
-            max-width: 340px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: aparecerBotones 1.5s ease-out 1s forwards;
-        }
-
-        .boton {
-            padding: 1.2rem;
-            font-size: 1.25rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            background: linear-gradient(90deg, #3B82F6, #2563EB);
-            color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .boton:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
-        }
-
-        /* Versión abajo */
-        .version {
+        .estrella {
             position: absolute;
-            bottom: 2rem;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            animation: aparecerTexto 1.5s ease-out 1.5s forwards;
+            background: #FFFFFF;
+            border-radius: 50%;
+            animation: parpadear 3.5s infinite ease-in-out;
+        }
+
+        @keyframes parpadear {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .logo-z {
+            font-size: clamp(7rem, 22vw, 11rem);
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 22px #A1B9FF, 0 0 45px #6189FF, 0 0 70px #4567FF;
+            animation: brillar 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes brillar {
+            from { text-shadow: 0 0 18px #A1B9FF, 0 0 36px #6189FF, 0 0 54px #4567FF; }
+            to { text-shadow: 0 0 30px #C1D9FF, 0 0 60px #81ABFF, 0 0 90px #6189FF; }
+        }
+
+        .titulo {
+            font-size: clamp(2.2rem, 9vw, 3.2rem);
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 3.5rem;
+        }
+
+        .contenedor-barra {
+            width: 85%;
+            max-width: 480px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .barra-progreso {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #FFCC32, #FF7620, #9A32CC, #4567FF);
+            border-radius: 20px;
+            animation: cargar 3.2s ease-in-out forwards;
+        }
+
+        @keyframes cargar {
+            0% { width: 0%; }
+            25% { width: 25%; }
+            50% { width: 55%; }
+            75% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        .texto-carga {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: #FFFFFF;
         }
     </style>
 </head>
 <body>
-
-    <h1 class="logo-principal">ZENTRITH WORLD</h1>
-    <p class="subtitulo">Espacio seguro para jugar y crear</p>
-
-    <div class="contenedor-botones">
-        <button class="boton" onclick="irASesion()">Iniciar Sesión</button>
-        <button class="boton" onclick="irACrear()">Crear Cuenta</button>
-        <button class="boton" onclick="irAInvitado()">Entrar como Invitado</button>
-    </div>
-
-    <div class="version">Versión Alpha 0.1</div>
-
     <script>
-        // Acá conectás con las pantallas siguientes cuando las tengas
-        function irASesion() {
-            // window.location.href = "iniciar-sesion.html";
-            console.log("Ir a Iniciar Sesión");
-        }
-
-        function irACrear() {
-            // window.location.href = "crear-cuenta.html";
-            console.log("Ir a Crear Cuenta");
-        }
-
-        function irAInvitado() {
-            // window.location.href = "entrar-invitado.html";
-            console.log("Ir a Entrar como Invitado");
+        for (let i = 0; i < 80; i++) {
+            const estrella = document.createElement('div');
+            estrella.classList.add('estrella');
+            const tamano = Math.random() * 2.5 + 0.8;
+            estrella.style.width = `${tamano}px`;
+            estrella.style.height = `${tamano}px`;
+            estrella.style.left = `${Math.random() * 100}%`;
+            estrella.style.top = `${Math.random() * 100}%`;
+            estrella.style.animationDelay = `${Math.random() * 4}s`;
+            document.body.appendChild(estrella);
         }
     </script>
 
+    <div class="logo-z">Z</div>
+    <h1 class="titulo">ZENTRITH WORLD</h1>
+
+    <div class="contenedor-barra">
+        <div class="barra-progreso"></div>
+    </div>
+
+    <p class="texto-carga" id="textoEstado">Iniciando sistemas seguros...</p>
+
+    <script>
+        const mensajes = [
+            "Iniciando sistemas seguros...",
+            "Preparando Zentrith World...",
+            "Conectando servidores...",
+            "Cargando archivos...",
+            "¡Casi listo!"
+        ];
+        const texto = document.getElementById("textoEstado");
+        let indice = 0;
+
+        const intervalo = setInterval(() => {
+            texto.textContent = mensajes[indice];
+            indice++;
+            if (indice >= mensajes.length) clearInterval(intervalo);
+        }, 750);
+
+        setTimeout(() => {
+            texto.textContent = "¡Listo!";
+            setTimeout(() => {
+                document.body.classList.add("desvanecer");
+                setTimeout(() => {
+                    window.location.href = "inicio.html";
+                }, 1200);
+            }, 1000);
+        }, 3300);
+    </script>
 </body>
 </html>
