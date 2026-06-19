@@ -9,7 +9,7 @@
         body {
             background: linear-gradient(180deg, #080C26 0%, #251A63 38%, #9A3242 72%, #FF7620 92%, #FFCC32 100%);
             min-height: 100vh;
-            color: #fff;
+            color: #FFFFFF;
             position: relative;
             overflow: hidden;
         }
@@ -30,46 +30,130 @@
         }
         .oculto { opacity: 0; visibility: hidden; }
 
-        /* Estrellas */
+        /* Estrellas parpadeantes */
         .estrella {
             position: absolute;
-            background: #fff;
+            background: #FFFFFF;
             border-radius: 50%;
             animation: parpadear 3.5s infinite ease-in-out;
         }
-        @keyframes parpadear { 0%,100% {opacity:0.2;} 50% {opacity:1;} }
-
-        /* Animaciones Z */
-        @keyframes girarZ { from {transform: rotateY(0deg);} to {transform: rotateY(360deg);} }
-        @keyframes brillar {
-            from {text-shadow:0 0 18px #A1B9FF,0 0 36px #6189FF,0 0 54px #4567FF;}
-            to {text-shadow:0 0 30px #C1D9FF,0 0 60px #81ABFF,0 0 90px #6189FF;}
+        @keyframes parpadear {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
         }
 
-        /* Pantalla Carga */
+        /* Animaciones de la Z */
+        @keyframes girarZ {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        @keyframes brillar {
+            from { text-shadow: 0 0 18px #A1B9FF, 0 0 36px #6189FF, 0 0 54px #4567FF; }
+            to { text-shadow: 0 0 30px #C1D9FF, 0 0 60px #81ABFF, 0 0 90px #6189FF; }
+        }
+
+        /* ---------------- PANTALLA DE CARGA ---------------- */
         .logo-z {
             font-size: clamp(7rem, 22vw, 11rem);
             font-weight: bold;
             animation: girarZ 6s linear infinite, brillar 3s ease-in-out infinite alternate;
         }
-        .titulo { font-size: clamp(2.2rem, 9vw, 3.2rem); margin-bottom: 3.5rem; letter-spacing: 2px; }
-        .contenedor-barra { width: 85%; max-width: 480px; height: 10px; background: rgba(255,255,255,0.15); border-radius: 20px; overflow: hidden; }
-        .barra-progreso { height: 100%; width: 0%; background: linear-gradient(90deg, #FFCC32, #FF7620, #9A32CC, #4567FF); border-radius: 20px; animation: cargar 3.2s ease forwards; }
-        @keyframes cargar { 0%{width:0;} 100%{width:100%;} }
-        .texto-carga { margin-top: 2rem; font-size: 1.5rem; }
+        .titulo {
+            font-size: clamp(2.2rem, 9vw, 3.2rem);
+            margin-bottom: 3.5rem;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+        }
+        .contenedor-barra {
+            width: 85%;
+            max-width: 480px;
+            height: 10px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .barra-progreso {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #FFCC32, #FF7620, #9A32CC, #4567FF);
+            border-radius: 20px;
+            animation: cargar 3.2s ease forwards;
+        }
+        @keyframes cargar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .texto-carga {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: #FFFFFF;
+        }
 
-        /* Pantalla Acceso */
-        .version { position: absolute; top: 1.5rem; font-size: 1rem; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
-        .logo { font-size: clamp(6rem, 20vw, 9rem); animation: brillar 3s ease infinite alternate; margin-bottom: 1rem; }
-        .subtitulo { font-size: clamp(2rem, 8vw, 2.8rem); margin-bottom: 3rem; text-align: center; }
-        .contenedor { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 1.2rem; z-index: 2; }
-        input { padding: 1rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.15); color: #fff; font-size: 1rem; outline: none; }
-        input::placeholder { color: rgba(255,255,255,0.6); }
-        .boton { padding: 1.1rem; border: none; border-radius: 10px; font-weight: bold; font-size: 1.15rem; cursor: pointer; transition: transform 0.2s; }
-        .boton:hover { transform: translateY(-2px); }
-        .boton-naranja { background: linear-gradient(90deg, #FFCC32, #FF7620); color: #000; }
-        .boton-azul { background: linear-gradient(90deg, #9A32CC, #4567FF); color: #fff; }
-        .separador { text-align: center; margin: 0.8rem 0; color: rgba(255,255,255,0.7); }
+        /* ---------------- ELEMENTOS COMUNES ---------------- */
+        .version {
+            position: absolute;
+            top: 1.5rem;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
+        }
+        .logo {
+            font-size: clamp(6rem, 20vw, 9rem);
+            animation: brillar 3s ease infinite alternate;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+        }
+        .subtitulo {
+            font-size: clamp(2rem, 8vw, 2.8rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #FFFFFF;
+        }
+        .contenedor {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            z-index: 2;
+        }
+        input {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.15);
+            color: #FFFFFF;
+            font-size: 1rem;
+            outline: none;
+        }
+        input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        .boton {
+            padding: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .boton:hover {
+            transform: translateY(-2px);
+        }
+        .boton-naranja {
+            background: linear-gradient(90deg, #FFCC32, #FF7620);
+            color: #000000;
+        }
+        .boton-azul {
+            background: linear-gradient(90deg, #9A32CC, #4567FF);
+            color: #FFFFFF;
+        }
+        .separador {
+            text-align: center;
+            margin: 0.8rem 0;
+            color: rgba(255,255,255,0.7);
+        }
     </style>
 </head>
 <body>
@@ -95,7 +179,7 @@
         <p class="texto-carga" id="estado">Iniciando sistemas seguros...</p>
     </div>
 
-    <!-- 2. Pantalla de Acceso (solo lo que pedís) -->
+    <!-- 2. Pantalla de Acceso -->
     <div id="acceso" class="pantalla oculto">
         <div class="version">Versión 0.1</div>
         <div class="logo">Z</div>
@@ -104,15 +188,28 @@
         <div class="contenedor">
             <input type="email" placeholder="Correo electrónico">
             <input type="password" placeholder="Contraseña">
-            <button class="boton boton-naranja">Entrar con correo</button>
+            <button class="boton boton-naranja" onclick="irMenu()">Entrar con correo</button>
 
             <div class="separador">o</div>
 
-            <button class="boton boton-azul">Entrar como Invitado</button>
+            <button class="boton boton-azul" onclick="irMenu()">Entrar como Invitado</button>
         </div>
     </div>
 
-    <!-- Lógica de transición -->
+    <!-- 3. Menú Principal (solo lo necesario) -->
+    <div id="menu" class="pantalla oculto">
+        <div class="version">Versión 0.1</div>
+        <div class="logo">Z</div>
+        <h1 class="subtitulo">ZENTRITH WORLD</h1>
+
+        <div class="contenedor">
+            <button class="boton boton-naranja">Jugar</button>
+            <button class="boton boton-azul">Mis Mundos</button>
+            <button class="boton boton-azul">Salir</button>
+        </div>
+    </div>
+
+    <!-- Lógica de navegación -->
     <script>
         const mensajes = [
             "Iniciando sistemas seguros...",
@@ -127,7 +224,7 @@
             estado.textContent = mensajes[idx++ % mensajes.length];
         }, 750);
 
-        // Cambio de carga a acceso
+        // Transición de carga a acceso
         setTimeout(() => {
             clearInterval(intervalo);
             estado.textContent = "¡Listo!";
@@ -136,6 +233,12 @@
                 document.getElementById("acceso").classList.remove("oculto");
             }, 1500);
         }, 3300);
+
+        // Ir al menú
+        function irMenu() {
+            document.getElementById("acceso").classList.add("oculto");
+            document.getElementById("menu").classList.remove("oculto");
+        }
     </script>
 </body>
 </html>
