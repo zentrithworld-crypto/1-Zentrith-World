@@ -12,10 +12,9 @@
             color: #fff;
             position: relative;
             overflow: hidden;
-            transition: opacity 1.2s ease;
         }
 
-        /* Control de visibilidad */
+        /* Control de pantallas */
         .pantalla {
             position: absolute;
             width: 100%;
@@ -27,9 +26,9 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            transition: opacity 1s ease;
         }
-        .oculto { display: none !important; }
-        .desvanecer { opacity: 0; pointer-events: none; }
+        .oculto { opacity: 0; visibility: hidden; }
 
         /* Estrellas */
         .estrella {
@@ -40,14 +39,14 @@
         }
         @keyframes parpadear { 0%,100% {opacity:0.2;} 50% {opacity:1;} }
 
-        /* Animaciones */
+        /* Animaciones Z */
         @keyframes girarZ { from {transform: rotateY(0deg);} to {transform: rotateY(360deg);} }
         @keyframes brillar {
             from {text-shadow:0 0 18px #A1B9FF,0 0 36px #6189FF,0 0 54px #4567FF;}
             to {text-shadow:0 0 30px #C1D9FF,0 0 60px #81ABFF,0 0 90px #6189FF;}
         }
 
-        /* Carga */
+        /* Pantalla Carga */
         .logo-z {
             font-size: clamp(7rem, 22vw, 11rem);
             font-weight: bold;
@@ -59,22 +58,22 @@
         @keyframes cargar { 0%{width:0;} 100%{width:100%;} }
         .texto-carga { margin-top: 2rem; font-size: 1.5rem; }
 
-        /* Elementos comunes */
+        /* Pantalla Acceso */
         .version { position: absolute; top: 1.5rem; font-size: 1rem; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
-        .logo { font-size: clamp(6rem, 20vw, 9rem); animation: brillar 3s ease infinite alternate; }
-        .subtitulo { font-size: clamp(2rem, 8vw, 2.8rem); margin-bottom: 2.5rem; text-align: center; }
-        .contenedor { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 1rem; z-index: 2; }
+        .logo { font-size: clamp(6rem, 20vw, 9rem); animation: brillar 3s ease infinite alternate; margin-bottom: 1rem; }
+        .subtitulo { font-size: clamp(2rem, 8vw, 2.8rem); margin-bottom: 3rem; text-align: center; }
+        .contenedor { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 1.2rem; z-index: 2; }
         input { padding: 1rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.15); color: #fff; font-size: 1rem; outline: none; }
         input::placeholder { color: rgba(255,255,255,0.6); }
-        .boton { padding: 1rem; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s; }
+        .boton { padding: 1.1rem; border: none; border-radius: 10px; font-weight: bold; font-size: 1.15rem; cursor: pointer; transition: transform 0.2s; }
         .boton:hover { transform: translateY(-2px); }
         .boton-naranja { background: linear-gradient(90deg, #FFCC32, #FF7620); color: #000; }
         .boton-azul { background: linear-gradient(90deg, #9A32CC, #4567FF); color: #fff; }
-        .separador { text-align: center; margin: 0.5rem 0; color: rgba(255,255,255,0.7); }
+        .separador { text-align: center; margin: 0.8rem 0; color: rgba(255,255,255,0.7); }
     </style>
 </head>
 <body>
-    <!-- Estrellas -->
+    <!-- Fondo de estrellas -->
     <script>
         for (let i = 0; i < 80; i++) {
             const e = document.createElement('div');
@@ -88,7 +87,7 @@
         }
     </script>
 
-    <!-- 1. Carga -->
+    <!-- 1. Pantalla de Carga -->
     <div id="carga" class="pantalla">
         <div class="logo-z">Z</div>
         <h1 class="titulo">ZENTRITH WORLD</h1>
@@ -96,51 +95,24 @@
         <p class="texto-carga" id="estado">Iniciando sistemas seguros...</p>
     </div>
 
-    <!-- 2. Acceso -->
+    <!-- 2. Pantalla de Acceso (solo lo que pedís) -->
     <div id="acceso" class="pantalla oculto">
         <div class="version">Versión 0.1</div>
         <div class="logo">Z</div>
         <h1 class="subtitulo">ZENTRITH WORLD</h1>
+
         <div class="contenedor">
             <input type="email" placeholder="Correo electrónico">
             <input type="password" placeholder="Contraseña">
-            <button class="boton boton-naranja" onclick="irMenu('usuario')">Iniciar Sesión</button>
-            <button class="boton boton-azul" onclick="mostrarCrear()">Crear Cuenta</button>
+            <button class="boton boton-naranja">Entrar con correo</button>
+
             <div class="separador">o</div>
-            <button class="boton boton-azul" onclick="irMenu('invitado')">Entrar como Invitado</button>
+
+            <button class="boton boton-azul">Entrar como Invitado</button>
         </div>
     </div>
 
-    <!-- 3. Crear Cuenta -->
-    <div id="crear" class="pantalla oculto">
-        <div class="version">Versión 0.1</div>
-        <h2 class="subtitulo">Crear tu cuenta</h2>
-        <div class="contenedor">
-            <input type="text" placeholder="Tu nombre">
-            <input type="text" placeholder="Usuario">
-            <input type="email" placeholder="Correo electrónico">
-            <input type="number" min="6" max="120" placeholder="Tu edad">
-            <input type="password" placeholder="Contraseña">
-            <button class="boton boton-naranja" onclick="irMenu('usuario')">Guardar y entrar</button>
-            <button class="boton boton-azul" onclick="volver()">Volver</button>
-        </div>
-    </div>
-
-    <!-- 4. Menú Principal -->
-    <div id="menu" class="pantalla oculto">
-        <div class="version">Versión 0.1</div>
-        <div class="logo">Z</div>
-        <h1 class="subtitulo" id="tituloMenu">Menú Principal</h1>
-        <div class="contenedor">
-            <button class="boton boton-naranja">Jugar</button>
-            <button class="boton boton-azul">Mis Mundos</button>
-            <button class="boton boton-azul">Configuración</button>
-            <button class="boton boton-azul">Ayuda</button>
-            <button class="boton boton-azul" onclick="volver()">Salir</button>
-        </div>
-    </div>
-
-    <!-- Lógica -->
+    <!-- Lógica de transición -->
     <script>
         const mensajes = [
             "Iniciando sistemas seguros...",
@@ -155,39 +127,15 @@
             estado.textContent = mensajes[idx++ % mensajes.length];
         }, 750);
 
-        // Transición carga → acceso
+        // Cambio de carga a acceso
         setTimeout(() => {
             clearInterval(intervalo);
             estado.textContent = "¡Listo!";
             setTimeout(() => {
-                document.getElementById("carga").classList.add("desvanecer");
-                setTimeout(() => {
-                    document.getElementById("carga").classList.add("oculto");
-                    document.getElementById("acceso").classList.remove("oculto");
-                }, 1200);
-            }, 1000);
+                document.getElementById("carga").classList.add("oculto");
+                document.getElementById("acceso").classList.remove("oculto");
+            }, 1500);
         }, 3300);
-
-        function mostrarCrear() {
-            cambiarPantalla('acceso', 'crear');
-        }
-
-        function volver() {
-            cambiarPantalla('crear', 'acceso');
-            cambiarPantalla('menu', 'acceso');
-        }
-
-        function irMenu(tipo) {
-            document.getElementById("tituloMenu").textContent =
-                tipo === 'invitado' ? "Modo Invitado" : "Tu Cuenta";
-            cambiarPantalla('acceso', 'menu');
-            cambiarPantalla('crear', 'menu');
-        }
-
-        function cambiarPantalla(ocultarId, mostrarId) {
-            document.getElementById(ocultarId).classList.add("oculto");
-            document.getElementById(mostrarId).classList.remove("oculto");
-        }
     </script>
 </body>
 </html>
