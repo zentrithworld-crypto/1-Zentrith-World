@@ -37,87 +37,34 @@
             border-radius: 50%;
             animation: parpadear 3.5s infinite ease-in-out;
         }
-        @keyframes parpadear {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
+        @keyframes parpadear { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
-        /* Animaciones de la Z */
-        @keyframes girarZ {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
+        /* Animaciones Z */
+        @keyframes girarZ { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
         @keyframes brillar {
             from { text-shadow: 0 0 18px #A1B9FF, 0 0 36px #6189FF, 0 0 54px #4567FF; }
             to { text-shadow: 0 0 30px #C1D9FF, 0 0 60px #81ABFF, 0 0 90px #6189FF; }
         }
 
-        /* ---------------- PANTALLA DE CARGA ---------------- */
+        /* Pantalla de carga */
         .logo-z {
             font-size: clamp(7rem, 22vw, 11rem);
             font-weight: bold;
             animation: girarZ 6s linear infinite, brillar 3s ease-in-out infinite alternate;
         }
-        .titulo {
-            font-size: clamp(2.2rem, 9vw, 3.2rem);
-            margin-bottom: 3.5rem;
-            letter-spacing: 2px;
-            color: #FFFFFF;
-        }
-        .contenedor-barra {
-            width: 85%;
-            max-width: 480px;
-            height: 10px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .barra-progreso {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #FFCC32, #FF7620, #9A32CC, #4567FF);
-            border-radius: 20px;
-            animation: cargar 3.2s ease forwards;
-        }
-        @keyframes cargar {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-        .texto-carga {
-            margin-top: 2rem;
-            font-size: 1.5rem;
-            color: #FFFFFF;
-        }
+        .titulo { font-size: clamp(2.2rem, 9vw, 3.2rem); margin-bottom: 3.5rem; letter-spacing: 2px; }
+        .contenedor-barra { width: 85%; max-width: 480px; height: 10px; background: rgba(255,255,255,0.15); border-radius: 20px; overflow: hidden; }
+        .barra-progreso { height: 100%; width: 0%; background: linear-gradient(90deg, #FFCC32, #FF7620, #9A32CC, #4567FF); border-radius: 20px; animation: cargar 3.2s ease forwards; }
+        @keyframes cargar { 0% { width: 0%; } 100% { width: 100%; } }
+        .texto-carga { margin-top: 2rem; font-size: 1.5rem; }
 
-        /* ---------------- ELEMENTOS COMUNES ---------------- */
-        .version {
-            position: absolute;
-            top: 1.5rem;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.7);
-            letter-spacing: 1px;
-        }
-        .logo {
-            font-size: clamp(6rem, 20vw, 9rem);
-            animation: brillar 3s ease infinite alternate;
-            margin-bottom: 1rem;
-            color: #FFFFFF;
-        }
-        .subtitulo {
-            font-size: clamp(2rem, 8vw, 2.8rem);
-            margin-bottom: 3rem;
-            text-align: center;
-            color: #FFFFFF;
-        }
-        .contenedor {
-            width: 100%;
-            max-width: 380px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            z-index: 2;
-        }
-        input {
+        /* Elementos comunes */
+        .version { position: absolute; top: 1.5rem; font-size: 1rem; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
+        .logo { font-size: clamp(6rem, 20vw, 9rem); animation: brillar 3s ease infinite alternate; margin-bottom: 1rem; }
+        .subtitulo { font-size: clamp(1.8rem, 7vw, 2.4rem); margin-bottom: 2rem; text-align: center; }
+        .contenedor { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 1rem; z-index: 2; }
+        .fila-fecha { display: flex; gap: 0.8rem; }
+        input, select {
             padding: 1rem;
             border: none;
             border-radius: 10px;
@@ -126,9 +73,8 @@
             font-size: 1rem;
             outline: none;
         }
-        input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
+        input::placeholder { color: rgba(255,255,255,0.6); }
+        select { cursor: pointer; }
         .boton {
             padding: 1.1rem;
             border: none;
@@ -138,22 +84,10 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        .boton:hover {
-            transform: translateY(-2px);
-        }
-        .boton-naranja {
-            background: linear-gradient(90deg, #FFCC32, #FF7620);
-            color: #000000;
-        }
-        .boton-azul {
-            background: linear-gradient(90deg, #9A32CC, #4567FF);
-            color: #FFFFFF;
-        }
-        .separador {
-            text-align: center;
-            margin: 0.8rem 0;
-            color: rgba(255,255,255,0.7);
-        }
+        .boton:hover { transform: translateY(-2px); }
+        .boton-naranja { background: linear-gradient(90deg, #FFCC32, #FF7620); color: #000; }
+        .boton-azul { background: linear-gradient(90deg, #9A32CC, #4567FF); color: #FFFFFF; }
+        .separador { text-align: center; margin: 0.8rem 0; color: rgba(255,255,255,0.7); }
     </style>
 </head>
 <body>
@@ -179,33 +113,70 @@
         <p class="texto-carga" id="estado">Iniciando sistemas seguros...</p>
     </div>
 
-    <!-- 2. Pantalla de Acceso -->
+    <!-- 2. Pantalla de Acceso Principal -->
     <div id="acceso" class="pantalla oculto">
         <div class="version">Versión 0.1</div>
         <div class="logo">Z</div>
         <h1 class="subtitulo">ZENTRITH WORLD</h1>
-
         <div class="contenedor">
-            <input type="email" placeholder="Correo electrónico">
-            <input type="password" placeholder="Contraseña">
-            <button class="boton boton-naranja" onclick="irMenu()">Entrar con correo</button>
-
-            <div class="separador">o</div>
-
-            <button class="boton boton-azul" onclick="irMenu()">Entrar como Invitado</button>
+            <button class="boton boton-naranja" onclick="mostrarCorreo()">Crear cuenta con correo</button>
+            <button class="boton boton-azul" onclick="mostrarInvitado()">Entrar como Invitado</button>
         </div>
     </div>
 
-    <!-- 3. Menú Principal (solo lo necesario) -->
+    <!-- 3. Formulario Cuenta con Correo -->
+    <div id="form-correo" class="pantalla oculto">
+        <div class="version">Versión 0.1</div>
+        <h2 class="subtitulo">Datos de tu cuenta</h2>
+        <div class="contenedor">
+            <input type="text" placeholder="Nombre de jugador" required>
+            <select>
+                <option value="">Niño / Niña</option>
+                <option value="nino">Niño</option>
+                <option value="nina">Niña</option>
+            </select>
+            <div class="fila-fecha">
+                <input type="number" min="1" max="31" placeholder="Día">
+                <input type="number" min="1" max="12" placeholder="Mes">
+                <input type="number" min="1940" max="2020" placeholder="Año">
+            </div>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="password" placeholder="Contraseña" required>
+            <button class="boton boton-naranja" onclick="irMenu()">Guardar y entrar</button>
+            <button class="boton boton-azul" onclick="volverInicio()">Volver</button>
+        </div>
+    </div>
+
+    <!-- 4. Formulario Cuenta Invitado -->
+    <div id="form-invitado" class="pantalla oculto">
+        <div class="version">Versión 0.1</div>
+        <h2 class="subtitulo">Datos de invitado</h2>
+        <div class="contenedor">
+            <input type="text" placeholder="Nombre de jugador" required>
+            <select>
+                <option value="">Niño / Niña</option>
+                <option value="nino">Niño</option>
+                <option value="nina">Niña</option>
+            </select>
+            <div class="fila-fecha">
+                <input type="number" min="1" max="31" placeholder="Día">
+                <input type="number" min="1" max="12" placeholder="Mes">
+                <input type="number" min="1940" max="2020" placeholder="Año">
+            </div>
+            <button class="boton boton-naranja" onclick="irMenu()">Entrar como invitado</button>
+            <button class="boton boton-azul" onclick="volverInicio()">Volver</button>
+        </div>
+    </div>
+
+    <!-- 5. Menú Principal -->
     <div id="menu" class="pantalla oculto">
         <div class="version">Versión 0.1</div>
         <div class="logo">Z</div>
         <h1 class="subtitulo">ZENTRITH WORLD</h1>
-
         <div class="contenedor">
             <button class="boton boton-naranja">Jugar</button>
             <button class="boton boton-azul">Mis Mundos</button>
-            <button class="boton boton-azul">Salir</button>
+            <button class="boton boton-azul" onclick="volverInicio()">Salir</button>
         </div>
     </div>
 
@@ -224,7 +195,7 @@
             estado.textContent = mensajes[idx++ % mensajes.length];
         }, 750);
 
-        // Transición de carga a acceso
+        // Transición carga → acceso
         setTimeout(() => {
             clearInterval(intervalo);
             estado.textContent = "¡Listo!";
@@ -234,10 +205,25 @@
             }, 1500);
         }, 3300);
 
-        // Ir al menú
+        // Mostrar formularios
+        function mostrarCorreo() {
+            cambiarPantalla("acceso", "form-correo");
+        }
+        function mostrarInvitado() {
+            cambiarPantalla("acceso", "form-invitado");
+        }
+        function volverInicio() {
+            cambiarPantalla("form-correo", "acceso");
+            cambiarPantalla("form-invitado", "acceso");
+            cambiarPantalla("menu", "acceso");
+        }
         function irMenu() {
-            document.getElementById("acceso").classList.add("oculto");
-            document.getElementById("menu").classList.remove("oculto");
+            cambiarPantalla("form-correo", "menu");
+            cambiarPantalla("form-invitado", "menu");
+        }
+        function cambiarPantalla(ocultar, mostrar) {
+            document.getElementById(ocultar).classList.add("oculto");
+            document.getElementById(mostrar).classList.remove("oculto");
         }
     </script>
 </body>
