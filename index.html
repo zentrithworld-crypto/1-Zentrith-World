@@ -30,7 +30,7 @@
         }
         .oculto { opacity: 0; visibility: hidden; }
 
-        /* Estrellas parpadeantes */
+        /* Estrellas */
         .estrella {
             position: absolute;
             background: #FFFFFF;
@@ -46,7 +46,7 @@
             to { text-shadow: 0 0 30px #C1D9FF, 0 0 60px #81ABFF, 0 0 90px #6189FF; }
         }
 
-        /* Pantalla de carga */
+        /* Carga */
         .logo-z {
             font-size: clamp(7rem, 22vw, 11rem);
             font-weight: bold;
@@ -72,9 +72,10 @@
             color: #FFFFFF;
             font-size: 1rem;
             outline: none;
+            width: 100%;
         }
-        input::placeholder { color: rgba(255,255,255,0.6); }
-        select { cursor: pointer; }
+        input::placeholder, select { color: rgba(255,255,255,0.7); }
+        select option { background: #251A63; color: #FFFFFF; }
         .boton {
             padding: 1.1rem;
             border: none;
@@ -135,9 +136,25 @@
                 <option value="nino">Niño</option>
                 <option value="nina">Niña</option>
             </select>
+            <p style="text-align:center; margin:0.5rem 0; color:rgba(255,255,255,0.8);">Tu fecha de nacimiento</p>
             <div class="fila-fecha">
                 <input type="number" min="1" max="31" placeholder="Día">
-                <input type="number" min="1" max="12" placeholder="Mes">
+                <!-- Pestaña desplegable con nombres de meses -->
+                <select>
+                    <option value="">Mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
                 <input type="number" min="1940" max="2020" placeholder="Año">
             </div>
             <input type="email" placeholder="Correo electrónico" required>
@@ -158,9 +175,25 @@
                 <option value="nino">Niño</option>
                 <option value="nina">Niña</option>
             </select>
+            <p style="text-align:center; margin:0.5rem 0; color:rgba(255,255,255,0.8);">Tu fecha de nacimiento</p>
             <div class="fila-fecha">
                 <input type="number" min="1" max="31" placeholder="Día">
-                <input type="number" min="1" max="12" placeholder="Mes">
+                <!-- Pestaña desplegable con nombres de meses -->
+                <select>
+                    <option value="">Mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
                 <input type="number" min="1940" max="2020" placeholder="Año">
             </div>
             <button class="boton boton-naranja" onclick="irMenu()">Entrar como invitado</button>
@@ -200,18 +233,13 @@
             clearInterval(intervalo);
             estado.textContent = "¡Listo!";
             setTimeout(() => {
-                document.getElementById("carga").classList.add("oculto");
-                document.getElementById("acceso").classList.remove("oculto");
+                cambiarPantalla("carga", "acceso");
             }, 1500);
         }, 3300);
 
-        // Mostrar formularios
-        function mostrarCorreo() {
-            cambiarPantalla("acceso", "form-correo");
-        }
-        function mostrarInvitado() {
-            cambiarPantalla("acceso", "form-invitado");
-        }
+        // Funciones de navegación
+        function mostrarCorreo() { cambiarPantalla("acceso", "form-correo"); }
+        function mostrarInvitado() { cambiarPantalla("acceso", "form-invitado"); }
         function volverInicio() {
             cambiarPantalla("form-correo", "acceso");
             cambiarPantalla("form-invitado", "acceso");
@@ -227,4 +255,5 @@
         }
     </script>
 </body>
-</html>
+    </html>
+    
