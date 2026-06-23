@@ -210,7 +210,7 @@
             flex-direction: column;
             align-items: center;
             transform-origin: bottom center;
-            transition: transform 0.1s ease;
+            transition: transform 0.1s ease, left 0.15s ease;
         }
 
         .nombre-arriba {
@@ -497,7 +497,7 @@
         </div>
     </div>
 
-    <!-- Lógica general -->
+    <!-- Lógica completa corregida -->
     <script>
         const mensajes = [
             "Iniciando sistemas seguros...",
@@ -537,5 +537,4 @@
         function irMenu() {
             const nombreFinal = document.getElementById("nombreCorreo").value.trim() ||
                                 document.getElementById("nombreInvitado").value.trim() ||
-                                "Jugador";
-         
+                        
