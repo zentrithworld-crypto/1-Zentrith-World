@@ -311,6 +311,120 @@
             cursor: pointer;
             z-index: 10;
         }
+
+        /* ---------------- PANTALLAS AGREGADAS ---------------- */
+        /* 7. Pantalla de Configuración */
+        #configuracion {
+            background: linear-gradient(180deg, #080C26 0%, #251A63 100%);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .titulo-pantalla {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 2rem 0;
+            color: #FFCC32;
+        }
+        .grupo-opciones {
+            max-width: 450px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .opcion {
+            background: rgba(255,255,255,0.1);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .switch {
+            width: 45px;
+            height: 24px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+            cursor: pointer;
+        }
+        .switch.activo { background: #4567FF; }
+        .switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: 0.2s;
+        }
+        .switch.activo::after { transform: translateX(21px); }
+
+        /* 8. Pantalla de Personalización de Avatar */
+        #avatar {
+            background: linear-gradient(180deg, #251A63 0%, #9A3242 100%);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .vista-previa {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FF7620, #4567FF);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 0 25px rgba(255,204,50,0.5);
+        }
+        .colores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .color {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .color.seleccionado { border-color: #FFFFFF; transform: scale(1.1); }
+
+        /* 9. Pantalla de Amigos */
+        #amigos {
+            background: linear-gradient(180deg, #080C26 0%, #4567FF 100%);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .lista-amigos {
+            max-width: 450px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .tarjeta-amigo {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .estado-amigo {
+            padding: 0.4rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+        .en-linea { background: #2E7D32; }
+        .desconectado { background: #666666; }
     </style>
 </head>
 <body>
@@ -354,15 +468,15 @@
         <h2 class="subtitulo">Datos de tu cuenta</h2>
         <div class="contenedor">
             <input type="text" placeholder="Nombre de jugador" required id="nombreCorreo">
-            <select>
+            <select id="generoCorreo">
                 <option value="">Niño / Niña</option>
                 <option value="nino">Niño</option>
                 <option value="nina">Niña</option>
             </select>
             <p class="texto-ayuda">Tu fecha de nacimiento</p>
             <div class="fila-fecha">
-                <input type="number" min="1" max="31" placeholder="Día">
-                <select>
+                <input type="number" min="1" max="31" placeholder="Día" id="diaCorreo">
+                <select id="mesCorreo">
                     <option value="">Mes</option>
                     <option value="01">Enero</option>
                     <option value="02">Febrero</option>
@@ -377,10 +491,10 @@
                     <option value="11">Noviembre</option>
                     <option value="12">Diciembre</option>
                 </select>
-                <input type="number" min="1940" max="2020" placeholder="Año">
+                <input type="number" min="1940" max="2020" placeholder="Año" id="anioCorreo">
             </div>
-            <input type="email" placeholder="Correo electrónico" required>
-            <input type="password" placeholder="Contraseña" required>
+            <input type="email" placeholder="Correo electrónico" required id="correo">
+            <input type="password" placeholder="Contraseña" required id="clave">
             <button class="boton boton-naranja" onclick="irMenu()">Guardar y entrar</button>
             <button class="boton boton-azul" onclick="volverInicio()">Volver</button>
         </div>
@@ -392,15 +506,15 @@
         <h2 class="subtitulo">Datos de invitado</h2>
         <div class="contenedor">
             <input type="text" placeholder="Nombre de jugador" required id="nombreInvitado">
-            <select>
+            <select id="generoInvitado">
                 <option value="">Niño / Niña</option>
                 <option value="nino">Niño</option>
                 <option value="nina">Niña</option>
             </select>
             <p class="texto-ayuda">Tu fecha de nacimiento</p>
             <div class="fila-fecha">
-                <input type="number" min="1" max="31" placeholder="Día">
-                <select>
+                <input type="number" min="1" max="31" placeholder="Día" id="diaInvitado">
+                <select id="mesInvitado">
                     <option value="">Mes</option>
                     <option value="01">Enero</option>
                     <option value="02">Febrero</option>
@@ -415,7 +529,7 @@
                     <option value="11">Noviembre</option>
                     <option value="12">Diciembre</option>
                 </select>
-                <input type="number" min="1940" max="2020" placeholder="Año">
+                <input type="number" min="1940" max="2020" placeholder="Año" id="anioInvitado">
             </div>
             <button class="boton boton-naranja" onclick="irMenu()">Entrar como invitado</button>
             <button class="boton boton-azul" onclick="volverInicio()">Volver</button>
@@ -429,7 +543,7 @@
             <div class="logo-titulo">ZENTRITH</div>
             <div class="iconos-derecha">
                 <div class="icono">🔍</div>
-                <div class="icono">⚙️</div>
+                <div class="icono" onclick="irConfiguracion()">⚙️</div>
                 <div class="icono estrella-notif">✦</div>
             </div>
         </div>
@@ -437,104 +551,4 @@
         <div class="tarjeta-perfil">
             <div class="avatar">Z</div>
             <div class="info-usuario">
-                <div class="nombre-usuario" id="mostrarNombreMenu">Jugador</div>
-                <div class="rango">Explorador</div>
-            </div>
-            <div class="moneda">
-                <span>Z</span>
-                <span>0</span>
-            </div>
-        </div>
-
-        <div class="seccion-explorar">
-            <h2 class="titulo-seccion">Explorar</h2>
-            <button class="boton boton-naranja boton-jugar" onclick="irJuego()">Iniciar Partida</button>
-        </div>
-
-        <div class="barra-inferior">
-            <div class="item-navegacion activo">
-                <div class="icono-nav">🏠</div>
-                <span>Inicio</span>
-            </div>
-            <div class="item-navegacion">
-                <div class="icono-nav">📈</div>
-                <span>Destacados</span>
-            </div>
-            <div class="item-navegacion">
-                <div class="icono-nav">👤</div>
-                <span>Avatar</span>
-            </div>
-            <div class="item-navegacion">
-                <div class="icono-nav">👥</div>
-                <span>Amigos</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 6. Pantalla de Juego -->
-    <div id="juego" class="pantalla oculto">
-        <button class="boton-volver" onclick="volverMenuDesdeJuego()">Volver al Menú</button>
-        <div class="suelo-juego"></div>
-        <div class="personaje quieto" id="personajeJuego">
-            <div class="nombre-arriba" id="nombreEnJuego">Jugador</div>
-            <div class="cabeza">
-                <div class="cara-frente">
-                    <div class="ojos">
-                        <div class="ojo"></div>
-                        <div class="ojo"></div>
-                    </div>
-                    <div class="boca"></div>
-                </div>
-                <div class="cara-izquierda"></div>
-                <div class="cara-derecha"></div>
-                <div class="cara-atras"></div>
-            </div>
-            <div class="torso"></div>
-            <div class="piernas">
-                <div class="pierna"></div>
-                <div class="pierna"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lógica completa corregida -->
-    <script>
-        const mensajes = [
-            "Iniciando sistemas seguros...",
-            "Preparando Zentrith World...",
-            "Conectando servidores...",
-            "Cargando archivos...",
-            "¡Casi listo!"
-        ];
-        const estado = document.getElementById("estado");
-        let idx = 0;
-        const intervalo = setInterval(() => {
-            estado.textContent = mensajes[idx++ % mensajes.length];
-        }, 750);
-
-        setTimeout(() => {
-            clearInterval(intervalo);
-            estado.textContent = "¡Listo!";
-            setTimeout(() => {
-                cambiarPantalla("carga", "acceso");
-            }, 1500);
-        }, 3300);
-
-        function cambiarPantalla(ocultar, mostrar) {
-            document.getElementById(ocultar).classList.add("oculto");
-            document.getElementById(mostrar).classList.remove("oculto");
-        }
-
-        function mostrarCorreo() { cambiarPantalla("acceso", "form-correo"); }
-        function mostrarInvitado() { cambiarPantalla("acceso", "form-invitado"); }
-
-        function volverInicio() {
-            cambiarPantalla("form-correo", "acceso");
-            cambiarPantalla("form-invitado", "acceso");
-            cambiarPantalla("menu", "acceso");
-        }
-
-        function irMenu() {
-            const nombreFinal = document.getElementById("nombreCorreo").value.trim() ||
-                                document.getElementById("nombreInvitado").value.trim() ||
-                        
+                <div class="nombre-usuario" id="mostrarNombreMenu">Jugador</di
